@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqy4ordentikc"]
+
+[ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://pez.gd" id="1_tlgln"]
+[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://art/default_fish.png" id="2_f5oq0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f5oq0"]
+radius = 31.0
+height = 112.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5oq0"]
+size = Vector2(17.5, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kntyo"]
+size = Vector2(17, 74)
+
+[node name="Pez" type="RigidBody2D"]
+script = ExtResource("1_tlgln")
+textura = ExtResource("2_f5oq0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_f5oq0")
+
+[node name="DefaultFish" type="Sprite2D" parent="."]
+position = Vector2(3.7778018, -3.9999993)
+scale = Vector2(0.08148147, 0.08148148)
+texture = ExtResource("2_f5oq0")
+
+[node name="CorteCabeza" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCabeza"]
+position = Vector2(-21.25, 0)
+shape = SubResource("RectangleShape2D_f5oq0")
+
+[node name="CorteCola" type="Area2D" parent="."]
+position = Vector2(-23, -19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCola"]
+position = Vector2(49, 19)
+shape = SubResource("RectangleShape2D_kntyo")
+
+[connection signal="input_event" from="CorteCabeza" to="." method="_on_corte_cabeza_input_event"]
+[connection signal="input_event" from="CorteCola" to="." method="_on_corte_cola_input_event"]
