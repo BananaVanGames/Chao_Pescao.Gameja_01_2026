@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dqy4ordentikc"]
 
-[ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://pez.gd" id="1_tlgln"]
-[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://art/default_fish.png" id="2_f5oq0"]
+[ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://game/pez/pez.gd" id="1_tlgln"]
+[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/default_fish.png" id="2_f5oq0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f5oq0"]
 radius = 31.0
@@ -23,7 +23,7 @@ shape = SubResource("CapsuleShape2D_f5oq0")
 
 [node name="DefaultFish" type="Sprite2D" parent="."]
 position = Vector2(3.7778018, -3.9999993)
-scale = Vector2(0.08148147, 0.08148148)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_f5oq0")
 
 [node name="CorteCabeza" type="Area2D" parent="."]
