@@ -1,20 +1,14 @@
 extends Node2D
 
 @export var fish_scene: PackedScene
-@export var round_time := 5.5
-@export var punch_time := 0.5
-
+@export var round_time: float = 5.00
 
 @onready var timer: Timer = $Timer
-@onready var punch_timer: Timer = $PunchTimer
 @onready var spawner: Marker2D = $Spawner
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	timer.timeout.connect(_on_timer_timeout)
-	punch_timer.timeout.connect(_on_punch_timer_timeout)
-
 	start_round()
 
 
@@ -25,17 +19,11 @@ func _process(delta: float) -> void:
 
 	GameHandler.set_time(timer.time_left)
 
+
 func start_round():
 	GameHandler.set_time(round_time)
 	timer.start(round_time)
-	
-func _on_timer_timeout() -> void:
-	GameHandler.set_time(0)
-	punch_timer.start(punch_time)
-	
-func _on_punch_timer_timeout() -> void:
 	spawn_fish()
-	start_round()
 
 
 func spawn_fish():
@@ -49,7 +37,12 @@ func spawn_fish():
 
 	GameHandler.set_fishes_left(GameHandler.fishes_left - 1)
 
+
 func end_game():
-	timer.stop()
-	punch_timer.stop()
+	get_tree().quit()
 	print("Game Over")
+
+
+func _on_timer_timeout() -> void:
+	$Punch.trigger_punch()
+	start_round()

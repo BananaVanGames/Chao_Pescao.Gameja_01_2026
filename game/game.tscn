@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=7 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://baxidpxet6s0f" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://dqy4ordentikc" path="res://game/pez/pez.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://cmum7eealbbyv" path="res://game/score_zone/score_zone.tscn" id="4_4fuuu"]
+[ext_resource type="PackedScene" uid="uid://cbf08dbu67aci" path="res://game/punch/punch.tscn" id="5_dxrkv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(471, 15)
@@ -19,9 +20,6 @@ layer = -1
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="PunchTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Spawner" type="Marker2D" parent="."]
 position = Vector2(934, 20)
 
@@ -35,5 +33,9 @@ shape = SubResource("RectangleShape2D_80nbo")
 [node name="ScoreZone" parent="." instance=ExtResource("4_4fuuu")]
 position = Vector2(657, 427)
 
+[node name="Punch" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(1349, 679)
+punch_distance = 500.0
+force = Vector2(-10000, 0)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="PunchTimer" to="." method="_on_punch_timer_timeout"]
