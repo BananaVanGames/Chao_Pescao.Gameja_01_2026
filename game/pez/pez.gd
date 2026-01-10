@@ -45,9 +45,10 @@ enum TIPO_COLA {
 @export var cuerpo: ESTADO_CUERPO
 @export var cola: TIPO_COLA
 
-
+#region # Drag and drop variables
 var dragging: bool = false
 var grab_offset := Vector2.ZERO
+#endregion
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

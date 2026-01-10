@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmum7eealbbyv"]
+
+[ext_resource type="Script" uid="uid://crj4hx4o4ad2x" path="res://game/score_zone/score_zone.gd" id="1_na03p"]
+[ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="2_8135c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0af2"]
+size = Vector2(120, 66)
+
+[node name="ScoreZone" type="Node2D"]
+script = ExtResource("1_na03p")
+
+[node name="GoodArea" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="GoodArea"]
+texture = ExtResource("2_8135c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoodArea"]
+shape = SubResource("RectangleShape2D_d0af2")
+
+[node name="BadArea" type="Area2D" parent="."]
+position = Vector2(521, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BadArea"]
+modulate = Color(0.99984866, 0.44193134, 0.5024827, 1)
+texture = ExtResource("2_8135c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BadArea"]
+shape = SubResource("RectangleShape2D_d0af2")
+
+[connection signal="body_entered" from="GoodArea" to="." method="_on_good_area_body_entered"]
+[connection signal="body_entered" from="BadArea" to="." method="_on_bad_area_body_entered"]

@@ -1,15 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=6 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://baxidpxet6s0f" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://dqy4ordentikc" path="res://game/pez/pez.tscn" id="2_e2o6t"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7iqs"]
-size = Vector2(28.499664, 5.235552)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_h7iqs"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_h7iqs"]
+[ext_resource type="PackedScene" uid="uid://cmum7eealbbyv" path="res://game/score_zone/score_zone.tscn" id="4_4fuuu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(471, 15)
@@ -29,40 +23,7 @@ layer = -1
 one_shot = true
 
 [node name="Spawner" type="Marker2D" parent="."]
-position = Vector2(938, 48)
-
-[node name="GoodArea" type="Area2D" parent="."]
-position = Vector2(1708, 399)
-scale = Vector2(11.929965, 42.49599)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GoodArea"]
-scale = Vector2(1, 0.9999999)
-shape = SubResource("RectangleShape2D_h7iqs")
-
-[node name="Sprite2D" type="Sprite2D" parent="GoodArea"]
-scale = Vector2(28.797651, 5.3346877)
-texture = SubResource("CanvasTexture_h7iqs")
-
-[node name="BadArea" type="Area2D" parent="."]
-position = Vector2(1709, 718)
-scale = Vector2(11.929965, 42.49599)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BadArea"]
-scale = Vector2(1, 0.9999999)
-shape = SubResource("RectangleShape2D_h7iqs")
-
-[node name="Sprite2D" type="Sprite2D" parent="BadArea"]
-scale = Vector2(28.797651, 5.3346877)
-texture = SubResource("PlaceholderTexture2D_h7iqs")
-
-[node name="Pez" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(930, 431)
-PID = null
-gravity = null
-ojos = null
-cabeza = null
-cuerpo = null
-cola = null
+position = Vector2(934, 20)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(950, 745)
@@ -70,6 +31,9 @@ position = Vector2(950, 745)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 17)
 shape = SubResource("RectangleShape2D_80nbo")
+
+[node name="ScoreZone" parent="." instance=ExtResource("4_4fuuu")]
+position = Vector2(657, 427)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="PunchTimer" to="." method="_on_punch_timer_timeout"]
