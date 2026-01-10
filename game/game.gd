@@ -74,9 +74,10 @@ func spawn_fish():
 
 
 func end_game():
-	timer.stop()
+	get_tree().quit()
 	print("Game Over")
 
 
 func _on_timer_timeout() -> void:
+	$Punch.trigger_punch()
 	start_round()
