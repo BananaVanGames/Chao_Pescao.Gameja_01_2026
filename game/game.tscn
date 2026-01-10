@@ -4,15 +4,15 @@
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://dqy4ordentikc" path="res://game/pez/pez.tscn" id="2_e2o6t"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
-size = Vector2(471, 15)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7iqs"]
 size = Vector2(28.499664, 5.235552)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_h7iqs"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_h7iqs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
+size = Vector2(471, 15)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h7iqs")
@@ -22,17 +22,6 @@ fish_scene = ExtResource("2_e2o6t")
 layer = -1
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("1_80nbo")]
-
-[node name="Pez" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(940, 200)
-disable_mode = 1
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(950, 745)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 17)
-shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -65,6 +54,22 @@ shape = SubResource("RectangleShape2D_h7iqs")
 [node name="Sprite2D" type="Sprite2D" parent="BadArea"]
 scale = Vector2(28.797651, 5.3346877)
 texture = SubResource("PlaceholderTexture2D_h7iqs")
+
+[node name="Pez" parent="." instance=ExtResource("2_e2o6t")]
+position = Vector2(930, 431)
+PID = null
+gravity = null
+ojos = null
+cabeza = null
+cuerpo = null
+cola = null
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(950, 745)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_80nbo")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="PunchTimer" to="." method="_on_punch_timer_timeout"]
