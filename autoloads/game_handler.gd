@@ -9,7 +9,7 @@ var time_left: float = 5
 var score: int = 0
 var fishes_left: int = 10
 var rules: Array = []
-
+var danger_rules: Array = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +20,18 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+
+func set_danger_rules(values: Array):
+	danger_rules = values
+
+
+func get_danger_rules() -> Array:
+	return danger_rules
+
+
+func get_current_rules() -> Array:
+	return rules
 
 
 func start_next_set(value: Array):

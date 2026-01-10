@@ -34,7 +34,7 @@ enum TIPO_COLA {
 #endregion
 
 @export var PID: int = -1
-@export var gravity := 1200.0
+@export var gravity := 2000.0
 @export var drag_speed := 20.0
 @export var textura: Texture
 @export var ojos: NUM_OJOS

@@ -25,7 +25,6 @@ shape = SubResource("RectangleShape2D_d0af2")
 position = Vector2(-500, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BadArea"]
-modulate = Color(0.99984866, 0.44193134, 0.5024827, 1)
 texture = ExtResource("3_yv41l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BadArea"]
