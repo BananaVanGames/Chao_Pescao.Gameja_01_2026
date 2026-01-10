@@ -3,19 +3,12 @@
 [ext_resource type="Script" uid="uid://6tkxj7crpg1m" path="res://ui/hud/hud.gd" id="1_4d6w6"]
 [ext_resource type="Texture2D" uid="uid://dv10dovk3utxo" path="res://ui/hud/art/consola.png" id="2_w75iv"]
 [ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="3_e0nub"]
+[ext_resource type="LabelSettings" uid="uid://cncbveswkxc3s" path="res://ui/hud/hud.tres" id="3_imuuq"]
 [ext_resource type="Texture2D" uid="uid://deiqksca00k3s" path="res://ui/hud/art/ojo.png" id="3_w75iv"]
-
-[sub_resource type="SystemFont" id="SystemFont_w75iv"]
-font_names = PackedStringArray("Maxter Board St")
-subpixel_positioning = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_w75iv"]
-font = SubResource("SystemFont_w75iv")
-font_size = 65
-font_color = Color(0.38039216, 0.011764706, 0.27058825, 1)
+[ext_resource type="FontFile" uid="uid://dhvwjiy18f55j" path="res://ui/hud/Maxter Board St.ttf" id="4_kwc50"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_imuuq"]
-font = SubResource("SystemFont_w75iv")
+font = ExtResource("4_kwc50")
 font_size = 40
 font_color = Color(0.38039216, 0.011764706, 0.27058825, 1)
 
@@ -58,7 +51,7 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "5.00"
-label_settings = SubResource("LabelSettings_w75iv")
+label_settings = ExtResource("3_imuuq")
 horizontal_alignment = 1
 
 [node name="Node2D" type="Node2D" parent="."]

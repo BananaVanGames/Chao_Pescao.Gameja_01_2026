@@ -20,8 +20,11 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 		return
 
 	var fish_data = body.get_fish_data()
+	var current_rules = GameHandler.get_current_rules()
+	var danger_rules = GameHandler.get_danger_rules()
+
 	print("FISH DATA: ", fish_data)
-	print("Current Rules: ", GameHandler.get_current_rules())
-	print("Current Danger Rules: ", GameHandler.get_danger_rules())
+	print("Current Rules: ", current_rules)
+	print("Current Danger Rules: ", danger_rules)
 
 	body.queue_free()
