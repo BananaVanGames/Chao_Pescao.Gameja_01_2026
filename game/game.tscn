@@ -19,21 +19,18 @@ layer = -1
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="PunchTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Spawner" type="Marker2D" parent="."]
-position = Vector2(934, 20)
+position = Vector2(1014, 331)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(950, 745)
+position = Vector2(1018, 1021)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 17)
 shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="ScoreZone" parent="." instance=ExtResource("4_4fuuu")]
-position = Vector2(657, 427)
+position = Vector2(1022, 796)
+scale = Vector2(0.8, 0.8)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="PunchTimer" to="." method="_on_punch_timer_timeout"]

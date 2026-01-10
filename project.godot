@@ -28,6 +28,10 @@ window/size/viewport_height=1080
 
 enabled=PackedStringArray("res://addons/simple_gdscript_formatter/plugin.cfg")
 
+[global_group]
+
+pez=""
+
 [input]
 
 click={

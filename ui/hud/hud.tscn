@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://baxidpxet6s0f"]
+[gd_scene load_steps=5 format=3 uid="uid://baxidpxet6s0f"]
 
 [ext_resource type="Script" uid="uid://6tkxj7crpg1m" path="res://ui/hud/hud.gd" id="1_4d6w6"]
 [ext_resource type="Texture2D" uid="uid://bseff3c2jrv5b" path="res://ui/hud/art/background_placeholder.jpg" id="1_xmswo"]
+[ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="3_e0nub"]
+[ext_resource type="Texture2D" uid="uid://deiqksca00k3s" path="res://ui/hud/art/ojo.png" id="3_w75iv"]
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -14,6 +16,7 @@ mouse_filter = 2
 script = ExtResource("1_4d6w6")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,9 +30,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -157.25
-offset_right = 471.0
-offset_bottom = 157.25
+offset_top = -528.0
+offset_right = 499.0
+offset_bottom = -213.5
 grow_vertical = 2
 
 [node name="Timer" type="Label" parent="VBoxContainer"]
@@ -52,3 +55,92 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "PESCADOS RESTANTES: 10"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1447.0
+offset_top = -529.0
+offset_right = 1946.0
+offset_bottom = -214.5
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+columns = 3
+
+[node name="Ojos" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_w75iv")
+expand_mode = 2
+
+[node name="ReglaOjosLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
+theme_override_font_sizes/font_size = 40
+text = "PELIGRO: "
+
+[node name="Danger1" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_e0nub")
+expand_mode = 2
+
+[node name="ReglaCabeza" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_e0nub")
+expand_mode = 2
+
+[node name="ReglaCabezaLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
+theme_override_font_sizes/font_size = 40
+text = "PELIGRO: "
+
+[node name="Danger2" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_e0nub")
+expand_mode = 2
+
+[node name="ReglaCuerpo" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_e0nub")
+expand_mode = 2
+
+[node name="ReglaCuerpoLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
+theme_override_font_sizes/font_size = 40
+text = "PELIGRO: "
+
+[node name="Danger3" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_e0nub")
+expand_mode = 2
+
+[node name="ReglaCola" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_e0nub")
+expand_mode = 2
+
+[node name="ReglaColaLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
+theme_override_font_sizes/font_size = 40
+text = "PELIGRO: "
+
+[node name="Danger4" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_e0nub")
+expand_mode = 2

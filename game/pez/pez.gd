@@ -11,26 +11,23 @@ enum NUM_OJOS {
 }
 
 enum ESTADO_CABEZA {
-	CON_MANCHAS,
 	SIN_MANCHAS,
+	CON_MANCHAS,
 	SOMBRERO,
 	FUMADOR,
 	CORTADA,
 }
 
 enum ESTADO_CUERPO {
-	CON_MANCHAS,
-	SIN_MANCHAS,
-	JERINGUILLA,
-	PODRIDO,
-	ESQUELETO,
+	BUENO,
+	MALO,
 }
 
 enum TIPO_COLA {
-	CON_MANCHAS,
 	DELGADA,
 	REDONDA,
 	ABANICO,
+	CON_MANCHAS,
 	CORTADA,
 }
 
@@ -48,11 +45,14 @@ enum TIPO_COLA {
 #region # Drag and drop variables
 var dragging: bool = false
 var grab_offset := Vector2.ZERO
+
 #endregion
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -63,6 +63,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y += gravity * delta
 		move_and_slide()
+
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			dragging = false
+
+
+func get_fish_data():
+	return [ojos, cabeza, cuerpo, cola]
 
 
 func _on_corte_cabeza_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -82,14 +92,9 @@ func _on_corte_cola_input_event(_viewport: Node, event: InputEvent, _shape_idx: 
 		#TODO Hay que cortar la textura de la cola de alguna forma y cambiar su estado a cortada
 		pass
 
-			
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			dragging = false
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-		if Input.is_action_just_pressed("click") and not dragging:
-			dragging = true
-			grab_offset = get_global_mouse_position() - global_position
-			print("selected")
+func _on_area_2d_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
+	if Input.is_action_just_pressed("click") and not dragging:
+		dragging = true
+		grab_offset = get_global_mouse_position() - global_position
+		print("selected")

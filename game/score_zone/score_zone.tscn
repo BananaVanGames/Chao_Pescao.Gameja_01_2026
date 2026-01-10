@@ -1,30 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmum7eealbbyv"]
+[gd_scene load_steps=5 format=3 uid="uid://cmum7eealbbyv"]
 
 [ext_resource type="Script" uid="uid://crj4hx4o4ad2x" path="res://game/score_zone/score_zone.gd" id="1_na03p"]
-[ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="2_8135c"]
+[ext_resource type="Texture2D" uid="uid://dgs4nvh3mlw0a" path="res://game/score_zone/art/caja_bien.png" id="2_y4oms"]
+[ext_resource type="Texture2D" uid="uid://cw84lcl3yy5u0" path="res://game/score_zone/art/caja_mal.png" id="3_yv41l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0af2"]
-size = Vector2(120, 66)
+size = Vector2(278, 81)
 
 [node name="ScoreZone" type="Node2D"]
+z_index = -10
 script = ExtResource("1_na03p")
 
 [node name="GoodArea" type="Area2D" parent="."]
+position = Vector2(500, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="GoodArea"]
-texture = ExtResource("2_8135c")
+texture = ExtResource("2_y4oms")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoodArea"]
+position = Vector2(24, -44)
 shape = SubResource("RectangleShape2D_d0af2")
 
 [node name="BadArea" type="Area2D" parent="."]
-position = Vector2(521, 0)
+position = Vector2(-500, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BadArea"]
 modulate = Color(0.99984866, 0.44193134, 0.5024827, 1)
-texture = ExtResource("2_8135c")
+texture = ExtResource("3_yv41l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BadArea"]
+position = Vector2(-19, -49)
 shape = SubResource("RectangleShape2D_d0af2")
 
 [connection signal="body_entered" from="GoodArea" to="." method="_on_good_area_body_entered"]

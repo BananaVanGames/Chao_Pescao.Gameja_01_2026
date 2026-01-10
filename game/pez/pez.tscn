@@ -12,7 +12,8 @@ size = Vector2(17.5, 74)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kntyo"]
 size = Vector2(17, 74)
 
-[node name="Pez" type="CharacterBody2D"]
+[node name="Pez" type="CharacterBody2D" groups=["pez"]]
+z_index = 100
 script = ExtResource("1_tlgln")
 textura = ExtResource("2_f5oq0")
 
