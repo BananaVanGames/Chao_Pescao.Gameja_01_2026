@@ -140,4 +140,4 @@ func _on_corte_cola_input_event(_viewport: Node, event: InputEvent, _shape_idx: 
 func _on_area_2d_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
 	if _event is InputEventMouseButton and _event.button_index == MOUSE_BUTTON_LEFT and _event.pressed:
 		emit_signal("clicked", self)
-		print("clicked")
+		#print("clicked")

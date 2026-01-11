@@ -47,17 +47,6 @@ var last_fish: CharacterBody2D = null
 var file_names
 var resources
 
-@onready var mano: Sprite2D = $Mano
-#endregion
-
-@onready var timer: Timer = $Timer
-@onready var spawner: Marker2D = $Spawner
-@onready var line_2d: Line2D = $Line2D
-@onready var trampilla_sprite: AnimatedSprite2D = $TrampillaSprite
-@onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
-@onready var set_transition: CanvasLayer = $SetTransition
-
-
 var peces := [
 	preload("res://game/pez/art/0,0,0,0.png"),
 	preload("res://game/pez/art/0,0,0,1.png"),
@@ -260,11 +249,22 @@ var peces := [
 	preload("res://game/pez/art/default_fish.png")
 ]
 
+@onready var mano: Sprite2D = $Mano
+#endregion
+
+@onready var timer: Timer = $Timer
+@onready var spawner: Marker2D = $Spawner
+@onready var line_2d: Line2D = $Line2D
+@onready var trampilla_sprite: AnimatedSprite2D = $TrampillaSprite
+@onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
+@onready var set_transition: CanvasLayer = $SetTransition
+
+
 func _ready() -> void:
 	var dir := DirAccess.open("res://game/pez/art/")
 	file_names = dir.get_files()
 	resources = []
-	
+
 	for file_name in file_names:
 		if file_name.ends_with(".import"):
 			file_names.erase(file_name)
@@ -359,21 +359,22 @@ func randomize_fish_characteristics(fish: CharacterBody2D) -> void:
 		var cuerpo = randi_range(0, 1)
 		var cola = randi_range(0, 3)
 		var texturePath = "res://game/pez/art/" + str(ojos) + "," + str(cabeza) + "," + str(cuerpo) + "," + str(cola) + ".png"
+		print("Pez que spawnea: ", texturePath)
 		if FileAccess.file_exists(texturePath):
 			fish.set_fish_texture(load(texturePath))
-			fish.set_fish_data([ojos, cabeza, 0, cola])
+			fish.set_fish_data([ojos, cabeza, cuerpo, cola])
 		pass
 	else:
 		var random_num = randi_range(0, file_names.size())
 		fish.set_fish_texture(peces[random_num])
 		var path = peces[random_num].resource_path
-		var file_name = path.get_file()              # "0,0,0,2.png"
-		var numbers_str = file_name.get_basename()   # "0,0,0,2"
+		var file_name = path.get_file() # "0,0,0,2.png"
+		var numbers_str = file_name.get_basename() # "0,0,0,2"
 		var values = numbers_str.split(",")
 		var nums: Array[int] = []
 		for v in values:
 			nums.append(v.to_int())
-			
+
 		fish.set_fish_data([nums[0], nums[1], nums[2], nums[3]])
 
 
@@ -388,7 +389,7 @@ func spawn_fish():
 	last_fish = fish_scene.instantiate()
 	spawner.add_child(last_fish)
 	randomize_fish_characteristics(last_fish)
-	print("Características del pez: ", last_fish.get_fish_data())
+	print("Características del pez nuevo: ", last_fish.get_fish_data())
 
 	last_fish.global_position = spawner.global_position
 	last_fish.clicked.connect(_on_fish_clicked)
@@ -507,13 +508,13 @@ func _on_timer_timeout() -> void:
 func _on_pez_en_mesa_body_entered(body: Node2D) -> void:
 	if body.is_in_group("pez"):
 		pez_en_mesa = true
-		print("PEZ EN MESA")
+		#print("PEZ EN MESA")
 
 
 func _on_pez_en_mesa_body_exited(body: Node2D) -> void:
 	if body.is_in_group("pez"):
 		pez_en_mesa = false
-		print("PEZ FUERA DE MESA")
+		#print("PEZ FUERA DE MESA")
 
 
 func _on_basura_peces_body_entered(body: Node2D) -> void:
