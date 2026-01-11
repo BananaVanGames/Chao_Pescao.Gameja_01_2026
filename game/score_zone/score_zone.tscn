@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0af2"]
 size = Vector2(278, 81)
 
-[node name="ScoreZone" type="Node2D"]
+[node name="CajasDeClasificacion" type="Node2D"]
 z_index = -10
 script = ExtResource("1_na03p")
 

@@ -21,15 +21,14 @@ enum MouseTool {
 @export var hand_knife: Texture2D
 
 # POSIBLES PECES A SPAWNEAR = [OJOS, CABEZA, CUERPO, COLA]
-var peces_posibles1: Array = [[1], [0, 1], [0], [0, 1, 2]]
-var peces_posibles2: Array = [[0, 1, 2, 3], [0, 1], [0, 1], [0, 1, 2]]
-var peces_posibles3: Array = [[0, 1, 2, 3, 4, 5], [0, 1, 2, 3], [0, 1], [0, 1, 2, 3]]
-var peces_posibles: Array = [peces_posibles1, peces_posibles2, peces_posibles3]
+var peces_posibles1: Array = [[0, 1, 2], [0, 1], [0], [0, 1, 2]]
+var peces_posibles2: Array = [[0, 1, 2, 3], [0, 1, 2], [0, 1], [0, 1, 2, 3]]
+var peces_posibles: Array = [peces_posibles1, peces_posibles2]
 
 # PECES PELIGROSOS: 
-var peces_peligrosos1: Array = [[1], [0, 1], [0], [0, 1, 2]]
-var peces_peligrosos2: Array = [[3, 4, 5], [0, 1, 2], [0, 1], [0, 1, 2, 3]]
-var peces_peligrosos3: Array = [[3, 4, 5, 6], [0, 1, 2, 3], [0, 1], [0, 1, 2, 3]]
+var peces_peligrosos1: Array = [[1], [0, 1], [0, 1, 2]]
+var peces_peligrosos2: Array = [[3, 4, 5], [0, 1, 2], [0, 1, 2, 3]]
+var peces_peligrosos3: Array = [[3, 4, 5, 6], [0, 1, 2, 3], [0, 1, 2, 3]]
 var peces_peligrosos: Array = [peces_peligrosos1, peces_peligrosos2, peces_peligrosos3]
 var current_tool := MouseTool.NONE
 
@@ -100,10 +99,10 @@ func _input(event):
 func start_next_set():
 	level += 1
 	if level > 3:
-		game_over()
+		end_game()
 
 	var rules: Array
-	for i in range(4):
+	for i in range(3):
 		rules.append(peces_peligrosos[level][i].pick_random())
 
 	print("Las reglas de peces peligrosos son: ", rules)
@@ -112,12 +111,33 @@ func start_next_set():
 
 func start_round():
 	GameHandler.set_time(round_time)
+	GameHandler.add_score(0)
 	timer.start(round_time)
 	spawn_fish()
 
 
-func game_over():
-	pass
+func randomize_fish_characteristics(fish: CharacterBody2D) -> void:
+	#print("Current Level: ", level)
+	if level == 0:
+		var ojos = randi_range(0, 2)
+		var cabeza = randi_range(0, 1)
+		var cola = randi_range(0, 2)
+		var texturePath = "res://game/pez/art/" + str(ojos) + str(cabeza) + "0" + str(cola) + ".png"
+		if FileAccess.file_exists(texturePath):
+			fish.set_fish_texture(load(texturePath))
+			fish.set_fish_data([ojos, cabeza, 0, cola])
+	elif level == 1:
+		var ojos = randi_range(0, 3)
+		var cabeza = randi_range(0, 1)
+		var cuerpo = randi_range(0, 1)
+		var cola = randi_range(0, 3)
+		var texturePath = "res://game/pez/art/" + str(ojos) + str(cabeza) + str(cuerpo) + str(cola) + ".png"
+		if FileAccess.file_exists(texturePath):
+			fish.set_fish_texture(load(texturePath))
+			fish.set_fish_data([ojos, cabeza, 0, cola])
+		pass
+	else:
+		pass
 
 
 func spawn_fish():
@@ -127,8 +147,10 @@ func spawn_fish():
 
 	var fish = fish_scene.instantiate()
 	spawner.add_child(fish)
-	fish.global_position = spawner.global_position
+	randomize_fish_characteristics(fish)
+	print("Características del pez: ", fish.get_fish_data())
 
+	fish.global_position = spawner.global_position
 	fish.clicked.connect(_on_fish_clicked)
 
 	GameHandler.set_fishes_left(GameHandler.fishes_left - 1)

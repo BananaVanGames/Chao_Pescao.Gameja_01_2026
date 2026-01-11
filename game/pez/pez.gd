@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal clicked(fish)
+
 #region Caracteristicas de los peces
 enum NUM_OJOS {
 	UNO,
@@ -15,7 +17,6 @@ enum ESTADO_CABEZA {
 	CON_MANCHAS,
 	SOMBRERO,
 	FUMADOR,
-	CORTADA,
 }
 
 enum ESTADO_CUERPO {
@@ -28,30 +29,29 @@ enum TIPO_COLA {
 	REDONDA,
 	ABANICO,
 	CON_MANCHAS,
-	CORTADA,
 }
 
 #endregion
 
-@export var PID: int = -1
-
-@export var textura: Texture
-@export var ojos: NUM_OJOS
-@export var cabeza: ESTADO_CABEZA
-@export var cuerpo: ESTADO_CUERPO
-@export var cola: TIPO_COLA
-
 #region # DRAG N DROP VARIABLES
 @export var gravity := 2000.0
 @export var drag_speed := 20.0
+
+var ojos: NUM_OJOS = NUM_OJOS.UNO
+var cabeza: ESTADO_CABEZA = ESTADO_CABEZA.SIN_MANCHAS
+var cuerpo: ESTADO_CUERPO = ESTADO_CUERPO.BUENO
+var cola: TIPO_COLA = TIPO_COLA.ABANICO
+var cabeza_cortada: bool = false
+var cola_cortada: bool = false
+
 var is_dragged: bool = false
 var grab_offset := Vector2.ZERO
-signal clicked(fish)
+
 #endregion
 
 @onready var sprite_cabeza: Sprite2D = $Cabeza
+@onready var sprite_cuerpo: Sprite2D = $Cuerpo
 @onready var sprite_cola: Sprite2D = $Cola
-
 
 
 # Called when the node enters the scene tree for the first time.
@@ -68,9 +68,11 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 	move_and_slide()
 
+
 func start_drag(mouse_pos: Vector2):
 	is_dragged = true
 	grab_offset = mouse_pos - global_position
+
 
 func stop_drag():
 	is_dragged = false
@@ -81,8 +83,30 @@ func stop_drag():
 #			dragging = false
 
 
-func get_fish_data():
-	return [ojos, cabeza, cuerpo, cola]
+func set_fish_data(values: Array):
+	ojos = values[0]
+	cabeza = values[1]
+	cuerpo = values[2]
+	cola = values[3]
+
+
+func get_fish_data() -> Array:
+	return [ojos, cabeza, cuerpo, cola, cabeza_cortada, cola_cortada]
+
+
+func set_fish_texture(texture: CompressedTexture2D) -> void:
+	sprite_cabeza.texture = texture
+	sprite_cuerpo.texture = texture
+	sprite_cola.texture = texture
+
+
+func cut_head():
+	sprite_cabeza.visible = false
+	cabeza_cortada = true
+
+func cut_tail():
+	sprite_cola.visible = false
+	cola_cortada = true
 
 
 func _on_corte_cabeza_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -92,20 +116,8 @@ func _on_corte_cabeza_input_event(_viewport: Node, event: InputEvent, _shape_idx
 	if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 		#TODO Hay que cortar la textura de la cabeza de alguna forma y cambiar su estado a cortada
 		pass
-
-func cut_head():
-	if cabeza == ESTADO_CABEZA.CORTADA:
-		return
-
-	sprite_cabeza.visible = false
-
-func cut_tail():
-	if cola == TIPO_COLA.CORTADA:
-		return
-
-	cola = TIPO_COLA.CORTADA
-	sprite_cola.visible = false
 	#$TailBlood.emitting = true
+
 
 func _on_corte_cola_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event == null:

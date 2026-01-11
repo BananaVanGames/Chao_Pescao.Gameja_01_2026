@@ -1,5 +1,6 @@
 extends Control
 
+#region Preloads
 @onready var ojo = preload("res://ui/hud/art/ojo.png")
 
 @onready var procesable = preload("res://ui/hud/art/procesable.png")
@@ -9,7 +10,7 @@ extends Control
 @onready var cabeza_manchas = preload("res://ui/hud/art/cabeza_manchas.png")
 @onready var cabeza_fumador = preload("res://ui/hud/art/cabeza_cigarro.png")
 @onready var cabeza_sombrero = preload("res://ui/hud/art/cabeza_sombrero.png")
-@onready var tipo_cabeza = [cabeza_manchas, cabeza_fumador, cabeza_sombrero]
+@onready var tipo_cabeza = [null, cabeza_manchas, cabeza_sombrero, cabeza_fumador]
 
 @onready var cola_delgada = preload("res://ui/hud/art/cola_delgada.png")
 @onready var cola_redonda = preload("res://ui/hud/art/cola_redonda.png")
@@ -17,14 +18,16 @@ extends Control
 @onready var cola_manchas = preload("res://ui/hud/art/cola_manchas.png")
 @onready var tipo_cola = [cola_delgada, cola_redonda, cola_abanico, cola_manchas]
 
-@onready var score_label: Label = $Node2D/Score
-@onready var timer_label: Label = $Node2D2/Timer
+@onready var score_label: Label = $Score/Score
+@onready var timer_label: Label = $Timer/Timer
 @onready var fishes_left_label: Label = $FishesLeft
-@onready var danger_1: TextureRect = $GridContainer/Danger1
-@onready var danger_2: TextureRect = $GridContainer/Danger2
-@onready var danger_3: TextureRect = $GridContainer/Danger3
-@onready var grid_container: GridContainer = $GridContainer
-@onready var regla_cola: TextureRect = $GridContainer/ReglaCola
+@onready var danger_1: TextureRect = $Reglas/GridContainer/Danger1
+@onready var danger_2: TextureRect = $Reglas/GridContainer/Danger2
+@onready var danger_3: TextureRect = $Reglas/GridContainer/Danger3
+@onready var grid_container: GridContainer = $Reglas/GridContainer
+@onready var regla_cola: TextureRect = $Reglas/GridContainer/ReglaCola
+
+#endregion
 
 
 func _ready():
@@ -64,8 +67,7 @@ func _start_next_set(value: Array):
 					grid_children[i * 3 + 1].visible = false
 					danger_2.visible = false
 				else:
-					var random = randi_range(0, 1)
-					grid_children[i * 3].texture = tipo_cabeza[random]
+					grid_children[i * 3].texture = tipo_cabeza[value[i]]
 
 					grid_children[i * 3 + 1].text = " = "
 
@@ -73,8 +75,7 @@ func _start_next_set(value: Array):
 					danger_2.texture = peligrosisdad[random_cabeza]
 
 			2:
-				var random = randi_range(0, 2)
-				regla_cola.texture = tipo_cola[random]
+				regla_cola.texture = tipo_cola[value[i]]
 
 				grid_children[i * 3 + 1].text = " = "
 

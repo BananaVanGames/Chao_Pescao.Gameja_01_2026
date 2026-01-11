@@ -40,12 +40,12 @@ grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_w75iv")
 
-[node name="Node2D2" type="Node2D" parent="."]
+[node name="Timer" type="Node2D" parent="."]
 position = Vector2(221.00002, 168)
 rotation = -0.19198622
 skew = 0.040142573
 
-[node name="Timer" type="Label" parent="Node2D2"]
+[node name="Timer" type="Label" parent="Timer"]
 offset_left = -92.17667
 offset_top = -43.083862
 offset_right = 82.82333
@@ -58,12 +58,12 @@ text = "5.00"
 label_settings = SubResource("LabelSettings_kwc50")
 horizontal_alignment = 1
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Score" type="Node2D" parent="."]
 position = Vector2(470, 226.99997)
 rotation = -0.15533431
 skew = 0.19547687
 
-[node name="Score" type="Label" parent="Node2D"]
+[node name="Score" type="Label" parent="Score"]
 offset_left = -87.6032
 offset_top = -38.584213
 offset_right = 82.3968
@@ -87,71 +87,73 @@ theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "PESCADOS RESTANTES: 10"
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 1
+[node name="Reglas" type="Node2D" parent="."]
+position = Vector2(1649, 332)
+
+[node name="GridContainer" type="GridContainer" parent="Reglas"]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 1447.0
-offset_top = -529.0
-offset_right = 1946.0
-offset_bottom = -214.5
+offset_left = -249.7789
+offset_top = -291.48334
+offset_right = 249.2211
+offset_bottom = 23.016663
 grow_vertical = 2
 scale = Vector2(1.8, 1.8)
 columns = 3
 
-[node name="Ojos" type="TextureRect" parent="GridContainer"]
+[node name="Ojos" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_w75iv")
 expand_mode = 2
 
-[node name="ReglaOjosLabel" type="Label" parent="GridContainer"]
+[node name="ReglaOjosLabel" type="Label" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "OJOS"
 
-[node name="Danger1" type="TextureRect" parent="GridContainer"]
+[node name="Danger1" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_e0nub")
 expand_mode = 2
 
-[node name="ReglaCabeza" type="TextureRect" parent="GridContainer"]
+[node name="ReglaCabeza" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_e0nub")
 expand_mode = 2
 
-[node name="ReglaCabezaLabel" type="Label" parent="GridContainer"]
+[node name="ReglaCabezaLabel" type="Label" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "CABEZA"
 
-[node name="Danger2" type="TextureRect" parent="GridContainer"]
+[node name="Danger2" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_e0nub")
 expand_mode = 2
 
-[node name="ReglaCola" type="TextureRect" parent="GridContainer"]
+[node name="ReglaCola" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_e0nub")
 expand_mode = 2
 
-[node name="ReglaColaLabel" type="Label" parent="GridContainer"]
+[node name="ReglaColaLabel" type="Label" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "COLA"
 
-[node name="Danger3" type="TextureRect" parent="GridContainer"]
+[node name="Danger3" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_e0nub")

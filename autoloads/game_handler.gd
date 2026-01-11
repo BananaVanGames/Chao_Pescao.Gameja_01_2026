@@ -45,6 +45,10 @@ func set_time(value: float):
 	emit_signal("time_changed", time_left)
 
 
+func get_time() -> float:
+	return time_left
+
+
 func add_score(value: int):
 	score += value
 	emit_signal("score_changed", score)
