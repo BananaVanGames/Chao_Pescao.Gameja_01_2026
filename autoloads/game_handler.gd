@@ -59,4 +59,4 @@ func reset_fish(value: int):
 
 func reset():
 	set_time(5)
-	reset_fish(1)
+	reset_fish(10)

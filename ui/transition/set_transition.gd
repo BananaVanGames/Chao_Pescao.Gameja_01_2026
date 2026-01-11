@@ -5,21 +5,13 @@ signal transition_finished
 @onready var mask: Sprite2D = $FishMask
 
 func play():
+	# Show the CanvasLayer (and fish)
 	visible = true
-	mask.scale = Vector2.ZERO
 
-	var tween := create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 
-	tween.tween_property(mask, "scale", Vector2(30, 30), 0.4)\
-		.set_trans(Tween.TRANS_CUBIC)\
-		.set_ease(Tween.EASE_IN_OUT)
+	# Wait a short moment so the player sees it (optional)
+	await get_tree().create_timer(1).timeout
 
-	tween.tween_property(mask, "scale", Vector2.ZERO, 0.4)\
-		.set_trans(Tween.TRANS_CUBIC)\
-		.set_ease(Tween.EASE_IN_OUT)
-
-	tween.finished.connect(func():
-		visible = false
-		emit_signal("transition_finished")
-	)
+	# Hide the CanvasLayer again
+	visible = false
+	emit_signal("transition_finished")

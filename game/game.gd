@@ -51,7 +51,8 @@ var last_fish: CharacterBody2D = null
 @onready var line_2d: Line2D = $Line2D
 @onready var trampilla_sprite: AnimatedSprite2D = $TrampillaSprite
 @onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
-#@onready var set_transition: CanvasLayer = $SetTransition
+@onready var set_transition: CanvasLayer = $SetTransition
+
 
 
 func _ready() -> void:
@@ -173,9 +174,11 @@ func on_set_finished():
 
 	for fish in spawner.get_children():
 		fish.queue_free()
-
 	# This reset does not reset score
 	GameHandler.reset()
+
+	await get_tree().process_frame
+	set_transition.play()
 
 	start_next_set()
 	start_round()

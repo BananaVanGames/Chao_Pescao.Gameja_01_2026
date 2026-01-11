@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=67 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
@@ -57,6 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://cwfvu8u8o87me" path="res://game/trampilla_y_mesa/trampilla38.png" id="51_ylx5t"]
 [ext_resource type="Texture2D" uid="uid://dpshvx3mbjd5k" path="res://game/trampilla_y_mesa/trampilla39.png" id="52_8aer8"]
 [ext_resource type="Texture2D" uid="uid://cbc13pohlhtol" path="res://game/trampilla_y_mesa/OL_Trampilla.png" id="56_kaw54"]
+[ext_resource type="PackedScene" uid="uid://bd83eekpbqxx2" path="res://ui/transition/set_transition.tscn" id="58_jbuku"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kaw54"]
 animations = [{
@@ -252,6 +253,7 @@ position = Vector2(710, 507)
 scale = Vector2(0.7, 0.7)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("1_80nbo")]
 offset_top = -2.0
@@ -325,6 +327,8 @@ visible = false
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_j8tme")
 autoplay = true
+
+[node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="PezEnMesa" to="." method="_on_pez_en_mesa_body_entered"]
