@@ -1,14 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://byihj7ts63ode"]
+[gd_scene load_steps=14 format=3 uid="uid://byihj7ts63ode"]
 
 [ext_resource type="Script" uid="uid://tjbiwvfnojao" path="res://ui/pause_menu/pause_menu.gd" id="1_mnjdh"]
-[ext_resource type="Texture2D" uid="uid://dusynucoacqp2" path="res://ui/main_menu/art/boton.png" id="2_c3jo5"]
+[ext_resource type="Texture2D" uid="uid://cmrb6gdp8adgi" path="res://ui/tutorial/placeholder.png" id="2_c3jo5"]
 [ext_resource type="AudioStream" uid="uid://dny7bmqeclnuk" path="res://music/pausa.mp3" id="2_jbgdu"]
+[ext_resource type="Texture2D" uid="uid://dhm0hpjqu7rkr" path="res://ui/tutorial/art/L02.png" id="3_b4b0p"]
+[ext_resource type="Texture2D" uid="uid://dusynucoacqp2" path="res://ui/main_menu/art/boton.png" id="3_j11rl"]
 [ext_resource type="Texture2D" uid="uid://c5jvdwbhlfcdm" path="res://ui/main_menu/art/boton_pressed.png" id="3_uraes"]
+[ext_resource type="Texture2D" uid="uid://db522c10q07ow" path="res://ui/tutorial/art/L01.png" id="4_c3jo5"]
 [ext_resource type="Texture2D" uid="uid://tubhseq3kfbs" path="res://ui/main_menu/art/boton_hover.png" id="4_ihaig"]
+[ext_resource type="Texture2D" uid="uid://bi4yn862qg4se" path="res://ui/tutorial/art/E05.png" id="6_3qrb2"]
+[ext_resource type="Texture2D" uid="uid://bpfc6chf3ys8u" path="res://ui/tutorial/art/SE3.png" id="6_b05md"]
+[ext_resource type="Texture2D" uid="uid://dy8yalfw24kr1" path="res://ui/tutorial/art/SA06.png" id="7_b05md"]
+[ext_resource type="Texture2D" uid="uid://bg1u0ujoc45tf" path="res://ui/tutorial/art/SE07.png" id="8_f2x4c"]
+[ext_resource type="Texture2D" uid="uid://c6krk1y5gg5uf" path="res://ui/tutorial/art/A04.png" id="9_lhp7q"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_mnjdh")
+
+[node name="Placeholder" type="Sprite2D" parent="."]
+position = Vector2(962.5, 539.25)
+scale = Vector2(1.0014627, 1.0078824)
+texture = ExtResource("2_c3jo5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -34,7 +47,7 @@ grow_vertical = 2
 [node name="Resume" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
-texture_normal = ExtResource("2_c3jo5")
+texture_normal = ExtResource("3_j11rl")
 texture_pressed = ExtResource("3_uraes")
 texture_hover = ExtResource("4_ihaig")
 ignore_texture_size = true
@@ -59,7 +72,7 @@ text = "Resume"
 [node name="Tutorial" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
-texture_normal = ExtResource("2_c3jo5")
+texture_normal = ExtResource("3_j11rl")
 texture_pressed = ExtResource("3_uraes")
 texture_hover = ExtResource("4_ihaig")
 ignore_texture_size = true
@@ -84,7 +97,7 @@ text = "Tutorial"
 [node name="MainMenu" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
-texture_normal = ExtResource("2_c3jo5")
+texture_normal = ExtResource("3_j11rl")
 texture_pressed = ExtResource("3_uraes")
 texture_hover = ExtResource("4_ihaig")
 ignore_texture_size = true
@@ -110,11 +123,57 @@ text = "Main Menu"
 title = "Chao Pescao"
 dialog_text = "Are you sure you want to go back to the main menu?  Current progress will be lost"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("2_jbgdu")
 
+[node name="Dialogos" type="AudioStreamPlayer" parent="."]
+
+[node name="L01" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1017, 565.00006)
+scale = Vector2(1.0043073, 1.0043073)
+texture = ExtResource("4_c3jo5")
+
+[node name="L02" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(208, 378.00003)
+rotation = 1.5707964
+scale = Vector2(0.41784468, 0.41784468)
+texture = ExtResource("3_b4b0p")
+
+[node name="Se3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(963, 327)
+scale = Vector2(0.38127846, 0.38127846)
+texture = ExtResource("6_b05md")
+
+[node name="A04" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(852, 209)
+scale = Vector2(0.24828286, 0.24828286)
+texture = ExtResource("9_lhp7q")
+
+[node name="E05" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(409.99997, 553)
+scale = Vector2(0.38127846, 0.38127846)
+texture = ExtResource("6_3qrb2")
+
+[node name="Sa06" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1208, 554)
+scale = Vector2(0.38127846, 0.38127846)
+texture = ExtResource("7_b05md")
+
+[node name="Se07" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(628, 900.99994)
+scale = Vector2(0.38127846, 0.38127846)
+texture = ExtResource("8_f2x4c")
+
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

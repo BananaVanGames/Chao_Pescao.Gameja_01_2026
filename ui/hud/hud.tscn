@@ -1,13 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1m584cu6xjfj"]
+[gd_scene load_steps=14 format=3 uid="uid://b1m584cu6xjfj"]
 
 [ext_resource type="Script" uid="uid://6tkxj7crpg1m" path="res://ui/hud/hud.gd" id="1_4d6w6"]
 [ext_resource type="Texture2D" uid="uid://dv10dovk3utxo" path="res://ui/hud/art/cronometro y puntuación/consola.png" id="2_kwc50"]
-[ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="3_e0nub"]
 [ext_resource type="FontFile" uid="uid://dhvwjiy18f55j" path="res://ui/hud/Maxter Board St.ttf" id="4_kwc50"]
 [ext_resource type="Texture2D" uid="uid://bv5dy17acad0c" path="res://ui/hud/art/rules/pantallas02.png" id="4_o2lis"]
 [ext_resource type="Texture2D" uid="uid://deiqksca00k3s" path="res://ui/hud/art/rules/ojo.png" id="5_kwc50"]
 [ext_resource type="Texture2D" uid="uid://huebkrek7ycv" path="res://ui/hud/art/rules/icono_pez_encendido.png" id="5_o2lis"]
+[ext_resource type="Texture2D" uid="uid://crmcx0hnpl06b" path="res://ui/hud/art/rules/toxico.png" id="7_5uuaq"]
+[ext_resource type="Texture2D" uid="uid://d2oikemqqca4n" path="res://ui/hud/art/rules/cabeza_manchas.png" id="8_p3vm3"]
 [ext_resource type="Texture2D" uid="uid://b2iwysonxkt82" path="res://ui/hud/art/background/HUB_OL.png" id="9_cxhb7"]
+[ext_resource type="Texture2D" uid="uid://c25beojwghxrv" path="res://ui/hud/art/rules/procesable.png" id="9_gv4gi"]
+[ext_resource type="Texture2D" uid="uid://7iphke3tm3ym" path="res://ui/hud/art/rules/cola_manchas.png" id="10_5mn0o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kwc50"]
 font = ExtResource("4_kwc50")
@@ -182,13 +185,13 @@ text = "  >2  "
 [node name="Danger1" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("3_e0nub")
+texture = ExtResource("7_5uuaq")
 expand_mode = 2
 
 [node name="ReglaCabeza" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("3_e0nub")
+texture = ExtResource("8_p3vm3")
 expand_mode = 2
 
 [node name="ReglaCabezaLabel" type="Label" parent="Reglas/GridContainer"]
@@ -201,13 +204,13 @@ text = "   =   "
 [node name="Danger2" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("3_e0nub")
+texture = ExtResource("9_gv4gi")
 expand_mode = 2
 
 [node name="ReglaCola" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("3_e0nub")
+texture = ExtResource("10_5mn0o")
 expand_mode = 2
 
 [node name="ReglaColaLabel" type="Label" parent="Reglas/GridContainer"]
@@ -220,7 +223,7 @@ text = "   =   "
 [node name="Danger3" type="TextureRect" parent="Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("3_e0nub")
+texture = ExtResource("7_5uuaq")
 expand_mode = 2
 
 [node name="Marco" type="TextureRect" parent="."]
