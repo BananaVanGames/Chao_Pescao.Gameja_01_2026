@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=15 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cbf08dbu67aci" path="res://game/punch/punch.tscn" id="5_dxrkv"]
 [ext_resource type="Texture2D" uid="uid://duvi1xyo5eeiv" path="res://game/mano/mano_cuchillo.png" id="5_y36n6"]
 [ext_resource type="Texture2D" uid="uid://d4d284x7a77rb" path="res://game/mano/mano_abierta.png" id="6_dakft"]
+[ext_resource type="PackedScene" uid="uid://byihj7ts63ode" path="res://ui/pause_menu/pause_menu.tscn" id="9_l8g03"]
+[ext_resource type="AudioStream" uid="uid://cvx7k7n7fm70s" path="res://music/InGame1.mp3" id="10_j8tme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(471, 15)
@@ -77,5 +79,11 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_j8tme")
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

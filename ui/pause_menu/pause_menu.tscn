@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://byihj7ts63ode"]
+
+[ext_resource type="Script" uid="uid://tjbiwvfnojao" path="res://ui/pause_menu/pause_menu.gd" id="1_mnjdh"]
+[ext_resource type="AudioStream" uid="uid://dny7bmqeclnuk" path="res://music/pausa.mp3" id="2_jbgdu"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_mnjdh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.60784316)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.5
+offset_top = -173.5
+offset_right = 169.5
+offset_bottom = 173.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Resume"
+
+[node name="Tutorial" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Tutorial"
+
+[node name="OptionMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Options"
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Main Menu"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Return to Main Menu"
+dialog_text = "Are you sure? Current progress will be lost, like chao pescao."
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_jbgdu")
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
