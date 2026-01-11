@@ -4,6 +4,7 @@ signal time_changed(value)
 signal score_changed(value)
 signal fishes_left_changed(value)
 signal change_rules(value)
+signal open_door
 
 var time_left: float = 5
 var score: int = 0
@@ -12,22 +13,15 @@ var rules: Array = []
 var danger_rules: Array = []
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
-
 func set_danger_rules(values: Array):
 	danger_rules = values
 
 
 func get_danger_rules() -> Array:
 	return danger_rules
+
+func open_door_animation():
+	emit_signal("open_door")
 
 
 func get_current_rules() -> Array:

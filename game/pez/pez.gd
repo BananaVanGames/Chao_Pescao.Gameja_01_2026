@@ -34,7 +34,7 @@ enum TIPO_COLA {
 #endregion
 
 #region # DRAG N DROP VARIABLES
-@export var gravity := 2000.0
+@export var gravity := 1000.0
 @export var drag_speed := 20.0
 
 var ojos: NUM_OJOS = NUM_OJOS.UNO
@@ -52,6 +52,7 @@ var grab_offset := Vector2.ZERO
 @onready var sprite_cabeza: Sprite2D = $Cabeza
 @onready var sprite_cuerpo: Sprite2D = $Cuerpo
 @onready var sprite_cola: Sprite2D = $Cola
+@onready var death_explosion: AnimatedSprite2D = $DeathExplosion
 
 
 # Called when the node enters the scene tree for the first time.
@@ -82,6 +83,14 @@ func stop_drag():
 #		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 #			dragging = false
 
+func explode():
+	death_explosion.visible = true
+	death_explosion.play("default")
+	sprite_cabeza.visible = false
+	sprite_cuerpo.visible = false
+	sprite_cola.visible = false
+	await death_explosion.animation_finished
+	queue_free()
 
 func set_fish_data(values: Array):
 	ojos = values[0]

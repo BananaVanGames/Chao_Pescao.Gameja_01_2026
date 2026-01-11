@@ -73,8 +73,8 @@ autoplay = true
 bus = &"Musica"
 
 [node name="BananaLogo" type="Sprite2D" parent="."]
-position = Vector2(1697, 852.00006)
-scale = Vector2(0.04733622, 0.04733622)
+position = Vector2(1713, 835)
+scale = Vector2(0.834, 0.8460001)
 texture = ExtResource("5_3c04x")
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

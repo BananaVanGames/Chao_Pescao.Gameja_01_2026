@@ -36,6 +36,8 @@ func trigger_punch():
 		return
 	state = "forward"
 	animated_sprite_2d.play("hit")
+	GameHandler.open_door_animation()
+
 
 func _on_punch_area_body_entered(body: Node2D) -> void:
 	if state != "forward":

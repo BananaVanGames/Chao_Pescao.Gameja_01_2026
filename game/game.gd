@@ -40,15 +40,22 @@ var dragged_fish: CharacterBody2D = null
 var is_cutting := false
 var cut_points := []
 
+var pez_en_mesa: bool = false
+var last_fish: CharacterBody2D = null
+
 @onready var mano: Sprite2D = $Mano
 #endregion
 
 @onready var timer: Timer = $Timer
 @onready var spawner: Marker2D = $Spawner
 @onready var line_2d: Line2D = $Line2D
+@onready var trampilla_sprite: AnimatedSprite2D = $TrampillaSprite
+@onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
 
 
 func _ready() -> void:
+	cinta_fondo.play("default")
+	GameHandler.open_door.connect(_on_open_door_animation)
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	start_next_set()
 	start_round()
@@ -145,13 +152,16 @@ func spawn_fish():
 		end_game()
 		return
 
-	var fish = fish_scene.instantiate()
-	spawner.add_child(fish)
-	randomize_fish_characteristics(fish)
-	print("Características del pez: ", fish.get_fish_data())
+	if not last_fish == null and not pez_en_mesa:
+		last_fish.explode()
 
-	fish.global_position = spawner.global_position
-	fish.clicked.connect(_on_fish_clicked)
+	last_fish = fish_scene.instantiate()
+	spawner.add_child(last_fish)
+	randomize_fish_characteristics(last_fish)
+	print("Características del pez: ", last_fish.get_fish_data())
+
+	last_fish.global_position = spawner.global_position
+	last_fish.clicked.connect(_on_fish_clicked)
 
 	GameHandler.set_fishes_left(GameHandler.fishes_left - 1)
 
@@ -225,8 +235,12 @@ func test_cut_against_fish(fish):
 		fish.cut_tail()
 
 
-func cut_fish(fish):
+func cut_fish():
 	line_2d.add_point(get_local_mouse_position())
+
+
+func _on_open_door_animation():
+	trampilla_sprite.play("default")
 
 
 func _on_fish_clicked(fish):
@@ -234,11 +248,29 @@ func _on_fish_clicked(fish):
 		MouseTool.GRAB:
 			start_grab(fish)
 		MouseTool.KNIFE:
-			cut_fish(fish)
+			cut_fish()
 
 
 # later you’ll call:
 # fish.cut_head() or fish.cut_tail()
 func _on_timer_timeout() -> void:
-	$Punch.trigger_punch()
+	if pez_en_mesa:
+		$Punch.trigger_punch()
 	start_round()
+
+
+func _on_pez_en_mesa_body_entered(body: Node2D) -> void:
+	if body.is_in_group("pez"):
+		pez_en_mesa = true
+		print("PEZ EN MESA")
+
+
+func _on_pez_en_mesa_body_exited(body: Node2D) -> void:
+	if body.is_in_group("pez"):
+		pez_en_mesa = false
+		print("PEZ FUERA DE MESA")
+
+
+func _on_basura_peces_body_entered(body: Node2D) -> void:
+	if body.is_in_group("pez"):
+		body.queue_free()

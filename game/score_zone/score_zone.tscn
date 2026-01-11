@@ -1,18 +1,157 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmum7eealbbyv"]
+[gd_scene load_steps=38 format=3 uid="uid://cmum7eealbbyv"]
 
 [ext_resource type="Script" uid="uid://crj4hx4o4ad2x" path="res://game/score_zone/score_zone.gd" id="1_na03p"]
 [ext_resource type="Texture2D" uid="uid://dgs4nvh3mlw0a" path="res://game/score_zone/art/caja_bien.png" id="2_y4oms"]
-[ext_resource type="Texture2D" uid="uid://cw84lcl3yy5u0" path="res://game/score_zone/art/caja_mal.png" id="3_yv41l"]
+[ext_resource type="Texture2D" uid="uid://bkvh1qjuhyxl2" path="res://game/score_zone/art/badbox10.png" id="3_5wx57"]
+[ext_resource type="Texture2D" uid="uid://ccj66008itfee" path="res://game/score_zone/art/badbox11.png" id="4_a6ud6"]
+[ext_resource type="Texture2D" uid="uid://wnikxpv726pq" path="res://game/score_zone/art/badbox12.png" id="5_3fy3o"]
+[ext_resource type="Texture2D" uid="uid://bnlh76bgdg2gh" path="res://game/score_zone/art/badbox13.png" id="6_limbx"]
+[ext_resource type="Texture2D" uid="uid://cc317j018dx6f" path="res://game/score_zone/art/badbox14.png" id="7_a1twq"]
+[ext_resource type="Texture2D" uid="uid://ckafq3eaihgm4" path="res://game/score_zone/art/badbox15.png" id="8_lqlc0"]
+[ext_resource type="Texture2D" uid="uid://dxgnwc66cwht3" path="res://game/score_zone/art/badbox16.png" id="9_rew2e"]
+[ext_resource type="Texture2D" uid="uid://c3cxcqpp07vcj" path="res://game/score_zone/art/badbox17.png" id="10_lrf2w"]
+[ext_resource type="Texture2D" uid="uid://dds0n51y45mxl" path="res://game/score_zone/art/badbox18.png" id="11_et8ne"]
+[ext_resource type="Texture2D" uid="uid://sdcuomttfqbh" path="res://game/score_zone/art/badbox19.png" id="12_6iuhr"]
+[ext_resource type="Texture2D" uid="uid://cnkhun5uqq3t3" path="res://game/score_zone/art/badbox20.png" id="13_hrmp7"]
+[ext_resource type="Texture2D" uid="uid://ckighwscdxlx1" path="res://game/score_zone/art/badbox21.png" id="14_eya2j"]
+[ext_resource type="Texture2D" uid="uid://cs1q6ilaqnjvo" path="res://game/score_zone/art/badbox22.png" id="15_kgnn7"]
+[ext_resource type="Texture2D" uid="uid://cty8r88a4ejj8" path="res://game/score_zone/art/badbox23.png" id="16_sailt"]
+[ext_resource type="Texture2D" uid="uid://c3dq6h0wlp21k" path="res://game/score_zone/art/badbox24.png" id="17_x5y45"]
+[ext_resource type="Texture2D" uid="uid://i7vs3pcjs5su" path="res://game/score_zone/art/badbox25.png" id="18_s8858"]
+[ext_resource type="Texture2D" uid="uid://b17mjv3f7em6e" path="res://game/score_zone/art/badbox26.png" id="19_wl0rx"]
+[ext_resource type="Texture2D" uid="uid://bu3xm837ixy3e" path="res://game/score_zone/art/badbox27.png" id="20_iptap"]
+[ext_resource type="Texture2D" uid="uid://ckvuydfsre1da" path="res://game/score_zone/art/badbox28.png" id="21_uyjkn"]
+[ext_resource type="Texture2D" uid="uid://byxccnfjugeca" path="res://game/score_zone/art/badbox29.png" id="22_02j7x"]
+[ext_resource type="Texture2D" uid="uid://4ltyb518qcey" path="res://game/score_zone/art/badbox30.png" id="23_yjuwe"]
+[ext_resource type="Texture2D" uid="uid://bfa4s1noxilct" path="res://game/score_zone/art/badbox31.png" id="24_0oq3f"]
+[ext_resource type="Texture2D" uid="uid://do0uehmi4ky2g" path="res://game/score_zone/art/badbox32.png" id="25_t7hxk"]
+[ext_resource type="Texture2D" uid="uid://d10s0yd7lkiue" path="res://game/score_zone/art/badbox33.png" id="26_pcymt"]
+[ext_resource type="Texture2D" uid="uid://bb5s1hggxm1ej" path="res://game/score_zone/art/badbox34.png" id="27_xw128"]
+[ext_resource type="Texture2D" uid="uid://b27cta8u24q5y" path="res://game/score_zone/art/badbox35.png" id="28_1vuit"]
+[ext_resource type="Texture2D" uid="uid://c0la8rmqppa7s" path="res://game/score_zone/art/badbox36.png" id="29_lvncr"]
+[ext_resource type="Texture2D" uid="uid://cptw3ui3nc0ae" path="res://game/score_zone/art/badbox37.png" id="30_ldjfw"]
+[ext_resource type="Texture2D" uid="uid://bvu0uq52e6rod" path="res://game/score_zone/art/badbox38.png" id="31_wckd1"]
+[ext_resource type="Texture2D" uid="uid://dwnpelfqrhvqc" path="res://game/score_zone/art/badbox39.png" id="32_06f4v"]
+[ext_resource type="Texture2D" uid="uid://6seud7n2pgdv" path="res://game/score_zone/art/badbox40.png" id="33_tetgn"]
+[ext_resource type="Texture2D" uid="uid://1ibkt24rf1vg" path="res://game/score_zone/art/badbox41.png" id="34_cli7q"]
+[ext_resource type="Texture2D" uid="uid://62ku36c0ul3j" path="res://game/score_zone/art/badbox42.png" id="35_yw63w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0af2"]
 size = Vector2(278, 81)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jlp4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5wx57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a6ud6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3fy3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_limbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_a1twq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lqlc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rew2e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lrf2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_et8ne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6iuhr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_hrmp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_eya2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_kgnn7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sailt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_x5y45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_s8858")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_wl0rx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_iptap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_uyjkn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_02j7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_yjuwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_0oq3f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_t7hxk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_pcymt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_xw128")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_1vuit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_lvncr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_ldjfw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_wckd1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_06f4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_tetgn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_cli7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_yw63w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
 
 [node name="CajasDeClasificacion" type="Node2D"]
 z_index = -10
 script = ExtResource("1_na03p")
 
 [node name="GoodArea" type="Area2D" parent="."]
-position = Vector2(500, 0)
+position = Vector2(243, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="GoodArea"]
 texture = ExtResource("2_y4oms")
@@ -24,8 +163,11 @@ shape = SubResource("RectangleShape2D_d0af2")
 [node name="BadArea" type="Area2D" parent="."]
 position = Vector2(-500, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="BadArea"]
-texture = ExtResource("3_yv41l")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="BadArea"]
+position = Vector2(5, -44)
+sprite_frames = SubResource("SpriteFrames_0jlp4")
+autoplay = "default"
+frame_progress = 0.65929615
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BadArea"]
 position = Vector2(-19, -49)
