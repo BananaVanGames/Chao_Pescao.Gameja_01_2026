@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd83eekpbqxx2"]
+
+[ext_resource type="Script" uid="uid://b3na0bvantokb" path="res://ui/transition/set_transition.gd" id="1_27i77"]
+[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/default_fish.png" id="1_jgql5"]
+
+[node name="SetTransition" type="CanvasLayer"]
+process_mode = 3
+visible = false
+script = ExtResource("1_27i77")
+
+[node name="FishMask" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 4096
+texture = ExtResource("1_jgql5")

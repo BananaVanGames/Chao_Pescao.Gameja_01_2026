@@ -29,7 +29,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_4d6w6")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Consola" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,13 +43,13 @@ grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_kwc50")
 
-[node name="Timer" type="Node2D" parent="TextureRect"]
+[node name="Timer" type="Node2D" parent="Consola"]
 position = Vector2(779.99994, 589.99994)
 rotation = -0.19198622
 scale = Vector2(1.2499999, 1.2499998)
 skew = 0.040142536
 
-[node name="Timer" type="Label" parent="TextureRect/Timer"]
+[node name="Timer" type="Label" parent="Consola/Timer"]
 offset_left = -92.17667
 offset_top = -43.083862
 offset_right = 82.82333
@@ -62,13 +62,13 @@ text = "5.00"
 label_settings = SubResource("LabelSettings_kwc50")
 horizontal_alignment = 1
 
-[node name="Score" type="Node2D" parent="TextureRect"]
+[node name="Score" type="Node2D" parent="Consola"]
 position = Vector2(1091.2499, 663.7499)
 rotation = -0.15533432
 scale = Vector2(1.2499999, 1.25)
 skew = 0.19547677
 
-[node name="Score" type="Label" parent="TextureRect/Score"]
+[node name="Score" type="Label" parent="Consola/Score"]
 offset_left = -87.6032
 offset_top = -38.584213
 offset_right = 82.3968

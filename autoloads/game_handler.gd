@@ -5,6 +5,7 @@ signal score_changed(value)
 signal fishes_left_changed(value)
 signal change_rules(value)
 signal open_door
+signal reset_fishes(value)
 
 var time_left: float = 5
 var score: int = 0
@@ -45,15 +46,17 @@ func get_time() -> float:
 
 func add_score(value: int):
 	score += value
-	emit_signal("score_changed", score)
+	emit_signal("score_changed", score, value)
 
 
 func set_fishes_left(value: int):
 	fishes_left = value
 	emit_signal("fishes_left_changed", fishes_left)
 
+func reset_fish(value: int):
+	fishes_left = value
+	emit_signal("reset_fishes", fishes_left)
 
 func reset():
 	set_time(5)
-	score = 0
-	set_fishes_left(10)
+	reset_fish(1)

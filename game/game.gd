@@ -51,9 +51,11 @@ var last_fish: CharacterBody2D = null
 @onready var line_2d: Line2D = $Line2D
 @onready var trampilla_sprite: AnimatedSprite2D = $TrampillaSprite
 @onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
+#@onready var set_transition: CanvasLayer = $SetTransition
 
 
 func _ready() -> void:
+	GameHandler.reset()
 	cinta_fondo.play("default")
 	GameHandler.open_door.connect(_on_open_door_animation)
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -107,7 +109,8 @@ func start_next_set():
 	level += 1
 	if level > 3:
 		end_game()
-
+		return
+	
 	var rules: Array
 	for i in range(3):
 		rules.append(peces_peligrosos[level][i].pick_random())
@@ -149,7 +152,7 @@ func randomize_fish_characteristics(fish: CharacterBody2D) -> void:
 
 func spawn_fish():
 	if GameHandler.fishes_left <= 0:
-		end_game()
+		on_set_finished()
 		return
 
 	if not last_fish == null and not pez_en_mesa:
@@ -165,6 +168,17 @@ func spawn_fish():
 
 	GameHandler.set_fishes_left(GameHandler.fishes_left - 1)
 
+func on_set_finished():
+	timer.stop()
+
+	for fish in spawner.get_children():
+		fish.queue_free()
+
+	# This reset does not reset score
+	GameHandler.reset()
+
+	start_next_set()
+	start_round()
 
 func end_game():
 	get_tree().quit()

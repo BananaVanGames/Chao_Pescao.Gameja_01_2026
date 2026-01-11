@@ -21,14 +21,22 @@ extends Control
 @onready var pez_restante_encendido = preload("res://ui/hud/art/rules/icono_pez_encendido.png")
 @onready var pez_restante_apagado = preload("res://ui/hud/art/rules/icono_pez_apagado.png")
 
-@onready var score_label: Label = $TextureRect/Score/Score
-@onready var timer_label: Label = $TextureRect/Timer/Timer
+@onready var score_label: Label = $Consola/Score/Score
+@onready var timer_label: Label = $Consola/Timer/Timer
+
+
+@onready var consolita = preload("res://ui/hud/art/cronometro y puntuación/consola.png")
+@onready var bombilla1 = preload("res://ui/hud/art/cronometro y puntuación/consola_bombilla1.png")
+@onready var bombilla2 = preload("res://ui/hud/art/cronometro y puntuación/consola_bombilla2.png")
+@onready var bombilla3 = preload("res://ui/hud/art/cronometro y puntuación/consola_bombilla3.png")
+
 @onready var danger_1: TextureRect = $Reglas/GridContainer/Danger1
 @onready var danger_2: TextureRect = $Reglas/GridContainer/Danger2
 @onready var danger_3: TextureRect = $Reglas/GridContainer/Danger3
 @onready var grid_container: GridContainer = $Reglas/GridContainer
 @onready var regla_cola: TextureRect = $Reglas/GridContainer/ReglaCola
 @onready var contenedor_peces_restantes: HBoxContainer = $PecesRestantes/ContenedorPecesRestantes
+@onready var consola: TextureRect = $Consola
 
 #endregion
 
@@ -38,6 +46,7 @@ func _ready():
 	GameHandler.score_changed.connect(_on_score_changed)
 	GameHandler.fishes_left_changed.connect(_on_fishes_changed)
 	GameHandler.change_rules.connect(_start_next_set)
+	GameHandler.reset_fishes.connect(_reset_set)
 
 
 func reset_peces_restantes() -> void:
@@ -45,13 +54,23 @@ func reset_peces_restantes() -> void:
 	for i in range(10):
 		hijos_contenedor[i].texture = pez_restante_encendido
 
+func _reset_set(_value) -> void:
+	reset_peces_restantes()
 
 func _on_time_changed(value) -> void:
 	timer_label.text = str(snapped(value, 0.1)) + "0"
 
 
-func _on_score_changed(value) -> void:
-	score_label.text = str(value)
+func _on_score_changed(total_score, tmp_score):
+	if tmp_score == 1:
+		consola.texture = bombilla1
+	elif tmp_score == 2:
+		consola.texture = bombilla2
+	elif tmp_score == 3:
+		consola.texture = bombilla3
+	else:
+		consola.texture = consolita
+	score_label.text = str(total_score)
 
 
 func _on_fishes_changed(value) -> void:
