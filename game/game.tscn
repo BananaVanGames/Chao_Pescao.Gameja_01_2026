@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=81 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
@@ -58,6 +58,19 @@
 [ext_resource type="Texture2D" uid="uid://dpshvx3mbjd5k" path="res://game/trampilla_y_mesa/trampilla39.png" id="52_8aer8"]
 [ext_resource type="Texture2D" uid="uid://cbc13pohlhtol" path="res://game/trampilla_y_mesa/OL_Trampilla.png" id="56_kaw54"]
 [ext_resource type="PackedScene" uid="uid://bd83eekpbqxx2" path="res://ui/transition/set_transition.tscn" id="58_jbuku"]
+[ext_resource type="Texture2D" uid="uid://bnam0rniyavqn" path="res://ui/hud/art/pinza/pinza01.png" id="59_gk1pq"]
+[ext_resource type="Texture2D" uid="uid://cttaifaj3oos" path="res://ui/hud/art/pinza/pinza02.png" id="60_3wmuf"]
+[ext_resource type="Texture2D" uid="uid://ccofekv380kfr" path="res://ui/hud/art/pinza/pinza03.png" id="61_vgjtp"]
+[ext_resource type="Texture2D" uid="uid://ckbxg4t54w08v" path="res://ui/hud/art/pinza/pinza04.png" id="62_my0r7"]
+[ext_resource type="Texture2D" uid="uid://dcoovf08qythx" path="res://ui/hud/art/pinza/pinza05.png" id="63_ym2td"]
+[ext_resource type="Texture2D" uid="uid://lq3pixtr6ffj" path="res://ui/hud/art/pinza/pinza06.png" id="64_vf2gg"]
+[ext_resource type="Texture2D" uid="uid://pv84mxtl8lyj" path="res://ui/hud/art/pinza/pinza07.png" id="65_mh1fh"]
+[ext_resource type="Texture2D" uid="uid://c7aqjac1t0yuh" path="res://ui/hud/art/pinza/pinza08.png" id="66_avony"]
+[ext_resource type="Texture2D" uid="uid://7ksnh7dpt08e" path="res://ui/hud/art/pinza/pinza09.png" id="67_8tfxx"]
+[ext_resource type="Texture2D" uid="uid://bxdahvw8qnsxn" path="res://ui/hud/art/pinza/pinza10.png" id="68_15634"]
+[ext_resource type="Texture2D" uid="uid://cxd4reim2uqq2" path="res://ui/hud/art/pinza/pinza11.png" id="69_2kr6o"]
+[ext_resource type="Texture2D" uid="uid://djkqfogum0os6" path="res://ui/hud/art/pinza/pinza12.png" id="70_fqr2c"]
+[ext_resource type="Texture2D" uid="uid://duun0xtoce2wt" path="res://ui/hud/art/pinza/pinza13.png" id="71_au36g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kaw54"]
 animations = [{
@@ -229,6 +242,53 @@ blend_mode = 1
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_oacl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59_gk1pq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_3wmuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_vgjtp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_my0r7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_ym2td")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_vf2gg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_mh1fh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_avony")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_8tfxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_15634")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_2kr6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_fqr2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_au36g")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h7iqs")
 fish_scene = ExtResource("2_e2o6t")
@@ -268,7 +328,7 @@ scale = Vector2(0.163, 0.2)
 texture = ExtResource("6_dakft")
 
 [node name="Spawner" type="Marker2D" parent="."]
-position = Vector2(972, 634)
+position = Vector2(972, 917)
 
 [node name="TrampillaSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(956, 543)
@@ -329,6 +389,12 @@ stream = ExtResource("10_j8tme")
 autoplay = true
 
 [node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
+
+[node name="Pinza" type="AnimatedSprite2D" parent="."]
+z_index = 1000
+position = Vector2(964, 532)
+sprite_frames = SubResource("SpriteFrames_oacl0")
+frame = 6
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="PezEnMesa" to="." method="_on_pez_en_mesa_body_entered"]

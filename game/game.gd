@@ -249,6 +249,8 @@ var peces := [
 	preload("res://game/pez/art/default_fish.png")
 ]
 
+@onready var pinza: AnimatedSprite2D = $Pinza
+
 @onready var mano: Sprite2D = $Mano
 #endregion
 
@@ -386,6 +388,8 @@ func spawn_fish():
 	if not last_fish == null and not pez_en_mesa:
 		last_fish.explode()
 
+	pinza.play("default")
+	await get_tree().create_timer(0.18).timeout
 	last_fish = fish_scene.instantiate()
 	spawner.add_child(last_fish)
 	randomize_fish_characteristics(last_fish)
