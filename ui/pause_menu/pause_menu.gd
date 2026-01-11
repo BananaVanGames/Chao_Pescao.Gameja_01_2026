@@ -25,11 +25,6 @@ func toggle_pause():
 			visible = true
 			get_tree().paused = true
 			audio_stream_player.play()
-
-func _on_button_pressed() -> void:
-	visible = false
-	get_tree().paused = false
-	audio_stream_player.stop()
 	
 
 func _on_main_menu_pressed() -> void:
@@ -40,3 +35,9 @@ func _on_confirmation_dialog_confirmed() -> void:
 	visible = false
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
+
+
+func _on_resume_pressed() -> void:
+	visible = false
+	get_tree().paused = false
+	audio_stream_player.stop()

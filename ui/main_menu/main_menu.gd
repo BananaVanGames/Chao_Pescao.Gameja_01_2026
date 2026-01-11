@@ -15,8 +15,9 @@ func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://game/game.tscn")
 
 
-func _on_option_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://ui/option_menu/option_menu.tscn")
-
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_tutorial_pressed() -> void:
+	pass # Replace with function body.
