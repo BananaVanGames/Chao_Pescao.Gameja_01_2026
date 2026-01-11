@@ -1,16 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqy4ordentikc"]
+[gd_scene load_steps=8 format=3 uid="uid://dqy4ordentikc"]
 
 [ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://game/pez/pez.gd" id="1_tlgln"]
 [ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/default_fish.png" id="2_f5oq0"]
+[ext_resource type="Texture2D" uid="uid://byvly8wx30s2o" path="res://game/pez/art/2,0,0,0,fish.png" id="3_e5qgn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2k18"]
 radius = 82.36504
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5oq0"]
-size = Vector2(17.5, 74)
+size = Vector2(62.000053, 103.000084)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kntyo"]
-size = Vector2(17, 74)
+size = Vector2(62, 116)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2k18"]
+size = Vector2(100, 116)
 
 [node name="Pez" type="CharacterBody2D" groups=["pez"]]
 z_index = 100
@@ -31,26 +35,48 @@ rotation = 1.5707964
 scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("CircleShape2D_n2k18")
 
-[node name="DefaultFish" type="Sprite2D" parent="."]
-position = Vector2(3.7778018, -3.9999993)
+[node name="Cabeza" type="Sprite2D" parent="."]
+position = Vector2(-139, -3.9999998)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_f5oq0")
+texture = ExtResource("3_e5qgn")
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 1080)
+
+[node name="Cuerpo" type="Sprite2D" parent="."]
+position = Vector2(-11, -3.9999993)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_e5qgn")
+region_enabled = true
+region_rect = Rect2(640, 0, 640, 1080)
+
+[node name="Cola" type="Sprite2D" parent="."]
+position = Vector2(117, -3.9999998)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_e5qgn")
+region_enabled = true
+region_rect = Rect2(1280, 0, 640, 1080)
 
 [node name="CorteCabeza" type="Area2D" parent="."]
-position = Vector2(2.3841858e-07, -4.7683716e-07)
+position = Vector2(-93, 6.9999995)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCabeza"]
-position = Vector2(-21.25, 0)
+scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_f5oq0")
 
 [node name="CorteCola" type="Area2D" parent="."]
-position = Vector2(-23, -19)
+position = Vector2(73, 7)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCola"]
-position = Vector2(49, 19)
+scale = Vector2(0.9999997, 0.9999997)
 shape = SubResource("RectangleShape2D_kntyo")
+
+[node name="CorteCuerpo" type="Area2D" parent="."]
+position = Vector2(-10, 7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCuerpo"]
+shape = SubResource("RectangleShape2D_n2k18")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="input_event" from="CorteCabeza" to="." method="_on_corte_cabeza_input_event"]

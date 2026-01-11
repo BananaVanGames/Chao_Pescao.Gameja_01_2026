@@ -5,9 +5,20 @@ enum PELIGROSIDAD {
 	PROCESABLE,
 }
 
+#region MOUSE LOGIC VARIABLES
+# Mouse tool modes
+enum MouseTool {
+	NONE,
+	GRAB,
+	KNIFE,
+}
+
 @export var fish_scene: PackedScene
 @export var round_time: float = 5
 @export var level: int = -1
+@export var hand_open: Texture2D
+@export var hand_grab: Texture2D
+@export var hand_knife: Texture2D
 
 # POSIBLES PECES A SPAWNEAR = [OJOS, CABEZA, CUERPO, COLA]
 var peces_posibles1: Array = [[1], [0, 1], [0], [0, 1, 2]]
@@ -20,12 +31,26 @@ var peces_peligrosos1: Array = [[1], [0, 1], [0], [0, 1, 2]]
 var peces_peligrosos2: Array = [[3, 4, 5], [0, 1, 2], [0, 1], [0, 1, 2, 3]]
 var peces_peligrosos3: Array = [[3, 4, 5, 6], [0, 1, 2, 3], [0, 1], [0, 1, 2, 3]]
 var peces_peligrosos: Array = [peces_peligrosos1, peces_peligrosos2, peces_peligrosos3]
+var current_tool := MouseTool.NONE
+
+# Drag n drop logic LEFT MOUSE BUTTON
+# Which fish is currently being dragged (null = none)
+var dragged_fish: CharacterBody2D = null
+
+# Cutting logic variables RIGHT MOUSE BUTTON
+var is_cutting := false
+var cut_points := []
+
+@onready var mano: Sprite2D = $Mano
+#endregion
 
 @onready var timer: Timer = $Timer
 @onready var spawner: Marker2D = $Spawner
+@onready var line_2d: Line2D = $Line2D
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	start_next_set()
 	start_round()
 
@@ -34,8 +59,42 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if timer.is_stopped():
 		return
-
 	GameHandler.set_time(timer.time_left)
+	mano.global_position = get_global_mouse_position()
+
+	match current_tool:
+		MouseTool.GRAB:
+			mano.texture = hand_grab
+		MouseTool.KNIFE:
+			mano.texture = hand_knife
+		_:
+			mano.texture = hand_open
+
+	if is_cutting:
+		var pos = get_global_mouse_position()
+		line_2d.add_point(pos)
+		cut_points.append(pos)
+
+
+func _input(event):
+	if event is InputEventMouseButton:
+
+		# LEFT = grab tool
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				current_tool = MouseTool.GRAB
+			else:
+				current_tool = MouseTool.NONE
+				release_fish()
+
+		# RIGHT = knife tool
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if event.pressed:
+				current_tool = MouseTool.KNIFE
+				start_cut()
+			else:
+				current_tool = MouseTool.NONE
+				finish_cut()
 
 
 func start_next_set():
@@ -70,6 +129,8 @@ func spawn_fish():
 	spawner.add_child(fish)
 	fish.global_position = spawner.global_position
 
+	fish.clicked.connect(_on_fish_clicked)
+
 	GameHandler.set_fishes_left(GameHandler.fishes_left - 1)
 
 
@@ -78,6 +139,84 @@ func end_game():
 	print("Game Over")
 
 
+func start_grab(fish):
+	# Prevent grabbing multiple fish
+	if dragged_fish != null:
+		return
+
+	dragged_fish = fish
+	# Tell the fish it is being dragged
+	fish.start_drag(get_global_mouse_position())
+
+
+func release_fish():
+	if dragged_fish:
+		dragged_fish.stop_drag()
+		dragged_fish = null
+
+
+func start_cut():
+	is_cutting = true
+	cut_points.clear()
+	line_2d.clear_points()
+	line_2d.add_point(get_global_mouse_position())
+
+
+func finish_cut():
+	is_cutting = false
+	# Test cut against all fish
+	for fish in spawner.get_children():
+		test_cut_against_fish(fish)
+	line_2d.clear_points()
+
+
+func test_cut_against_fish(fish):
+	var space := get_world_2d().direct_space_state
+
+	var hit_head := false
+	var hit_tail := false
+	var hit_body := false
+
+	for p in cut_points:
+		var query := PhysicsPointQueryParameters2D.new()
+		query.position = p
+		query.collide_with_areas = true
+		query.collide_with_bodies = false
+
+		var result = space.intersect_point(query)
+
+		for hit in result:
+			if hit.collider == fish.get_node("CorteCuerpo"):
+				hit_body = true
+			elif hit.collider == fish.get_node("CorteCabeza"):
+				hit_head = true
+			elif hit.collider == fish.get_node("CorteCola"):
+				hit_tail = true
+	# Forbidden area cancels the cut
+	if hit_body:
+		return
+
+	if hit_head:
+		fish.cut_head()
+
+	if hit_tail:
+		fish.cut_tail()
+
+
+func cut_fish(fish):
+	line_2d.add_point(get_local_mouse_position())
+
+
+func _on_fish_clicked(fish):
+	match current_tool:
+		MouseTool.GRAB:
+			start_grab(fish)
+		MouseTool.KNIFE:
+			cut_fish(fish)
+
+
+# later you’ll call:
+# fish.cut_head() or fish.cut_tail()
 func _on_timer_timeout() -> void:
 	$Punch.trigger_punch()
 	start_round()
