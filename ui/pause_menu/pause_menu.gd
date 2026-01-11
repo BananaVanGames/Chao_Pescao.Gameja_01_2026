@@ -21,8 +21,9 @@ extends CanvasLayer
 @onready var se_07: Sprite2D = $Se07
 
 @onready var dialogue_list = [[lo1_dialogo, lo2_dialogo, se3_dialogo, ao4_dialogo, eo5_dialogo, sa6_dialogo, sa7_dialogo], [l_01, l_02, se_3, a_04, e_05, sa_06, se_07]]
+@onready var tutorial: ConfirmationDialog = $Tutorial
 
-
+var tutorial_running := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
@@ -32,7 +33,10 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
-		toggle_pause()
+		if tutorial_running:
+			tutorial.popup_centered()
+		else:
+			toggle_pause()
 
 
 func toggle_pause():
@@ -65,8 +69,8 @@ func _on_resume_pressed() -> void:
 	get_tree().paused = false
 	musica_fondo.stop()
 
-	
 func _on_tutorial_pressed() -> void:
+	tutorial_running = true
 	v_box_container.visible = false
 	for i in range(1, 7):
 		dialogue_list[1][i].visible = true
@@ -79,3 +83,14 @@ func _on_tutorial_pressed() -> void:
 		dialogue_list[1][i].visible = false
 
 	v_box_container.visible = true
+	tutorial_running = false
+
+
+
+func _on_tutorial_confirmed() -> void:
+	dialogos.stop()
+	for i in range(7):
+		dialogue_list[1][i].visible = false
+
+	v_box_container.visible = true
+	tutorial_running = false

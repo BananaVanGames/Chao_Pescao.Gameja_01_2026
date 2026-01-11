@@ -1,5 +1,6 @@
 extends Control
 
+@onready var tutorial: Label = $VBoxContainer/Tutorial/Tutorial
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,4 +21,7 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
-	pass # Replace with function body.
+	if tutorial.visible == true:
+		tutorial.visible = false
+	else:
+		tutorial.visible = true

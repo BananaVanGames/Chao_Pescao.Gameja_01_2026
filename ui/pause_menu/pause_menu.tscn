@@ -172,8 +172,13 @@ position = Vector2(628, 900.99994)
 scale = Vector2(0.38127846, 0.38127846)
 texture = ExtResource("8_f2x4c")
 
-[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[node name="Tutorial" type="ConfirmationDialog" parent="."]
+title = "Exit Tutorial"
+dialog_text = "Do you want to skip the tutorial?"
+
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="confirmed" from="Tutorial" to="." method="_on_tutorial_confirmed"]

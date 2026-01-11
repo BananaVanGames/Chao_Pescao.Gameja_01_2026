@@ -104,6 +104,18 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "Tutorial"
 
+[node name="Tutorial" type="Label" parent="VBoxContainer/Tutorial"]
+visible = false
+layout_mode = 0
+offset_left = 469.0
+offset_top = -2.0
+offset_right = 835.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 32
+text = " -Enter the game
+- Press ESC 
+- Click Tutorial"
+
 [node name="ExitButton" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(500, 150)
 layout_mode = 2
