@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://game/pez/pez.gd" id="1_tlgln"]
 [ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/default_fish.png" id="2_f5oq0"]
-[ext_resource type="Texture2D" uid="uid://km1n1gpp6gud" path="res://game/pez/art/explosion.png" id="3_e5qgn"]
+[ext_resource type="Texture2D" uid="uid://km1n1gpp6gud" path="res://game/pez/explosion.png" id="3_e5qgn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2k18"]
 radius = 82.36504

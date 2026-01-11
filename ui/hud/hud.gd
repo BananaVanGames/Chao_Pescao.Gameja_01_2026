@@ -24,7 +24,6 @@ extends Control
 @onready var score_label: Label = $Consola/Score/Score
 @onready var timer_label: Label = $Consola/Timer/Timer
 
-
 @onready var consolita = preload("res://ui/hud/art/cronometro y puntuación/consola.png")
 @onready var bombilla1 = preload("res://ui/hud/art/cronometro y puntuación/consola_bombilla1.png")
 @onready var bombilla2 = preload("res://ui/hud/art/cronometro y puntuación/consola_bombilla2.png")
@@ -54,8 +53,10 @@ func reset_peces_restantes() -> void:
 	for i in range(10):
 		hijos_contenedor[i].texture = pez_restante_encendido
 
+
 func _reset_set(_value) -> void:
 	reset_peces_restantes()
+
 
 func _on_time_changed(value) -> void:
 	timer_label.text = str(snapped(value, 0.1)) + "0"
@@ -83,6 +84,7 @@ func _start_next_set(value: Array):
 	var random_cabeza: int
 	var random_cola: int
 	var grid_children = grid_container.get_children()
+
 	for i in range(3):
 		match i:
 			0:
@@ -96,10 +98,12 @@ func _start_next_set(value: Array):
 					grid_children[i * 3 + 1].visible = false
 					danger_2.visible = false
 				else:
+					grid_children[i * 3].visible = true
+					grid_children[i * 3 + 1].visible = true
+					danger_2.visible = true
+
 					grid_children[i * 3].texture = tipo_cabeza[value[i]]
-
 					grid_children[i * 3 + 1].text = "   =   "
-
 					random_cabeza = randi_range(0, 1)
 					danger_2.texture = peligrosisdad[random_cabeza]
 

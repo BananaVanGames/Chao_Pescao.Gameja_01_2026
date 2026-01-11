@@ -21,6 +21,7 @@ func set_danger_rules(values: Array):
 func get_danger_rules() -> Array:
 	return danger_rules
 
+
 func open_door_animation():
 	emit_signal("open_door")
 
@@ -53,9 +54,11 @@ func set_fishes_left(value: int):
 	fishes_left = value
 	emit_signal("fishes_left_changed", fishes_left)
 
+
 func reset_fish(value: int):
 	fishes_left = value
 	emit_signal("reset_fishes", fishes_left)
+
 
 func reset():
 	set_time(5)
