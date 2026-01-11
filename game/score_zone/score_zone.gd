@@ -73,7 +73,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	print("Puntuación de la cola: ", score)
 
 	if score == 2 and GameHandler.get_time() > 1.00:
-		print("Punto extra por velocidad")
+		#print("Punto extra por velocidad")
 		score = 3
 
 	print("Puntuación final añadida: ", score, "\n")
@@ -86,8 +86,8 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 		return
 
 	var fish_data = body.get_fish_data()
-
-	if fish_data[2] == 0:
+	print("Datos del pez: ", fish_data)
+	if fish_data[CUERPO_PEZ] == 0:
 		GameHandler.add_score(-3)
 	else:
 		GameHandler.add_score(1)
