@@ -101,6 +101,60 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y36n6"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_l8g03"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oacl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59_gk1pq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_3wmuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_vgjtp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_my0r7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_ym2td")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_vf2gg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_mh1fh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_avony")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_8tfxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_15634")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_2kr6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_fqr2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_au36g")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_6f2ei"]
 animations = [{
 "frames": [{
@@ -223,53 +277,6 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_oacl0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("59_gk1pq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("60_3wmuf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("61_vgjtp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("62_my0r7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("63_ym2td")
-}, {
-"duration": 1.0,
-"texture": ExtResource("64_vf2gg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("65_mh1fh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("66_avony")
-}, {
-"duration": 1.0,
-"texture": ExtResource("67_8tfxx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("68_15634")
-}, {
-"duration": 1.0,
-"texture": ExtResource("69_2kr6o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("70_fqr2c")
-}, {
-"duration": 1.0,
-"texture": ExtResource("71_au36g")
-}],
-"loop": false,
-"name": &"default",
-"speed": 24.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(576, 76)
 
@@ -282,13 +289,6 @@ size = Vector2(781, 159)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxrkv"]
 size = Vector2(75, 334)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y36n6"]
-blend_mode = 1
-
-[sub_resource type="Curve" id="Curve_l8g03"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h7iqs")
 fish_scene = ExtResource("2_e2o6t")
@@ -297,7 +297,7 @@ hand_grab = ExtResource("4_u5opy")
 hand_knife = ExtResource("5_y36n6")
 
 [node name="Fondo" type="TextureRect" parent="."]
-z_index = -15
+z_index = -100
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -310,29 +310,52 @@ grow_vertical = 2
 texture = ExtResource("6_1paru")
 
 [node name="CintaFondo" type="AnimatedSprite2D" parent="."]
-z_index = -10
+z_index = -99
 position = Vector2(952, 538)
 sprite_frames = SubResource("SpriteFrames_kaw54")
 frame_progress = 0.65542233
 
 [node name="ScoreZone" parent="." instance=ExtResource("4_4fuuu")]
+z_index = 0
 position = Vector2(710, 507)
 scale = Vector2(0.7, 0.7)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 10
 
-[node name="Hud" parent="CanvasLayer" instance=ExtResource("1_80nbo")]
+[node name="Hud" parent="HUD" instance=ExtResource("1_80nbo")]
 offset_top = -2.0
 offset_bottom = -2.0
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="Mano" type="Sprite2D" parent="."]
+[node name="Cursor" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Mano" type="Sprite2D" parent="Cursor"]
 z_index = 4096
 z_as_relative = false
 scale = Vector2(0.163, 0.2)
 texture = ExtResource("6_dakft")
+
+[node name="Line2D" type="Line2D" parent="Cursor"]
+material = SubResource("CanvasItemMaterial_y36n6")
+width = 6.0
+width_curve = SubResource("Curve_l8g03")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="SFX" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="Pinza" type="AnimatedSprite2D" parent="SFX"]
+z_index = 1000
+position = Vector2(953, 287)
+sprite_frames = SubResource("SpriteFrames_oacl0")
+frame = 6
 
 [node name="Spawner" type="Marker2D" parent="."]
 position = Vector2(970, 610)
@@ -345,12 +368,6 @@ sprite_frames = SubResource("SpriteFrames_6f2ei")
 z_index = 100
 position = Vector2(956, 545)
 texture = ExtResource("56_kaw54")
-
-[node name="Pinza" type="AnimatedSprite2D" parent="."]
-z_index = 1000
-position = Vector2(953, 287)
-sprite_frames = SubResource("SpriteFrames_oacl0")
-frame = 6
 
 [node name="Mesa" type="StaticBody2D" parent="."]
 position = Vector2(970, 1016)
@@ -382,16 +399,6 @@ shape = SubResource("RectangleShape2D_dxrkv")
 [node name="Punch" parent="." instance=ExtResource("5_dxrkv")]
 position = Vector2(1661, 893.00006)
 scale = Vector2(1.5, 1.5)
-
-[node name="Line2D" type="Line2D" parent="."]
-material = SubResource("CanvasItemMaterial_y36n6")
-width = 6.0
-width_curve = SubResource("Curve_l8g03")
-texture_mode = 2
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-antialiased = true
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
 visible = false

@@ -47,14 +47,14 @@ var last_fish: CharacterBody2D = null
 var file_names
 var resources
 
-@onready var pinza: AnimatedSprite2D = $Pinza
+@onready var pinza: AnimatedSprite2D = $SFX/Pinza
 
-@onready var mano: Sprite2D = $Mano
+@onready var mano: Sprite2D = $Cursor/Mano
 #endregion
 
 @onready var timer: Timer = $Timer
 @onready var spawner: Marker2D = $Spawner
-@onready var line_2d: Line2D = $Line2D
+@onready var line_2d: Line2D = $Cursor/Line2D
 @onready var trampilla_sprite: AnimatedSprite2D = $TrampillaSprite
 @onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
 @onready var set_transition: CanvasLayer = $SetTransition
