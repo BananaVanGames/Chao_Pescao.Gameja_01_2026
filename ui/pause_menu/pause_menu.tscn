@@ -137,21 +137,20 @@ texture = ExtResource("4_c3jo5")
 
 [node name="L02" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(208, 378.00003)
-rotation = 1.5707964
-scale = Vector2(0.41784468, 0.41784468)
+position = Vector2(512, 216)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_b4b0p")
 
 [node name="Se3" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(963, 327)
-scale = Vector2(0.38127846, 0.38127846)
+position = Vector2(1011, 344)
+scale = Vector2(0.35, 0.35)
 texture = ExtResource("6_b05md")
 
 [node name="A04" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(852, 209)
-scale = Vector2(0.24828286, 0.24828286)
+position = Vector2(895.00006, 190)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_lhp7q")
 
 [node name="E05" type="Sprite2D" parent="."]

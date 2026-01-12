@@ -50,27 +50,37 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 		body.queue_free()
 		return
 
-	score += apply_rule(
-		fish_data[OJOS_PEZ] > current_rules[OJOS_RULES],
-		danger_rules[0],
-		fish_data[CABEZA_CORTADA]
-	)
-	print("Puntuación de los ojos: ", score)
+	var cabeza_mal := false
+	if fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]:
+		cabeza_mal = true
 
-	if current_rules[CABEZA_RULES] != 0:
-		score += apply_rule(
-			fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES],
-			danger_rules[1],
-			fish_data[CABEZA_CORTADA]
-		)
-	print("Puntuación de la cabeza: ", score)
-
-	score += apply_rule(
-		fish_data[COLA_PEZ] == current_rules[COLA_RULES],
-		danger_rules[2],
-		fish_data[COLA_CORTADA]
-	)
-	print("Puntuación de la cola: ", score)
+	if fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != 0:
+		cabeza_mal = true
+	var cabeza_cortada = fish_data[CABEZA_CORTADA]
+	
+	if cabeza_mal:
+		if not cabeza_cortada:
+			# Debía cortarse pero no se cortó
+			if not danger_rules[0]:
+				score = -3
+			else:
+				score -= 1
+	else:
+		if cabeza_cortada:
+			# No debía cortarse pero se cortó
+			score -= 1
+	print("Score después de la cabeza: ", score)
+	if score != -3:
+		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
+			if not fish_data[COLA_CORTADA]:
+				if not danger_rules[2]:
+					score = -3
+				else:
+					score -= 1
+		else:
+			if fish_data[COLA_CORTADA]:
+				score -= 1
+	print("Score después de la cola: ", score)
 
 	if score == 2 and GameHandler.get_time() > 1.00:
 		#print("Punto extra por velocidad")

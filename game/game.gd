@@ -14,7 +14,7 @@ enum MouseTool {
 }
 
 @export var fish_scene: PackedScene
-@export var round_time: float = 5
+@export var round_time: float = 5.2
 @export var level: int = -1
 @export var hand_open: Texture2D
 @export var hand_grab: Texture2D
@@ -27,8 +27,8 @@ var peces_posibles: Array = [peces_posibles1, peces_posibles2]
 
 # PECES PELIGROSOS: 
 var peces_peligrosos1: Array = [[1], [0, 1], [0, 1, 2]]
-var peces_peligrosos2: Array = [[3, 4, 5], [0, 1, 2], [0, 1, 2, 3]]
-var peces_peligrosos3: Array = [[3, 4, 5, 6], [0, 1, 2, 3], [0, 1, 2, 3]]
+var peces_peligrosos2: Array = [[2, 3, 4], [0, 1, 2], [0, 1, 2, 3]]
+var peces_peligrosos3: Array = [[2, 3, 4, 5], [0, 1, 2, 3], [0, 1, 2, 3]]
 var peces_peligrosos: Array = [peces_peligrosos1, peces_peligrosos2, peces_peligrosos3]
 var current_tool := MouseTool.NONE
 
@@ -47,208 +47,6 @@ var last_fish: CharacterBody2D = null
 var file_names
 var resources
 
-var peces := [
-	preload("res://game/pez/art/0,0,0,0.png"),
-	preload("res://game/pez/art/0,0,0,1.png"),
-	preload("res://game/pez/art/0,0,0,2.png"),
-	preload("res://game/pez/art/0,0,0,3.png"),
-	preload("res://game/pez/art/0,0,1,0.png"),
-	preload("res://game/pez/art/0,0,1,1.png"),
-	preload("res://game/pez/art/0,0,1,2.png"),
-	preload("res://game/pez/art/0,0,1,3.png"),
-	preload("res://game/pez/art/0,1,0,0.png"),
-	preload("res://game/pez/art/0,1,0,1.png"),
-	preload("res://game/pez/art/0,1,0,2.png"),
-	preload("res://game/pez/art/0,1,0,3.png"),
-	preload("res://game/pez/art/0,1,1,0.png"),
-	preload("res://game/pez/art/0,1,1,1.png"),
-	preload("res://game/pez/art/0,1,1,2.png"),
-	preload("res://game/pez/art/0,1,1,3.png"),
-	preload("res://game/pez/art/0,2,0,0.png"),
-	preload("res://game/pez/art/0,2,0,1.png"),
-	preload("res://game/pez/art/0,2,0,2.png"),
-	preload("res://game/pez/art/0,2,0,3.png"),
-	preload("res://game/pez/art/0,2,1,0.png"),
-	preload("res://game/pez/art/0,2,1,1.png"),
-	preload("res://game/pez/art/0,2,1,2.png"),
-	preload("res://game/pez/art/0,2,1,3.png"),
-	preload("res://game/pez/art/0,3,0,0.png"),
-	preload("res://game/pez/art/0,3,0,1.png"),
-	preload("res://game/pez/art/0,3,0,2.png"),
-	preload("res://game/pez/art/0,3,0,3.png"),
-	preload("res://game/pez/art/0,3,1,0.png"),
-	preload("res://game/pez/art/0,3,1,1.png"),
-	preload("res://game/pez/art/0,3,1,2.png"),
-	preload("res://game/pez/art/0,3,1,3.png"),
-
-	preload("res://game/pez/art/1,0,0,0.png"),
-	preload("res://game/pez/art/1,0,0,1.png"),
-	preload("res://game/pez/art/1,0,0,2.png"),
-	preload("res://game/pez/art/1,0,0,3.png"),
-	preload("res://game/pez/art/1,0,1,0.png"),
-	preload("res://game/pez/art/1,0,1,1.png"),
-	preload("res://game/pez/art/1,0,1,2.png"),
-	preload("res://game/pez/art/1,0,1,3.png"),
-	preload("res://game/pez/art/1,1,0,0.png"),
-	preload("res://game/pez/art/1,1,0,1.png"),
-	preload("res://game/pez/art/1,1,0,2.png"),
-	preload("res://game/pez/art/1,1,0,3.png"),
-	preload("res://game/pez/art/1,1,1,0.png"),
-	preload("res://game/pez/art/1,1,1,1.png"),
-	preload("res://game/pez/art/1,1,1,2.png"),
-	preload("res://game/pez/art/1,1,1,3.png"),
-	preload("res://game/pez/art/1,2,0,0.png"),
-	preload("res://game/pez/art/1,2,0,1.png"),
-	preload("res://game/pez/art/1,2,0,2.png"),
-	preload("res://game/pez/art/1,2,0,3.png"),
-	preload("res://game/pez/art/1,2,1,0.png"),
-	preload("res://game/pez/art/1,2,1,1.png"),
-	preload("res://game/pez/art/1,2,1,2.png"),
-	preload("res://game/pez/art/1,2,1,3.png"),
-	preload("res://game/pez/art/1,3,0,0.png"),
-	preload("res://game/pez/art/1,3,0,1.png"),
-	preload("res://game/pez/art/1,3,0,2.png"),
-	preload("res://game/pez/art/1,3,0,3.png"),
-	preload("res://game/pez/art/1,3,1,0.png"),
-	preload("res://game/pez/art/1,3,1,1.png"),
-	preload("res://game/pez/art/1,3,1,2.png"),
-	preload("res://game/pez/art/1,3,1,3.png"),
-
-	preload("res://game/pez/art/2,0,0,0.png"),
-	preload("res://game/pez/art/2,0,0,1.png"),
-	preload("res://game/pez/art/2,0,0,2.png"),
-	preload("res://game/pez/art/2,0,0,3.png"),
-	preload("res://game/pez/art/2,0,1,0.png"),
-	preload("res://game/pez/art/2,0,1,1.png"),
-	preload("res://game/pez/art/2,0,1,2.png"),
-	preload("res://game/pez/art/2,0,1,3.png"),
-	preload("res://game/pez/art/2,1,0,0.png"),
-	preload("res://game/pez/art/2,1,0,1.png"),
-	preload("res://game/pez/art/2,1,0,2.png"),
-	preload("res://game/pez/art/2,1,0,3.png"),
-	preload("res://game/pez/art/2,1,1,0.png"),
-	preload("res://game/pez/art/2,1,1,1.png"),
-	preload("res://game/pez/art/2,1,1,2.png"),
-	preload("res://game/pez/art/2,1,1,3.png"),
-	preload("res://game/pez/art/2,2,0,0.png"),
-	preload("res://game/pez/art/2,2,0,1.png"),
-	preload("res://game/pez/art/2,2,0,2.png"),
-	preload("res://game/pez/art/2,2,0,3.png"),
-	preload("res://game/pez/art/2,2,1,0.png"),
-	preload("res://game/pez/art/2,2,1,1.png"),
-	preload("res://game/pez/art/2,2,1,2.png"),
-	preload("res://game/pez/art/2,2,1,3.png"),
-	preload("res://game/pez/art/2,3,0,0.png"),
-	preload("res://game/pez/art/2,3,0,1.png"),
-	preload("res://game/pez/art/2,3,0,2.png"),
-	preload("res://game/pez/art/2,3,0,3.png"),
-	preload("res://game/pez/art/2,3,1,0.png"),
-	preload("res://game/pez/art/2,3,1,1.png"),
-	preload("res://game/pez/art/2,3,1,2.png"),
-	preload("res://game/pez/art/2,3,1,3.png"),
-
-	preload("res://game/pez/art/3,0,0,0.png"),
-	preload("res://game/pez/art/3,0,0,1.png"),
-	preload("res://game/pez/art/3,0,0,2.png"),
-	preload("res://game/pez/art/3,0,0,3.png"),
-	preload("res://game/pez/art/3,0,1,0.png"),
-	preload("res://game/pez/art/3,0,1,1.png"),
-	preload("res://game/pez/art/3,0,1,2.png"),
-	preload("res://game/pez/art/3,0,1,3.png"),
-	preload("res://game/pez/art/3,1,0,0.png"),
-	preload("res://game/pez/art/3,1,0,1.png"),
-	preload("res://game/pez/art/3,1,0,2.png"),
-	preload("res://game/pez/art/3,1,0,3.png"),
-	preload("res://game/pez/art/3,1,1,0.png"),
-	preload("res://game/pez/art/3,1,1,1.png"),
-	preload("res://game/pez/art/3,1,1,2.png"),
-	preload("res://game/pez/art/3,1,1,3.png"),
-	preload("res://game/pez/art/3,2,0,0.png"),
-	preload("res://game/pez/art/3,2,0,1.png"),
-	preload("res://game/pez/art/3,2,0,2.png"),
-	preload("res://game/pez/art/3,2,0,3.png"),
-	preload("res://game/pez/art/3,2,1,0.png"),
-	preload("res://game/pez/art/3,2,1,1.png"),
-	preload("res://game/pez/art/3,2,1,2.png"),
-	preload("res://game/pez/art/3,2,1,3.png"),
-	preload("res://game/pez/art/3,3,0,0.png"),
-	preload("res://game/pez/art/3,3,0,1.png"),
-	preload("res://game/pez/art/3,3,0,2.png"),
-	preload("res://game/pez/art/3,3,0,3.png"),
-	preload("res://game/pez/art/3,3,1,0.png"),
-	preload("res://game/pez/art/3,3,1,1.png"),
-	preload("res://game/pez/art/3,3,1,2.png"),
-	preload("res://game/pez/art/3,3,1,3.png"),
-
-	preload("res://game/pez/art/4,0,0,0.png"),
-	preload("res://game/pez/art/4,0,0,1.png"),
-	preload("res://game/pez/art/4,0,0,2.png"),
-	preload("res://game/pez/art/4,0,0,3.png"),
-	preload("res://game/pez/art/4,0,1,0.png"),
-	preload("res://game/pez/art/4,0,1,1.png"),
-	preload("res://game/pez/art/4,0,1,2.png"),
-	preload("res://game/pez/art/4,0,1,3.png"),
-	preload("res://game/pez/art/4,1,0,0.png"),
-	preload("res://game/pez/art/4,1,0,1.png"),
-	preload("res://game/pez/art/4,1,0,2.png"),
-	preload("res://game/pez/art/4,1,0,3.png"),
-	preload("res://game/pez/art/4,1,1,0.png"),
-	preload("res://game/pez/art/4,1,1,1.png"),
-	preload("res://game/pez/art/4,1,1,2.png"),
-	preload("res://game/pez/art/4,1,1,3.png"),
-	preload("res://game/pez/art/4,2,0,0.png"),
-	preload("res://game/pez/art/4,2,0,1.png"),
-	preload("res://game/pez/art/4,2,0,2.png"),
-	preload("res://game/pez/art/4,2,0,3.png"),
-	preload("res://game/pez/art/4,2,1,0.png"),
-	preload("res://game/pez/art/4,2,1,1.png"),
-	preload("res://game/pez/art/4,2,1,2.png"),
-	preload("res://game/pez/art/4,2,1,3.png"),
-	preload("res://game/pez/art/4,3,0,0.png"),
-	preload("res://game/pez/art/4,3,0,1.png"),
-	preload("res://game/pez/art/4,3,0,2.png"),
-	preload("res://game/pez/art/4,3,0,3.png"),
-	preload("res://game/pez/art/4,3,1,0.png"),
-	preload("res://game/pez/art/4,3,1,1.png"),
-	preload("res://game/pez/art/4,3,1,2.png"),
-	preload("res://game/pez/art/4,3,1,3.png"),
-
-	preload("res://game/pez/art/5,0,0,0.png"),
-	preload("res://game/pez/art/5,0,0,1.png"),
-	preload("res://game/pez/art/5,0,0,2.png"),
-	preload("res://game/pez/art/5,0,0,3.png"),
-	preload("res://game/pez/art/5,0,1,0.png"),
-	preload("res://game/pez/art/5,0,1,1.png"),
-	preload("res://game/pez/art/5,0,1,2.png"),
-	preload("res://game/pez/art/5,0,1,3.png"),
-	preload("res://game/pez/art/5,1,0,0.png"),
-	preload("res://game/pez/art/5,1,0,1.png"),
-	preload("res://game/pez/art/5,1,0,2.png"),
-	preload("res://game/pez/art/5,1,0,3.png"),
-	preload("res://game/pez/art/5,1,1,0.png"),
-	preload("res://game/pez/art/5,1,1,1.png"),
-	preload("res://game/pez/art/5,1,1,2.png"),
-	preload("res://game/pez/art/5,1,1,3.png"),
-	preload("res://game/pez/art/5,2,0,0.png"),
-	preload("res://game/pez/art/5,2,0,1.png"),
-	preload("res://game/pez/art/5,2,0,2.png"),
-	preload("res://game/pez/art/5,2,0,3.png"),
-	preload("res://game/pez/art/5,2,1,0.png"),
-	preload("res://game/pez/art/5,2,1,1.png"),
-	preload("res://game/pez/art/5,2,1,2.png"),
-	preload("res://game/pez/art/5,2,1,3.png"),
-	preload("res://game/pez/art/5,3,0,0.png"),
-	preload("res://game/pez/art/5,3,0,1.png"),
-	preload("res://game/pez/art/5,3,0,2.png"),
-	preload("res://game/pez/art/5,3,0,3.png"),
-	preload("res://game/pez/art/5,3,1,0.png"),
-	preload("res://game/pez/art/5,3,1,1.png"),
-	preload("res://game/pez/art/5,3,1,2.png"),
-	preload("res://game/pez/art/5,3,1,3.png"),
-
-	preload("res://game/pez/art/default_fish.png")
-]
-
 @onready var pinza: AnimatedSprite2D = $Pinza
 
 @onready var mano: Sprite2D = $Mano
@@ -263,17 +61,6 @@ var peces := [
 
 
 func _ready() -> void:
-	var dir := DirAccess.open("res://game/pez/art/")
-	file_names = dir.get_files()
-	resources = []
-
-	for file_name in file_names:
-		if file_name.ends_with(".import"):
-			file_names.erase(file_name)
-
-	for file_name in file_names:
-		resources.append(load("res://game/pez/art/" + file_name))
-
 	GameHandler.reset()
 	cinta_fondo.play("default")
 	GameHandler.open_door.connect(_on_open_door_animation)
@@ -326,7 +113,7 @@ func _input(event):
 
 func start_next_set():
 	level += 1
-	if level > 3:
+	if level > 2:
 		end_game()
 		return
 
@@ -346,38 +133,16 @@ func start_round():
 
 
 func randomize_fish_characteristics(fish: CharacterBody2D) -> void:
-	#print("Current Level: ", level)
-	if level == 0:
-		var ojos = randi_range(0, 2)
-		var cabeza = randi_range(0, 1)
-		var cola = randi_range(0, 2)
-		var texturePath = "res://game/pez/art/" + str(ojos) + "," + str(cabeza) + ",0," + str(cola) + ".png"
-		if FileAccess.file_exists(texturePath):
-			fish.set_fish_texture(load(texturePath))
-			fish.set_fish_data([ojos, cabeza, 0, cola])
-	elif level == 1:
-		var ojos = randi_range(0, 3)
-		var cabeza = randi_range(0, 1)
-		var cuerpo = randi_range(0, 1)
-		var cola = randi_range(0, 3)
-		var texturePath = "res://game/pez/art/" + str(ojos) + "," + str(cabeza) + "," + str(cuerpo) + "," + str(cola) + ".png"
-		print("Pez que spawnea: ", texturePath)
-		if FileAccess.file_exists(texturePath):
-			fish.set_fish_texture(load(texturePath))
-			fish.set_fish_data([ojos, cabeza, cuerpo, cola])
-		pass
-	else:
-		var random_num = randi_range(0, file_names.size())
-		fish.set_fish_texture(peces[random_num])
-		var path = peces[random_num].resource_path
-		var file_name = path.get_file() # "0,0,0,2.png"
-		var numbers_str = file_name.get_basename() # "0,0,0,2"
-		var values = numbers_str.split(",")
-		var nums: Array[int] = []
-		for v in values:
-			nums.append(v.to_int())
+	var random = randi_range(0, level)
+	var fish_texture = GameHandler.fish_sprites[random].pick_random()
+	var file_name = fish_texture.resource_path.get_file()
+	var valuesStr = file_name.get_basename().split(",")
+	var nums: Array[int] = []
+	for v in valuesStr:
+		nums.append(v.to_int())
 
-		fish.set_fish_data([nums[0], nums[1], nums[2], nums[3]])
+	fish.set_fish_texture(fish_texture)
+	fish.set_fish_data([nums[0], nums[1], nums[2], nums[3]])
 
 
 func spawn_fish():
@@ -393,7 +158,6 @@ func spawn_fish():
 	last_fish = fish_scene.instantiate()
 	spawner.add_child(last_fish)
 	randomize_fish_characteristics(last_fish)
-	print("Características del pez nuevo: ", last_fish.get_fish_data())
 
 	last_fish.global_position = spawner.global_position
 	last_fish.clicked.connect(_on_fish_clicked)
@@ -413,11 +177,14 @@ func on_set_finished():
 	set_transition.play()
 
 	start_next_set()
+	round_time = 6.3
+	print("TESTING")
 	start_round()
+	round_time = 5.2
 
 
 func end_game():
-	get_tree().quit()
+	get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
 	print("Game Over")
 
 
@@ -523,4 +290,5 @@ func _on_pez_en_mesa_body_exited(body: Node2D) -> void:
 
 func _on_basura_peces_body_entered(body: Node2D) -> void:
 	if body.is_in_group("pez"):
+		GameHandler.add_score(-3)
 		body.queue_free()

@@ -223,25 +223,6 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
-size = Vector2(576, 76)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1paru"]
-radius = 83.09633
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1paru"]
-size = Vector2(781, 159)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxrkv"]
-size = Vector2(75, 334)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y36n6"]
-blend_mode = 1
-
-[sub_resource type="Curve" id="Curve_l8g03"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_oacl0"]
 animations = [{
 "frames": [{
@@ -289,6 +270,25 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
+size = Vector2(576, 76)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1pq"]
+size = Vector2(294, 82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1paru"]
+size = Vector2(781, 159)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxrkv"]
+size = Vector2(75, 334)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y36n6"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_l8g03"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h7iqs")
 fish_scene = ExtResource("2_e2o6t")
@@ -298,8 +298,15 @@ hand_knife = ExtResource("5_y36n6")
 
 [node name="Fondo" type="TextureRect" parent="."]
 z_index = -15
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 1923.0
+offset_bottom = 1084.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("6_1paru")
 
 [node name="CintaFondo" type="AnimatedSprite2D" parent="."]
@@ -328,18 +335,22 @@ scale = Vector2(0.163, 0.2)
 texture = ExtResource("6_dakft")
 
 [node name="Spawner" type="Marker2D" parent="."]
-position = Vector2(972, 917)
+position = Vector2(970, 610)
 
 [node name="TrampillaSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(956, 543)
 sprite_frames = SubResource("SpriteFrames_6f2ei")
-frame = 37
-frame_progress = 1.0
 
 [node name="OlTrampilla" type="Sprite2D" parent="."]
 z_index = 100
 position = Vector2(956, 545)
 texture = ExtResource("56_kaw54")
+
+[node name="Pinza" type="AnimatedSprite2D" parent="."]
+z_index = 1000
+position = Vector2(953, 287)
+sprite_frames = SubResource("SpriteFrames_oacl0")
+frame = 6
 
 [node name="Mesa" type="StaticBody2D" parent="."]
 position = Vector2(970, 1016)
@@ -351,7 +362,8 @@ shape = SubResource("RectangleShape2D_80nbo")
 position = Vector2(968, 922)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PezEnMesa"]
-shape = SubResource("CircleShape2D_1paru")
+position = Vector2(1, 11)
+shape = SubResource("RectangleShape2D_gk1pq")
 
 [node name="BasuraPeces" type="Area2D" parent="."]
 position = Vector2(176, 1140)
@@ -389,12 +401,6 @@ stream = ExtResource("10_j8tme")
 autoplay = true
 
 [node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
-
-[node name="Pinza" type="AnimatedSprite2D" parent="."]
-z_index = 1000
-position = Vector2(964, 532)
-sprite_frames = SubResource("SpriteFrames_oacl0")
-frame = 6
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="PezEnMesa" to="." method="_on_pez_en_mesa_body_entered"]
