@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameHandler="*res://autoloads/game_handler.gd"
+MusicHandler="*res://autoloads/music_player.gd"
 
 [display]
 

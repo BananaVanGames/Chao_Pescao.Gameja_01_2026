@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://ch4xwiql7mby5"]
+
+[ext_resource type="Texture2D" uid="uid://cmrb6gdp8adgi" path="res://ui/tutorial/placeholder.png" id="1_aw2cu"]
+[ext_resource type="Script" uid="uid://dh3jraa7xuhdp" path="res://ui/tutorial/tutorial.gd" id="1_leiwb"]
+[ext_resource type="Texture2D" uid="uid://db522c10q07ow" path="res://ui/tutorial/art/L01.png" id="2_leiwb"]
+[ext_resource type="Texture2D" uid="uid://dhm0hpjqu7rkr" path="res://ui/tutorial/art/L02.png" id="3_ggehi"]
+[ext_resource type="Texture2D" uid="uid://bpfc6chf3ys8u" path="res://ui/tutorial/art/SE3.png" id="4_j0hjb"]
+[ext_resource type="Texture2D" uid="uid://c6krk1y5gg5uf" path="res://ui/tutorial/art/A04.png" id="5_sqq7s"]
+[ext_resource type="Texture2D" uid="uid://bi4yn862qg4se" path="res://ui/tutorial/art/E05.png" id="6_noidg"]
+[ext_resource type="Texture2D" uid="uid://dy8yalfw24kr1" path="res://ui/tutorial/art/SA06.png" id="7_jhac3"]
+[ext_resource type="Texture2D" uid="uid://bg1u0ujoc45tf" path="res://ui/tutorial/art/SE07.png" id="8_vy52c"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_leiwb")
+
+[node name="Placeholder" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_aw2cu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.60784316)
+
+[node name="L01" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 610.00006
+offset_top = 349.00003
+offset_right = 2530.0
+offset_bottom = 1429.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_leiwb")
+
+[node name="L02" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 127.0
+offset_right = 2217.0
+offset_bottom = 1207.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_ggehi")
+
+[node name="Se3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 707.0
+offset_top = 170.0
+offset_right = 2627.0
+offset_bottom = 1250.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_j0hjb")
+
+[node name="A04" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 16.0
+offset_right = 2494.0
+offset_bottom = 1096.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_sqq7s")
+
+[node name="E05" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 346.0
+offset_right = 1975.0
+offset_bottom = 1426.0
+scale = Vector2(0.38127846, 0.38127846)
+texture = ExtResource("6_noidg")
+
+[node name="Sa06" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 342.0
+offset_right = 2764.0
+offset_bottom = 1422.0
+scale = Vector2(0.38127846, 0.38127846)
+texture = ExtResource("7_jhac3")
+
+[node name="Se07" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 679.0
+offset_right = 2225.0
+offset_bottom = 1759.0
+scale = Vector2(0.38127846, 0.38127846)
+texture = ExtResource("8_vy52c")
+
+[node name="Dialogos" type="AudioStreamPlayer" parent="."]
+
+[node name="ConfirmQuitTutorial" type="ConfirmationDialog" parent="."]
+oversampling_override = 1.0
+title = "Exit Tutorial"
+size = Vector2i(268, 100)
+dialog_text = "Do you want to skip the tutorial?"
+
+[connection signal="canceled" from="ConfirmQuitTutorial" to="." method="_on_tutorial_canceled"]
+[connection signal="confirmed" from="ConfirmQuitTutorial" to="." method="_on_tutorial_confirmed"]

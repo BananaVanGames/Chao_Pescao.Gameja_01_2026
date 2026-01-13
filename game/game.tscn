@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=80 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://db1xron2ewk4j" path="res://ui/hud/art/background/cintas04.png" id="8_ln7ps"]
 [ext_resource type="PackedScene" uid="uid://byihj7ts63ode" path="res://ui/pause_menu/pause_menu.tscn" id="9_l8g03"]
 [ext_resource type="Texture2D" uid="uid://b2phpqxnre61e" path="res://ui/hud/art/background/cintas05.png" id="9_pxxsx"]
-[ext_resource type="AudioStream" uid="uid://cvx7k7n7fm70s" path="res://music/InGame1.mp3" id="10_j8tme"]
 [ext_resource type="Texture2D" uid="uid://3qnk1irw0cpq" path="res://ui/hud/art/background/cintas06.png" id="10_u8s88"]
 [ext_resource type="Texture2D" uid="uid://bfo54c0ba3vhg" path="res://ui/hud/art/background/cintas07.png" id="11_dxwpq"]
 [ext_resource type="Texture2D" uid="uid://dh8n46ruqy0y7" path="res://ui/hud/art/background/cintas08.png" id="12_mhvfb"]
@@ -321,7 +320,7 @@ position = Vector2(710, 507)
 scale = Vector2(0.7, 0.7)
 
 [node name="HUD" type="CanvasLayer" parent="."]
-layer = 10
+layer = 2
 
 [node name="Hud" parent="HUD" instance=ExtResource("1_80nbo")]
 offset_top = -2.0
@@ -361,7 +360,7 @@ frame = 6
 position = Vector2(970, 610)
 
 [node name="TrampillaSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(956, 543)
+position = Vector2(955, 543)
 sprite_frames = SubResource("SpriteFrames_6f2ei")
 
 [node name="OlTrampilla" type="Sprite2D" parent="."]
@@ -401,11 +400,8 @@ position = Vector2(1661, 893.00006)
 scale = Vector2(1.5, 1.5)
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
+layer = 2
 visible = false
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_j8tme")
-autoplay = true
 
 [node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
 

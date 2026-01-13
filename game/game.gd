@@ -58,12 +58,14 @@ var resources
 @onready var trampilla_sprite: AnimatedSprite2D = $TrampillaSprite
 @onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
 @onready var set_transition: CanvasLayer = $SetTransition
-
+@onready var game_music: AudioStream = preload("res://music/InGame1.mp3")
 
 func _ready() -> void:
-	GameHandler.reset()
 	cinta_fondo.play("default")
+	GameHandler.reset()
 	GameHandler.open_door.connect(_on_open_door_animation)
+	MusicHandler.load_track(game_music)
+	MusicHandler.play()
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	start_next_set()
 	start_round()
@@ -92,7 +94,6 @@ func _process(_delta: float) -> void:
 
 func _input(event):
 	if event is InputEventMouseButton:
-
 		# LEFT = grab tool
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:

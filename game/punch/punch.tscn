@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cbf08dbu67aci"]
+[gd_scene load_steps=30 format=3 uid="uid://cbf08dbu67aci"]
 
 [ext_resource type="Script" uid="uid://b3nnetptb8ebs" path="res://game/punch/punch.gd" id="1_16sg0"]
 [ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="2_1fkrj"]
@@ -102,6 +102,66 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="Animation" id="Animation_xk8dd"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hit"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9166),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 21]
+}
+
+[sub_resource type="Animation" id="Animation_xwkru"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hit"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [21]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xwkru"]
+_data = {
+&"RESET": SubResource("Animation_xwkru"),
+&"hit": SubResource("Animation_xk8dd")
+}
+
 [node name="Punch" type="Node2D"]
 script = ExtResource("1_16sg0")
 
@@ -120,6 +180,10 @@ scale = Vector2(0.38771874, 0.38771874)
 sprite_frames = SubResource("SpriteFrames_52n6l")
 animation = &"hit"
 frame = 21
-frame_progress = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xwkru")
+}
 
 [connection signal="body_entered" from="PunchArea" to="." method="_on_punch_area_body_entered"]

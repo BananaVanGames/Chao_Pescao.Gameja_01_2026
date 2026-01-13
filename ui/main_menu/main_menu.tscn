@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://4xe8awboiffn"]
+[gd_scene load_steps=8 format=3 uid="uid://4xe8awboiffn"]
 
 [ext_resource type="Script" uid="uid://dho1c4kvupl4b" path="res://ui/main_menu/main_menu.gd" id="1_nvasf"]
 [ext_resource type="Texture2D" uid="uid://bxvnj3x4enmxp" path="res://ui/main_menu/art/fondo.png" id="2_6mijq"]
 [ext_resource type="Texture2D" uid="uid://db3krq1e5py1o" path="res://ui/main_menu/art/navideja.png" id="3_x57m8"]
 [ext_resource type="Texture2D" uid="uid://dusynucoacqp2" path="res://ui/main_menu/art/boton.png" id="4_6mijq"]
-[ext_resource type="AudioStream" uid="uid://c3r6k6o5bxsau" path="res://music/menu.mp3" id="4_i5wg5"]
 [ext_resource type="Texture2D" uid="uid://dcsj61mr002h1" path="res://ui/main_menu/art/BananaLogo.png" id="5_3c04x"]
 [ext_resource type="Texture2D" uid="uid://c5jvdwbhlfcdm" path="res://ui/main_menu/art/boton_pressed.png" id="5_w2r0d"]
 [ext_resource type="Texture2D" uid="uid://tubhseq3kfbs" path="res://ui/main_menu/art/boton_hover.png" id="6_4e78x"]
@@ -140,11 +139,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "Salir"
-
-[node name="MusicaDeFondo" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_i5wg5")
-autoplay = true
-bus = &"Musica"
 
 [node name="BananaLogo" type="Sprite2D" parent="."]
 position = Vector2(1713, 835)

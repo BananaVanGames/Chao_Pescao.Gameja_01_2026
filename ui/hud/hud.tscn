@@ -84,8 +84,12 @@ text = "69"
 label_settings = SubResource("LabelSettings_imuuq")
 horizontal_alignment = 1
 
-[node name="Pantallas02" type="Sprite2D" parent="."]
-position = Vector2(978, 529)
+[node name="Pantallas02" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = -10.0
+offset_right = 1941.0
+offset_bottom = 1070.0
 texture = ExtResource("4_o2lis")
 
 [node name="PecesRestantes" type="Node2D" parent="."]
