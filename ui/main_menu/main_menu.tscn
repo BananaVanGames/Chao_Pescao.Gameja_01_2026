@@ -140,8 +140,12 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "Salir"
 
-[node name="BananaLogo" type="Sprite2D" parent="."]
-position = Vector2(1713, 835)
+[node name="BananaLogo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1522.0
+offset_top = 636.0
+offset_right = 2022.0
+offset_bottom = 1136.0
 scale = Vector2(0.834, 0.8460001)
 texture = ExtResource("5_3c04x")
 

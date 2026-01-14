@@ -401,7 +401,6 @@ scale = Vector2(1.5, 1.5)
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
 layer = 2
-visible = false
 
 [node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
 

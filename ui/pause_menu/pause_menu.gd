@@ -52,9 +52,15 @@ func _on_resume_pressed() -> void:
 	MusicHandler.play(game_music_pos)
 
 
+func _on_tutorial_finished() -> void:
+	in_tutorial = false
+	v_box_container.visible = true
+
+
 func _on_tutorial_pressed() -> void:
 	in_tutorial = true
 	v_box_container.visible = false
 	var pop_up_tutorial = tutorial_scene.instantiate()
 	add_child(pop_up_tutorial)
-	pop_up_tutorial.executed_from_pause_menu()
+	pop_up_tutorial.tutorial_finished.connect(_on_tutorial_finished)
+	#pop_up_tutorial.executed_from_pause_menu()

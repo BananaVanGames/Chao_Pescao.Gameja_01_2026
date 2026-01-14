@@ -1,8 +1,9 @@
 extends Control
 
+signal tutorial_finished
+
 var time_stamp: float = 0
 var current_sprite: int = 0
-var notice_back: bool = false
 var confirm_exit: bool = false
 
 @onready var lo1_dialogo: AudioStream = preload("res://ui/tutorial/dialogos/L01.wav")
@@ -28,7 +29,8 @@ var confirm_exit: bool = false
 
 func _ready() -> void:
 	reset_tutorial()
-
+	MusicHandler.stop()
+	
 	for i in range(7):
 		current_sprite = i
 		dialogue_list[1][i].visible = true
@@ -51,14 +53,10 @@ func _process(_delta: float) -> void:
 			confirm_exit = false
 
 
-func executed_from_pause_menu() -> void:
-	notice_back = true
-
 
 func finish_tutorial() -> void:
-	if notice_back:
-		get_parent().in_tutorial = false
-		get_parent().v_box_container.visible = true
+	emit_signal("tutorial_finished")
+	MusicHandler.play()
 	queue_free()
 
 
