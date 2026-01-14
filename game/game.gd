@@ -60,9 +60,10 @@ var resources
 @onready var set_transition: CanvasLayer = $SetTransition
 @onready var game_music: AudioStream = preload("res://music/InGame1.mp3")
 
+
 func _ready() -> void:
 	cinta_fondo.play("default")
-	GameHandler.reset()
+	GameHandler.reset_round()
 	GameHandler.open_door.connect(_on_open_door_animation)
 	MusicHandler.load_track(game_music)
 	MusicHandler.play()
@@ -172,7 +173,7 @@ func on_set_finished():
 	for fish in spawner.get_children():
 		fish.queue_free()
 	# This reset does not reset score
-	GameHandler.reset()
+	GameHandler.reset_round()
 
 	await get_tree().process_frame
 	set_transition.play()
@@ -185,6 +186,7 @@ func on_set_finished():
 
 
 func end_game():
+	GameHandler.reset_score()
 	get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
 	print("Game Over")
 

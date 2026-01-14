@@ -41,6 +41,7 @@ func _on_main_menu_pressed() -> void:
 
 func _on_confirmation_dialog_confirmed() -> void:
 	visible = false
+	GameHandler.reset_score()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
 

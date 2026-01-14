@@ -22,8 +22,8 @@ var confirm_exit: bool = false
 @onready var se_07: TextureRect = $Se07
 @onready var dialogos: AudioStreamPlayer = $Dialogos
 
-@onready var dialogue_list = [[lo1_dialogo, po2_dialogo, se3_dialogo, ao4_dialogo, eo5_dialogo, sa7_dialogo, sa6_dialogo], [l_01, l_02, se_3, a_04, e_05, se_07, sa_06]]
-@onready var fish_sprites = [l_01, l_02, se_3, a_04, e_05, se_07, sa_06]
+@onready var dialogue_list = [[lo1_dialogo, po2_dialogo, se3_dialogo, ao4_dialogo, eo5_dialogo, sa6_dialogo, sa7_dialogo], [l_01, l_02, se_3, a_04, e_05, sa_06, se_07]]
+@onready var fish_sprites = [l_01, l_02, se_3, a_04, e_05, sa_06, se_07]
 @onready var confirm_quit_tutorial: ConfirmationDialog = $ConfirmQuitTutorial
 
 

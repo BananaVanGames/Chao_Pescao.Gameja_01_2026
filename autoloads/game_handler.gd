@@ -13,6 +13,8 @@ var fishes_left: int = 10
 var rules: Array = []
 var danger_rules: Array = []
 
+#region Fish paths
+
 var paths_level_1 := [
 	"res://game/pez/art/0,0,0,0.png",
 	"res://game/pez/art/0,0,0,1.png",
@@ -213,6 +215,7 @@ var paths_level_3 := [
 	"res://game/pez/art/5,3,1,2.png",
 	"res://game/pez/art/5,3,1,3.png",
 ]
+#endregion
 
 var paths_levels = [paths_level_1, paths_level_2, paths_level_3]
 var fish_sprites: Array[Array] = [[], [], []]
@@ -285,6 +288,10 @@ func reset_fish(value: int):
 	emit_signal("reset_fishes", fishes_left)
 
 
-func reset():
+func reset_round() -> void:
 	set_time(5)
 	reset_fish(10)
+
+
+func reset_score() -> void:
+	score = 0
