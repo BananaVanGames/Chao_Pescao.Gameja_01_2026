@@ -4,14 +4,13 @@ signal time_changed(value)
 signal score_changed(value)
 signal fishes_left_changed(value)
 signal change_rules(value)
-signal open_door
 signal reset_fishes(value)
 
 var time_left: float = 5
 var score: int = 0
 var fishes_left: int = 10
 var rules: Array = []
-var danger_rules: Array = []
+var processable_rules: Array = []
 
 #region Fish paths
 
@@ -242,12 +241,12 @@ func load_fishes_in_background():
 			ResourceLoader.load_threaded_request(path, "", true)
 
 
-func set_danger_rules(values: Array):
-	danger_rules = values
+func set_processable_rules(values: Array):
+	processable_rules = values
 
 
-func get_danger_rules() -> Array:
-	return danger_rules
+func get_processable_rules() -> Array:
+	return processable_rules
 
 
 func open_door_animation():

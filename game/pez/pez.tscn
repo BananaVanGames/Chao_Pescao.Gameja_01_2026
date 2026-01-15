@@ -1,8 +1,24 @@
-[gd_scene load_steps=25 format=3 uid="uid://dqy4ordentikc"]
+[gd_scene load_steps=45 format=3 uid="uid://dqy4ordentikc"]
 
 [ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://game/pez/pez.gd" id="1_tlgln"]
 [ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/default_fish.png" id="2_f5oq0"]
+[ext_resource type="Texture2D" uid="uid://c5t2vv5vicfaj" path="res://game/pez/corrosion_pez-01.png" id="3_3amar"]
 [ext_resource type="Texture2D" uid="uid://km1n1gpp6gud" path="res://game/pez/explosion.png" id="3_e5qgn"]
+[ext_resource type="Texture2D" uid="uid://bxly71vs33boi" path="res://game/pez/corrosion_pez-02.png" id="4_tg48v"]
+[ext_resource type="Texture2D" uid="uid://xqgrf43su67h" path="res://game/pez/corrosion_pez-03.png" id="5_ir0ui"]
+[ext_resource type="Texture2D" uid="uid://b4v75bdw6cwml" path="res://game/pez/corrosion_pez-04.png" id="6_j1cap"]
+[ext_resource type="Texture2D" uid="uid://162x3lb5e03s" path="res://game/pez/corrosion_pez-05.png" id="7_i3xac"]
+[ext_resource type="Texture2D" uid="uid://dmrx0taiv5get" path="res://game/pez/corrosion_pez-06.png" id="8_fy2gg"]
+[ext_resource type="Texture2D" uid="uid://bgk0hmxdtl7j1" path="res://game/pez/corrosion_pez-07.png" id="9_ucldb"]
+[ext_resource type="Texture2D" uid="uid://canllqn7i7sxs" path="res://game/pez/corrosion_pez-08.png" id="10_7sjaf"]
+[ext_resource type="Texture2D" uid="uid://cpgoh45gobqae" path="res://game/pez/corrosion_pez-09.png" id="11_mupc8"]
+[ext_resource type="Texture2D" uid="uid://wgt8a2guuh2" path="res://game/pez/corrosion_pez-10.png" id="12_jblbd"]
+[ext_resource type="Texture2D" uid="uid://ywnlnxus6v64" path="res://game/pez/corrosion_pez-11.png" id="13_lma4y"]
+[ext_resource type="Texture2D" uid="uid://d3062osleneu7" path="res://game/pez/corrosion_pez-12.png" id="14_wtdgb"]
+[ext_resource type="Texture2D" uid="uid://siy727pj1e2y" path="res://game/pez/corrosion_pez-13.png" id="15_us2cp"]
+[ext_resource type="Texture2D" uid="uid://c6ptq2rx17owp" path="res://game/pez/corrosion_pez-14.png" id="16_kqmna"]
+[ext_resource type="Texture2D" uid="uid://dx2wvpjn4tta6" path="res://game/pez/corrosion_pez-15.png" id="17_rx5db"]
+[ext_resource type="Texture2D" uid="uid://diwr8pau6xt50" path="res://game/pez/corrosion_pez-16.png" id="18_68ac4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2k18"]
 radius = 82.36504
@@ -15,6 +31,62 @@ size = Vector2(62, 116)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2k18"]
 size = Vector2(100, 116)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3amar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3amar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tg48v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ir0ui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j1cap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_i3xac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fy2gg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ucldb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_7sjaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mupc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jblbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_lma4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_wtdgb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_us2cp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_kqmna")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_rx5db")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_68ac4")
+}],
+"loop": true,
+"name": &"corrosion",
+"speed": 24.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhtpm"]
 atlas = ExtResource("3_e5qgn")
@@ -132,9 +204,251 @@ animations = [{
 "texture": SubResource("AtlasTexture_3amar")
 }],
 "loop": false,
-"name": &"default",
+"name": &"explosion",
 "speed": 12.0
 }]
+
+[sub_resource type="Animation" id="Animation_tg48v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Corrosion:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"corrosion"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Corrosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosion:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explosion"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Explosion:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Explosion:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Corrosion:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cabeza:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cuerpo:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Cola:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_3amar"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explosion"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 15]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Corrosion:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"corrosion"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Corrosion:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Explosion:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.53333336, 0.93333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Corrosion:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.53333336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cabeza:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.43333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cuerpo:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.43333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Cola:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.43333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.93333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ir0ui"]
+_data = {
+&"RESET": SubResource("Animation_tg48v"),
+&"death": SubResource("Animation_3amar")
+}
 
 [node name="Pez" type="CharacterBody2D" groups=["pez"]]
 z_index = 100
@@ -197,11 +511,25 @@ position = Vector2(-10, 7)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCuerpo"]
 shape = SubResource("RectangleShape2D_n2k18")
 
-[node name="DeathExplosion" type="AnimatedSprite2D" parent="."]
+[node name="Corrosion" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 2
-scale = Vector2(10, 9.788)
+position = Vector2(7.0000005, 13)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_3amar")
+animation = &"corrosion"
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 2
+scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_tg48v")
+animation = &"explosion"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ir0ui")
+}
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="input_event" from="CorteCabeza" to="." method="_on_corte_cabeza_input_event"]

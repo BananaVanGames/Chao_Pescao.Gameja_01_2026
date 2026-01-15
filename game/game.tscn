@@ -1,11 +1,10 @@
-[gd_scene load_steps=80 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=36 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://dqy4ordentikc" path="res://game/pez/pez.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://cmum7eealbbyv" path="res://game/score_zone/score_zone.tscn" id="4_4fuuu"]
 [ext_resource type="Texture2D" uid="uid://dgdul0x3rufcw" path="res://game/mano/mano_cerrada.png" id="4_u5opy"]
-[ext_resource type="PackedScene" uid="uid://cbf08dbu67aci" path="res://game/punch/punch.tscn" id="5_dxrkv"]
 [ext_resource type="Texture2D" uid="uid://duvi1xyo5eeiv" path="res://game/mano/mano_cuchillo.png" id="5_y36n6"]
 [ext_resource type="Texture2D" uid="uid://np6av2loxy1f" path="res://ui/hud/art/background/BG.png" id="6_1paru"]
 [ext_resource type="Texture2D" uid="uid://d4d284x7a77rb" path="res://game/mano/mano_abierta.png" id="6_dakft"]
@@ -17,45 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bfo54c0ba3vhg" path="res://ui/hud/art/background/cintas07.png" id="11_dxwpq"]
 [ext_resource type="Texture2D" uid="uid://dh8n46ruqy0y7" path="res://ui/hud/art/background/cintas08.png" id="12_mhvfb"]
 [ext_resource type="Texture2D" uid="uid://5a1dvwl0nclg" path="res://ui/hud/art/background/cintas09.png" id="13_5e03w"]
-[ext_resource type="Texture2D" uid="uid://bidsoe6623wf6" path="res://game/trampilla_y_mesa/trampilla02.png" id="15_ohnrv"]
-[ext_resource type="Texture2D" uid="uid://dqpnro8kqeh2i" path="res://game/trampilla_y_mesa/trampilla03.png" id="16_kaw54"]
-[ext_resource type="Texture2D" uid="uid://cxhpjjamib1km" path="res://game/trampilla_y_mesa/trampilla04.png" id="17_1paru"]
-[ext_resource type="Texture2D" uid="uid://d2vnysss6iysi" path="res://game/trampilla_y_mesa/trampilla05.png" id="18_jbuku"]
-[ext_resource type="Texture2D" uid="uid://bh6uyeawlji8i" path="res://game/trampilla_y_mesa/trampilla06.png" id="19_bq3im"]
-[ext_resource type="Texture2D" uid="uid://bjbnj42i15yvg" path="res://game/trampilla_y_mesa/trampilla07.png" id="20_weo45"]
-[ext_resource type="Texture2D" uid="uid://b2igfqr8ddxb8" path="res://game/trampilla_y_mesa/trampilla08.png" id="21_3crti"]
-[ext_resource type="Texture2D" uid="uid://ya7g2s87onyr" path="res://game/trampilla_y_mesa/trampilla09.png" id="22_fwql0"]
-[ext_resource type="Texture2D" uid="uid://brmco7nnwv7ld" path="res://game/trampilla_y_mesa/trampilla10.png" id="23_yeywo"]
-[ext_resource type="Texture2D" uid="uid://cyrpcoepqfuyc" path="res://game/trampilla_y_mesa/trampilla11.png" id="24_xi3ba"]
-[ext_resource type="Texture2D" uid="uid://bwnoj2otd0y3n" path="res://game/trampilla_y_mesa/trampilla12.png" id="25_at8vr"]
-[ext_resource type="Texture2D" uid="uid://d05tywycahrig" path="res://game/trampilla_y_mesa/trampilla13.png" id="26_3hog8"]
-[ext_resource type="Texture2D" uid="uid://bqg2eprrbmlet" path="res://game/trampilla_y_mesa/trampilla14.png" id="27_4e2d6"]
-[ext_resource type="Texture2D" uid="uid://c55yjw7ppu13v" path="res://game/trampilla_y_mesa/trampilla15.png" id="28_rr8ep"]
-[ext_resource type="Texture2D" uid="uid://c41tqsq5ruf5h" path="res://game/trampilla_y_mesa/trampilla16.png" id="29_ohuyl"]
-[ext_resource type="Texture2D" uid="uid://cyrh5riv0mo6j" path="res://game/trampilla_y_mesa/trampilla17.png" id="30_o3dub"]
-[ext_resource type="Texture2D" uid="uid://crbmokg0do6m6" path="res://game/trampilla_y_mesa/trampilla18.png" id="31_gk1pq"]
-[ext_resource type="Texture2D" uid="uid://3e0ovuhhbt23" path="res://game/trampilla_y_mesa/trampilla19.png" id="32_3wmuf"]
-[ext_resource type="Texture2D" uid="uid://feu0y33ot52q" path="res://game/trampilla_y_mesa/trampilla20.png" id="33_vgjtp"]
-[ext_resource type="Texture2D" uid="uid://dkpgm2xvdls4h" path="res://game/trampilla_y_mesa/trampilla21.png" id="34_my0r7"]
-[ext_resource type="Texture2D" uid="uid://buxisl446hpc3" path="res://game/trampilla_y_mesa/trampilla22.png" id="35_ym2td"]
-[ext_resource type="Texture2D" uid="uid://dxx6wav8l5vss" path="res://game/trampilla_y_mesa/trampilla23.png" id="36_vf2gg"]
-[ext_resource type="Texture2D" uid="uid://ts847mkplp0r" path="res://game/trampilla_y_mesa/trampilla24.png" id="37_mh1fh"]
-[ext_resource type="Texture2D" uid="uid://rnfnb8pobl7f" path="res://game/trampilla_y_mesa/trampilla25.png" id="38_avony"]
-[ext_resource type="Texture2D" uid="uid://clk7ocebbjqur" path="res://game/trampilla_y_mesa/trampilla26.png" id="39_8tfxx"]
-[ext_resource type="Texture2D" uid="uid://boavxa3g8psmr" path="res://game/trampilla_y_mesa/trampilla27.png" id="40_15634"]
-[ext_resource type="Texture2D" uid="uid://cxh7052c3weq5" path="res://game/trampilla_y_mesa/trampilla28.png" id="41_2kr6o"]
-[ext_resource type="Texture2D" uid="uid://dgf175us1o6fu" path="res://game/trampilla_y_mesa/trampilla29.png" id="42_fqr2c"]
-[ext_resource type="Texture2D" uid="uid://cvu7l1s1t8rtf" path="res://game/trampilla_y_mesa/trampilla30.png" id="43_au36g"]
-[ext_resource type="Texture2D" uid="uid://buedf42mneoa0" path="res://game/trampilla_y_mesa/trampilla31.png" id="44_oacl0"]
-[ext_resource type="Texture2D" uid="uid://cf10vqvd2i8ak" path="res://game/trampilla_y_mesa/trampilla32.png" id="45_q6yak"]
-[ext_resource type="Texture2D" uid="uid://n7ckwrlwa8em" path="res://game/trampilla_y_mesa/trampilla33.png" id="46_w3h8t"]
-[ext_resource type="Texture2D" uid="uid://dr154j4v0h311" path="res://game/trampilla_y_mesa/trampilla34.png" id="47_seuhy"]
-[ext_resource type="Texture2D" uid="uid://b7qwlqsq1cux1" path="res://game/trampilla_y_mesa/trampilla35.png" id="48_cdllp"]
-[ext_resource type="Texture2D" uid="uid://ca3aj26ieoam1" path="res://game/trampilla_y_mesa/trampilla36.png" id="49_12t26"]
-[ext_resource type="Texture2D" uid="uid://ch0sjoy0lxumi" path="res://game/trampilla_y_mesa/trampilla37.png" id="50_j0f0q"]
-[ext_resource type="Texture2D" uid="uid://cwfvu8u8o87me" path="res://game/trampilla_y_mesa/trampilla38.png" id="51_ylx5t"]
-[ext_resource type="Texture2D" uid="uid://dpshvx3mbjd5k" path="res://game/trampilla_y_mesa/trampilla39.png" id="52_8aer8"]
-[ext_resource type="Texture2D" uid="uid://cbc13pohlhtol" path="res://game/trampilla_y_mesa/OL_Trampilla.png" id="56_kaw54"]
+[ext_resource type="PackedScene" uid="uid://cdkg20lpo1xmi" path="res://game/mesa_trampilla.tscn" id="29_pvdu1"]
 [ext_resource type="PackedScene" uid="uid://bd83eekpbqxx2" path="res://ui/transition/set_transition.tscn" id="58_jbuku"]
 [ext_resource type="Texture2D" uid="uid://bnam0rniyavqn" path="res://ui/hud/art/pinza/pinza01.png" id="59_gk1pq"]
 [ext_resource type="Texture2D" uid="uid://cttaifaj3oos" path="res://ui/hud/art/pinza/pinza02.png" id="60_3wmuf"]
@@ -154,140 +115,6 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6f2ei"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("15_ohnrv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_kaw54")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_1paru")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_jbuku")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_bq3im")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_weo45")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_3crti")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_fwql0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_yeywo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_xi3ba")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_at8vr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_3hog8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_4e2d6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_rr8ep")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_ohuyl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_o3dub")
-}, {
-"duration": 1.0,
-"texture": ExtResource("31_gk1pq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_3wmuf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_vgjtp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_my0r7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("35_ym2td")
-}, {
-"duration": 1.0,
-"texture": ExtResource("36_vf2gg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("37_mh1fh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("38_avony")
-}, {
-"duration": 1.0,
-"texture": ExtResource("39_8tfxx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("40_15634")
-}, {
-"duration": 1.0,
-"texture": ExtResource("41_2kr6o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("42_fqr2c")
-}, {
-"duration": 1.0,
-"texture": ExtResource("43_au36g")
-}, {
-"duration": 1.0,
-"texture": ExtResource("44_oacl0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("45_q6yak")
-}, {
-"duration": 1.0,
-"texture": ExtResource("46_w3h8t")
-}, {
-"duration": 1.0,
-"texture": ExtResource("47_seuhy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("48_cdllp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("49_12t26")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_j0f0q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("51_ylx5t")
-}, {
-"duration": 1.0,
-"texture": ExtResource("52_8aer8")
-}],
-"loop": false,
-"name": &"default",
-"speed": 24.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
-size = Vector2(576, 76)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1pq"]
-size = Vector2(294, 82)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1paru"]
-size = Vector2(781, 159)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxrkv"]
-size = Vector2(75, 334)
-
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h7iqs")
 fish_scene = ExtResource("2_e2o6t")
@@ -359,52 +186,12 @@ frame = 6
 [node name="Spawner" type="Marker2D" parent="."]
 position = Vector2(970, 610)
 
-[node name="TrampillaSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(955, 543)
-sprite_frames = SubResource("SpriteFrames_6f2ei")
-
-[node name="OlTrampilla" type="Sprite2D" parent="."]
-z_index = 100
-position = Vector2(956, 545)
-texture = ExtResource("56_kaw54")
-
-[node name="Mesa" type="StaticBody2D" parent="."]
-position = Vector2(970, 1016)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mesa"]
-shape = SubResource("RectangleShape2D_80nbo")
-
-[node name="PezEnMesa" type="Area2D" parent="."]
-position = Vector2(968, 922)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PezEnMesa"]
-position = Vector2(1, 11)
-shape = SubResource("RectangleShape2D_gk1pq")
-
-[node name="BasuraPeces" type="Area2D" parent="."]
-position = Vector2(176, 1140)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BasuraPeces"]
-position = Vector2(200, 94)
-shape = SubResource("RectangleShape2D_1paru")
-
-[node name="Trampilla" type="StaticBody2D" parent="."]
-position = Vector2(178, 908)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Trampilla"]
-rotation = -0.2268928
-shape = SubResource("RectangleShape2D_dxrkv")
-
-[node name="Punch" parent="." instance=ExtResource("5_dxrkv")]
-position = Vector2(1661, 893.00006)
-scale = Vector2(1.5, 1.5)
+[node name="MesaTrampilla" parent="." instance=ExtResource("29_pvdu1")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
 layer = 2
+visible = false
 
 [node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="PezEnMesa" to="." method="_on_pez_en_mesa_body_entered"]
-[connection signal="body_exited" from="PezEnMesa" to="." method="_on_pez_en_mesa_body_exited"]
-[connection signal="body_entered" from="BasuraPeces" to="." method="_on_basura_peces_body_entered"]

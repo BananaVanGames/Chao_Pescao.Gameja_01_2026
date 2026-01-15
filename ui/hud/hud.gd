@@ -115,4 +115,4 @@ func _start_next_set(value: Array):
 				random_cola = randi_range(0, 1)
 				danger_3.texture = peligrosisdad[random_cola]
 
-	GameHandler.set_danger_rules([random_ojos, random_cabeza, random_cola])
+	GameHandler.set_processable_rules([random_ojos, random_cabeza, random_cola])

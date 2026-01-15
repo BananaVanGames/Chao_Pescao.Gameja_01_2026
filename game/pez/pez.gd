@@ -31,11 +31,11 @@ enum TIPO_COLA {
 	CON_MANCHAS,
 }
 
-#endregion
-
 #region # DRAG N DROP VARIABLES
 @export var gravity := 1000.0
 @export var drag_speed := 20.0
+
+#endregion
 
 var ojos: NUM_OJOS = NUM_OJOS.UNO
 var cabeza: ESTADO_CABEZA = ESTADO_CABEZA.SIN_MANCHAS
@@ -49,10 +49,10 @@ var grab_offset := Vector2.ZERO
 
 #endregion
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_cabeza: Sprite2D = $Cabeza
 @onready var sprite_cuerpo: Sprite2D = $Cuerpo
 @onready var sprite_cola: Sprite2D = $Cola
-@onready var death_explosion: AnimatedSprite2D = $DeathExplosion
 
 
 # Called when the node enters the scene tree for the first time.
@@ -83,14 +83,10 @@ func stop_drag():
 #		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 #			dragging = false
 
+
 func explode():
-	death_explosion.visible = true
-	death_explosion.play("default")
-	sprite_cabeza.visible = false
-	sprite_cuerpo.visible = false
-	sprite_cola.visible = false
-	await death_explosion.animation_finished
-	queue_free()
+	animation_player.play("death")
+
 
 func set_fish_data(values: Array):
 	ojos = values[0]
@@ -112,6 +108,7 @@ func set_fish_texture(texture: CompressedTexture2D) -> void:
 func cut_head():
 	sprite_cabeza.visible = false
 	cabeza_cortada = true
+
 
 func cut_tail():
 	sprite_cola.visible = false

@@ -40,12 +40,13 @@ var dragged_fish: CharacterBody2D = null
 var is_cutting := false
 var cut_points := []
 
-var pez_en_mesa: bool = false
 var last_fish: CharacterBody2D = null
 
 #@onready var set_transition: CanvasLayer = $SetTransition
 var file_names
 var resources
+
+@onready var punch: Node2D = $Punch
 
 @onready var pinza: AnimatedSprite2D = $SFX/Pinza
 
@@ -55,16 +56,15 @@ var resources
 @onready var timer: Timer = $Timer
 @onready var spawner: Marker2D = $Spawner
 @onready var line_2d: Line2D = $Cursor/Line2D
-@onready var trampilla_sprite: AnimatedSprite2D = $TrampillaSprite
 @onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
 @onready var set_transition: CanvasLayer = $SetTransition
 @onready var game_music: AudioStream = preload("res://music/InGame1.mp3")
+@onready var mesa_trampilla: Node2D = $MesaTrampilla
 
 
 func _ready() -> void:
 	cinta_fondo.play("default")
 	GameHandler.reset_round()
-	GameHandler.open_door.connect(_on_open_door_animation)
 	MusicHandler.load_track(game_music)
 	MusicHandler.play()
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -152,8 +152,9 @@ func spawn_fish():
 		on_set_finished()
 		return
 
-	if not last_fish == null and not pez_en_mesa:
-		last_fish.explode()
+	if not last_fish == null:
+		mesa_trampilla.new_fish_spawned(last_fish)
+		
 
 	pinza.play("default")
 	await get_tree().create_timer(0.18).timeout
@@ -259,9 +260,6 @@ func cut_fish():
 	line_2d.add_point(get_local_mouse_position())
 
 
-func _on_open_door_animation():
-	trampilla_sprite.play("default")
-
 
 func _on_fish_clicked(fish):
 	match current_tool:
@@ -271,27 +269,6 @@ func _on_fish_clicked(fish):
 			cut_fish()
 
 
-# later you’ll call:
-# fish.cut_head() or fish.cut_tail()
 func _on_timer_timeout() -> void:
-	if pez_en_mesa:
-		$Punch.trigger_punch()
+	mesa_trampilla.fish_timeout()
 	start_round()
-
-
-func _on_pez_en_mesa_body_entered(body: Node2D) -> void:
-	if body.is_in_group("pez"):
-		pez_en_mesa = true
-		#print("PEZ EN MESA")
-
-
-func _on_pez_en_mesa_body_exited(body: Node2D) -> void:
-	if body.is_in_group("pez"):
-		pez_en_mesa = false
-		#print("PEZ FUERA DE MESA")
-
-
-func _on_basura_peces_body_entered(body: Node2D) -> void:
-	if body.is_in_group("pez"):
-		GameHandler.add_score(-3)
-		body.queue_free()

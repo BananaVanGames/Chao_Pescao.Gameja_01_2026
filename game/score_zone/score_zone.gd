@@ -31,11 +31,11 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 
 	var fish_data = body.get_fish_data()
 	var current_rules = GameHandler.get_current_rules()
-	var danger_rules = GameHandler.get_danger_rules()
+	var processable_rules = GameHandler.get_processable_rules()
 
 	print("Fish data: ", fish_data)
 	print("Current rules: ", current_rules)
-	print("Danger rules: ", danger_rules)
+	print("Danger rules: ", processable_rules)
 
 	if fish_data[CUERPO_PEZ] == CUERPO_ENFERMO:
 		GameHandler.add_score(-3)
@@ -53,7 +53,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	var cabeza_cortada = fish_data[CABEZA_CORTADA]
 
 	if cabeza_mal:
-		if not danger_rules[OJOS_RULES] or not danger_rules[CABEZA_RULES]:
+		if not processable_rules[OJOS_RULES] or not processable_rules[CABEZA_RULES]:
 			score = -3
 		else:
 			if not cabeza_cortada:
@@ -65,7 +65,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	print("Score después de la cabeza: ", score)
 	if score != -3:
 		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
-			if not danger_rules[COLA_RULES]:
+			if not processable_rules[COLA_RULES]:
 				score = -3
 			else:
 				if not fish_data[COLA_CORTADA]:
@@ -90,26 +90,30 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 
 	var fish_data = body.get_fish_data()
 	var current_rules = GameHandler.get_current_rules()
-	var danger_rules = GameHandler.get_danger_rules()
+	var processable_rules = GameHandler.get_processable_rules()
 
 	print("Fish data: ", fish_data)
 	print("Current rules: ", current_rules)
-	print("Danger rules: ", danger_rules)
+	print("Danger rules: ", processable_rules)
 
+	#Con este IF nos cercioramos de que el pez tiene al menos 1 parte tóxica
 	if (
 			fish_data[CUERPO_PEZ] == CUERPO_SANO
 			or (
-				danger_rules[OJOS_RULES] and danger_rules[COLA_RULES]
-				and (danger_rules[CABEZA_RULES] or current_rules[CABEZA_RULES] != CABEZA_SANA)
+				processable_rules[OJOS_RULES]
+				and processable_rules[COLA_RULES]
+				and processable_rules[CABEZA_RULES]
+				and current_rules[CABEZA_RULES] != CABEZA_SANA
 			)
 	):
 		GameHandler.add_score(-3)
 		body.queue_free()
 
 	if (
-			fish_data[OJOS_PEZ] <= current_rules[OJOS_RULES] and not danger_rules[OJOS_RULES]
-			or fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and not danger_rules[CABEZA_RULES]
-			or fish_data[COLA_PEZ] == current_rules[COLA_RULES] and not danger_rules[COLA_RULES]):
+			fish_data[OJOS_PEZ] <= current_rules[OJOS_RULES] and not processable_rules[OJOS_RULES]
+			or fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and not processable_rules[CABEZA_RULES]
+			or fish_data[COLA_PEZ] == current_rules[COLA_RULES] and not processable_rules[COLA_RULES]
+	):
 		pass
 
 	var score := 2
@@ -123,7 +127,7 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 	var cabeza_cortada = fish_data[CABEZA_CORTADA]
 
 	if cabeza_mal:
-		if danger_rules[0]:
+		if processable_rules[0]:
 			if cabeza_cortada:
 				score -= 1
 	else:
@@ -133,7 +137,7 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 	print("Score después de la cabeza: ", score)
 	if score != -3:
 		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
-			if not danger_rules[2]:
+			if not processable_rules[2]:
 				score = -3
 			else:
 				if not fish_data[COLA_CORTADA]:

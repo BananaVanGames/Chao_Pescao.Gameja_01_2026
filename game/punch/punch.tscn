@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cbf08dbu67aci"]
+[gd_scene load_steps=29 format=3 uid="uid://cbf08dbu67aci"]
 
 [ext_resource type="Script" uid="uid://b3nnetptb8ebs" path="res://game/punch/punch.gd" id="1_16sg0"]
 [ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="2_1fkrj"]
@@ -23,7 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://cimtwokc5y0kb" path="res://game/punch/art/punch-19.png" id="21_v7pks"]
 [ext_resource type="Texture2D" uid="uid://daj1gnxg8qyra" path="res://game/punch/art/punch-20.png" id="22_deslh"]
 [ext_resource type="Texture2D" uid="uid://dr0i180x83ivf" path="res://game/punch/art/punch-21.png" id="23_3iuus"]
-[ext_resource type="Texture2D" uid="uid://ki0rdqcuex5l" path="res://game/punch/art/punch-22.png" id="24_u835f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh8fn"]
 size = Vector2(124, 127)
@@ -93,41 +92,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("23_3iuus")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_u835f")
 }],
 "loop": false,
 "name": &"hit",
 "speed": 24.0
 }]
-
-[sub_resource type="Animation" id="Animation_xk8dd"]
-resource_name = "hit"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"hit"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.9166),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 21]
-}
 
 [sub_resource type="Animation" id="Animation_xwkru"]
 length = 0.001
@@ -153,7 +122,83 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [21]
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PunchArea:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PunchArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_xk8dd"]
+resource_name = "hit"
+length = 0.875
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hit"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 20]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PunchArea:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.16792126, 0.2178813, 0.34000587, 0.3913537, 0.6550317),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-7, 0), Vector2(-304, 0), Vector2(-450, 0), Vector2(-453, 0), Vector2(23, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PunchArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xwkru"]
@@ -169,6 +214,7 @@ script = ExtResource("1_16sg0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PunchArea"]
 shape = SubResource("RectangleShape2D_xh8fn")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="PunchArea"]
 visible = false
@@ -179,7 +225,6 @@ position = Vector2(-161, -24)
 scale = Vector2(0.38771874, 0.38771874)
 sprite_frames = SubResource("SpriteFrames_52n6l")
 animation = &"hit"
-frame = 21
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

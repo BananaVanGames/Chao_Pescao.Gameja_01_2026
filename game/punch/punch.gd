@@ -11,6 +11,7 @@ var state := "idle" # idle, forward, back
 #endregion
 @onready var punch_area: Area2D = $PunchArea
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
@@ -18,7 +19,8 @@ func _ready():
 
 
 func _physics_process(delta):
-	match state:
+	pass
+	'''match state:
 		"forward":
 			punch_area.position.x -= punch_speed * delta
 			if punch_area.position.x <= start_position.x - punch_distance:
@@ -28,19 +30,19 @@ func _physics_process(delta):
 			punch_area.position.x += punch_speed * delta
 			if punch_area.position.x >= start_position.x:
 				punch_area.position = start_position
-				state = "idle"
+				state = "idle"'''
 
 
-func trigger_punch():
-	if state != "idle":
+func throw_punch():
+	'''if state != "idle":
 		return
-	state = "forward"
-	animated_sprite_2d.play("hit")
+	state = "forward"'''
+	animation_player.play("hit")
 	GameHandler.open_door_animation()
 
 
 func _on_punch_area_body_entered(body: Node2D) -> void:
-	if state != "forward":
-		return
+	'''if state != "forward":
+		return'''
 	if body is CharacterBody2D:
 		body.velocity += force
