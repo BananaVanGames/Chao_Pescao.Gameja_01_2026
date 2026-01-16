@@ -61,13 +61,6 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y36n6"]
-blend_mode = 1
-
-[sub_resource type="Curve" id="Curve_l8g03"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_oacl0"]
 animations = [{
 "frames": [{
@@ -115,12 +108,21 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y36n6"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_l8g03"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h7iqs")
 fish_scene = ExtResource("2_e2o6t")
 hand_open = ExtResource("6_dakft")
 hand_grab = ExtResource("4_u5opy")
 hand_knife = ExtResource("5_y36n6")
+
+[node name="Timer" type="Timer" parent="."]
 
 [node name="Fondo" type="TextureRect" parent="."]
 z_index = -100
@@ -146,14 +148,26 @@ z_index = 0
 position = Vector2(710, 507)
 scale = Vector2(0.7, 0.7)
 
+[node name="SFX" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="Pinza" type="AnimatedSprite2D" parent="SFX"]
+z_index = 1000
+position = Vector2(953, 287)
+sprite_frames = SubResource("SpriteFrames_oacl0")
+frame = 6
+
+[node name="Spawner" type="Marker2D" parent="."]
+position = Vector2(970, 610)
+
+[node name="MesaTrampilla" parent="." instance=ExtResource("29_pvdu1")]
+
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="Hud" parent="HUD" instance=ExtResource("1_80nbo")]
 offset_top = -2.0
 offset_bottom = -2.0
-
-[node name="Timer" type="Timer" parent="."]
 
 [node name="Cursor" type="CanvasLayer" parent="."]
 layer = 100
@@ -173,20 +187,6 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
-
-[node name="SFX" type="CanvasLayer" parent="."]
-layer = 20
-
-[node name="Pinza" type="AnimatedSprite2D" parent="SFX"]
-z_index = 1000
-position = Vector2(953, 287)
-sprite_frames = SubResource("SpriteFrames_oacl0")
-frame = 6
-
-[node name="Spawner" type="Marker2D" parent="."]
-position = Vector2(970, 610)
-
-[node name="MesaTrampilla" parent="." instance=ExtResource("29_pvdu1")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
 layer = 2
