@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dury0kwx7c6jc"]
+
+[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/fish types/default_fish.png" id="1_bahi2"]
+[ext_resource type="Script" uid="uid://cp6vqcdniwve0" path="res://game/pez/cola_aux.gd" id="1_gksol"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eours"]
+radius = 30.0
+height = 74.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gksol"]
+radius = 30.0
+height = 74.0
+
+[node name="ColaAux" type="RigidBody2D" groups=["corte"]]
+z_index = 100
+script = ExtResource("1_gksol")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(45.000008, -9)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_bahi2")
+region_enabled = true
+region_rect = Rect2(1280, 0, 640, 1080)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11, 1)
+shape = SubResource("CapsuleShape2D_eours")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(11, 1)
+shape = SubResource("CapsuleShape2D_gksol")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

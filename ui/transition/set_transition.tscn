@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bd83eekpbqxx2"]
 
 [ext_resource type="Script" uid="uid://b3na0bvantokb" path="res://ui/transition/set_transition.gd" id="1_27i77"]
-[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/default_fish.png" id="1_jgql5"]
+[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/fish types/default_fish.png" id="1_jgql5"]
 
 [node name="SetTransition" type="CanvasLayer"]
 process_mode = 3

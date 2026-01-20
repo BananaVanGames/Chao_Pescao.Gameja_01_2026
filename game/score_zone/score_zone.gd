@@ -28,9 +28,9 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	var current_rules = GameHandler.get_current_rules()
 	var processable_rules = GameHandler.get_processable_rules()
 
-	print("Fish data: ", fish_data)
-	print("Current rules: ", current_rules)
-	print("Danger rules: ", processable_rules)
+	#print("Fish data: ", fish_data)
+	#print("Current rules: ", current_rules)
+	#print("Danger rules: ", processable_rules)
 
 	if fish_data[CUERPO_PEZ] == CUERPO_ENFERMO:
 		GameHandler.add_score(-3)
@@ -57,7 +57,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 		if cabeza_cortada:
 			# No debía cortarse pero se cortó
 			score -= 1
-	print("Score después de la cabeza: ", score)
+	#print("Score después de la cabeza: ", score)
 
 	if score != -3:
 		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
@@ -69,13 +69,13 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 		else:
 			if fish_data[COLA_CORTADA]:
 				score -= 1
-	print("Score después de la cola: ", score)
+	#print("Score después de la cola: ", score)
 
 	if score == 2 and GameHandler.get_time() > 1.00:
 		#print("Punto extra por velocidad")
 		score = 3
 
-	print("Puntuación final añadida: ", score, "\n")
+	#print("Puntuación final añadida: ", score, "\n")
 	GameHandler.add_score(score)
 	body.queue_free()
 
@@ -88,47 +88,57 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 	var current_rules = GameHandler.get_current_rules()
 	var processable_rules = GameHandler.get_processable_rules()
 
-	print("Fish data: ", fish_data)
-	print("Current rules: ", current_rules)
-	print("Danger rules: ", processable_rules)
+	#print("Fish data: ", fish_data)
+	#print("Current rules: ", current_rules)
+	#print("Danger rules: ", processable_rules)
 
-	if not (
+	var toxic_parts: int = 0
+	if (
 			fish_data[OJOS_PEZ] > current_rules[OJOS_RULES] and not processable_rules[OJOS_PEZ]
-			or (fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and not processable_rules[CABEZA_RULES]
-				and fish_data[CABEZA_PEZ] != CABEZA_SANA)
-			or fish_data [CUERPO_PEZ] == CUERPO_ENFERMO
-			or fish_data[COLA_PEZ] == current_rules[COLA_RULES] and not processable_rules[COLA_RULES]
+			or fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and not processable_rules[CABEZA_RULES]
+			and fish_data[CABEZA_PEZ] != CABEZA_SANA
 	):
+		toxic_parts += 1
+
+	if fish_data [CUERPO_PEZ] == CUERPO_ENFERMO:
+		toxic_parts += 1
+
+	if fish_data[COLA_PEZ] == current_rules[COLA_RULES] and not processable_rules[COLA_RULES]:
+		toxic_parts += 1
+
+	if not toxic_parts:
 		GameHandler.add_score(-3)
 		body.queue_free()
 		return
 
-	var score := 2
+	var toxic_cut: int = 0
 	var cabeza_mal := false
 
-	if not fish_data [CUERPO_PEZ] == CUERPO_ENFERMO:
-		if fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]:
-			cabeza_mal = true
-		if fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA:
-			cabeza_mal = true
+	if fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]:
+		cabeza_mal = true
+	if fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA:
+		cabeza_mal = true
 
-		var cabeza_cortada = fish_data[CABEZA_CORTADA]
+	var cabeza_cortada = fish_data[CABEZA_CORTADA]
 
-		if cabeza_mal:
-			if not processable_rules[OJOS_RULES] or not processable_rules[CABEZA_RULES]:
-				if cabeza_cortada:
-					score -= 2
-		print("Score después de la cabeza: ", score)
+	if cabeza_mal:
+		if not processable_rules[OJOS_RULES] or not processable_rules[CABEZA_RULES]:
+			if cabeza_cortada:
+				toxic_cut += 1
 
-		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
-			if not processable_rules[COLA_RULES]:
-				if fish_data[COLA_CORTADA]:
-					score -= 2
-		print("Score después de la cola: ", score)
+	if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
+		if not processable_rules[COLA_RULES]:
+			if fish_data[COLA_CORTADA]:
+				toxic_cut += 1
 
-	if score == 2 and GameHandler.get_time() > 1.00:
-		score = 3
+	if toxic_cut == 0:
+		if GameHandler.get_time() > 1.00:
+			GameHandler.add_score(3)
+		else:
+			GameHandler.add_score(2)
+	elif toxic_cut == toxic_parts:
+		GameHandler.add_score(-3)
+	else:
+		GameHandler.add_score(-1)
 
-	print("Puntuación final añadida: ", score, "\n")
-	GameHandler.add_score(score)
 	body.queue_free()

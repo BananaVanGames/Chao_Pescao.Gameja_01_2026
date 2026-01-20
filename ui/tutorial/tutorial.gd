@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 
 
 func finish_tutorial() -> void:
-	emit_signal("tutorial_finished")
+	tutorial_finished.emit()
 	MusicHandler.play()
 	queue_free()
 

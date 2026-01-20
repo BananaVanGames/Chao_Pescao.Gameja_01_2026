@@ -1,6 +1,8 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 signal clicked(fish)
+signal corte_cabeza
+signal corte_cola
 
 #region Caracteristicas de los peces
 enum NUM_OJOS {
@@ -46,6 +48,7 @@ var cola_cortada: bool = false
 
 var is_dragged: bool = false
 var grab_offset := Vector2.ZERO
+var fish_texture: CompressedTexture2D = null
 
 #endregion
 
@@ -53,21 +56,16 @@ var grab_offset := Vector2.ZERO
 @onready var sprite_cabeza: Sprite2D = $Cabeza
 @onready var sprite_cuerpo: Sprite2D = $Cuerpo
 @onready var sprite_cola: Sprite2D = $Cola
+@onready var cabeza_col_shape: CollisionShape2D = $CabezaColShape
+@onready var cola_col_shape: CollisionShape2D = $ColaColShape
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if is_dragged:
 		var target := get_global_mouse_position() - grab_offset
-		velocity = (target - global_position) * drag_speed
+		linear_velocity = (target - global_position) * drag_speed
 	else:
-		velocity.y += gravity * delta
-	move_and_slide()
+		linear_velocity.y += gravity * delta
 
 
 func start_drag(mouse_pos: Vector2):
@@ -77,11 +75,6 @@ func start_drag(mouse_pos: Vector2):
 
 func stop_drag():
 	is_dragged = false
-
-#func _input(event):
-#	if event is InputEventMouseButton:
-#		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-#			dragging = false
 
 
 func explode():
@@ -100,41 +93,25 @@ func get_fish_data() -> Array:
 
 
 func set_fish_texture(texture: CompressedTexture2D) -> void:
-	sprite_cabeza.texture = texture
-	sprite_cuerpo.texture = texture
-	sprite_cola.texture = texture
+	fish_texture = texture
+	sprite_cabeza.texture = fish_texture
+	sprite_cuerpo.texture = fish_texture
+	sprite_cola.texture = fish_texture
 
 
 func cut_head():
 	sprite_cabeza.visible = false
 	cabeza_cortada = true
-
+	corte_cabeza.emit(fish_texture, global_position)
+	cabeza_col_shape.disabled = true
 
 func cut_tail():
 	sprite_cola.visible = false
 	cola_cortada = true
-
-
-func _on_corte_cabeza_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event == null:
-		return
-
-	if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
-		#TODO Hay que cortar la textura de la cabeza de alguna forma y cambiar su estado a cortada
-		pass
-	#$TailBlood.emitting = true
-
-
-func _on_corte_cola_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event == null:
-		return
-
-	if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
-		#TODO Hay que cortar la textura de la cola de alguna forma y cambiar su estado a cortada
-		pass
+	corte_cola.emit(fish_texture, global_position)
+	cola_col_shape.disabled = true
 
 
 func _on_area_2d_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
 	if _event is InputEventMouseButton and _event.button_index == MOUSE_BUTTON_LEFT and _event.pressed:
-		emit_signal("clicked", self)
-		#print("clicked")
+		clicked.emit(self)

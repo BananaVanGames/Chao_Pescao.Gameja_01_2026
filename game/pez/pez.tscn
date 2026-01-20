@@ -1,36 +1,34 @@
-[gd_scene load_steps=45 format=3 uid="uid://dqy4ordentikc"]
+[gd_scene load_steps=47 format=3 uid="uid://dqy4ordentikc"]
 
 [ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://game/pez/pez.gd" id="1_tlgln"]
-[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/default_fish.png" id="2_f5oq0"]
-[ext_resource type="Texture2D" uid="uid://c5t2vv5vicfaj" path="res://game/pez/corrosion_pez-01.png" id="3_3amar"]
-[ext_resource type="Texture2D" uid="uid://km1n1gpp6gud" path="res://game/pez/explosion.png" id="3_e5qgn"]
-[ext_resource type="Texture2D" uid="uid://bxly71vs33boi" path="res://game/pez/corrosion_pez-02.png" id="4_tg48v"]
-[ext_resource type="Texture2D" uid="uid://xqgrf43su67h" path="res://game/pez/corrosion_pez-03.png" id="5_ir0ui"]
-[ext_resource type="Texture2D" uid="uid://b4v75bdw6cwml" path="res://game/pez/corrosion_pez-04.png" id="6_j1cap"]
-[ext_resource type="Texture2D" uid="uid://162x3lb5e03s" path="res://game/pez/corrosion_pez-05.png" id="7_i3xac"]
-[ext_resource type="Texture2D" uid="uid://dmrx0taiv5get" path="res://game/pez/corrosion_pez-06.png" id="8_fy2gg"]
-[ext_resource type="Texture2D" uid="uid://bgk0hmxdtl7j1" path="res://game/pez/corrosion_pez-07.png" id="9_ucldb"]
-[ext_resource type="Texture2D" uid="uid://canllqn7i7sxs" path="res://game/pez/corrosion_pez-08.png" id="10_7sjaf"]
-[ext_resource type="Texture2D" uid="uid://cpgoh45gobqae" path="res://game/pez/corrosion_pez-09.png" id="11_mupc8"]
-[ext_resource type="Texture2D" uid="uid://wgt8a2guuh2" path="res://game/pez/corrosion_pez-10.png" id="12_jblbd"]
-[ext_resource type="Texture2D" uid="uid://ywnlnxus6v64" path="res://game/pez/corrosion_pez-11.png" id="13_lma4y"]
-[ext_resource type="Texture2D" uid="uid://d3062osleneu7" path="res://game/pez/corrosion_pez-12.png" id="14_wtdgb"]
-[ext_resource type="Texture2D" uid="uid://siy727pj1e2y" path="res://game/pez/corrosion_pez-13.png" id="15_us2cp"]
-[ext_resource type="Texture2D" uid="uid://c6ptq2rx17owp" path="res://game/pez/corrosion_pez-14.png" id="16_kqmna"]
-[ext_resource type="Texture2D" uid="uid://dx2wvpjn4tta6" path="res://game/pez/corrosion_pez-15.png" id="17_rx5db"]
-[ext_resource type="Texture2D" uid="uid://diwr8pau6xt50" path="res://game/pez/corrosion_pez-16.png" id="18_68ac4"]
+[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/fish types/default_fish.png" id="2_f5oq0"]
+[ext_resource type="Texture2D" uid="uid://c5t2vv5vicfaj" path="res://game/pez/art/death/corrosion_pez-01.png" id="3_3amar"]
+[ext_resource type="Texture2D" uid="uid://km1n1gpp6gud" path="res://game/pez/art/death/explosion.png" id="3_e5qgn"]
+[ext_resource type="Texture2D" uid="uid://bxly71vs33boi" path="res://game/pez/art/death/corrosion_pez-02.png" id="4_tg48v"]
+[ext_resource type="Texture2D" uid="uid://xqgrf43su67h" path="res://game/pez/art/death/corrosion_pez-03.png" id="5_ir0ui"]
+[ext_resource type="Texture2D" uid="uid://b4v75bdw6cwml" path="res://game/pez/art/death/corrosion_pez-04.png" id="6_j1cap"]
+[ext_resource type="Texture2D" uid="uid://162x3lb5e03s" path="res://game/pez/art/death/corrosion_pez-05.png" id="7_i3xac"]
+[ext_resource type="Texture2D" uid="uid://dmrx0taiv5get" path="res://game/pez/art/death/corrosion_pez-06.png" id="8_fy2gg"]
+[ext_resource type="Texture2D" uid="uid://bgk0hmxdtl7j1" path="res://game/pez/art/death/corrosion_pez-07.png" id="9_ucldb"]
+[ext_resource type="Texture2D" uid="uid://canllqn7i7sxs" path="res://game/pez/art/death/corrosion_pez-08.png" id="10_7sjaf"]
+[ext_resource type="Texture2D" uid="uid://cpgoh45gobqae" path="res://game/pez/art/death/corrosion_pez-09.png" id="11_mupc8"]
+[ext_resource type="Texture2D" uid="uid://wgt8a2guuh2" path="res://game/pez/art/death/corrosion_pez-10.png" id="12_jblbd"]
+[ext_resource type="Texture2D" uid="uid://ywnlnxus6v64" path="res://game/pez/art/death/corrosion_pez-11.png" id="13_lma4y"]
+[ext_resource type="Texture2D" uid="uid://d3062osleneu7" path="res://game/pez/art/death/corrosion_pez-12.png" id="14_wtdgb"]
+[ext_resource type="Texture2D" uid="uid://siy727pj1e2y" path="res://game/pez/art/death/corrosion_pez-13.png" id="15_us2cp"]
+[ext_resource type="Texture2D" uid="uid://c6ptq2rx17owp" path="res://game/pez/art/death/corrosion_pez-14.png" id="16_kqmna"]
+[ext_resource type="Texture2D" uid="uid://dx2wvpjn4tta6" path="res://game/pez/art/death/corrosion_pez-15.png" id="17_rx5db"]
+[ext_resource type="Texture2D" uid="uid://diwr8pau6xt50" path="res://game/pez/art/death/corrosion_pez-16.png" id="18_68ac4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n2k18"]
-radius = 82.36504
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tg48v"]
+radius = 63.000008
+height = 218.00003
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5oq0"]
 size = Vector2(62.000053, 103.000084)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kntyo"]
 size = Vector2(62, 116)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2k18"]
-size = Vector2(100, 116)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3amar"]
 animations = [{
@@ -450,15 +448,21 @@ _data = {
 &"death": SubResource("Animation_3amar")
 }
 
-[node name="Pez" type="CharacterBody2D" groups=["pez"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ir0ui"]
+radius = 30.999992
+height = 100.00001
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3amar"]
+radius = 56.000008
+height = 152.00002
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j1cap"]
+radius = 29.000015
+height = 92.00001
+
+[node name="Pez" type="RigidBody2D" groups=["pez"]]
 z_index = 100
 script = ExtResource("1_tlgln")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.3841858e-07, -7.1525574e-07)
-rotation = 1.5707964
-scale = Vector2(0.9999998, 0.9999998)
-shape = SubResource("CircleShape2D_n2k18")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -466,31 +470,31 @@ shape = SubResource("CircleShape2D_n2k18")
 position = Vector2(2.3841858e-07, -7.1525574e-07)
 rotation = 1.5707964
 scale = Vector2(0.9999998, 0.9999998)
-shape = SubResource("CircleShape2D_n2k18")
+shape = SubResource("CapsuleShape2D_tg48v")
 
 [node name="Cabeza" type="Sprite2D" parent="."]
-position = Vector2(-139, -3.9999998)
+position = Vector2(-121, -11)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_f5oq0")
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 1080)
 
 [node name="Cuerpo" type="Sprite2D" parent="."]
-position = Vector2(-11, -3.9999993)
+position = Vector2(6.999999, -10.999999)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_f5oq0")
 region_enabled = true
 region_rect = Rect2(640, 0, 640, 1080)
 
 [node name="Cola" type="Sprite2D" parent="."]
-position = Vector2(117, -3.9999998)
+position = Vector2(135, -10.999999)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_f5oq0")
 region_enabled = true
 region_rect = Rect2(1280, 0, 640, 1080)
 
 [node name="CorteCabeza" type="Area2D" parent="."]
-position = Vector2(-93, 6.9999995)
+position = Vector2(-75, 0)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCabeza"]
@@ -498,18 +502,12 @@ scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_f5oq0")
 
 [node name="CorteCola" type="Area2D" parent="."]
-position = Vector2(73, 7)
+position = Vector2(91, 4.7683716e-07)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCola"]
 scale = Vector2(0.9999997, 0.9999997)
 shape = SubResource("RectangleShape2D_kntyo")
-
-[node name="CorteCuerpo" type="Area2D" parent="."]
-position = Vector2(-10, 7)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCuerpo"]
-shape = SubResource("RectangleShape2D_n2k18")
 
 [node name="Corrosion" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -531,6 +529,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_ir0ui")
 }
 
+[node name="CabezaColShape" type="CollisionShape2D" parent="."]
+position = Vector2(-89, 2.999999)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("CapsuleShape2D_ir0ui")
+
+[node name="CuerpoColShape" type="CollisionShape2D" parent="."]
+position = Vector2(0.99999976, 3.5527137e-15)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("CapsuleShape2D_3amar")
+
+[node name="ColaColShape" type="CollisionShape2D" parent="."]
+position = Vector2(88, -1.9073486e-06)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("CapsuleShape2D_j1cap")
+
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="input_event" from="CorteCabeza" to="." method="_on_corte_cabeza_input_event"]
-[connection signal="input_event" from="CorteCola" to="." method="_on_corte_cola_input_event"]

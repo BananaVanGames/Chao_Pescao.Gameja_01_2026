@@ -33,6 +33,7 @@ enabled=PackedStringArray("res://addons/simple_gdscript_formatter/plugin.cfg")
 
 pez=""
 fish=""
+corte=""
 
 [input]
 

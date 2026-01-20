@@ -14,4 +14,4 @@ func play():
 
 	# Hide the CanvasLayer again
 	visible = false
-	emit_signal("transition_finished")
+	transition_finished.emit()

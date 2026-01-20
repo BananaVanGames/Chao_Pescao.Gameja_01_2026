@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8v0rc25vb8uo"]
+
+[ext_resource type="Script" uid="uid://dadj1axa6gsmh" path="res://game/pez/cabeza_aux.gd" id="1_ln1gr"]
+[ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/fish types/default_fish.png" id="1_odn6a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q3c52"]
+radius = 30.0
+height = 106.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ln1gr"]
+radius = 30.0
+height = 106.0
+
+[node name="CabezaAux" type="RigidBody2D" groups=["corte"]]
+z_index = 100
+script = ExtResource("1_ln1gr")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-49.000008, -16)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_odn6a")
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 1080)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-15, 0)
+shape = SubResource("CapsuleShape2D_q3c52")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-15, 0)
+shape = SubResource("CapsuleShape2D_ln1gr")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

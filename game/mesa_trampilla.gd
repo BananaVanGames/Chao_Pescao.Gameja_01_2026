@@ -13,7 +13,7 @@ func fish_timeout() -> void:
 		punch.throw_punch()
 
 
-func new_fish_spawned(last_fish: CharacterBody2D) -> void:
+func new_fish_spawned(last_fish: RigidBody2D) -> void:
 	if not pez_en_mesa:
 		last_fish.explode()
 
@@ -21,7 +21,10 @@ func new_fish_spawned(last_fish: CharacterBody2D) -> void:
 func _on_basura_peces_body_entered(body: Node2D) -> void:
 	if body.is_in_group("pez"):
 		GameHandler.add_score(-3)
+		body.queue_free()
 
+	if body.is_in_group("corte"):
+		body.queue_free()
 
 func _on_detector_de_peces_body_entered(body: Node2D) -> void:
 	if body.is_in_group("pez"):

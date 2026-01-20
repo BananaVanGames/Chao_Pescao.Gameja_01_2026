@@ -34,22 +34,18 @@ var current_tool := MouseTool.NONE
 
 # Drag n drop logic LEFT MOUSE BUTTON
 # Which fish is currently being dragged (null = none)
-var dragged_fish: CharacterBody2D = null
+var dragged_fish: RigidBody2D = null
+var last_fish: RigidBody2D = null
 
 # Cutting logic variables RIGHT MOUSE BUTTON
 var is_cutting := false
 var cut_points := []
 
-var last_fish: CharacterBody2D = null
-
 #@onready var set_transition: CanvasLayer = $SetTransition
 var file_names
 var resources
 
-@onready var punch: Node2D = $Punch
-
 @onready var pinza: AnimatedSprite2D = $SFX/Pinza
-
 @onready var mano: Sprite2D = $Cursor/Mano
 #endregion
 
@@ -60,6 +56,8 @@ var resources
 @onready var set_transition: CanvasLayer = $SetTransition
 @onready var game_music: AudioStream = preload("res://music/InGame1.mp3")
 @onready var mesa_trampilla: Node2D = $MesaTrampilla
+@onready var cabeza_aux: PackedScene = preload("res://game/pez/cabeza_aux.tscn")
+@onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
 
 
 func _ready() -> void:
@@ -123,7 +121,7 @@ func start_next_set():
 	for i in range(3):
 		rules.append(peces_peligrosos[level][i].pick_random())
 
-	print("Las reglas de peces peligrosos son: ", rules)
+	#print("Las reglas de peces peligrosos son: ", rules)
 	GameHandler.start_next_set(rules)
 
 
@@ -134,7 +132,7 @@ func start_round():
 	spawn_fish()
 
 
-func randomize_fish_characteristics(fish: CharacterBody2D) -> void:
+func randomize_fish_characteristics(fish: RigidBody2D) -> void:
 	var random = randi_range(0, level)
 	var fish_texture = GameHandler.fish_sprites[random].pick_random()
 	var file_name = fish_texture.resource_path.get_file()
@@ -154,7 +152,6 @@ func spawn_fish():
 
 	if not last_fish == null:
 		mesa_trampilla.new_fish_spawned(last_fish)
-		
 
 	pinza.play("default")
 	await get_tree().create_timer(0.18).timeout
@@ -171,8 +168,8 @@ func spawn_fish():
 func on_set_finished():
 	timer.stop()
 
-	for fish in spawner.get_children():
-		fish.queue_free()
+	for spawn_child in spawner.get_children():
+		spawn_child.queue_free()
 	# This reset does not reset score
 	GameHandler.reset_round()
 
@@ -181,7 +178,7 @@ func on_set_finished():
 
 	start_next_set()
 	round_time = 6.3
-	print("TESTING")
+	#print("TESTING")
 	start_round()
 	round_time = 5.2
 
@@ -189,11 +186,11 @@ func on_set_finished():
 func end_game():
 	GameHandler.reset_score()
 	get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
-	print("Game Over")
+	#print("Game Over")
 
 
 func start_grab(fish):
-	# Prevent grabbing multiple fish
+	#print("Dragged Fish: ", dragged_fish)
 	if dragged_fish != null:
 		return
 
@@ -223,7 +220,7 @@ func finish_cut():
 	line_2d.clear_points()
 
 
-func test_cut_against_fish(fish):
+func test_cut_against_fish(fish: RigidBody2D):
 	var space := get_world_2d().direct_space_state
 
 	var hit_head := false
@@ -239,26 +236,49 @@ func test_cut_against_fish(fish):
 		var result = space.intersect_point(query)
 
 		for hit in result:
-			if hit.collider == fish.get_node("CorteCuerpo"):
-				hit_body = true
-			elif hit.collider == fish.get_node("CorteCabeza"):
+			if hit.collider == fish.get_node_or_null("CorteCabeza"):
 				hit_head = true
-			elif hit.collider == fish.get_node("CorteCola"):
+			elif hit.collider == fish.get_node_or_null("CorteCola"):
 				hit_tail = true
+			else:
+				continue
 	# Forbidden area cancels the cut
 	if hit_body:
 		return
 
 	if hit_head:
+		fish.corte_cabeza.connect(crear_cabeza_independiente)
 		fish.cut_head()
 
 	if hit_tail:
+		fish.corte_cola.connect(crear_cola_independiente)
 		fish.cut_tail()
 
 
+func crear_cabeza_independiente(new_text: CompressedTexture2D, new_pos: Vector2) -> void:
+	var corte: RigidBody2D = cabeza_aux.instantiate()
+	spawner.add_child(corte)
+	corte.set_texture(new_text)
+	corte.clicked.connect(_on_fish_clicked)
+	corte.global_position = new_pos - Vector2(65, 0)
+	# Por qué este 65 mágico?
+	# Debería ser 320 pixeles a la izq que cada sección del pez son 640 
+	# y como la pos 0,0 de la textura está en la mitad, se movería eso para 
+	# que spawnee aproximadamente donde ya está la cabeza
+	# Sin embargo, la textura del pez está escalada a 0.2, por lo que 320/5 = 64
+	# Le pongo 1 pixel más de margen para que no colisione al spawnear y haga cosas raras
+	
+
+func crear_cola_independiente(new_text: CompressedTexture2D, new_pos: Vector2) -> void:
+	var corte: RigidBody2D = cola_aux.instantiate()
+	spawner.add_child(corte)
+	corte.set_texture(new_text)
+	corte.clicked.connect(_on_fish_clicked)
+	corte.global_position = new_pos + Vector2(65, 0)
+	# Arriba está explicado
+
 func cut_fish():
 	line_2d.add_point(get_local_mouse_position())
-
 
 
 func _on_fish_clicked(fish):

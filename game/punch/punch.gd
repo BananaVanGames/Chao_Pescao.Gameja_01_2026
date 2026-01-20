@@ -18,31 +18,10 @@ func _ready():
 	start_position = punch_area.position
 
 
-func _physics_process(delta):
-	pass
-	'''match state:
-		"forward":
-			punch_area.position.x -= punch_speed * delta
-			if punch_area.position.x <= start_position.x - punch_distance:
-				state = "back"
-
-		"back":
-			punch_area.position.x += punch_speed * delta
-			if punch_area.position.x >= start_position.x:
-				punch_area.position = start_position
-				state = "idle"'''
-
-
 func throw_punch():
-	'''if state != "idle":
-		return
-	state = "forward"'''
 	animation_player.play("hit")
-	GameHandler.open_door_animation()
 
 
 func _on_punch_area_body_entered(body: Node2D) -> void:
-	'''if state != "forward":
-		return'''
-	if body is CharacterBody2D:
-		body.velocity += force
+	if body is RigidBody2D:
+		body.linear_velocity += force
