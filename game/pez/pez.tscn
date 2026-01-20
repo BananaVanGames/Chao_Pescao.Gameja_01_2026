@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dqy4ordentikc"]
+[gd_scene load_steps=48 format=3 uid="uid://dqy4ordentikc"]
 
 [ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://game/pez/pez.gd" id="1_tlgln"]
 [ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/fish types/default_fish.png" id="2_f5oq0"]
@@ -26,6 +26,9 @@ height = 218.00003
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5oq0"]
 size = Vector2(62.000053, 103.000084)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3amar"]
+size = Vector2(90, 123)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kntyo"]
 size = Vector2(62, 116)
@@ -500,6 +503,11 @@ scale = Vector2(0.99999994, 0.99999994)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCabeza"]
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_f5oq0")
+
+[node name="CorteCuerpo" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCuerpo"]
+shape = SubResource("RectangleShape2D_3amar")
 
 [node name="CorteCola" type="Area2D" parent="."]
 position = Vector2(91, 4.7683716e-07)

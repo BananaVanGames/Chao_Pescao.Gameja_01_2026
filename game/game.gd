@@ -46,12 +46,12 @@ var file_names
 var resources
 
 @onready var pinza: AnimatedSprite2D = $SFX/Pinza
-@onready var mano: Sprite2D = $Cursor/Mano
+@onready var mano: Sprite2D = $HUD/Mano
 #endregion
 
 @onready var timer: Timer = $Timer
 @onready var spawner: Marker2D = $Spawner
-@onready var line_2d: Line2D = $Cursor/Line2D
+@onready var line_2d: Line2D = $HUD/Line2D
 @onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
 @onready var set_transition: CanvasLayer = $SetTransition
 @onready var game_music: AudioStream = preload("res://music/InGame1.mp3")
@@ -238,6 +238,8 @@ func test_cut_against_fish(fish: RigidBody2D):
 		for hit in result:
 			if hit.collider == fish.get_node_or_null("CorteCabeza"):
 				hit_head = true
+			elif hit.collider == fish.get_node_or_null("CorteCuerpo"):
+				hit_body = true
 			elif hit.collider == fish.get_node_or_null("CorteCola"):
 				hit_tail = true
 			else:

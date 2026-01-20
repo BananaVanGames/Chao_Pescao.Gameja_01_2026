@@ -169,16 +169,13 @@ layer = 2
 offset_top = -2.0
 offset_bottom = -2.0
 
-[node name="Cursor" type="CanvasLayer" parent="."]
-layer = 100
-
-[node name="Mano" type="Sprite2D" parent="Cursor"]
+[node name="Mano" type="Sprite2D" parent="HUD"]
 z_index = 4096
 z_as_relative = false
 scale = Vector2(0.163, 0.2)
 texture = ExtResource("6_dakft")
 
-[node name="Line2D" type="Line2D" parent="Cursor"]
+[node name="Line2D" type="Line2D" parent="HUD"]
 material = SubResource("CanvasItemMaterial_y36n6")
 width = 6.0
 width_curve = SubResource("Curve_l8g03")

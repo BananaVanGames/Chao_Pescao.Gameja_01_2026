@@ -100,16 +100,19 @@ func set_fish_texture(texture: CompressedTexture2D) -> void:
 
 
 func cut_head():
-	sprite_cabeza.visible = false
-	cabeza_cortada = true
-	corte_cabeza.emit(fish_texture, global_position)
-	cabeza_col_shape.disabled = true
+	if not cabeza_cortada:
+		sprite_cabeza.visible = false
+		cabeza_cortada = true
+		corte_cabeza.emit(fish_texture, global_position)
+		cabeza_col_shape.disabled = true
+
 
 func cut_tail():
-	sprite_cola.visible = false
-	cola_cortada = true
-	corte_cola.emit(fish_texture, global_position)
-	cola_col_shape.disabled = true
+	if not cola_cortada:
+		sprite_cola.visible = false
+		cola_cortada = true
+		corte_cola.emit(fish_texture, global_position)
+		cola_col_shape.disabled = true
 
 
 func _on_area_2d_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
