@@ -14,7 +14,7 @@ enum MouseTool {
 }
 
 @export var fish_scene: PackedScene
-@export var round_time: float = 5.2
+@export var round_time: float = 5
 @export var level: int = -1
 @export var hand_open: Texture2D
 @export var hand_grab: Texture2D
@@ -52,28 +52,33 @@ var resources
 @onready var timer: Timer = $Timer
 @onready var spawner: Marker2D = $Spawner
 @onready var line_2d: Line2D = $HUD/Line2D
-@onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
 @onready var set_transition: CanvasLayer = $SetTransition
 @onready var game_music: AudioStream = preload("res://music/InGame1.mp3")
 @onready var mesa_trampilla: Node2D = $MesaTrampilla
 @onready var cabeza_aux: PackedScene = preload("res://game/pez/cabeza_aux.tscn")
 @onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
+@onready var score_zone: Node2D = $ScoreZone
 
 
 func _ready() -> void:
-	cinta_fondo.play("default")
+	mesa_trampilla.pez_destruido.connect(on_fish_destroyed)
+	score_zone.pez_clasificado.connect(on_fish_destroyed)
+
 	GameHandler.reset_round()
+	GameHandler.add_score(0)
+
 	MusicHandler.load_track(game_music)
 	MusicHandler.play()
+
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	start_next_set()
 	start_round()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if timer.is_stopped():
 		return
+
 	GameHandler.set_time(timer.time_left)
 	mano.global_position = get_global_mouse_position()
 
@@ -111,6 +116,10 @@ func _input(event):
 				finish_cut()
 
 
+func on_fish_destroyed() -> void:
+	start_round()
+
+
 func start_next_set():
 	level += 1
 	if level > 2:
@@ -127,7 +136,6 @@ func start_next_set():
 
 func start_round():
 	GameHandler.set_time(round_time)
-	GameHandler.add_score(0)
 	timer.start(round_time)
 	spawn_fish()
 
@@ -269,7 +277,7 @@ func crear_cabeza_independiente(new_text: CompressedTexture2D, new_pos: Vector2)
 	# que spawnee aproximadamente donde ya está la cabeza
 	# Sin embargo, la textura del pez está escalada a 0.2, por lo que 320/5 = 64
 	# Le pongo 1 pixel más de margen para que no colisione al spawnear y haga cosas raras
-	
+
 
 func crear_cola_independiente(new_text: CompressedTexture2D, new_pos: Vector2) -> void:
 	var corte: RigidBody2D = cola_aux.instantiate()
@@ -278,6 +286,7 @@ func crear_cola_independiente(new_text: CompressedTexture2D, new_pos: Vector2) -
 	corte.clicked.connect(_on_fish_clicked)
 	corte.global_position = new_pos + Vector2(65, 0)
 	# Arriba está explicado
+
 
 func cut_fish():
 	line_2d.add_point(get_local_mouse_position())
@@ -293,4 +302,13 @@ func _on_fish_clicked(fish):
 
 func _on_timer_timeout() -> void:
 	mesa_trampilla.fish_timeout()
-	start_round()
+
+
+func _on_destructor_peces_body_entered(body: Node2D) -> void:
+	if body.is_in_group("pez"):
+		GameHandler.add_score(-3)
+		body.queue_free()
+		on_fish_destroyed()
+
+	if body.is_in_group("corte"):
+		body.queue_free()

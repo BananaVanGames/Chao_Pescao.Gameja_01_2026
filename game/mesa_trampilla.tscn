@@ -274,7 +274,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
-size = Vector2(576, 76)
+size = Vector2(772, 119)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1pq"]
 size = Vector2(294, 82)
@@ -283,7 +283,7 @@ size = Vector2(294, 82)
 size = Vector2(2528.5, 159)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxrkv"]
-size = Vector2(684, 70)
+size = Vector2(684, 88)
 
 [node name="MesaTrampilla" type="Node2D"]
 script = ExtResource("1_qdbxn")
@@ -306,7 +306,7 @@ libraries = {
 position = Vector2(970, 1016)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mesa"]
-position = Vector2(0, -26)
+position = Vector2(95, 14.5)
 shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="DetectorDePeces" type="Area2D" parent="."]
@@ -330,10 +330,6 @@ position = Vector2(337, 985)
 shape = SubResource("RectangleShape2D_dxrkv")
 
 [node name="Punch" parent="." instance=ExtResource("41_fhuig")]
-position = Vector2(1661, 893.00006)
-scale = Vector2(1.5, 1.5)
-
-[node name="Punch2" parent="." instance=ExtResource("41_fhuig")]
 position = Vector2(1661, 893.00006)
 scale = Vector2(1.5, 1.5)
 

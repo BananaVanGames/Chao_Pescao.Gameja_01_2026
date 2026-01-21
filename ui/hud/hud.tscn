@@ -80,7 +80,7 @@ pivot_offset = Vector2(85, 47)
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
-text = "69"
+text = "0"
 label_settings = SubResource("LabelSettings_imuuq")
 horizontal_alignment = 1
 

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal pez_clasificado
+
 #region Constantes
 const OJOS_PEZ = 0
 const CABEZA_PEZ = 1
@@ -19,6 +21,8 @@ const CUERPO_ENFERMO = 1
 
 #endregion
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 func _on_good_area_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("pez"):
@@ -34,6 +38,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 
 	if fish_data[CUERPO_PEZ] == CUERPO_ENFERMO:
 		GameHandler.add_score(-3)
+		pez_clasificado.emit()
 		body.queue_free()
 		return
 
@@ -77,6 +82,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 
 	#print("Puntuación final añadida: ", score, "\n")
 	GameHandler.add_score(score)
+	pez_clasificado.emit()
 	body.queue_free()
 
 
@@ -108,6 +114,7 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 
 	if not toxic_parts:
 		GameHandler.add_score(-3)
+		pez_clasificado.emit()
 		body.queue_free()
 		return
 
@@ -141,4 +148,33 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 	else:
 		GameHandler.add_score(-1)
 
+	pez_clasificado.emit()
 	body.queue_free()
+
+
+func _on_open_good_area_body_entered(body: Node2D) -> void:
+	if not body.is_in_group("pez"):
+		return
+
+	animation_player.play("open_good_container")
+
+
+func _on_open_good_area_body_exited(body: Node2D) -> void:
+	if not body.is_in_group("pez"):
+		return
+
+	animation_player.play("close_good_container")
+
+
+func _on_open_bad_area_body_entered(body: Node2D) -> void:
+	if not body.is_in_group("pez"):
+		return
+
+	animation_player.play("open_bad_container")
+
+
+func _on_open_bad_area_body_exited(body: Node2D) -> void:
+	if not body.is_in_group("pez"):
+		return
+
+	animation_player.play("close_bad_container")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=28 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
@@ -6,16 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cmum7eealbbyv" path="res://game/score_zone/score_zone.tscn" id="4_4fuuu"]
 [ext_resource type="Texture2D" uid="uid://dgdul0x3rufcw" path="res://game/mano/mano_cerrada.png" id="4_u5opy"]
 [ext_resource type="Texture2D" uid="uid://duvi1xyo5eeiv" path="res://game/mano/mano_cuchillo.png" id="5_y36n6"]
-[ext_resource type="Texture2D" uid="uid://np6av2loxy1f" path="res://ui/hud/art/background/BG.png" id="6_1paru"]
 [ext_resource type="Texture2D" uid="uid://d4d284x7a77rb" path="res://game/mano/mano_abierta.png" id="6_dakft"]
-[ext_resource type="Texture2D" uid="uid://dkddchgset14m" path="res://ui/hud/art/background/cintas03.png" id="7_4cobl"]
-[ext_resource type="Texture2D" uid="uid://db1xron2ewk4j" path="res://ui/hud/art/background/cintas04.png" id="8_ln7ps"]
+[ext_resource type="PackedScene" uid="uid://bp0iyqdeeq51h" path="res://ui/hud/fondo.tscn" id="6_leid8"]
 [ext_resource type="PackedScene" uid="uid://byihj7ts63ode" path="res://ui/pause_menu/pause_menu.tscn" id="9_l8g03"]
-[ext_resource type="Texture2D" uid="uid://b2phpqxnre61e" path="res://ui/hud/art/background/cintas05.png" id="9_pxxsx"]
-[ext_resource type="Texture2D" uid="uid://3qnk1irw0cpq" path="res://ui/hud/art/background/cintas06.png" id="10_u8s88"]
-[ext_resource type="Texture2D" uid="uid://bfo54c0ba3vhg" path="res://ui/hud/art/background/cintas07.png" id="11_dxwpq"]
-[ext_resource type="Texture2D" uid="uid://dh8n46ruqy0y7" path="res://ui/hud/art/background/cintas08.png" id="12_mhvfb"]
-[ext_resource type="Texture2D" uid="uid://5a1dvwl0nclg" path="res://ui/hud/art/background/cintas09.png" id="13_5e03w"]
 [ext_resource type="PackedScene" uid="uid://cdkg20lpo1xmi" path="res://game/mesa_trampilla.tscn" id="29_pvdu1"]
 [ext_resource type="PackedScene" uid="uid://bd83eekpbqxx2" path="res://ui/transition/set_transition.tscn" id="58_jbuku"]
 [ext_resource type="Texture2D" uid="uid://bnam0rniyavqn" path="res://ui/hud/art/pinza/pinza01.png" id="59_gk1pq"]
@@ -31,35 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://cxd4reim2uqq2" path="res://ui/hud/art/pinza/pinza11.png" id="69_2kr6o"]
 [ext_resource type="Texture2D" uid="uid://djkqfogum0os6" path="res://ui/hud/art/pinza/pinza12.png" id="70_fqr2c"]
 [ext_resource type="Texture2D" uid="uid://duun0xtoce2wt" path="res://ui/hud/art/pinza/pinza13.png" id="71_au36g"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kaw54"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_4cobl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_ln7ps")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_pxxsx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_u8s88")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_dxwpq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_mhvfb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_5e03w")
-}],
-"loop": true,
-"name": &"default",
-"speed": 24.0
-}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oacl0"]
 animations = [{
@@ -122,34 +86,18 @@ hand_open = ExtResource("6_dakft")
 hand_grab = ExtResource("4_u5opy")
 hand_knife = ExtResource("5_y36n6")
 
+[node name="Fondo" parent="." instance=ExtResource("6_leid8")]
+
 [node name="Timer" type="Timer" parent="."]
-
-[node name="Fondo" type="TextureRect" parent="."]
-z_index = -100
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 4.0
-offset_right = 1923.0
-offset_bottom = 1084.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1paru")
-
-[node name="CintaFondo" type="AnimatedSprite2D" parent="."]
-z_index = -99
-position = Vector2(952, 538)
-sprite_frames = SubResource("SpriteFrames_kaw54")
-frame_progress = 0.65542233
 
 [node name="ScoreZone" parent="." instance=ExtResource("4_4fuuu")]
 z_index = 0
-position = Vector2(710, 507)
-scale = Vector2(0.7, 0.7)
+position = Vector2(676, 614)
 
 [node name="SFX" type="CanvasLayer" parent="."]
 layer = 20
+offset = Vector2(0, 50.695)
+transform = Transform2D(1, 0, 0, 1, 0, 50.695)
 
 [node name="Pinza" type="AnimatedSprite2D" parent="SFX"]
 z_index = 1000
@@ -158,7 +106,7 @@ sprite_frames = SubResource("SpriteFrames_oacl0")
 frame = 6
 
 [node name="Spawner" type="Marker2D" parent="."]
-position = Vector2(970, 610)
+position = Vector2(966, 754)
 
 [node name="MesaTrampilla" parent="." instance=ExtResource("29_pvdu1")]
 
@@ -191,4 +139,11 @@ visible = false
 
 [node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
 
+[node name="DestructorPeces" type="Area2D" parent="."]
+position = Vector2(-129, -144)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructorPeces"]
+polygon = PackedVector2Array(2656, -1211, 2654, 1590, 2460, 1548, 2455, -1018, -765, -1059, -768, 1472, 136, 1453, 136, 1620, -981, 1654, -986, -1230)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="DestructorPeces" to="." method="_on_destructor_peces_body_entered"]
