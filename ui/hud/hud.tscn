@@ -34,13 +34,13 @@ script = ExtResource("1_4d6w6")
 
 [node name="Consola" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -212.0
-offset_top = -334.0
-offset_right = -212.0
-offset_bottom = -334.0
+anchors_preset = -1
+anchor_right = 1.6610001
+anchor_bottom = 1.6680001
+offset_left = -243.00003
+offset_top = -316.0
+offset_right = -236.47217
+offset_bottom = -316.864
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
@@ -85,11 +85,14 @@ label_settings = SubResource("LabelSettings_imuuq")
 horizontal_alignment = 1
 
 [node name="Pantallas02" type="TextureRect" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.6850001
+anchor_bottom = 1.651
 offset_left = 21.0
 offset_top = -10.0
-offset_right = 1941.0
-offset_bottom = 1070.0
+offset_right = -0.12011719
+offset_bottom = 0.15197754
 texture = ExtResource("4_o2lis")
 
 [node name="PecesRestantes" type="Node2D" parent="."]
@@ -232,9 +235,11 @@ expand_mode = 2
 
 [node name="Marco" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_right = 1.667
+anchor_bottom = 1.667
+offset_right = -0.3840332
+offset_bottom = -0.21606445
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_cxhb7")

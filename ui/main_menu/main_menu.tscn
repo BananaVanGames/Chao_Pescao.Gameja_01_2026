@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nvasf")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="GameTitle" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_vertical = 2
 texture = ExtResource("2_6mijq")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="GamejaLogo" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -39,6 +39,15 @@ offset_bottom = -24.0
 grow_vertical = 0
 texture = ExtResource("3_x57m8")
 expand_mode = 1
+
+[node name="BananaVanLogo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1522.0
+offset_top = 636.0
+offset_right = 2022.0
+offset_bottom = 1136.0
+scale = Vector2(0.834, 0.8460001)
+texture = ExtResource("5_3c04x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -139,15 +148,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "Salir"
-
-[node name="BananaLogo" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 1522.0
-offset_top = 636.0
-offset_right = 2022.0
-offset_bottom = 1136.0
-scale = Vector2(0.834, 0.8460001)
-texture = ExtResource("5_3c04x")
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]

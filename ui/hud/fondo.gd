@@ -4,8 +4,10 @@ extends Node2D
 @onready var spawner_fondo: Marker2D = $SpawnerFondo
 @onready var cinta_fondo: AnimatedSprite2D = $CintaFondo
 
+
 func _ready() -> void:
-	cinta_fondo.play("default")
+	cinta_fondo.play("run")
+
 
 func randomize_fish_characteristics(fish: RigidBody2D) -> void:
 	var random = randi_range(0, 2)
@@ -22,7 +24,7 @@ func randomize_fish_characteristics(fish: RigidBody2D) -> void:
 
 func _on_timer_fondo_timeout() -> void:
 	var new_fish = fish_scene.instantiate()
-	add_child(new_fish)
+	spawner_fondo.add_child(new_fish)
 	randomize_fish_characteristics(new_fish)
 	new_fish.global_position = spawner_fondo.global_position
 	new_fish.gravity_scale = 0

@@ -219,20 +219,50 @@ var paths_level_3 := [
 var paths_levels = [paths_level_1, paths_level_2, paths_level_3]
 var fish_sprites: Array[Array] = [[], [], []]
 
+var fish_loaded := false
+var check_finished := false
+
+var level_idx := 0
+var path_idx := 0
+
 
 func _process(_delta: float) -> void:
-	var all_loaded := true
-	for level in paths_levels:
-		for path in level:
-			var status = ResourceLoader.load_threaded_get_status(path)
-			if status != ResourceLoader.THREAD_LOAD_LOADED:
-				all_loaded = false
-				break
+	if fish_loaded:
+		return
 
-	if all_loaded:
-		for i in range(paths_levels.size()):
-			for path in paths_levels[i]:
-				fish_sprites[i].append(ResourceLoader.load_threaded_get(path))
+	if not check_finished:
+		var fish_path: String = paths_levels[level_idx][path_idx]
+		var status := ResourceLoader.load_threaded_get_status(fish_path)
+
+		if status != ResourceLoader.THREAD_LOAD_LOADED:
+			return 
+
+		path_idx += 1
+		if path_idx >= paths_levels[level_idx].size():
+			path_idx = 0
+			level_idx += 1
+
+		if level_idx >= paths_levels.size():
+			check_finished = true
+			level_idx = 0
+			path_idx = 0
+			print("All fish resources ready")
+		return
+
+	var path: String = paths_levels[level_idx][path_idx]
+	fish_sprites[level_idx].append(
+		ResourceLoader.load_threaded_get(path)
+	)
+
+	path_idx += 1
+	if path_idx >= paths_levels[level_idx].size():
+		path_idx = 0
+		level_idx += 1
+
+	if level_idx >= paths_levels.size():
+		fish_loaded = true
+		set_process(false)
+		print("Fish loaded")
 
 
 func load_fishes_in_background():

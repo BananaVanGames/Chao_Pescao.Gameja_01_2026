@@ -35,7 +35,7 @@ animations = [{
 "texture": ExtResource("5_80ivu")
 }],
 "loop": true,
-"name": &"default",
+"name": &"run",
 "speed": 24.0
 }]
 
@@ -60,12 +60,12 @@ position = Vector2(-197, 365)
 
 [node name="TimerFondo" type="Timer" parent="."]
 wait_time = 1.5
-autostart = true
+one_shot = true
 
 [node name="CintaFondo" type="AnimatedSprite2D" parent="."]
 z_index = -99
 position = Vector2(971, 405)
 sprite_frames = SubResource("SpriteFrames_kaw54")
-frame_progress = 0.65542233
+animation = &"run"
 
 [connection signal="timeout" from="TimerFondo" to="." method="_on_timer_fondo_timeout"]

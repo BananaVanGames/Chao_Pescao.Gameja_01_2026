@@ -1,15 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=24 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
-[ext_resource type="PackedScene" uid="uid://dqy4ordentikc" path="res://game/pez/pez.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://cmum7eealbbyv" path="res://game/score_zone/score_zone.tscn" id="4_4fuuu"]
-[ext_resource type="Texture2D" uid="uid://dgdul0x3rufcw" path="res://game/mano/mano_cerrada.png" id="4_u5opy"]
-[ext_resource type="Texture2D" uid="uid://duvi1xyo5eeiv" path="res://game/mano/mano_cuchillo.png" id="5_y36n6"]
-[ext_resource type="Texture2D" uid="uid://d4d284x7a77rb" path="res://game/mano/mano_abierta.png" id="6_dakft"]
+[ext_resource type="Texture2D" uid="uid://d4d284x7a77rb" path="res://ui/mano/mano_abierta.png" id="6_dakft"]
 [ext_resource type="PackedScene" uid="uid://bp0iyqdeeq51h" path="res://ui/hud/fondo.tscn" id="6_leid8"]
 [ext_resource type="PackedScene" uid="uid://byihj7ts63ode" path="res://ui/pause_menu/pause_menu.tscn" id="9_l8g03"]
-[ext_resource type="PackedScene" uid="uid://cdkg20lpo1xmi" path="res://game/mesa_trampilla.tscn" id="29_pvdu1"]
+[ext_resource type="PackedScene" uid="uid://cdkg20lpo1xmi" path="res://game/trampilla_y_mesa/mesa_trampilla.tscn" id="29_pvdu1"]
 [ext_resource type="PackedScene" uid="uid://bd83eekpbqxx2" path="res://ui/transition/set_transition.tscn" id="58_jbuku"]
 [ext_resource type="Texture2D" uid="uid://bnam0rniyavqn" path="res://ui/hud/art/pinza/pinza01.png" id="59_gk1pq"]
 [ext_resource type="Texture2D" uid="uid://cttaifaj3oos" path="res://ui/hud/art/pinza/pinza02.png" id="60_3wmuf"]
@@ -68,7 +64,7 @@ animations = [{
 "texture": ExtResource("71_au36g")
 }],
 "loop": false,
-"name": &"default",
+"name": &"activate",
 "speed": 24.0
 }]
 
@@ -81,18 +77,10 @@ point_count = 4
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h7iqs")
-fish_scene = ExtResource("2_e2o6t")
-hand_open = ExtResource("6_dakft")
-hand_grab = ExtResource("4_u5opy")
-hand_knife = ExtResource("5_y36n6")
 
 [node name="Fondo" parent="." instance=ExtResource("6_leid8")]
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="ScoreZone" parent="." instance=ExtResource("4_4fuuu")]
-z_index = 0
-position = Vector2(676, 614)
 
 [node name="SFX" type="CanvasLayer" parent="."]
 layer = 20
@@ -103,7 +91,7 @@ transform = Transform2D(1, 0, 0, 1, 0, 50.695)
 z_index = 1000
 position = Vector2(953, 287)
 sprite_frames = SubResource("SpriteFrames_oacl0")
-frame = 6
+animation = &"activate"
 
 [node name="Spawner" type="Marker2D" parent="."]
 position = Vector2(966, 754)

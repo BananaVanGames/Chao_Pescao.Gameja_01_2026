@@ -2,18 +2,13 @@ extends Control
 
 @onready var tutorial: Label = $VBoxContainer/Tutorial/Tutorial
 @onready var tutorial_scene: PackedScene = preload("res://ui/tutorial/tutorial.tscn")
-@onready var menu_music: AudioStream = load("res://music/menu.mp3")
+@onready var menu_music: AudioStream = preload("res://music/menu.mp3")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameHandler.load_fishes_in_background()
 	MusicHandler.load_track(menu_music)
 	MusicHandler.play()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
 
 
 func _on_start_button_pressed() -> void:

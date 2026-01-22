@@ -1,7 +1,7 @@
-[gd_scene load_steps=50 format=3 uid="uid://cdkg20lpo1xmi"]
+[gd_scene load_steps=51 format=3 uid="uid://cdkg20lpo1xmi"]
 
 [ext_resource type="Texture2D" uid="uid://bidsoe6623wf6" path="res://game/trampilla_y_mesa/trampilla02.png" id="1_n51qw"]
-[ext_resource type="Script" uid="uid://dv5hiq0nukqf3" path="res://game/mesa_trampilla.gd" id="1_qdbxn"]
+[ext_resource type="Script" uid="uid://dv5hiq0nukqf3" path="res://game/trampilla_y_mesa/mesa_trampilla.gd" id="1_qdbxn"]
 [ext_resource type="Texture2D" uid="uid://dqpnro8kqeh2i" path="res://game/trampilla_y_mesa/trampilla03.png" id="2_qdbxn"]
 [ext_resource type="Texture2D" uid="uid://cxhpjjamib1km" path="res://game/trampilla_y_mesa/trampilla04.png" id="3_fhuig"]
 [ext_resource type="Texture2D" uid="uid://d2vnysss6iysi" path="res://game/trampilla_y_mesa/trampilla05.png" id="4_0btmr"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://dpshvx3mbjd5k" path="res://game/trampilla_y_mesa/trampilla39.png" id="38_xmoca"]
 [ext_resource type="Texture2D" uid="uid://cbc13pohlhtol" path="res://game/trampilla_y_mesa/OL_Trampilla.png" id="39_wbdj0"]
 [ext_resource type="PackedScene" uid="uid://cbf08dbu67aci" path="res://game/punch/punch.tscn" id="41_fhuig"]
+[ext_resource type="PackedScene" uid="uid://cmum7eealbbyv" path="res://game/score_zone/score_zone.tscn" id="42_vwyk1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6f2ei"]
 animations = [{
@@ -332,6 +333,10 @@ shape = SubResource("RectangleShape2D_dxrkv")
 [node name="Punch" parent="." instance=ExtResource("41_fhuig")]
 position = Vector2(1661, 893.00006)
 scale = Vector2(1.5, 1.5)
+
+[node name="ScoreZone" parent="." instance=ExtResource("42_vwyk1")]
+z_index = 0
+position = Vector2(676, 614)
 
 [connection signal="body_entered" from="DetectorDePeces" to="." method="_on_detector_de_peces_body_entered"]
 [connection signal="body_exited" from="DetectorDePeces" to="." method="_on_detector_de_peces_body_exited"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duvi1xyo5eeiv"
-path="res://.godot/imported/mano_cuchillo.png-0611e0211efd62b6cee52e9d58b584d4.ctex"
+uid="uid://d4d284x7a77rb"
+path="res://.godot/imported/mano_abierta.png-61a3fabf68420a68702eb96e208f0494.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/mano/mano_cuchillo.png"
-dest_files=["res://.godot/imported/mano_cuchillo.png-0611e0211efd62b6cee52e9d58b584d4.ctex"]
+source_file="res://ui/mano/mano_abierta.png"
+dest_files=["res://.godot/imported/mano_abierta.png-61a3fabf68420a68702eb96e208f0494.ctex"]
 
 [params]
 

@@ -13,12 +13,8 @@ enum MouseTool {
 	KNIFE,
 }
 
-@export var fish_scene: PackedScene
 @export var round_time: float = 5
 @export var level: int = -1
-@export var hand_open: Texture2D
-@export var hand_grab: Texture2D
-@export var hand_knife: Texture2D
 
 # POSIBLES PECES A SPAWNEAR = [OJOS, CABEZA, CUERPO, COLA]
 var peces_posibles1: Array = [[0, 1, 2], [0, 1], [0], [0, 1, 2]]
@@ -45,6 +41,12 @@ var cut_points := []
 var file_names
 var resources
 
+@onready var fish_scene: PackedScene = preload("res://game/pez/pez.tscn")
+
+@onready var hand_open: Texture2D = preload("res://ui/mano/mano_abierta.png")
+@onready var hand_grab: Texture2D = preload("res://ui/mano/mano_cerrada.png")
+@onready var hand_knife: Texture2D = preload("res://ui/mano/mano_cuchillo.png")
+
 @onready var pinza: AnimatedSprite2D = $SFX/Pinza
 @onready var mano: Sprite2D = $HUD/Mano
 #endregion
@@ -57,12 +59,10 @@ var resources
 @onready var mesa_trampilla: Node2D = $MesaTrampilla
 @onready var cabeza_aux: PackedScene = preload("res://game/pez/cabeza_aux.tscn")
 @onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
-@onready var score_zone: Node2D = $ScoreZone
 
 
 func _ready() -> void:
 	mesa_trampilla.pez_destruido.connect(on_fish_destroyed)
-	score_zone.pez_clasificado.connect(on_fish_destroyed)
 
 	GameHandler.reset_round()
 	GameHandler.add_score(0)
@@ -161,7 +161,7 @@ func spawn_fish():
 	if not last_fish == null:
 		mesa_trampilla.new_fish_spawned(last_fish)
 
-	pinza.play("default")
+	pinza.play("activate")
 	await get_tree().create_timer(0.18).timeout
 	last_fish = fish_scene.instantiate()
 	spawner.add_child(last_fish)
