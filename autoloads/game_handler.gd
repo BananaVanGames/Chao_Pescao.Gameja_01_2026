@@ -219,56 +219,69 @@ var paths_level_3 := [
 var paths_levels = [paths_level_1, paths_level_2, paths_level_3]
 var fish_sprites: Array[Array] = [[], [], []]
 
-var fish_loaded := false
 var check_finished := false
+var fish_loaded := false
 
 var level_idx := 0
 var path_idx := 0
+
+var level_requested := false
+var level_loaded_count := 0
+var request_idx := 0
+var requesting_level := false
 
 
 func _process(_delta: float) -> void:
 	if fish_loaded:
 		return
 
-	if not check_finished:
-		var fish_path: String = paths_levels[level_idx][path_idx]
-		var status := ResourceLoader.load_threaded_get_status(fish_path)
+	var level_paths: Array = paths_levels[level_idx]
 
-		if status != ResourceLoader.THREAD_LOAD_LOADED:
-			return 
+	# 1️⃣ Fase de REQUEST (1 por frame)
+	if not requesting_level:
+		var fish_path: String = level_paths[request_idx]
+		ResourceLoader.load_threaded_request(fish_path, "", true)
 
-		path_idx += 1
-		if path_idx >= paths_levels[level_idx].size():
+		request_idx += 1
+		if request_idx >= level_paths.size():
+			requesting_level = true
+			request_idx = 0
 			path_idx = 0
-			level_idx += 1
+			level_loaded_count = 0
+			#print("Level ", level_idx, " requests queued")
 
-		if level_idx >= paths_levels.size():
-			check_finished = true
-			level_idx = 0
-			path_idx = 0
-			print("All fish resources ready")
 		return
 
-	var path: String = paths_levels[level_idx][path_idx]
-	fish_sprites[level_idx].append(
-		ResourceLoader.load_threaded_get(path)
-	)
+	# 2️⃣ Fase de POLLING + CONSUMO (1 por frame)
+	var path: String = level_paths[path_idx]
+	var status := ResourceLoader.load_threaded_get_status(path)
+
+	if status == ResourceLoader.THREAD_LOAD_LOADED:
+		fish_sprites[level_idx].append(
+			ResourceLoader.load_threaded_get(path)
+		)
+		level_loaded_count += 1
+
+	elif status == ResourceLoader.THREAD_LOAD_FAILED:
+		push_error("Failed to load: " + path)
+		level_loaded_count += 1
 
 	path_idx += 1
-	if path_idx >= paths_levels[level_idx].size():
+	if path_idx >= level_paths.size():
 		path_idx = 0
+
+	# 3️⃣ ¿Nivel terminado?
+	if level_loaded_count >= level_paths.size():
+		print("Level ", level_idx, " fish loaded")
+
 		level_idx += 1
+		requesting_level = false
+		request_idx = 0
 
-	if level_idx >= paths_levels.size():
-		fish_loaded = true
-		set_process(false)
-		print("Fish loaded")
-
-
-func load_fishes_in_background():
-	for level in paths_levels:
-		for path in level:
-			ResourceLoader.load_threaded_request(path, "", true)
+		if level_idx >= paths_levels.size():
+			fish_loaded = true
+			set_process(false)
+			print("All fish loaded")
 
 
 func set_processable_rules(values: Array):

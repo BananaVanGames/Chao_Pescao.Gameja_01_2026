@@ -60,7 +60,7 @@ position = Vector2(-197, 365)
 
 [node name="TimerFondo" type="Timer" parent="."]
 wait_time = 1.5
-one_shot = true
+autostart = true
 
 [node name="CintaFondo" type="AnimatedSprite2D" parent="."]
 z_index = -99

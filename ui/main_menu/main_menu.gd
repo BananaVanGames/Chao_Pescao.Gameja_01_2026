@@ -6,7 +6,6 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameHandler.load_fishes_in_background()
 	MusicHandler.load_track(menu_music)
 	MusicHandler.play()
 
