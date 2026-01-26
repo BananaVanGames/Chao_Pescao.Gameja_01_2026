@@ -47,7 +47,7 @@ var resources
 @onready var hand_grab: Texture2D = preload("res://ui/mano/mano_cerrada.png")
 @onready var hand_knife: Texture2D = preload("res://ui/mano/mano_cuchillo.png")
 
-@onready var pinza: AnimatedSprite2D = $SFX/Pinza
+@onready var pinza: AnimatedSprite2D = $HUD/Pinza
 @onready var mano: Sprite2D = $HUD/Mano
 #endregion
 
@@ -129,7 +129,7 @@ func start_next_set():
 		rules.append(peces_peligrosos[level][i].pick_random())
 
 	#print("Las reglas de peces peligrosos son: ", rules)
-	GameHandler.set_next_set_rules(rules)
+	GameHandler.start_next_set(rules)
 
 
 func start_round():
