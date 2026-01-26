@@ -21,6 +21,13 @@
 [ext_resource type="Texture2D" uid="uid://djkqfogum0os6" path="res://ui/hud/art/pinza/pinza12.png" id="70_fqr2c"]
 [ext_resource type="Texture2D" uid="uid://duun0xtoce2wt" path="res://ui/hud/art/pinza/pinza13.png" id="71_au36g"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y36n6"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_l8g03"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_oacl0"]
 animations = [{
 "frames": [{
@@ -68,19 +75,12 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y36n6"]
-blend_mode = 1
-
-[sub_resource type="Curve" id="Curve_l8g03"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [sub_resource type="Animation" id="Animation_dxwpq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SFX/Pinza:animation")
+tracks/0/path = NodePath("HUD/Pinza:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -92,7 +92,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SFX/Pinza:frame")
+tracks/1/path = NodePath("HUD/Pinza:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -108,7 +108,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SFX/Pinza:animation")
+tracks/0/path = NodePath("HUD/Pinza:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -120,7 +120,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SFX/Pinza:frame")
+tracks/1/path = NodePath("HUD/Pinza:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -168,17 +168,6 @@ position = Vector2(-129, -144)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructorPeces"]
 polygon = PackedVector2Array(2656, -1211, 2654, 1590, 2460, 1548, 2455, -1018, -765, -1059, -768, 1472, 136, 1453, 136, 1620, -981, 1654, -986, -1230)
 
-[node name="SFX" type="CanvasLayer" parent="."]
-layer = 20
-offset = Vector2(0, 50.695)
-transform = Transform2D(1, 0, 0, 1, 0, 50.695)
-
-[node name="Pinza" type="AnimatedSprite2D" parent="SFX"]
-z_index = 1000
-position = Vector2(953, 287)
-sprite_frames = SubResource("SpriteFrames_oacl0")
-animation = &"activate"
-
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 2
 
@@ -201,6 +190,12 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
+
+[node name="Pinza" type="AnimatedSprite2D" parent="HUD"]
+z_index = 1000
+position = Vector2(953, 287)
+sprite_frames = SubResource("SpriteFrames_oacl0")
+animation = &"activate"
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
 layer = 2
