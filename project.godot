@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameHandler="*res://autoloads/game_handler.gd"
 MusicHandler="*res://autoloads/music_player.gd"
+SettingsHandler="*res://autoloads/settings_handler.gd"
 
 [display]
 
@@ -28,7 +29,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/codeandweb.texturepacker/plugin.cfg", "res://addons/simple_gdscript_formatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/simple_gdscript_formatter/plugin.cfg")
 
 [global_group]
 

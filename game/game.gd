@@ -192,7 +192,9 @@ func on_set_finished():
 
 
 func end_game():
+	SettingsHandler.add_score(GameHandler.score)
 	GameHandler.reset_score()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
 	#print("Game Over")
 

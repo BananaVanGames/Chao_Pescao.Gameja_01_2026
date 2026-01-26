@@ -38,7 +38,7 @@ extends Control
 @onready var consola: TextureRect = $Consola
 
 #endregion
-
+var is_muted: bool = false
 
 func _ready():
 	GameHandler.time_changed.connect(_on_time_changed)
