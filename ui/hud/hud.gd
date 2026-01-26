@@ -5,7 +5,7 @@ extends Control
 
 @onready var procesable = preload("res://ui/hud/art/rules/procesable.png")
 @onready var toxico = preload("res://ui/hud/art/rules/toxico.png")
-@onready var peligrosisdad = [toxico, procesable]
+@onready var peligrosidad = [toxico, procesable]
 
 @onready var cabeza_manchas = preload("res://ui/hud/art/rules/cabeza_manchas.png")
 @onready var cabeza_fumador = preload("res://ui/hud/art/rules/cabeza_cigarro.png")
@@ -90,7 +90,7 @@ func _start_next_set(value: Array):
 			0:
 				random_ojos = randi_range(0, 1)
 				grid_children[i * 3 + 1].text = ">" + str(value[i] + 1)
-				danger_1.texture = peligrosisdad[random_ojos]
+				danger_1.texture = peligrosidad[random_ojos]
 
 			1:
 				if value[i] == 0:
@@ -105,7 +105,7 @@ func _start_next_set(value: Array):
 					grid_children[i * 3].texture = tipo_cabeza[value[i]]
 					grid_children[i * 3 + 1].text = "   =   "
 					random_cabeza = randi_range(0, 1)
-					danger_2.texture = peligrosisdad[random_cabeza]
+					danger_2.texture = peligrosidad[random_cabeza]
 
 			2:
 				regla_cola.texture = tipo_cola[value[i]]
@@ -113,6 +113,6 @@ func _start_next_set(value: Array):
 				grid_children[i * 3 + 1].text = "   =   "
 
 				random_cola = randi_range(0, 1)
-				danger_3.texture = peligrosisdad[random_cola]
+				danger_3.texture = peligrosidad[random_cola]
 
 	GameHandler.set_processable_rules([random_ojos, random_cabeza, random_cola])
