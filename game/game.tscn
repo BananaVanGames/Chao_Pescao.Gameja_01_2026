@@ -78,9 +78,20 @@ point_count = 4
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h7iqs")
 
+[node name="Timer" type="Timer" parent="."]
+
 [node name="Fondo" parent="." instance=ExtResource("6_leid8")]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Spawner" type="Marker2D" parent="."]
+position = Vector2(966, 754)
+
+[node name="MesaTrampilla" parent="." instance=ExtResource("29_pvdu1")]
+
+[node name="DestructorPeces" type="Area2D" parent="."]
+position = Vector2(-129, -144)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructorPeces"]
+polygon = PackedVector2Array(2656, -1211, 2654, 1590, 2460, 1548, 2455, -1018, -765, -1059, -768, 1472, 136, 1453, 136, 1620, -981, 1654, -986, -1230)
 
 [node name="SFX" type="CanvasLayer" parent="."]
 layer = 20
@@ -92,11 +103,6 @@ z_index = 1000
 position = Vector2(953, 287)
 sprite_frames = SubResource("SpriteFrames_oacl0")
 animation = &"activate"
-
-[node name="Spawner" type="Marker2D" parent="."]
-position = Vector2(966, 754)
-
-[node name="MesaTrampilla" parent="." instance=ExtResource("29_pvdu1")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 2
@@ -126,12 +132,6 @@ layer = 2
 visible = false
 
 [node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
-
-[node name="DestructorPeces" type="Area2D" parent="."]
-position = Vector2(-129, -144)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructorPeces"]
-polygon = PackedVector2Array(2656, -1211, 2654, 1590, 2460, 1548, 2455, -1018, -765, -1059, -768, 1472, 136, 1453, 136, 1620, -981, 1654, -986, -1230)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="DestructorPeces" to="." method="_on_destructor_peces_body_entered"]

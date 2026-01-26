@@ -289,6 +289,10 @@ size = Vector2(684, 88)
 [node name="MesaTrampilla" type="Node2D"]
 script = ExtResource("1_qdbxn")
 
+[node name="ScoreZone" parent="." instance=ExtResource("42_vwyk1")]
+z_index = 0
+position = Vector2(676, 614)
+
 [node name="TrampillaSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(955, 543)
 sprite_frames = SubResource("SpriteFrames_6f2ei")
@@ -333,10 +337,6 @@ shape = SubResource("RectangleShape2D_dxrkv")
 [node name="Punch" parent="." instance=ExtResource("41_fhuig")]
 position = Vector2(1661, 893.00006)
 scale = Vector2(1.5, 1.5)
-
-[node name="ScoreZone" parent="." instance=ExtResource("42_vwyk1")]
-z_index = 0
-position = Vector2(676, 614)
 
 [connection signal="body_entered" from="DetectorDePeces" to="." method="_on_detector_de_peces_body_entered"]
 [connection signal="body_exited" from="DetectorDePeces" to="." method="_on_detector_de_peces_body_exited"]
