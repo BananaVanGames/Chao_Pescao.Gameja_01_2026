@@ -31,5 +31,7 @@ func _on_timer_fondo_timeout() -> void:
 	new_fish.z_index = -98
 	new_fish.remove_from_group("pez")
 	new_fish.add_to_group("corte")
+	new_fish.set_collision_layer_value(1, false)
+	new_fish.set_collision_mask_value(1, false)
 	new_fish.set_physics_process(false)
 	new_fish.linear_velocity.x = 500

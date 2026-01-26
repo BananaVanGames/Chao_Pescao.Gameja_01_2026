@@ -14,7 +14,7 @@ enum MouseTool {
 }
 
 @export var round_time: float = 5
-@export var level: int = -1
+@export var level: int = 0
 
 # POSIBLES PECES A SPAWNEAR = [OJOS, CABEZA, CUERPO, COLA]
 var peces_posibles1: Array = [[0, 1, 2], [0, 1], [0], [0, 1, 2]]
@@ -59,10 +59,12 @@ var resources
 @onready var mesa_trampilla: Node2D = $MesaTrampilla
 @onready var cabeza_aux: PackedScene = preload("res://game/pez/cabeza_aux.tscn")
 @onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	mesa_trampilla.pez_destruido.connect(on_fish_destroyed)
+	set_transition.transition_finished.connect(_on_transition_finished)
 
 	GameHandler.reset_round()
 	GameHandler.add_score(0)
@@ -117,27 +119,27 @@ func _input(event):
 
 
 func on_fish_destroyed() -> void:
+	await get_tree().create_timer(0.25).timeout
 	start_round()
 
 
 func start_next_set():
-	level += 1
-	if level > 2:
-		end_game()
-		return
-
 	var rules: Array
 	for i in range(3):
 		rules.append(peces_peligrosos[level][i].pick_random())
 
 	#print("Las reglas de peces peligrosos son: ", rules)
-	GameHandler.start_next_set(rules)
+	GameHandler.set_next_set_rules(rules)
 
 
 func start_round():
+	if GameHandler.fishes_left <= 0:
+		on_set_finished()
+		return
+
 	GameHandler.set_time(round_time)
 	timer.start(round_time)
-	spawn_fish()
+	animation_player.play("spawn_fish")
 
 
 func randomize_fish_characteristics(fish: RigidBody2D) -> void:
@@ -154,15 +156,9 @@ func randomize_fish_characteristics(fish: RigidBody2D) -> void:
 
 
 func spawn_fish():
-	if GameHandler.fishes_left <= 0:
-		on_set_finished()
-		return
-
 	if not last_fish == null:
 		mesa_trampilla.new_fish_spawned(last_fish)
 
-	pinza.play("activate")
-	await get_tree().create_timer(0.18).timeout
 	last_fish = fish_scene.instantiate()
 	spawner.add_child(last_fish)
 	randomize_fish_characteristics(last_fish)
@@ -178,17 +174,15 @@ func on_set_finished():
 
 	for spawn_child in spawner.get_children():
 		spawn_child.queue_free()
-	# This reset does not reset score
+
+	level += 1
+	if level > 2:
+		end_game()
+		return
+
 	GameHandler.reset_round()
-
-	await get_tree().process_frame
+	set_process(false)
 	set_transition.play()
-
-	start_next_set()
-	round_time = 6.3
-	#print("TESTING")
-	start_round()
-	round_time = 5.2
 
 
 func end_game():
@@ -292,6 +286,12 @@ func crear_cola_independiente(new_text: CompressedTexture2D, new_pos: Vector2) -
 
 func cut_fish():
 	line_2d.add_point(get_local_mouse_position())
+
+
+func _on_transition_finished() -> void:
+	set_process(true)
+	start_next_set()
+	start_round()
 
 
 func _on_fish_clicked(fish):
