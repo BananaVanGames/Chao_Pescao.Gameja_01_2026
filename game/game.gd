@@ -126,7 +126,7 @@ func on_fish_destroyed() -> void:
 func start_next_set():
 	var rules: Array
 	for i in range(3):
-		rules.append(peces_peligrosos[level][i].pick_random())
+		rules.append(peces_peligrosos[GameHandler.level][i].pick_random())
 
 	#print("Las reglas de peces peligrosos son: ", rules)
 	GameHandler.start_next_set(rules)
@@ -143,7 +143,7 @@ func start_round():
 
 
 func randomize_fish_characteristics(fish: RigidBody2D) -> void:
-	var random = randi_range(0, level)
+	var random = randi_range(0, GameHandler.level)
 	var fish_texture = GameHandler.fish_sprites[random].pick_random()
 	var file_name = fish_texture.resource_path.get_file()
 	var valuesStr = file_name.get_basename().split(",")
@@ -175,8 +175,8 @@ func on_set_finished():
 	for spawn_child in spawner.get_children():
 		spawn_child.queue_free()
 
-	level += 1
-	if level > 2:
+	GameHandler.level += 1
+	if GameHandler.level > 2:
 		end_game()
 		return
 
@@ -186,7 +186,7 @@ func on_set_finished():
 
 
 func end_game():
-	SettingsHandler.add_score(GameHandler.score)
+	SettingsHandler.add_score(GameHandler.score, GameHandler.level)
 	GameHandler.reset_score()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")

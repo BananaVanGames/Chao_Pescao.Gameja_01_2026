@@ -16,11 +16,12 @@ func _process(delta: float) -> void:
 	pass
 
 
-func add_score(new_score: int) -> void:
+func add_score(new_score: int, new_level: int) -> void:
 	var date = Time.get_datetime_string_from_system().split("T")[0]
 
 	scores.append({
 		"score": new_score,
+		"level": new_level,
 		"date": date
 		})
 

@@ -229,6 +229,7 @@ var level_requested := false
 var level_loaded_count := 0
 var request_idx := 0
 var requesting_level := false
+var level: int = 0
 
 
 func _process(_delta: float) -> void:
@@ -333,3 +334,4 @@ func reset_round() -> void:
 
 func reset_score() -> void:
 	score = 0
+	level = 0
