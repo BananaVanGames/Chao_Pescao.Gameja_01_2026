@@ -6,16 +6,6 @@ const MAX_SCORES = 10
 var scores = []
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	load_scores()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func add_score(new_score: int, new_level: int) -> void:
 	var date = Time.get_datetime_string_from_system().split("T")[0]
 

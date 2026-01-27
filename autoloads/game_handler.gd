@@ -238,7 +238,6 @@ func _process(_delta: float) -> void:
 
 	var level_paths: Array = paths_levels[level_idx]
 
-	# 1️⃣ Fase de REQUEST (1 por frame)
 	if not requesting_level:
 		var fish_path: String = level_paths[request_idx]
 		ResourceLoader.load_threaded_request(fish_path, "", true)

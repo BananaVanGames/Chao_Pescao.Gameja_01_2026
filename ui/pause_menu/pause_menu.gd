@@ -21,13 +21,14 @@ func _input(_event: InputEvent) -> void:
 
 
 func toggle_pause():
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if get_tree().paused:
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		visible = false
 		get_tree().paused = false
 		MusicHandler.load_track(get_parent().game_music)
 		MusicHandler.play(game_music_pos)
 	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		visible = true
 		get_tree().paused = true
 		game_music_pos = MusicHandler.get_playback_position()
@@ -47,6 +48,7 @@ func _on_confirmation_dialog_confirmed() -> void:
 
 
 func _on_resume_pressed() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	visible = false
 	get_tree().paused = false
 	MusicHandler.load_track(get_parent().game_music)

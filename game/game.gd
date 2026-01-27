@@ -125,11 +125,13 @@ func on_fish_destroyed() -> void:
 
 func start_next_set():
 	var rules: Array
+	var level_dificulty: int = min(GameHandler.level, 2)
+
 	for i in range(3):
-		rules.append(peces_peligrosos[GameHandler.level][i].pick_random())
+		rules.append(peces_peligrosos[level_dificulty][i].pick_random())
 
 	#print("Las reglas de peces peligrosos son: ", rules)
-	GameHandler.start_next_set(rules)
+	GameHandler.set_next_set_rules(rules)
 
 
 func start_round():
@@ -143,7 +145,8 @@ func start_round():
 
 
 func randomize_fish_characteristics(fish: RigidBody2D) -> void:
-	var random = randi_range(0, GameHandler.level)
+	var max_random: int = min(GameHandler.level, 2)
+	var random = randi_range(0, max_random)
 	var fish_texture = GameHandler.fish_sprites[random].pick_random()
 	var file_name = fish_texture.resource_path.get_file()
 	var valuesStr = file_name.get_basename().split(",")
@@ -156,9 +159,6 @@ func randomize_fish_characteristics(fish: RigidBody2D) -> void:
 
 
 func spawn_fish():
-	if not last_fish == null:
-		mesa_trampilla.new_fish_spawned(last_fish)
-
 	last_fish = fish_scene.instantiate()
 	spawner.add_child(last_fish)
 	randomize_fish_characteristics(last_fish)
@@ -176,9 +176,6 @@ func on_set_finished():
 		spawn_child.queue_free()
 
 	GameHandler.level += 1
-	if GameHandler.level > 2:
-		end_game()
-		return
 
 	GameHandler.reset_round()
 	set_process(false)
@@ -303,7 +300,12 @@ func _on_fish_clicked(fish):
 
 
 func _on_timer_timeout() -> void:
-	mesa_trampilla.fish_timeout()
+	var pez_en_mesa: bool = mesa_trampilla.fish_timeout()
+	print("PEZ: ", pez_en_mesa)
+	print("last_fish: ", last_fish)
+	if not pez_en_mesa and last_fish != null:
+		last_fish.explode()
+		on_fish_destroyed()
 
 
 func _on_destructor_peces_body_entered(body: Node2D) -> void:

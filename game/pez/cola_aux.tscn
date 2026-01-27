@@ -16,11 +16,10 @@ z_index = 100
 script = ExtResource("1_gksol")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(45.000008, -9)
-scale = Vector2(0.2, 0.2)
+position = Vector2(58, -10)
 texture = ExtResource("1_bahi2")
 region_enabled = true
-region_rect = Rect2(1280, 0, 640, 1080)
+region_rect = Rect2(302, 0, 151, 256)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(11, 1)

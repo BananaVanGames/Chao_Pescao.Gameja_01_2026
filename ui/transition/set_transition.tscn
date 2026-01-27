@@ -9,7 +9,7 @@ script = ExtResource("1_27i77")
 
 [node name="Label" type="Label" parent="."]
 z_index = 2
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 625.0
@@ -20,13 +20,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 50
-text = "MAS PESCAOS A CLASIFICAR"
+text = "MAS PESCAOS A CLASIFICAR!"
 
 [node name="FishMask" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 z_index = 1
 position = Vector2(965.625, 540)
-scale = Vector2(0.9983072, 1)
+scale = Vector2(4, 4)
 texture = ExtResource("1_jgql5")
 
 [node name="ColorRect" type="ColorRect" parent="."]

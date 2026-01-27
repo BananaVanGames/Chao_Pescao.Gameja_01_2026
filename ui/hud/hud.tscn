@@ -33,23 +33,17 @@ mouse_filter = 2
 script = ExtResource("1_4d6w6")
 
 [node name="Consola" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -243.00003
-offset_top = -316.0
-offset_right = 1032.6482
-offset_bottom = 404.57605
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.48033962, 0.48033962)
+layout_mode = 0
+offset_left = -410.0
+offset_top = -413.0
+offset_right = 1510.0
+offset_bottom = 667.0
+scale = Vector2(0.96, 0.96)
 texture = ExtResource("2_kwc50")
 
 [node name="Timer" type="Node2D" parent="Consola"]
-position = Vector2(1294.9171, 982.6381)
+position = Vector2(776.99994, 590)
 rotation = -0.19198622
-scale = Vector2(2, 2)
 skew = 0.040142536
 
 [node name="Timer" type="Label" parent="Consola/Timer"]
@@ -66,9 +60,9 @@ label_settings = SubResource("LabelSettings_kwc50")
 horizontal_alignment = 1
 
 [node name="Score" type="Node2D" parent="Consola"]
-position = Vector2(1813.3007, 1105.468)
+position = Vector2(1093, 663.99994)
 rotation = -0.15533432
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 skew = 0.19547677
 
 [node name="Score" type="Label" parent="Consola/Score"]
@@ -89,11 +83,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.016
 anchor_bottom = 1.0
-offset_left = 21.0
+offset_left = 25.0
 offset_top = -10.0
-offset_right = 1284.36
-offset_bottom = 703.23206
-scale = Vector2(0.6004245, 0.6004245)
+offset_right = -5.720093
+offset_bottom = -10.0
 texture = ExtResource("4_o2lis")
 
 [node name="PecesRestantes" type="Node2D" parent="."]
@@ -236,12 +229,9 @@ expand_mode = 2
 
 [node name="Marco" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1280.2561
-offset_bottom = 720.14404
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.6004245, 0.6004245)
 texture = ExtResource("9_cxhb7")

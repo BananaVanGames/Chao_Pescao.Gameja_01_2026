@@ -1,7 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://cbf08dbu67aci"]
+[gd_scene load_steps=28 format=3 uid="uid://cbf08dbu67aci"]
 
 [ext_resource type="Script" uid="uid://b3nnetptb8ebs" path="res://game/punch/punch.gd" id="1_16sg0"]
-[ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="2_1fkrj"]
 [ext_resource type="Texture2D" uid="uid://bahjdm6uitroo" path="res://game/punch/art/punch-01.png" id="3_xk8dd"]
 [ext_resource type="Texture2D" uid="uid://bfldict5o4tk2" path="res://game/punch/art/punch-02.png" id="4_xwkru"]
 [ext_resource type="Texture2D" uid="uid://br5rox5c5dmc2" path="res://game/punch/art/punch-03.png" id="5_ocvvv"]
@@ -134,7 +133,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(100, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -183,10 +182,10 @@ tracks/2/path = NodePath("PunchArea:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.16792126, 0.2178813, 0.34000587, 0.3913537, 0.6550317),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.16666667, 0.2178813, 0.21820933, 0.34000587, 0.34079885, 0.3913537, 0.6550317),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-7, 0), Vector2(-304, 0), Vector2(-450, 0), Vector2(-453, 0), Vector2(23, 0)]
+"values": [Vector2(100, 0), Vector2(93, 0), Vector2(100, 0), Vector2(-304, 0), Vector2(-269, 0), Vector2(-450, 0), Vector2(-450.04633, 0), Vector2(-453, 0), Vector2(100, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -208,21 +207,19 @@ _data = {
 }
 
 [node name="Punch" type="Node2D"]
+scale = Vector2(1.2, 1.2)
 script = ExtResource("1_16sg0")
 
 [node name="PunchArea" type="Area2D" parent="."]
+position = Vector2(100, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PunchArea"]
+position = Vector2(-96.667175, -2)
 shape = SubResource("RectangleShape2D_xh8fn")
 disabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="PunchArea"]
-visible = false
-texture = ExtResource("2_1fkrj")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-161, -24)
-scale = Vector2(0.38771874, 0.38771874)
+position = Vector2(-176, -14)
 sprite_frames = SubResource("SpriteFrames_52n6l")
 animation = &"hit"
 

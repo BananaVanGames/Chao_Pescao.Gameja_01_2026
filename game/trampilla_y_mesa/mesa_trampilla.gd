@@ -18,10 +18,12 @@ func on_pez_clasificado() -> void:
 	pez_destruido.emit()
 
 
-func fish_timeout() -> void:
+func fish_timeout() -> bool:
 	if pez_en_mesa:
 		animation_player.play("open")
 		punch.throw_punch()
+		return true
+	return false
 
 
 func new_fish_spawned(last_fish: RigidBody2D) -> void:

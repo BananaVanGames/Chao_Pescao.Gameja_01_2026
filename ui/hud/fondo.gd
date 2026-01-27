@@ -10,7 +10,7 @@ func _ready() -> void:
 
 
 func randomize_fish_characteristics(fish: RigidBody2D) -> void:
-	var random = randi_range(0, 2)
+	var random = randi_range(0, min(GameHandler.level, 2))
 	var fish_texture = GameHandler.fish_sprites[random].pick_random()
 	var file_name = fish_texture.resource_path.get_file()
 	var valuesStr = file_name.get_basename().split(",")

@@ -112,7 +112,6 @@ title = "Chao Pescao"
 size = Vector2i(649, 100)
 dialog_text = "Are you sure you want to go back to the main menu?  Current progress will be lost"
 
-[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

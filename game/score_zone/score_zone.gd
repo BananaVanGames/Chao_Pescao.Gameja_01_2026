@@ -53,26 +53,31 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	var cabeza_cortada = fish_data[CABEZA_CORTADA]
 
 	if cabeza_mal:
-		if not processable_rules[OJOS_RULES] or not processable_rules[CABEZA_RULES]:
+		if not processable_rules[OJOS_RULES] or (not processable_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA):
+			print("OJOS TÓXICOS O CABEZA TÓXICA EN EL PEZ")
 			score = -3
 		else:
 			if not cabeza_cortada:
+				print("CABEZA PROCESABLE NO CORTADA")
 				score -= 1
 	else:
 		if cabeza_cortada:
-			# No debía cortarse pero se cortó
+			print("CABEZA CORTADA CUANDO NO DEBIÓ")
 			score -= 1
 	#print("Score después de la cabeza: ", score)
 
 	if score != -3:
 		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
 			if not processable_rules[COLA_RULES]:
+				print("COLA TÓXICA NO CORTADA")
 				score = -3
 			else:
 				if not fish_data[COLA_CORTADA]:
+					print("COLA PROCESABLE NO CORTADA")
 					score -= 1
 		else:
 			if fish_data[COLA_CORTADA]:
+				print("COLA CORTADA CUANDO NO DEBIÓ")
 				score -= 1
 	#print("Score después de la cola: ", score)
 
