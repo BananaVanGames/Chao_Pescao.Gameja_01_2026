@@ -6,6 +6,7 @@ signal fishes_left_changed(value)
 signal change_rules(value)
 signal reset_fishes(value)
 
+var life_points: int = 5
 var time_left: float = 5
 var score: int = 0
 var fishes_left: int = 10
@@ -286,6 +287,20 @@ func get_processable_rules() -> Array:
 	return processable_rules
 
 
+func get_life_points() -> int:
+	return life_points
+
+
+func lose_life_points() -> void:
+	life_points -= 1
+	if life_points <= 0:
+		SettingsHandler.add_score(GameHandler.score, GameHandler.get_level())
+		GameHandler.reset_score()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
+		#print("Game Over")
+
+
 func get_current_rules() -> Array:
 	return rules
 
@@ -313,6 +328,14 @@ func add_score(value: int):
 func set_fishes_left(value: int):
 	fishes_left = value
 	fishes_left_changed.emit(fishes_left)
+
+
+func get_level() -> int:
+	return level
+
+
+func add_level() -> void:
+	level += 1
 
 
 func reset_fish(value: int):

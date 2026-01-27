@@ -37,6 +37,8 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	#print("Danger rules: ", processable_rules)
 
 	if fish_data[CUERPO_PEZ] == CUERPO_ENFERMO:
+		if GameHandler.get_level() > 3:
+			GameHandler.lose_life_points()
 		GameHandler.add_score(-3)
 		pez_clasificado.emit()
 		body.queue_free()
@@ -54,36 +56,33 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 
 	if cabeza_mal:
 		if not processable_rules[OJOS_RULES] or (not processable_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA):
-			print("OJOS TÓXICOS O CABEZA TÓXICA EN EL PEZ")
 			score = -3
 		else:
 			if not cabeza_cortada:
-				print("CABEZA PROCESABLE NO CORTADA")
 				score -= 1
 	else:
 		if cabeza_cortada:
-			print("CABEZA CORTADA CUANDO NO DEBIÓ")
 			score -= 1
 	#print("Score después de la cabeza: ", score)
 
 	if score != -3:
 		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
 			if not processable_rules[COLA_RULES]:
-				print("COLA TÓXICA NO CORTADA")
 				score = -3
 			else:
 				if not fish_data[COLA_CORTADA]:
-					print("COLA PROCESABLE NO CORTADA")
 					score -= 1
 		else:
 			if fish_data[COLA_CORTADA]:
-				print("COLA CORTADA CUANDO NO DEBIÓ")
 				score -= 1
 	#print("Score después de la cola: ", score)
 
 	if score == 2 and GameHandler.get_time() > 1.00:
 		#print("Punto extra por velocidad")
 		score = 3
+
+	if score == -3 and GameHandler.get_level() > 3:
+		GameHandler.lose_life_points()
 
 	#print("Puntuación final añadida: ", score, "\n")
 	GameHandler.add_score(score)
@@ -118,6 +117,8 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 		toxic_parts += 1
 
 	if not toxic_parts:
+		if GameHandler.get_level() > 3:
+			GameHandler.lose_life_points()
 		GameHandler.add_score(-3)
 		pez_clasificado.emit()
 		body.queue_free()
@@ -149,6 +150,8 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 		else:
 			GameHandler.add_score(2)
 	elif toxic_cut == toxic_parts:
+		if GameHandler.get_level() > 3:
+			GameHandler.lose_life_points()
 		GameHandler.add_score(-3)
 	else:
 		GameHandler.add_score(-1)

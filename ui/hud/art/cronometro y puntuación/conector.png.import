@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv10dovk3utxo"
-path="res://.godot/imported/consola.png-08f10611a652bc2e490921136feda4b7.ctex"
+uid="uid://clqd7wjrdblkr"
+path="res://.godot/imported/conector.png-5aca1e5f716acc791235ed380fa2a662.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/hud/art/cronometro y puntuación/consola.png"
-dest_files=["res://.godot/imported/consola.png-08f10611a652bc2e490921136feda4b7.ctex"]
+source_file="res://ui/hud/art/cronometro y puntuación/conector.png"
+dest_files=["res://.godot/imported/conector.png-5aca1e5f716acc791235ed380fa2a662.ctex"]
 
 [params]
 

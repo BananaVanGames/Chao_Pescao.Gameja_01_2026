@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4r63jl80r80g"
-path="res://.godot/imported/consola_bombilla1.png-14551b2a06221375ddbc25e823ca3955.ctex"
+uid="uid://cg6vbf053hm4g"
+path="res://.godot/imported/bombilla_encendida.png-3d0d09a2fe5613b7990a94ae721a750b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/hud/art/cronometro y puntuación/consola_bombilla1.png"
-dest_files=["res://.godot/imported/consola_bombilla1.png-14551b2a06221375ddbc25e823ca3955.ctex"]
+source_file="res://ui/hud/art/cronometro y puntuación/bombilla_encendida.png"
+dest_files=["res://.godot/imported/bombilla_encendida.png-3d0d09a2fe5613b7990a94ae721a750b.ctex"]
 
 [params]
 

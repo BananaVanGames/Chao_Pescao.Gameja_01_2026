@@ -125,7 +125,7 @@ func on_fish_destroyed() -> void:
 
 func start_next_set():
 	var rules: Array
-	var level_dificulty: int = min(GameHandler.level, 2)
+	var level_dificulty: int = min(GameHandler.get_level(), 2)
 
 	for i in range(3):
 		rules.append(peces_peligrosos[level_dificulty][i].pick_random())
@@ -145,7 +145,7 @@ func start_round():
 
 
 func randomize_fish_characteristics(fish: RigidBody2D) -> void:
-	var max_random: int = min(GameHandler.level, 2)
+	var max_random: int = min(GameHandler.get_level(), 2)
 	var random = randi_range(0, max_random)
 	var fish_texture = GameHandler.fish_sprites[random].pick_random()
 	var file_name = fish_texture.resource_path.get_file()
@@ -175,19 +175,11 @@ func on_set_finished():
 	for spawn_child in spawner.get_children():
 		spawn_child.queue_free()
 
-	GameHandler.level += 1
+	GameHandler.add_level()
 
 	GameHandler.reset_round()
 	set_process(false)
 	set_transition.play()
-
-
-func end_game():
-	SettingsHandler.add_score(GameHandler.score, GameHandler.level)
-	GameHandler.reset_score()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
-	#print("Game Over")
 
 
 func start_grab(fish):

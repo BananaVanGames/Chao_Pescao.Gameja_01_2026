@@ -1,16 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://b1m584cu6xjfj"]
+[gd_scene load_steps=17 format=3 uid="uid://b1m584cu6xjfj"]
 
 [ext_resource type="Script" uid="uid://6tkxj7crpg1m" path="res://ui/hud/hud.gd" id="1_4d6w6"]
-[ext_resource type="Texture2D" uid="uid://dv10dovk3utxo" path="res://ui/hud/art/cronometro y puntuación/consola.png" id="2_kwc50"]
+[ext_resource type="Texture2D" uid="uid://8pclrxp7ip6p" path="res://ui/hud/art/cronometro y puntuación/contador_largo.png" id="2_gv4gi"]
+[ext_resource type="Texture2D" uid="uid://di6v1hb3m50p5" path="res://ui/hud/art/cronometro y puntuación/contador_redondo.png" id="4_5mn0o"]
 [ext_resource type="FontFile" uid="uid://dhvwjiy18f55j" path="res://ui/hud/Maxter Board St.ttf" id="4_kwc50"]
 [ext_resource type="Texture2D" uid="uid://bv5dy17acad0c" path="res://ui/hud/art/rules/pantallas02.png" id="4_o2lis"]
 [ext_resource type="Texture2D" uid="uid://deiqksca00k3s" path="res://ui/hud/art/rules/ojo.png" id="5_kwc50"]
 [ext_resource type="Texture2D" uid="uid://huebkrek7ycv" path="res://ui/hud/art/rules/icono_pez_encendido.png" id="5_o2lis"]
 [ext_resource type="Texture2D" uid="uid://crmcx0hnpl06b" path="res://ui/hud/art/rules/toxico.png" id="7_5uuaq"]
 [ext_resource type="Texture2D" uid="uid://d2oikemqqca4n" path="res://ui/hud/art/rules/cabeza_manchas.png" id="8_p3vm3"]
+[ext_resource type="Texture2D" uid="uid://clqd7wjrdblkr" path="res://ui/hud/art/cronometro y puntuación/conector.png" id="9_5mn0o"]
 [ext_resource type="Texture2D" uid="uid://b2iwysonxkt82" path="res://ui/hud/art/background/HUB_OL.png" id="9_cxhb7"]
 [ext_resource type="Texture2D" uid="uid://c25beojwghxrv" path="res://ui/hud/art/rules/procesable.png" id="9_gv4gi"]
 [ext_resource type="Texture2D" uid="uid://7iphke3tm3ym" path="res://ui/hud/art/rules/cola_manchas.png" id="10_5mn0o"]
+[ext_resource type="Texture2D" uid="uid://d0rxcpvrktduc" path="res://ui/hud/art/cronometro y puntuación/bombilla.png" id="12_5mn0o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kwc50"]
 font = ExtResource("4_kwc50")
@@ -32,131 +35,23 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_4d6w6")
 
-[node name="Consola" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = -410.0
-offset_top = -413.0
-offset_right = 1510.0
-offset_bottom = 667.0
-scale = Vector2(0.96, 0.96)
-texture = ExtResource("2_kwc50")
-
-[node name="Timer" type="Node2D" parent="Consola"]
-position = Vector2(776.99994, 590)
-rotation = -0.19198622
-skew = 0.040142536
-
-[node name="Timer" type="Label" parent="Consola/Timer"]
-offset_left = -92.17667
-offset_top = -43.083862
-offset_right = 82.82333
-offset_bottom = 51.916138
-pivot_offset = Vector2(85, 47)
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
-theme_override_font_sizes/font_size = 40
-text = "5.00"
-label_settings = SubResource("LabelSettings_kwc50")
-horizontal_alignment = 1
-
-[node name="Score" type="Node2D" parent="Consola"]
-position = Vector2(1093, 663.99994)
-rotation = -0.15533432
-scale = Vector2(1.2, 1.2)
-skew = 0.19547677
-
-[node name="Score" type="Label" parent="Consola/Score"]
-offset_left = -87.6032
-offset_top = -38.584213
-offset_right = 82.3968
-offset_bottom = 56.415787
-pivot_offset = Vector2(85, 47)
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
-theme_override_font_sizes/font_size = 40
-text = "0"
-label_settings = SubResource("LabelSettings_imuuq")
-horizontal_alignment = 1
-
-[node name="Pantallas02" type="TextureRect" parent="."]
+[node name="ReglasYPecesRestantes" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.016
+anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 25.0
 offset_top = -10.0
-offset_right = -5.720093
+offset_right = 25.0
 offset_bottom = -10.0
 texture = ExtResource("4_o2lis")
 
-[node name="PecesRestantes" type="Node2D" parent="."]
-position = Vector2(883.99994, 124)
-rotation = 0.017453292
-scale = Vector2(0.95, 0.95)
-skew = -0.082030475
-
-[node name="ContenedorPecesRestantes" type="HBoxContainer" parent="PecesRestantes"]
-clip_contents = true
-offset_right = 476.0
-offset_bottom = 71.0
-theme_override_constants/separation = -30
-
-[node name="PezRestante" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 2
-
-[node name="PezRestante2" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="PezRestante3" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="PezRestante4" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="PezRestante5" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="PezRestante6" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="PezRestante7" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="PezRestante8" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="PezRestante9" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="PezRestante10" type="TextureRect" parent="PecesRestantes/ContenedorPecesRestantes"]
-layout_mode = 2
-texture = ExtResource("5_o2lis")
-expand_mode = 3
-
-[node name="Reglas" type="Node2D" parent="."]
-position = Vector2(1609.0001, 323)
+[node name="Reglas" type="Node2D" parent="ReglasYPecesRestantes"]
+position = Vector2(1584.0001, 333)
 rotation = 0.23212878
-skew = -0.3211406
+skew = -0.32114065
 
-[node name="GridContainer" type="GridContainer" parent="Reglas"]
+[node name="GridContainer" type="GridContainer" parent="ReglasYPecesRestantes/Reglas"]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -170,62 +65,231 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 30
 columns = 3
 
-[node name="Ojos" type="TextureRect" parent="Reglas/GridContainer"]
+[node name="Ojos" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("5_kwc50")
 expand_mode = 2
 
-[node name="ReglaOjosLabel" type="Label" parent="Reglas/GridContainer"]
+[node name="ReglaOjosLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "  >2  "
 
-[node name="Danger1" type="TextureRect" parent="Reglas/GridContainer"]
+[node name="Danger1" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("7_5uuaq")
 expand_mode = 2
 
-[node name="ReglaCabeza" type="TextureRect" parent="Reglas/GridContainer"]
+[node name="ReglaCabeza" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("8_p3vm3")
 expand_mode = 2
 
-[node name="ReglaCabezaLabel" type="Label" parent="Reglas/GridContainer"]
+[node name="ReglaCabezaLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "   =   "
 
-[node name="Danger2" type="TextureRect" parent="Reglas/GridContainer"]
+[node name="Danger2" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("9_gv4gi")
 expand_mode = 2
 
-[node name="ReglaCola" type="TextureRect" parent="Reglas/GridContainer"]
+[node name="ReglaCola" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("10_5mn0o")
 expand_mode = 2
 
-[node name="ReglaColaLabel" type="Label" parent="Reglas/GridContainer"]
+[node name="ReglaColaLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
 text = "   =   "
 
-[node name="Danger3" type="TextureRect" parent="Reglas/GridContainer"]
+[node name="Danger3" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("7_5uuaq")
 expand_mode = 2
+
+[node name="PecesRestantes" type="Node2D" parent="ReglasYPecesRestantes"]
+position = Vector2(858.99994, 134)
+rotation = 0.01745329
+scale = Vector2(0.95, 0.95)
+skew = -0.082030535
+
+[node name="ContenedorPecesRestantes" type="HBoxContainer" parent="ReglasYPecesRestantes/PecesRestantes"]
+clip_contents = true
+offset_right = 476.0
+offset_bottom = 71.0
+theme_override_constants/separation = -30
+
+[node name="PezRestante" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 2
+
+[node name="PezRestante2" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PezRestante3" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PezRestante4" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PezRestante5" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PezRestante6" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PezRestante7" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PezRestante8" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PezRestante9" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PezRestante10" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
+layout_mode = 2
+texture = ExtResource("5_o2lis")
+expand_mode = 3
+
+[node name="PuntuacionYTiempo" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Conexión" type="TextureRect" parent="PuntuacionYTiempo"]
+layout_mode = 0
+offset_left = 471.00003
+offset_top = 108.00001
+offset_right = 623.0
+offset_bottom = 162.0
+rotation = 0.28136742
+texture = ExtResource("9_5mn0o")
+
+[node name="Conexión2" type="TextureRect" parent="PuntuacionYTiempo"]
+layout_mode = 0
+offset_left = 207.99997
+offset_top = -2.999998
+offset_right = 359.99997
+offset_bottom = 51.0
+rotation = 1.3038516
+texture = ExtResource("9_5mn0o")
+
+[node name="Conexión3" type="TextureRect" parent="PuntuacionYTiempo"]
+layout_mode = 0
+offset_left = 552.0
+offset_top = -3.0517578e-05
+offset_right = 704.0
+offset_bottom = 53.99997
+rotation = 2.0512323
+texture = ExtResource("9_5mn0o")
+
+[node name="TextureRect" type="TextureRect" parent="PuntuacionYTiempo"]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 90.00001
+offset_right = 506.0
+offset_bottom = 266.0
+rotation = -0.17976892
+pivot_offset = Vector2(175, 88)
+texture = ExtResource("2_gv4gi")
+
+[node name="Timer" type="Label" parent="PuntuacionYTiempo/TextureRect"]
+layout_mode = 0
+offset_left = 93.5135
+offset_top = 38.634518
+offset_right = 268.51352
+offset_bottom = 127.63452
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(85, 47)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
+theme_override_font_sizes/font_size = 40
+text = "5.00"
+label_settings = SubResource("LabelSettings_kwc50")
+horizontal_alignment = 1
+
+[node name="Bombilla" type="TextureRect" parent="PuntuacionYTiempo"]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 89.000015
+offset_right = 625.0
+offset_bottom = 205.00002
+rotation = -0.64304894
+texture = ExtResource("12_5mn0o")
+
+[node name="Bombilla2" type="TextureRect" parent="PuntuacionYTiempo"]
+layout_mode = 0
+offset_left = 626.0
+offset_top = 20.0
+offset_right = 735.0
+offset_bottom = 136.0
+rotation = 0.1395444
+texture = ExtResource("12_5mn0o")
+
+[node name="Bombilla3" type="TextureRect" parent="PuntuacionYTiempo"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 59.999992
+offset_right = 877.0
+offset_bottom = 176.0
+rotation = 1.1164885
+texture = ExtResource("12_5mn0o")
+
+[node name="TextureRect2" type="TextureRect" parent="PuntuacionYTiempo"]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 106.0
+offset_right = 724.0
+offset_bottom = 254.0
+texture = ExtResource("4_5mn0o")
+
+[node name="Score" type="Label" parent="PuntuacionYTiempo/TextureRect2"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 42.999996
+offset_right = 164.0
+offset_bottom = 138.00002
+scale = Vector2(0.9, 0.9)
+pivot_offset = Vector2(85, 47)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
+theme_override_font_sizes/font_size = 40
+text = "0"
+label_settings = SubResource("LabelSettings_imuuq")
+horizontal_alignment = 1
 
 [node name="Marco" type="TextureRect" parent="."]
 layout_mode = 1

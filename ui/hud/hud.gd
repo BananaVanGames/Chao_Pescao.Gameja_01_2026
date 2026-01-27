@@ -1,5 +1,8 @@
 extends Control
 
+#endregion
+var is_muted: bool = false
+
 #region Preloads
 @onready var ojo = preload("res://ui/hud/art/rules/ojo.png")
 
@@ -21,24 +24,22 @@ extends Control
 @onready var pez_restante_encendido = preload("res://ui/hud/art/rules/icono_pez_encendido.png")
 @onready var pez_restante_apagado = preload("res://ui/hud/art/rules/icono_pez_apagado.png")
 
-@onready var score_label: Label = $Consola/Score/Score
-@onready var timer_label: Label = $Consola/Timer/Timer
+@onready var score_label: Label = $PuntuacionYTiempo/TextureRect2/Score
+@onready var timer_label: Label = $PuntuacionYTiempo/TextureRect/Timer
 
-@onready var consolita = preload("res://ui/hud/art/cronometro y puntuación/consola.png")
-@onready var bombilla1 = preload("res://ui/hud/art/cronometro y puntuación/consola_bombilla1.png")
-@onready var bombilla2 = preload("res://ui/hud/art/cronometro y puntuación/consola_bombilla2.png")
-@onready var bombilla3 = preload("res://ui/hud/art/cronometro y puntuación/consola_bombilla3.png")
-
-@onready var danger_1: TextureRect = $Reglas/GridContainer/Danger1
-@onready var danger_2: TextureRect = $Reglas/GridContainer/Danger2
-@onready var danger_3: TextureRect = $Reglas/GridContainer/Danger3
-@onready var grid_container: GridContainer = $Reglas/GridContainer
-@onready var regla_cola: TextureRect = $Reglas/GridContainer/ReglaCola
-@onready var contenedor_peces_restantes: HBoxContainer = $PecesRestantes/ContenedorPecesRestantes
-@onready var consola: TextureRect = $Consola
-
-#endregion
-var is_muted: bool = false
+@onready var danger_1: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/Danger1
+@onready var danger_2: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/Danger2
+@onready var danger_3: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/Danger3
+@onready var grid_container: GridContainer = $ReglasYPecesRestantes/Reglas/GridContainer
+@onready var regla_cola: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/ReglaCola
+@onready var contenedor_peces_restantes: HBoxContainer = $ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes
+@onready var bombilla_off = preload("res://ui/hud/art/cronometro y puntuación/bombilla.png")
+@onready var bombilla_acierto = preload("res://ui/hud/art/cronometro y puntuación/bombilla_encendida.png")
+@onready var bombilla_error = preload("res://ui/hud/art/cronometro y puntuación/bombilla_roja.png")
+@onready var bombilla: TextureRect = $PuntuacionYTiempo/Bombilla
+@onready var bombilla2: TextureRect = $PuntuacionYTiempo/Bombilla2
+@onready var bombilla3: TextureRect = $PuntuacionYTiempo/Bombilla3
+@onready var bombillas = [bombilla, bombilla2, bombilla3]
 
 func _ready():
 	GameHandler.time_changed.connect(_on_time_changed)
@@ -62,16 +63,20 @@ func _on_time_changed(value) -> void:
 	timer_label.text = str(snapped(value, 0.1)) + "0"
 
 
-func _on_score_changed(total_score, tmp_score):
-	if tmp_score == 1:
-		consola.texture = bombilla1
-	elif tmp_score == 2:
-		consola.texture = bombilla2
-	elif tmp_score == 3:
-		consola.texture = bombilla3
+func _on_score_changed(score, value):
+	for b in bombillas:
+		b.texture = bombilla_off
+
+	if value < 0:
+		for i in range(abs(value)):
+			if i < bombillas.size():
+				bombillas[i].texture = bombilla_error
 	else:
-		consola.texture = consolita
-	score_label.text = str(total_score)
+		for i in range(value):
+			if i < bombillas.size():
+				bombillas[i].texture = bombilla_acierto
+
+	score_label.text = str(score)
 
 
 func _on_fishes_changed(value) -> void:

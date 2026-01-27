@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy3so0jd5io4h"
-path="res://.godot/imported/consola_bombilla3.png-c757892b52e58c7aeb456e5623eef8dd.ctex"
+uid="uid://di6v1hb3m50p5"
+path="res://.godot/imported/contador_redondo.png-606c11ab22e18d93bd2aedbcb2a88ae1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/hud/art/cronometro y puntuación/consola_bombilla3.png"
-dest_files=["res://.godot/imported/consola_bombilla3.png-c757892b52e58c7aeb456e5623eef8dd.ctex"]
+source_file="res://ui/hud/art/cronometro y puntuación/contador_redondo.png"
+dest_files=["res://.godot/imported/contador_redondo.png-606c11ab22e18d93bd2aedbcb2a88ae1.ctex"]
 
 [params]
 
