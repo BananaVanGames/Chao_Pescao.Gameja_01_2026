@@ -11,6 +11,7 @@ var score: int = 0
 var fishes_left: int = 10
 var rules: Array = []
 var processable_rules: Array = []
+var level: int = 0
 
 #region Fish paths
 
@@ -221,15 +222,11 @@ var fish_sprites: Array[Array] = [[], [], []]
 
 var check_finished := false
 var fish_loaded := false
-
 var level_idx := 0
 var path_idx := 0
-
-var level_requested := false
-var level_loaded_count := 0
 var request_idx := 0
+var level_loaded_count := 0
 var requesting_level := false
-var level: int = 0
 
 
 func _process(_delta: float) -> void:
@@ -248,11 +245,9 @@ func _process(_delta: float) -> void:
 			request_idx = 0
 			path_idx = 0
 			level_loaded_count = 0
-			#print("Level ", level_idx, " requests queued")
 
 		return
 
-	# 2️⃣ Fase de POLLING + CONSUMO (1 por frame)
 	var path: String = level_paths[path_idx]
 	var status := ResourceLoader.load_threaded_get_status(path)
 
@@ -270,7 +265,6 @@ func _process(_delta: float) -> void:
 	if path_idx >= level_paths.size():
 		path_idx = 0
 
-	# 3️⃣ ¿Nivel terminado?
 	if level_loaded_count >= level_paths.size():
 		print("Level ", level_idx, " fish loaded")
 
@@ -296,7 +290,7 @@ func get_current_rules() -> Array:
 	return rules
 
 
-func start_next_set(value: Array):
+func set_next_set_rules(value: Array):
 	rules = value
 	#print("Rules recibidas: ", rules)
 	change_rules.emit(rules)
