@@ -1,5 +1,9 @@
 extends Control
 
+#endregion
+const PECES_ESPECIALES: int = 2
+const DIFICULTAD_MAXIMA: int = 6
+
 # true/false per fish slot
 var special_fish := []
 
@@ -44,8 +48,6 @@ var special_fish := []
 @onready var bombilla3: TextureRect = $PuntuacionYTiempo/Bombilla3
 @onready var bombillas = [bombilla, bombilla2, bombilla3]
 
-#endregion
-
 
 func _ready():
 	GameHandler.time_changed.connect(_on_time_changed)
@@ -54,6 +56,12 @@ func _ready():
 	GameHandler.change_rules.connect(change_rules_visuals)
 	GameHandler.reset_fishes.connect(_reset_set)
 	GameHandler.update_hearts.connect(on_update_hearts)
+	GameHandler.update_max_life.connect(on_update_max_life)
+
+	print("REINICIANDO CORAZONES")
+	var hearts = contenedor_vidas_restantes.get_children()
+	for i in range(hearts.size()):
+		hearts[i].visible = true
 
 
 func reset_peces_restantes() -> void:
@@ -70,7 +78,7 @@ func reset_peces_restantes() -> void:
 			hijos_contenedor[i].modulate = Color("ce002f")
 
 
-func change_rules_visuals(rules: Array, proc_rules):
+func change_rules_visuals(rules: Array, proc_rules: Array):
 	var grid_children = grid_container.get_children()
 
 	# Ojos
@@ -96,21 +104,24 @@ func change_rules_visuals(rules: Array, proc_rules):
 	danger_3.texture = peligrosidad[proc_rules[2]]
 
 
+func on_update_max_life(max_life: int):
+	var hearts = contenedor_vidas_restantes.get_children()
+	for i in range(max_life, hearts.size()):
+		hearts[i].visible = false
+
+
 func get_special_spawn_chance() -> float:
-	var lvl = GameHandler.level
+	var lvl: int = GameHandler.level
 	var chance: float = 0.0
 
-	var level_when_specials_start = 1
-	var level_all_specials = 6
-
-	if lvl >= level_all_specials:
+	if lvl >= DIFICULTAD_MAXIMA:
 		chance = 1.0
-	elif lvl >= level_when_specials_start:
-		# Example:
-		# level_range = 6 - 1 = 5
-		# lvl = 4 -> (4 - 1) / 5 = 3 / 5 = 0.6
-		var level_range = level_all_specials - level_when_specials_start
-		chance = float(lvl - level_when_specials_start) / float(level_range)
+	elif lvl >= PECES_ESPECIALES:
+		# lvl 5 -> (5 - 2) / 4 = 3 / 4 = 0.75
+		# lvl 4 -> (4 - 2) / 4 = 1 / 2 = 0.5
+		# lvl 3 -> (3 - 2) / 4 = 1 / 4 = 0.25
+		var level_range: float = DIFICULTAD_MAXIMA - PECES_ESPECIALES
+		chance = float(lvl - PECES_ESPECIALES) / level_range
 
 	return chance
 
@@ -151,6 +162,6 @@ func _on_fishes_changed(value) -> void:
 	var hijos_contenedor = contenedor_peces_restantes.get_children()
 	hijos_contenedor[value].texture = pez_restante_apagado
 	# Turn off modulate change of special fishes
-	hijos_contenedor[value].modulate = Color(1,1,1)
+	hijos_contenedor[value].modulate = Color(1, 1, 1)
 	if special_fish.size() > value and special_fish[value]:
 		GameHandler.randomize_rules()

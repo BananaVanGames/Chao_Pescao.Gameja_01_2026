@@ -13,6 +13,8 @@ enum MouseTool {
 	KNIFE,
 }
 
+const NIVEL_TUTORIAL = 0
+
 @export var round_time: float = 5
 @export var level: int = 0
 
@@ -154,9 +156,7 @@ func on_set_finished():
 
 	spawner.get_children().map(func(c): c.queue_free())
 
-	GameHandler.add_level()
-	GameHandler.reset_round()
-	GameHandler.add_life_point()
+	GameHandler.advance_next_level()
 
 	set_process(false)
 	set_transition.play()
@@ -273,6 +273,8 @@ func _on_fish_clicked(fish):
 
 func _on_timer_timeout() -> void:
 	if dragged_fish:
+		if GameHandler.get_level() > NIVEL_TUTORIAL:
+			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 		last_fish.explode()
 		await get_tree().create_timer(0.5).timeout
@@ -281,6 +283,8 @@ func _on_timer_timeout() -> void:
 
 	var pez_en_mesa: bool = mesa_trampilla.fish_timeout()
 	if last_fish and not pez_en_mesa or dragged_fish:
+		if GameHandler.get_level() > NIVEL_TUTORIAL:
+			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 		last_fish.explode()
 		on_fish_destroyed()
@@ -288,10 +292,12 @@ func _on_timer_timeout() -> void:
 
 func _on_destructor_peces_body_entered(body: Node2D) -> void:
 	if body.is_in_group("pez"):
+		if GameHandler.get_level() > NIVEL_TUTORIAL:
+			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 		body.queue_free()
 		on_fish_destroyed()
 
 	if body.is_in_group("corte"):
-		print("DESTRUYENDO PEZ DEL FONDO")
+		#print("DESTRUYENDO PEZ DEL FONDO")
 		body.queue_free()

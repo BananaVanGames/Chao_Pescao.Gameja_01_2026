@@ -3,21 +3,24 @@ extends Node2D
 signal pez_clasificado
 
 #region Constantes
-const OJOS_PEZ = 0
-const CABEZA_PEZ = 1
-const CUERPO_PEZ = 2
-const COLA_PEZ = 3
+const OJOS_PEZ: int = 0
+const CABEZA_PEZ: int = 1
+const CUERPO_PEZ: int = 2
+const COLA_PEZ: int = 3
 
-const OJOS_RULES = 0
-const CABEZA_RULES = 1
-const COLA_RULES = 2
+const OJOS_RULES: int = 0
+const CABEZA_RULES: int = 1
+const COLA_RULES: int = 2
 
-const CABEZA_CORTADA = 4
-const COLA_CORTADA = 5
+const CABEZA_CORTADA: int = 4
+const COLA_CORTADA: int = 5
 
-const CABEZA_SANA = 0
-const CUERPO_SANO = 0
-const CUERPO_ENFERMO = 1
+const CABEZA_SANA: int = 0
+const CUERPO_SANO: int = 0
+const CUERPO_ENFERMO: int = 1
+
+const NIVEL_TUTORIAL: int = 0
+const MARGEN_PUNTOS_EXTRA: float = 1.00
 
 #endregion
 
@@ -32,12 +35,12 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	var current_rules = GameHandler.get_current_rules()
 	var processable_rules = GameHandler.get_processable_rules()
 
-	#print("Fish data: ", fish_data)
-	#print("Current rules: ", current_rules)
-	#print("Danger rules: ", processable_rules)
+	print("Fish data: ", fish_data)
+	print("Current rules: ", current_rules)
+	print("Danger rules: ", processable_rules)
 
 	if fish_data[CUERPO_PEZ] == CUERPO_ENFERMO:
-		if GameHandler.get_level() > 3:
+		if GameHandler.get_level() > NIVEL_TUTORIAL:
 			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 		pez_clasificado.emit()
@@ -63,7 +66,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	else:
 		if cabeza_cortada:
 			score -= 1
-	#print("Score después de la cabeza: ", score)
+	print("Score después de la cabeza: ", score)
 
 	if score != -3:
 		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
@@ -75,16 +78,15 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 		else:
 			if fish_data[COLA_CORTADA]:
 				score -= 1
-	#print("Score después de la cola: ", score)
+	print("Score después de la cola: ", score)
 
-	if score == 2 and GameHandler.get_time() > 1.00:
-		#print("Punto extra por velocidad")
+	if score == 2 and GameHandler.get_time() > MARGEN_PUNTOS_EXTRA:
+		print("Punto extra por velocidad")
 		score = 3
 
-	if score == -3 and GameHandler.get_level() > 3:
+	if score == -3 and GameHandler.get_level() > NIVEL_TUTORIAL:
 		GameHandler.lose_life_point()
 
-	#print("Puntuación final añadida: ", score, "\n")
 	GameHandler.add_score(score)
 	pez_clasificado.emit()
 	body.queue_free()
@@ -98,9 +100,9 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 	var current_rules = GameHandler.get_current_rules()
 	var processable_rules = GameHandler.get_processable_rules()
 
-	#print("Fish data: ", fish_data)
-	#print("Current rules: ", current_rules)
-	#print("Danger rules: ", processable_rules)
+	print("Fish data: ", fish_data)
+	print("Current rules: ", current_rules)
+	print("Danger rules: ", processable_rules)
 
 	var toxic_parts: int = 0
 	if (
@@ -117,7 +119,7 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 		toxic_parts += 1
 
 	if not toxic_parts:
-		if GameHandler.get_level() > 3:
+		if GameHandler.get_level() > NIVEL_TUTORIAL:
 			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 		pez_clasificado.emit()
@@ -145,12 +147,12 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 				toxic_cut += 1
 
 	if toxic_cut == 0:
-		if GameHandler.get_time() > 1.00:
+		if GameHandler.get_time() > MARGEN_PUNTOS_EXTRA:
 			GameHandler.add_score(3)
 		else:
 			GameHandler.add_score(2)
 	elif toxic_cut == toxic_parts:
-		if GameHandler.get_level() > 3:
+		if GameHandler.get_level() > NIVEL_TUTORIAL:
 			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 	else:

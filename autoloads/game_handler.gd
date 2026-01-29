@@ -6,8 +6,10 @@ signal fishes_left_changed(value)
 signal change_rules(value)
 signal reset_fishes(value)
 signal update_hearts(value)
+signal update_max_life(value)
 
-var life_points: int = 5
+var max_life_points: int = 5
+var life_points: int = max_life_points
 var time_left: float = 5
 var score: int = 0
 var fishes_left: int = 10
@@ -18,7 +20,7 @@ var level: int = 0
 # PECES PELIGROSOS: 
 var reglas_procesables1: Array = [[1], [0, 1], [0, 1, 2]]
 var reglas_procesables2: Array = [[2, 3, 4], [0, 1, 2], [0, 1, 2, 3]]
-var reglas_procesables3: Array = [[2, 3, 4, 5], [0, 1, 2, 3], [0, 1, 2, 3]]
+var reglas_procesables3: Array = [[2, 3, 4, 5], [1, 2, 3], [0, 1, 2, 3]]
 var reglas_procesables: Array = [reglas_procesables1, reglas_procesables2, reglas_procesables3]
 
 #region Fish paths
@@ -294,7 +296,7 @@ func lose_life_point() -> void:
 	life_points -= 1
 	var restore_life := false
 	update_hearts.emit(life_points, restore_life)
-	if life_points <= 0:
+	if life_points < 0:
 		SettingsHandler.add_score(GameHandler.score, GameHandler.get_level())
 		GameHandler.reset_score()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -303,7 +305,7 @@ func lose_life_point() -> void:
 
 
 func add_life_point() -> void:
-	if life_points < 5:
+	if life_points < max_life_points:
 		life_points += 1
 		var restore_life := true
 		update_hearts.emit(life_points - 1, restore_life)
@@ -342,6 +344,8 @@ func get_time() -> float:
 
 func add_score(value: int):
 	score += value
+	print("Score: ", value)
+	print("")
 	score_changed.emit(score, value)
 
 
@@ -356,6 +360,26 @@ func get_level() -> int:
 
 func add_level() -> void:
 	level += 1
+
+
+func advance_next_level() -> void:
+	add_level()
+	reset_round()
+	add_life_point()
+	print("LEVEL ACTUAL: ", level)
+	
+	match level:
+		3:
+			max_life_points = 3
+		5:
+			max_life_points = 1
+		6:
+			max_life_points = 0
+	update_max_life.emit(max_life_points)
+
+
+func get_max_life() -> int:
+	return max_life_points
 
 
 func reset_fish(value: int):
