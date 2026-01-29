@@ -1,3 +1,4 @@
+class_name Tutorial
 extends Control
 
 signal tutorial_finished
@@ -30,7 +31,7 @@ var confirm_exit: bool = false
 func _ready() -> void:
 	reset_tutorial()
 	MusicHandler.stop()
-	
+
 	for i in range(7):
 		current_sprite = i
 		dialogue_list[1][i].visible = true
@@ -51,7 +52,6 @@ func _process(_delta: float) -> void:
 			confirm_quit_tutorial.popup_centered()
 		else:
 			confirm_exit = false
-
 
 
 func finish_tutorial() -> void:

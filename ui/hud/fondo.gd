@@ -23,7 +23,7 @@ func randomize_fish_characteristics(fish: RigidBody2D) -> void:
 
 
 func _on_timer_fondo_timeout() -> void:
-	var new_fish = fish_scene.instantiate()
+	var new_fish: Pez = fish_scene.instantiate()
 	spawner_fondo.add_child(new_fish)
 	randomize_fish_characteristics(new_fish)
 	new_fish.global_position = spawner_fondo.global_position
@@ -33,5 +33,6 @@ func _on_timer_fondo_timeout() -> void:
 	new_fish.add_to_group("corte")
 	new_fish.set_collision_layer_value(1, false)
 	new_fish.set_collision_mask_value(1, false)
+	new_fish.set_collision_layer_value(2, true)
 	new_fish.set_physics_process(false)
 	new_fish.linear_velocity.x = 500

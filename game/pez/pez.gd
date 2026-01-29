@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Pez
 
 signal clicked(fish)
 signal corte_cabeza

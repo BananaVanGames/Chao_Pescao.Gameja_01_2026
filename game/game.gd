@@ -26,15 +26,11 @@ var current_tool := MouseTool.NONE
 # Drag n drop logic LEFT MOUSE BUTTON
 # Which fish is currently being dragged (null = none)
 var dragged_fish: RigidBody2D = null
-var last_fish: RigidBody2D = null
+var last_fish: Pez = null
 
 # Cutting logic variables RIGHT MOUSE BUTTON
-var is_cutting := false
-var cut_points := []
-
-#@onready var set_transition: CanvasLayer = $SetTransition
-var file_names
-var resources
+var is_cutting: bool = false
+var cut_points: Array = []
 
 @onready var fish_scene: PackedScene = preload("res://game/pez/pez.tscn")
 
@@ -156,12 +152,12 @@ func spawn_fish():
 func on_set_finished():
 	timer.stop()
 
-	for spawn_child in spawner.get_children():
-		spawn_child.queue_free()
+	spawner.get_children().map(func(c): c.queue_free())
 
 	GameHandler.add_level()
 	GameHandler.reset_round()
 	GameHandler.add_life_point()
+
 	set_process(false)
 	set_transition.play()
 
@@ -235,7 +231,7 @@ func test_cut_against_fish(fish: RigidBody2D):
 
 
 func crear_cabeza_independiente(new_text: CompressedTexture2D, new_pos: Vector2) -> void:
-	var corte: RigidBody2D = cabeza_aux.instantiate()
+	var corte: CabezaPez = cabeza_aux.instantiate()
 	spawner.add_child(corte)
 	corte.set_texture(new_text)
 	corte.clicked.connect(_on_fish_clicked)
@@ -249,7 +245,7 @@ func crear_cabeza_independiente(new_text: CompressedTexture2D, new_pos: Vector2)
 
 
 func crear_cola_independiente(new_text: CompressedTexture2D, new_pos: Vector2) -> void:
-	var corte: RigidBody2D = cola_aux.instantiate()
+	var corte: ColaPez = cola_aux.instantiate()
 	spawner.add_child(corte)
 	corte.set_texture(new_text)
 	corte.clicked.connect(_on_fish_clicked)
@@ -297,4 +293,5 @@ func _on_destructor_peces_body_entered(body: Node2D) -> void:
 		on_fish_destroyed()
 
 	if body.is_in_group("corte"):
+		print("DESTRUYENDO PEZ DEL FONDO")
 		body.queue_free()

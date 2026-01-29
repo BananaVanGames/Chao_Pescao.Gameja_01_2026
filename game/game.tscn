@@ -164,6 +164,7 @@ position = Vector2(967, 791)
 position = Vector2(0, -1)
 
 [node name="DestructorPeces" type="Area2D" parent="."]
+collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructorPeces"]
 position = Vector2(-117, -72)

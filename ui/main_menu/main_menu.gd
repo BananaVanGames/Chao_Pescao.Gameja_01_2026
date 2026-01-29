@@ -1,6 +1,5 @@
 extends Control
 
-
 var nav_stack: Array[Control] = []
 var current_panel
 
@@ -82,5 +81,5 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
-	var pop_up_tutorial = tutorial_scene.instantiate()
+	var pop_up_tutorial: Tutorial = tutorial_scene.instantiate()
 	add_child(pop_up_tutorial)
