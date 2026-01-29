@@ -59,13 +59,16 @@ var fish_texture: CompressedTexture2D = null
 @onready var sprite_cola: Sprite2D = $Cola
 @onready var cabeza_col_shape: CollisionShape2D = $CabezaColShape
 @onready var cola_col_shape: CollisionShape2D = $ColaColShape
+@onready var water: GPUParticles2D = $Water
 
 
 func _physics_process(delta: float) -> void:
 	if is_dragged:
+		water.emitting = true
 		var target := get_global_mouse_position() - grab_offset
 		linear_velocity = (target - global_position) * drag_speed
 	else:
+		water.emitting = false
 		linear_velocity.y += gravity * delta
 
 
