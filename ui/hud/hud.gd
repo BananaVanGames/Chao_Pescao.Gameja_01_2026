@@ -1,7 +1,7 @@
 extends Control
 
-#endregion
-var is_muted: bool = false
+# true/false per fish slot
+var special_fish := []
 
 #region Preloads
 @onready var ojo = preload("res://ui/hud/art/rules/ojo.png")
@@ -44,6 +44,8 @@ var is_muted: bool = false
 @onready var bombilla3: TextureRect = $PuntuacionYTiempo/Bombilla3
 @onready var bombillas = [bombilla, bombilla2, bombilla3]
 
+#endregion
+
 
 func _ready():
 	GameHandler.time_changed.connect(_on_time_changed)
@@ -56,8 +58,16 @@ func _ready():
 
 func reset_peces_restantes() -> void:
 	var hijos_contenedor = contenedor_peces_restantes.get_children()
+	special_fish.clear()
+
+	var chance = get_special_spawn_chance()
+
 	for i in range(10):
 		hijos_contenedor[i].texture = pez_restante_encendido
+		var is_special: bool = randf() < chance
+		special_fish.append(is_special)
+		if is_special:
+			hijos_contenedor[i].modulate = Color("ce002f")
 
 
 func change_rules_visuals(rules: Array, proc_rules):
@@ -84,6 +94,25 @@ func change_rules_visuals(rules: Array, proc_rules):
 	regla_cola.texture = tipo_cola[rules[2]]
 	grid_children[7].text = "   =   "
 	danger_3.texture = peligrosidad[proc_rules[2]]
+
+
+func get_special_spawn_chance() -> float:
+	var lvl = GameHandler.level
+	var chance: float = 0.0
+
+	var level_when_specials_start = 1
+	var level_all_specials = 6
+
+	if lvl >= level_all_specials:
+		chance = 1.0
+	elif lvl >= level_when_specials_start:
+		# Example:
+		# level_range = 6 - 1 = 5
+		# lvl = 4 -> (4 - 1) / 5 = 3 / 5 = 0.6
+		var level_range = level_all_specials - level_when_specials_start
+		chance = float(lvl - level_when_specials_start) / float(level_range)
+
+	return chance
 
 
 func on_update_hearts(life_idx: int, restore: bool) -> void:
@@ -121,3 +150,7 @@ func _on_score_changed(score, value):
 func _on_fishes_changed(value) -> void:
 	var hijos_contenedor = contenedor_peces_restantes.get_children()
 	hijos_contenedor[value].texture = pez_restante_apagado
+	# Turn off modulate change of special fishes
+	hijos_contenedor[value].modulate = Color(1,1,1)
+	if special_fish.size() > value and special_fish[value]:
+		GameHandler.randomize_rules()
