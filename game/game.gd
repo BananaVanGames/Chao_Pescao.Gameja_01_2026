@@ -21,11 +21,6 @@ var peces_posibles1: Array = [[0, 1, 2], [0, 1], [0], [0, 1, 2]]
 var peces_posibles2: Array = [[0, 1, 2, 3], [0, 1, 2], [0, 1], [0, 1, 2, 3]]
 var peces_posibles: Array = [peces_posibles1, peces_posibles2]
 
-# PECES PELIGROSOS: 
-var peces_peligrosos1: Array = [[1], [0, 1], [0, 1, 2]]
-var peces_peligrosos2: Array = [[2, 3, 4], [0, 1, 2], [0, 1, 2, 3]]
-var peces_peligrosos3: Array = [[2, 3, 4, 5], [0, 1, 2, 3], [0, 1, 2, 3]]
-var peces_peligrosos: Array = [peces_peligrosos1, peces_peligrosos2, peces_peligrosos3]
 var current_tool := MouseTool.NONE
 
 # Drag n drop logic LEFT MOUSE BUTTON
@@ -73,7 +68,7 @@ func _ready() -> void:
 	MusicHandler.play()
 
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	start_next_set()
+	GameHandler.randomize_rules()
 	start_round()
 
 
@@ -123,17 +118,6 @@ func on_fish_destroyed() -> void:
 	start_round()
 
 
-func start_next_set():
-	var rules: Array
-	var level_dificulty: int = min(GameHandler.get_level(), 2)
-
-	for i in range(3):
-		rules.append(peces_peligrosos[level_dificulty][i].pick_random())
-
-	#print("Las reglas de peces peligrosos son: ", rules)
-	GameHandler.set_next_set_rules(rules)
-
-
 func start_round():
 	if GameHandler.fishes_left <= 0:
 		on_set_finished()
@@ -176,8 +160,8 @@ func on_set_finished():
 		spawn_child.queue_free()
 
 	GameHandler.add_level()
-
 	GameHandler.reset_round()
+	GameHandler.add_life_point()
 	set_process(false)
 	set_transition.play()
 
@@ -279,7 +263,7 @@ func cut_fish():
 
 func _on_transition_finished() -> void:
 	set_process(true)
-	start_next_set()
+	GameHandler.randomize_rules()
 	start_round()
 
 
@@ -292,10 +276,16 @@ func _on_fish_clicked(fish):
 
 
 func _on_timer_timeout() -> void:
+	if dragged_fish:
+		GameHandler.add_score(-3)
+		last_fish.explode()
+		await get_tree().create_timer(0.5).timeout
+		on_fish_destroyed()
+		return
+
 	var pez_en_mesa: bool = mesa_trampilla.fish_timeout()
-	print("PEZ: ", pez_en_mesa)
-	print("last_fish: ", last_fish)
-	if not pez_en_mesa and last_fish != null:
+	if last_fish and not pez_en_mesa or dragged_fish:
+		GameHandler.add_score(-3)
 		last_fish.explode()
 		on_fish_destroyed()
 

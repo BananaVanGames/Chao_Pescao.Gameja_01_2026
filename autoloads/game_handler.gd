@@ -5,6 +5,7 @@ signal score_changed(value)
 signal fishes_left_changed(value)
 signal change_rules(value)
 signal reset_fishes(value)
+signal update_hearts(value)
 
 var life_points: int = 5
 var time_left: float = 5
@@ -13,6 +14,12 @@ var fishes_left: int = 10
 var rules: Array = []
 var processable_rules: Array = []
 var level: int = 0
+
+# PECES PELIGROSOS: 
+var reglas_procesables1: Array = [[1], [0, 1], [0, 1, 2]]
+var reglas_procesables2: Array = [[2, 3, 4], [0, 1, 2], [0, 1, 2, 3]]
+var reglas_procesables3: Array = [[2, 3, 4, 5], [0, 1, 2, 3], [0, 1, 2, 3]]
+var reglas_procesables: Array = [reglas_procesables1, reglas_procesables2, reglas_procesables3]
 
 #region Fish paths
 
@@ -267,7 +274,7 @@ func _process(_delta: float) -> void:
 		path_idx = 0
 
 	if level_loaded_count >= level_paths.size():
-		print("Level ", level_idx, " fish loaded")
+		#print("Level ", level_idx, " fish loaded")
 
 		level_idx += 1
 		requesting_level = false
@@ -279,36 +286,49 @@ func _process(_delta: float) -> void:
 			print("All fish loaded")
 
 
-func set_processable_rules(values: Array):
-	processable_rules = values
-
-
-func get_processable_rules() -> Array:
-	return processable_rules
-
-
 func get_life_points() -> int:
 	return life_points
 
 
-func lose_life_points() -> void:
+func lose_life_point() -> void:
 	life_points -= 1
+	var restore_life := false
+	update_hearts.emit(life_points, restore_life)
 	if life_points <= 0:
 		SettingsHandler.add_score(GameHandler.score, GameHandler.get_level())
 		GameHandler.reset_score()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
-		#print("Game Over")
+		print("Game Over")
+
+
+func add_life_point() -> void:
+	if life_points < 5:
+		life_points += 1
+		var restore_life := true
+		update_hearts.emit(life_points - 1, restore_life)
 
 
 func get_current_rules() -> Array:
 	return rules
 
 
-func set_next_set_rules(value: Array):
-	rules = value
-	#print("Rules recibidas: ", rules)
-	change_rules.emit(rules)
+func randomize_rules():
+	rules.clear()
+	processable_rules.clear()
+
+	for i in range(3):
+		rules.append(reglas_procesables[min(level, 2)][i].pick_random())
+		processable_rules.append(randi_range(0, 1))
+	change_rules.emit(rules, processable_rules)
+
+
+func set_processable_rules(values: Array):
+	processable_rules = values
+
+
+func get_processable_rules() -> Array:
+	return processable_rules
 
 
 func set_time(value: float):

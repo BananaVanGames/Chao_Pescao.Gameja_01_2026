@@ -32,7 +32,10 @@ var is_muted: bool = false
 @onready var danger_3: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/Danger3
 @onready var grid_container: GridContainer = $ReglasYPecesRestantes/Reglas/GridContainer
 @onready var regla_cola: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/ReglaCola
+
 @onready var contenedor_peces_restantes: HBoxContainer = $ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes
+@onready var contenedor_vidas_restantes: HBoxContainer = $ReglasYPecesRestantes/VidasRestantes/ContenedorVidasRestantes
+
 @onready var bombilla_off = preload("res://ui/hud/art/cronometro y puntuación/bombilla.png")
 @onready var bombilla_acierto = preload("res://ui/hud/art/cronometro y puntuación/bombilla_encendida.png")
 @onready var bombilla_error = preload("res://ui/hud/art/cronometro y puntuación/bombilla_roja.png")
@@ -41,18 +44,54 @@ var is_muted: bool = false
 @onready var bombilla3: TextureRect = $PuntuacionYTiempo/Bombilla3
 @onready var bombillas = [bombilla, bombilla2, bombilla3]
 
+
 func _ready():
 	GameHandler.time_changed.connect(_on_time_changed)
 	GameHandler.score_changed.connect(_on_score_changed)
 	GameHandler.fishes_left_changed.connect(_on_fishes_changed)
-	GameHandler.change_rules.connect(_start_next_set)
+	GameHandler.change_rules.connect(change_rules_visuals)
 	GameHandler.reset_fishes.connect(_reset_set)
+	GameHandler.update_hearts.connect(on_update_hearts)
 
 
 func reset_peces_restantes() -> void:
 	var hijos_contenedor = contenedor_peces_restantes.get_children()
 	for i in range(10):
 		hijos_contenedor[i].texture = pez_restante_encendido
+
+
+func change_rules_visuals(rules: Array, proc_rules):
+	var grid_children = grid_container.get_children()
+
+	# Ojos
+	grid_children[1].text = ">" + str(rules[0] + 1)
+	danger_1.texture = peligrosidad[proc_rules[0]]
+
+	# Cabeza
+	if rules[1] == 0:
+		grid_children[3].visible = false
+		grid_children[4].visible = false
+		danger_2.visible = false
+	else:
+		grid_children[3].visible = true
+		grid_children[4].visible = true
+		grid_children[3].texture = tipo_cabeza[rules[1]]
+		grid_children[4].text = "   =   "
+		danger_2.visible = true
+		danger_2.texture = peligrosidad[proc_rules[1]]
+
+	# Cola
+	regla_cola.texture = tipo_cola[rules[2]]
+	grid_children[7].text = "   =   "
+	danger_3.texture = peligrosidad[proc_rules[2]]
+
+
+func on_update_hearts(life_idx: int, restore: bool) -> void:
+	var vidas = contenedor_vidas_restantes.get_children()
+	if restore:
+		vidas[life_idx].set_modulate(Color("ffffffff"))
+	else:
+		vidas[life_idx].set_modulate(Color("0000b4ff"))
 
 
 func _reset_set(_value) -> void:
@@ -82,42 +121,3 @@ func _on_score_changed(score, value):
 func _on_fishes_changed(value) -> void:
 	var hijos_contenedor = contenedor_peces_restantes.get_children()
 	hijos_contenedor[value].texture = pez_restante_apagado
-
-
-func _start_next_set(value: Array):
-	var random_ojos: int
-	var random_cabeza: int
-	var random_cola: int
-	var grid_children = grid_container.get_children()
-
-	for i in range(3):
-		match i:
-			0:
-				random_ojos = randi_range(0, 1)
-				grid_children[i * 3 + 1].text = ">" + str(value[i] + 1)
-				danger_1.texture = peligrosidad[random_ojos]
-
-			1:
-				if value[i] == 0:
-					grid_children[i * 3].visible = false
-					grid_children[i * 3 + 1].visible = false
-					danger_2.visible = false
-				else:
-					grid_children[i * 3].visible = true
-					grid_children[i * 3 + 1].visible = true
-					danger_2.visible = true
-
-					grid_children[i * 3].texture = tipo_cabeza[value[i]]
-					grid_children[i * 3 + 1].text = "   =   "
-					random_cabeza = randi_range(0, 1)
-					danger_2.texture = peligrosidad[random_cabeza]
-
-			2:
-				regla_cola.texture = tipo_cola[value[i]]
-
-				grid_children[i * 3 + 1].text = "   =   "
-
-				random_cola = randi_range(0, 1)
-				danger_3.texture = peligrosidad[random_cola]
-
-	GameHandler.set_processable_rules([random_ojos, random_cabeza, random_cola])

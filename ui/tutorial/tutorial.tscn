@@ -48,29 +48,29 @@ texture = ExtResource("3_ggehi")
 
 [node name="Se3" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 961.0
-offset_top = 129.0
-offset_right = 1871.0
-offset_bottom = 641.0
-scale = Vector2(0.5, 0.5)
+offset_left = 939.00006
+offset_top = 70.0
+offset_right = 1849.0
+offset_bottom = 582.0
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_j0hjb")
 flip_h = true
 
 [node name="A04" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 589.0
-offset_top = 6.9999995
-offset_right = 1499.0
-offset_bottom = 519.0
+offset_left = 605.0
+offset_top = -7.9999995
+offset_right = 1515.0
+offset_bottom = 504.0
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_sqq7s")
 
 [node name="E05" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 189.0
-offset_top = 523.0
-offset_right = 1099.0
-offset_bottom = 1035.0
+offset_left = 127.0
+offset_top = 528.0
+offset_right = 1037.0
+offset_bottom = 1040.0
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("6_noidg")
 

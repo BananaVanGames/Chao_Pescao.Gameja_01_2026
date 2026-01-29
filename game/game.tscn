@@ -164,10 +164,10 @@ position = Vector2(967, 791)
 position = Vector2(0, -1)
 
 [node name="DestructorPeces" type="Area2D" parent="."]
-position = Vector2(-129, -144)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructorPeces"]
-polygon = PackedVector2Array(2656, -1211, 2654, 1590, 2460, 1548, 2455, -1018, -765, -1059, -768, 1472, 136, 1453, 136, 1620, -981, 1654, -986, -1230)
+position = Vector2(-117, -72)
+polygon = PackedVector2Array(2656, -1211, 2659, 1598, 2449, 1428, 2451, -1042, -389, -1042, -388, 1442, 2462, 1435, 2660, 1599, -551, 1602, -550, -1212)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 2

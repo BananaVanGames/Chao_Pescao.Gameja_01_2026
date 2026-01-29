@@ -38,7 +38,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 
 	if fish_data[CUERPO_PEZ] == CUERPO_ENFERMO:
 		if GameHandler.get_level() > 3:
-			GameHandler.lose_life_points()
+			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 		pez_clasificado.emit()
 		body.queue_free()
@@ -82,7 +82,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 		score = 3
 
 	if score == -3 and GameHandler.get_level() > 3:
-		GameHandler.lose_life_points()
+		GameHandler.lose_life_point()
 
 	#print("Puntuación final añadida: ", score, "\n")
 	GameHandler.add_score(score)
@@ -118,7 +118,7 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 
 	if not toxic_parts:
 		if GameHandler.get_level() > 3:
-			GameHandler.lose_life_points()
+			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 		pez_clasificado.emit()
 		body.queue_free()
@@ -151,7 +151,7 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 			GameHandler.add_score(2)
 	elif toxic_cut == toxic_parts:
 		if GameHandler.get_level() > 3:
-			GameHandler.lose_life_points()
+			GameHandler.lose_life_point()
 		GameHandler.add_score(-3)
 	else:
 		GameHandler.add_score(-1)

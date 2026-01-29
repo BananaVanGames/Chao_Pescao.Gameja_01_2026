@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1m584cu6xjfj"]
+[gd_scene load_steps=18 format=3 uid="uid://b1m584cu6xjfj"]
 
 [ext_resource type="Script" uid="uid://6tkxj7crpg1m" path="res://ui/hud/hud.gd" id="1_4d6w6"]
 [ext_resource type="Texture2D" uid="uid://8pclrxp7ip6p" path="res://ui/hud/art/cronometro y puntuación/contador_largo.png" id="2_gv4gi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://huebkrek7ycv" path="res://ui/hud/art/rules/icono_pez_encendido.png" id="5_o2lis"]
 [ext_resource type="Texture2D" uid="uid://crmcx0hnpl06b" path="res://ui/hud/art/rules/toxico.png" id="7_5uuaq"]
 [ext_resource type="Texture2D" uid="uid://d2oikemqqca4n" path="res://ui/hud/art/rules/cabeza_manchas.png" id="8_p3vm3"]
+[ext_resource type="Texture2D" uid="uid://bxft7cp2gwegu" path="res://ui/hud/art/rules/corazon.png" id="9_3mxrk"]
 [ext_resource type="Texture2D" uid="uid://clqd7wjrdblkr" path="res://ui/hud/art/cronometro y puntuación/conector.png" id="9_5mn0o"]
 [ext_resource type="Texture2D" uid="uid://b2iwysonxkt82" path="res://ui/hud/art/background/HUB_OL.png" id="9_cxhb7"]
 [ext_resource type="Texture2D" uid="uid://c25beojwghxrv" path="res://ui/hud/art/rules/procesable.png" id="9_gv4gi"]
@@ -123,15 +124,17 @@ texture = ExtResource("7_5uuaq")
 expand_mode = 2
 
 [node name="PecesRestantes" type="Node2D" parent="ReglasYPecesRestantes"]
-position = Vector2(858.99994, 134)
+position = Vector2(864.00006, 133)
 rotation = 0.01745329
-scale = Vector2(0.95, 0.95)
+scale = Vector2(0.9, 0.9)
 skew = -0.082030535
 
 [node name="ContenedorPecesRestantes" type="HBoxContainer" parent="ReglasYPecesRestantes/PecesRestantes"]
 clip_contents = true
-offset_right = 476.0
-offset_bottom = 71.0
+offset_left = 2.689838
+offset_top = -25.362968
+offset_right = 478.68985
+offset_bottom = 45.63703
 theme_override_constants/separation = -30
 
 [node name="PezRestante" type="TextureRect" parent="ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes"]
@@ -183,6 +186,41 @@ expand_mode = 3
 layout_mode = 2
 texture = ExtResource("5_o2lis")
 expand_mode = 3
+
+[node name="VidasRestantes" type="Node2D" parent="ReglasYPecesRestantes"]
+position = Vector2(955.99994, 184.00002)
+rotation = 0.01745329
+scale = Vector2(0.9, 0.9)
+skew = -0.082030535
+
+[node name="ContenedorVidasRestantes" type="HBoxContainer" parent="ReglasYPecesRestantes/VidasRestantes"]
+offset_left = -38.04198
+offset_top = 4.0055947
+offset_right = 297.958
+offset_bottom = 68.00559
+alignment = 1
+
+[node name="Vida" type="TextureRect" parent="ReglasYPecesRestantes/VidasRestantes/ContenedorVidasRestantes"]
+layout_mode = 2
+texture = ExtResource("9_3mxrk")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="Vida2" type="TextureRect" parent="ReglasYPecesRestantes/VidasRestantes/ContenedorVidasRestantes"]
+layout_mode = 2
+texture = ExtResource("9_3mxrk")
+
+[node name="Vida3" type="TextureRect" parent="ReglasYPecesRestantes/VidasRestantes/ContenedorVidasRestantes"]
+layout_mode = 2
+texture = ExtResource("9_3mxrk")
+
+[node name="Vida4" type="TextureRect" parent="ReglasYPecesRestantes/VidasRestantes/ContenedorVidasRestantes"]
+layout_mode = 2
+texture = ExtResource("9_3mxrk")
+
+[node name="Vida5" type="TextureRect" parent="ReglasYPecesRestantes/VidasRestantes/ContenedorVidasRestantes"]
+layout_mode = 2
+texture = ExtResource("9_3mxrk")
 
 [node name="PuntuacionYTiempo" type="Control" parent="."]
 anchors_preset = 0
