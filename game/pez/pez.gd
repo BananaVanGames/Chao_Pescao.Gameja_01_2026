@@ -1,5 +1,5 @@
-extends RigidBody2D
 class_name Pez
+extends RigidBody2D
 
 signal clicked(fish)
 signal corte_cabeza
@@ -64,24 +64,25 @@ var fish_texture: CompressedTexture2D = null
 
 func _physics_process(delta: float) -> void:
 	if is_dragged:
-		water.emitting = true
 		var target := get_global_mouse_position() - grab_offset
 		linear_velocity = (target - global_position) * drag_speed
 	else:
-		water.emitting = false
 		linear_velocity.y += gravity * delta
 
 
 func start_drag(mouse_pos: Vector2):
 	is_dragged = true
+	water.emitting = true
 	grab_offset = mouse_pos - global_position
 
 
 func stop_drag():
 	is_dragged = false
+	water.emitting = false
 
 
 func explode():
+	water.emitting = false
 	animation_player.play("death")
 
 

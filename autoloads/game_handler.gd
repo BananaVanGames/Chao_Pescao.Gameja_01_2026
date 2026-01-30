@@ -294,6 +294,7 @@ func get_life_points() -> int:
 
 func lose_life_point() -> void:
 	life_points -= 1
+	print("PUNTOS DE VIDA:", life_points)
 	var restore_life := false
 	update_hearts.emit(life_points, restore_life)
 	if life_points < 0:
@@ -344,8 +345,8 @@ func get_time() -> float:
 
 func add_score(value: int):
 	score += value
-	print("Score: ", value)
-	print("")
+	#print("Score: ", value)
+	#print("")
 	score_changed.emit(score, value)
 
 
@@ -367,14 +368,16 @@ func advance_next_level() -> void:
 	reset_round()
 	add_life_point()
 	print("LEVEL ACTUAL: ", level)
-	
+
 	match level:
 		3:
 			max_life_points = 3
+
 		5:
 			max_life_points = 1
 		6:
 			max_life_points = 0
+	life_points = min(max_life_points, life_points)
 	update_max_life.emit(max_life_points)
 
 

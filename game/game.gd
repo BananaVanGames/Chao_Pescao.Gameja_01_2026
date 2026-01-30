@@ -162,7 +162,7 @@ func on_set_finished():
 	set_transition.play()
 
 
-func start_grab(fish):
+func start_grab(fish: Pez):
 	#print("Dragged Fish: ", dragged_fish)
 	if dragged_fish != null:
 		return

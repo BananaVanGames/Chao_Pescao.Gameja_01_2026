@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dqy4ordentikc"]
+[gd_scene load_steps=59 format=3 uid="uid://dqy4ordentikc"]
 
 [ext_resource type="Script" uid="uid://c8eh8bugu4wes" path="res://game/pez/pez.gd" id="1_tlgln"]
 [ext_resource type="Texture2D" uid="uid://bv5k7ncl0c8xb" path="res://game/pez/art/fish types/default_fish.png" id="2_f5oq0"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://c6ptq2rx17owp" path="res://game/pez/art/death/corrosion_pez-14.png" id="16_kqmna"]
 [ext_resource type="Texture2D" uid="uid://dx2wvpjn4tta6" path="res://game/pez/art/death/corrosion_pez-15.png" id="17_rx5db"]
 [ext_resource type="Texture2D" uid="uid://diwr8pau6xt50" path="res://game/pez/art/death/corrosion_pez-16.png" id="18_68ac4"]
+[ext_resource type="Texture2D" uid="uid://bjbkdyvls8wst" path="res://icon.svg" id="20_tg48v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tg48v"]
 radius = 63.000008
@@ -468,7 +469,7 @@ blend_mode = 1
 
 [sub_resource type="Curve" id="Curve_tg48v"]
 _limits = [0.0, 0.3, 0.0, 1.0]
-_data = [Vector2(0.03257329, 0), 0.0, 2.1766553, 0, 0, Vector2(0.52443, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0.0075000226), -2.067707, 0.0, 0, 0]
+_data = [Vector2(0.03257329, 0), 0.0, 2.1766553, 0, 0, Vector2(0.50854695, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0.0075000226), -2.067707, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_ir0ui"]
@@ -481,17 +482,17 @@ colors = PackedColorArray(1, 1, 1, 0.078431375, 1, 1, 1, 1)
 gradient = SubResource("Gradient_j1cap")
 
 [sub_resource type="Curve" id="Curve_fy2gg"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.4044944), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_ucldb"]
 _limits = [0.0, 30.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.14657982, 4.342106), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.26495725, 2.3595505), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_7sjaf"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.53418803, 0.9662922), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_mupc8"]
 curve_x = SubResource("Curve_fy2gg")
@@ -500,14 +501,19 @@ curve_z = SubResource("Curve_7sjaf")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jblbd"]
 particle_flag_disable_z = true
-emission_shape_offset = Vector3(0, 40, 0)
 emission_shape = 3
-emission_box_extents = Vector3(120, 0, 1)
+emission_box_extents = Vector3(120, 75, 1)
 gravity = Vector3(0, 200, 0)
-scale_min = 0.19999999
+scale_min = 0.099999994
+scale_max = 0.29999998
 scale_curve = SubResource("CurveXYZTexture_mupc8")
+color = Color(0.48032233, 0.7579067, 1.0216019, 1)
 color_initial_ramp = SubResource("GradientTexture1D_i3xac")
 alpha_curve = SubResource("CurveTexture_ir0ui")
+anim_speed_min = 5.19
+anim_speed_max = 12.32
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 2.87
 
 [node name="Pez" type="RigidBody2D" groups=["pez"]]
 z_index = 100
@@ -598,8 +604,11 @@ shape = SubResource("CapsuleShape2D_j1cap")
 
 [node name="Water" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_3amar")
+position = Vector2(-6, 12)
 emitting = false
 amount = 50
+texture = ExtResource("20_tg48v")
+lifetime = 1.5
 visibility_rect = Rect2(-150, -100, 300, 200)
 process_material = SubResource("ParticleProcessMaterial_jblbd")
 

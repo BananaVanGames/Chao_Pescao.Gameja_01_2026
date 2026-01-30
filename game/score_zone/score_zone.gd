@@ -48,24 +48,36 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 		return
 
 	var score := 2
-	var cabeza_mal := false
+
+	var cabeza_cortada: bool = fish_data[CABEZA_CORTADA]
+	var cola_cortada: bool = fish_data[COLA_CORTADA]
+	var cabeza_mal: bool = false
+	if (
+			fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA
+			or fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]
+	):
+		cabeza_mal = true
 
 	if fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]:
-		cabeza_mal = true
-	if fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA:
-		cabeza_mal = true
-
-	var cabeza_cortada = fish_data[CABEZA_CORTADA]
-
-	if cabeza_mal:
-		if not processable_rules[OJOS_RULES] or (not processable_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA):
+		if not processable_rules[OJOS_RULES]:
 			score = -3
 		else:
 			if not cabeza_cortada:
 				score -= 1
 	else:
-		if cabeza_cortada:
+		if cabeza_cortada and not cabeza_mal:
 			score -= 1
+
+	if score != -3:
+		if fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA:
+			if not processable_rules[CABEZA_RULES]:
+				score = -3
+			else:
+				if not cabeza_cortada:
+					score -= 1
+		else:
+			if cabeza_cortada and not cabeza_mal:
+				score -= 1
 	print("Score después de la cabeza: ", score)
 
 	if score != -3:
@@ -73,10 +85,10 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 			if not processable_rules[COLA_RULES]:
 				score = -3
 			else:
-				if not fish_data[COLA_CORTADA]:
+				if not cola_cortada:
 					score -= 1
 		else:
-			if fish_data[COLA_CORTADA]:
+			if cola_cortada:
 				score -= 1
 	print("Score después de la cola: ", score)
 
