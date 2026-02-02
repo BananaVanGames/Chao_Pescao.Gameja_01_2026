@@ -1,11 +1,13 @@
 extends Control
 
-#endregion
 const PECES_ESPECIALES: int = 2
 const DIFICULTAD_MAXIMA: int = 6
 
-# true/false per fish slot
 var special_fish := []
+
+var tween_1: Tween
+var tween_2: Tween
+var tween_3: Tween
 
 #region Preloads
 @onready var ojo = preload("res://ui/hud/art/rules/ojo.png")
@@ -31,11 +33,18 @@ var special_fish := []
 @onready var score_label: Label = $PuntuacionYTiempo/TextureRect2/Score
 @onready var timer_label: Label = $PuntuacionYTiempo/TextureRect/Timer
 
-@onready var danger_1: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/Danger1
-@onready var danger_2: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/Danger2
-@onready var danger_3: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/Danger3
-@onready var grid_container: GridContainer = $ReglasYPecesRestantes/Reglas/GridContainer
-@onready var regla_cola: TextureRect = $ReglasYPecesRestantes/Reglas/GridContainer/ReglaCola
+@onready var ojos_label: Label = %OjosLabel
+@onready var danger_1: TextureRect = %Danger1
+@onready var regla_cabeza: TextureRect = %ReglaCabeza
+@onready var cabeza_label: Label = %CabezaLabel
+@onready var danger_2: TextureRect = %Danger2
+@onready var cola_label: Label = %ColaLabel
+@onready var regla_cola: TextureRect = %ReglaCola
+@onready var danger_3: TextureRect = %Danger3
+
+@onready var rule_1: HBoxContainer = %Rule1
+@onready var rule_2: HBoxContainer = %Rule2
+@onready var rule_3: HBoxContainer = %Rule3
 
 @onready var contenedor_peces_restantes: HBoxContainer = $ReglasYPecesRestantes/PecesRestantes/ContenedorPecesRestantes
 @onready var contenedor_vidas_restantes: HBoxContainer = $ReglasYPecesRestantes/VidasRestantes/ContenedorVidasRestantes
@@ -47,6 +56,9 @@ var special_fish := []
 @onready var bombilla2: TextureRect = $PuntuacionYTiempo/Bombilla2
 @onready var bombilla3: TextureRect = $PuntuacionYTiempo/Bombilla3
 @onready var bombillas = [bombilla, bombilla2, bombilla3]
+@onready var static_shader: TextureRect = $ReglasYPecesRestantes/Reglas/StaticShader
+
+#endregion
 
 
 func _ready():
@@ -57,11 +69,32 @@ func _ready():
 	GameHandler.reset_fishes.connect(_reset_set)
 	GameHandler.update_hearts.connect(on_update_hearts)
 	GameHandler.update_max_life.connect(on_update_max_life)
+	GameHandler.rules_error.connect(on_rules_error)
 
-	print("REINICIANDO CORAZONES")
 	var hearts = contenedor_vidas_restantes.get_children()
 	for i in range(hearts.size()):
 		hearts[i].visible = true
+
+
+func on_rules_error(values: Array) -> void:
+	if values[0]:
+		rule_1.modulate = Color.RED
+		if tween_1:
+			tween_1.kill()
+		tween_1 = create_tween()
+		tween_1.tween_property(rule_1, "modulate", Color.WHITE, 2.0)
+	if values[1]:
+		rule_2.modulate = Color.RED
+		if tween_2:
+			tween_2.kill()
+		tween_2 = create_tween()
+		tween_2.tween_property(rule_2, "modulate", Color.WHITE, 2.0)
+	if values[2]:
+		rule_3.modulate = Color.RED
+		if tween_3:
+			tween_3.kill()
+		tween_3 = create_tween()
+		tween_3.tween_property(rule_3, "modulate", Color.WHITE, 2.0)
 
 
 func reset_peces_restantes() -> void:
@@ -79,28 +112,26 @@ func reset_peces_restantes() -> void:
 
 
 func change_rules_visuals(rules: Array, proc_rules: Array):
-	var grid_children = grid_container.get_children()
-
+	var tween = get_tree().create_tween()
+	static_shader.modulate = Color.WHITE
+	tween.tween_property(static_shader, "modulate", Color(1, 1, 1, 0), 0.5)
 	# Ojos
-	grid_children[1].text = ">" + str(rules[0] + 1)
+	ojos_label.text = ">" + str(rules[0] + 1)
 	danger_1.texture = peligrosidad[proc_rules[0]]
 
 	# Cabeza
 	if rules[1] == 0:
-		grid_children[3].visible = false
-		grid_children[4].visible = false
-		danger_2.visible = false
+		rule_2.visible = false
 	else:
-		grid_children[3].visible = true
-		grid_children[4].visible = true
-		grid_children[3].texture = tipo_cabeza[rules[1]]
-		grid_children[4].text = "   =   "
-		danger_2.visible = true
+		rule_2.visible = true
+
+		regla_cabeza.texture = tipo_cabeza[rules[1]]
+		cabeza_label.text = " = "
 		danger_2.texture = peligrosidad[proc_rules[1]]
 
 	# Cola
 	regla_cola.texture = tipo_cola[rules[2]]
-	grid_children[7].text = "   =   "
+	cola_label.text = " = "
 	danger_3.texture = peligrosidad[proc_rules[2]]
 
 

@@ -7,6 +7,8 @@
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
+layer = 2
+visible = false
 script = ExtResource("1_mnjdh")
 
 [node name="ColorRect" type="ColorRect" parent="."]

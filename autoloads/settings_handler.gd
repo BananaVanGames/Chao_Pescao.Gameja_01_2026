@@ -6,7 +6,7 @@ const MAX_SCORES = 10
 var scores = []
 
 
-func add_score(new_score: int, new_level: int) -> void:
+func add_to_scoreboard(new_score: int, new_level: int) -> void:
 	var date = Time.get_datetime_string_from_system().split("T")[0]
 
 	scores.append({

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dbifu6dca3j2i"]
+[gd_scene load_steps=26 format=3 uid="uid://dbifu6dca3j2i"]
 
 [ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cjevunm0mjij8" path="res://game/game.gd" id="1_h7iqs"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bp0iyqdeeq51h" path="res://ui/hud/fondo.tscn" id="6_leid8"]
 [ext_resource type="PackedScene" uid="uid://byihj7ts63ode" path="res://ui/pause_menu/pause_menu.tscn" id="9_l8g03"]
 [ext_resource type="PackedScene" uid="uid://cdkg20lpo1xmi" path="res://game/trampilla_y_mesa/mesa_trampilla.tscn" id="29_pvdu1"]
-[ext_resource type="PackedScene" uid="uid://bd83eekpbqxx2" path="res://ui/transition/set_transition.tscn" id="58_jbuku"]
 [ext_resource type="Texture2D" uid="uid://bnam0rniyavqn" path="res://ui/hud/art/pinza/pinza01.png" id="59_gk1pq"]
 [ext_resource type="Texture2D" uid="uid://cttaifaj3oos" path="res://ui/hud/art/pinza/pinza02.png" id="60_3wmuf"]
 [ext_resource type="Texture2D" uid="uid://ccofekv380kfr" path="res://ui/hud/art/pinza/pinza03.png" id="61_vgjtp"]
@@ -199,12 +198,6 @@ sprite_frames = SubResource("SpriteFrames_oacl0")
 animation = &"activate"
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
-layer = 2
-visible = false
-
-[node name="SetTransition" parent="." instance=ExtResource("58_jbuku")]
-layer = 20
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

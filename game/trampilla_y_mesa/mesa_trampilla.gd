@@ -33,9 +33,9 @@ func new_fish_spawned(last_fish: RigidBody2D) -> void:
 
 func _on_basura_peces_body_entered(body: Node2D) -> void:
 	if body.is_in_group("pez"):
-		GameHandler.add_score(-3)
 		body.queue_free()
-		pez_destruido.emit()
+		if GameHandler.add_score(-3):
+			pez_destruido.emit()
 
 	if body.is_in_group("corte"):
 		body.queue_free()

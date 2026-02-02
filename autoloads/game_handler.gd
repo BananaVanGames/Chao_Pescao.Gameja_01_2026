@@ -7,15 +7,23 @@ signal change_rules(value)
 signal reset_fishes(value)
 signal update_hearts(value)
 signal update_max_life(value)
+signal transition_finished
+signal rules_error(value)
+
+const NIVEL_TUTORIAL: int = 0
 
 var max_life_points: int = 5
 var life_points: int = max_life_points
+var lost_life: int = -1
+
 var time_left: float = 5
 var score: int = 0
+var level: int = 0
+var start_time: float = 0
+
 var fishes_left: int = 10
 var rules: Array = []
 var processable_rules: Array = []
-var level: int = 0
 
 # PECES PELIGROSOS: 
 var reglas_procesables1: Array = [[1], [0, 1], [0, 1, 2]]
@@ -225,7 +233,6 @@ var paths_level_3 := [
 	"res://game/pez/art/fish types/5,3,1,2.png",
 	"res://game/pez/art/fish types/5,3,1,3.png",
 ]
-#endregion
 
 var paths_levels = [paths_level_1, paths_level_2, paths_level_3]
 var fish_sprites: Array[Array] = [[], [], []]
@@ -237,6 +244,19 @@ var path_idx := 0
 var request_idx := 0
 var level_loaded_count := 0
 var requesting_level := false
+
+var transition: Transition
+
+#endregion
+
+@onready var game_music: AudioStream = preload("res://music/InGame1.mp3")
+@onready var transition_layer = preload("uid://bd83eekpbqxx2")
+
+
+func _ready() -> void:
+	transition = transition_layer.instantiate()
+	add_child(transition)
+	transition.transition_finished.connect(_on_transition_finished)
 
 
 func _process(_delta: float) -> void:
@@ -288,21 +308,40 @@ func _process(_delta: float) -> void:
 			print("All fish loaded")
 
 
+func trigger_rules_error(results: Array) -> void:
+	rules_error.emit(results)
+
+
 func get_life_points() -> int:
 	return life_points
 
 
-func lose_life_point() -> void:
+func get_score() -> int:
+	return score
+
+
+func lose_life_point() -> bool:
 	life_points -= 1
+	lost_life += 1
 	print("PUNTOS DE VIDA:", life_points)
+
 	var restore_life := false
 	update_hearts.emit(life_points, restore_life)
+
 	if life_points < 0:
-		SettingsHandler.add_score(GameHandler.score, GameHandler.get_level())
-		GameHandler.reset_score()
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
+		transition.play_game_finished(start_time)
+		SettingsHandler.add_to_scoreboard(GameHandler.get_score(), GameHandler.get_level())
+		GameHandler.reset_game()
+
 		print("Game Over")
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().paused = true
+		return false
+	return true
+
+
+func get_lost_life() -> int:
+	return lost_life
 
 
 func add_life_point() -> void:
@@ -343,11 +382,16 @@ func get_time() -> float:
 	return time_left
 
 
-func add_score(value: int):
+func game_over() -> void:
+	get_tree().call_deferred("change_scene_to_file", "res://ui/main_menu/main_menu.tscn")
+
+
+func add_score(value: int) -> bool:
 	score += value
-	#print("Score: ", value)
-	#print("")
 	score_changed.emit(score, value)
+	if value == -3 and level > NIVEL_TUTORIAL:
+		return lose_life_point()
+	return true
 
 
 func set_fishes_left(value: int):
@@ -367,12 +411,12 @@ func advance_next_level() -> void:
 	add_level()
 	reset_round()
 	add_life_point()
+	transition.play_between_rounds()
 	print("LEVEL ACTUAL: ", level)
 
 	match level:
 		3:
 			max_life_points = 3
-
 		5:
 			max_life_points = 1
 		6:
@@ -395,6 +439,19 @@ func reset_round() -> void:
 	reset_fish(10)
 
 
-func reset_score() -> void:
+func reset_game() -> void:
 	score = 0
 	level = 0
+	max_life_points = 5
+	life_points = max_life_points
+	lost_life = 0
+	start_time = 0
+
+
+func set_start_time(value: float) -> void:
+	start_time = value
+
+
+func _on_transition_finished() -> void:
+	randomize_rules()
+	transition_finished.emit()
