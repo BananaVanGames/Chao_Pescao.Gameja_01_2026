@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1m584cu6xjfj"]
+[gd_scene load_steps=25 format=3 uid="uid://b1m584cu6xjfj"]
 
 [ext_resource type="Script" uid="uid://6tkxj7crpg1m" path="res://ui/hud/hud.gd" id="1_4d6w6"]
 [ext_resource type="Texture2D" uid="uid://8pclrxp7ip6p" path="res://ui/hud/art/cronometro y puntuación/contador_largo.png" id="2_gv4gi"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://deiqksca00k3s" path="res://ui/hud/art/rules/ojo.png" id="5_kwc50"]
 [ext_resource type="Texture2D" uid="uid://huebkrek7ycv" path="res://ui/hud/art/rules/icono_pez_encendido.png" id="5_o2lis"]
 [ext_resource type="Texture2D" uid="uid://crmcx0hnpl06b" path="res://ui/hud/art/rules/toxico.png" id="7_5uuaq"]
+[ext_resource type="Shader" uid="uid://cillqd5jijcno" path="res://ui/hud/hud.gdshader" id="8_olkg6"]
 [ext_resource type="Texture2D" uid="uid://d2oikemqqca4n" path="res://ui/hud/art/rules/cabeza_manchas.png" id="8_p3vm3"]
 [ext_resource type="Texture2D" uid="uid://bxft7cp2gwegu" path="res://ui/hud/art/rules/corazon.png" id="9_3mxrk"]
 [ext_resource type="Texture2D" uid="uid://clqd7wjrdblkr" path="res://ui/hud/art/cronometro y puntuación/conector.png" id="9_5mn0o"]
@@ -15,6 +16,32 @@
 [ext_resource type="Texture2D" uid="uid://c25beojwghxrv" path="res://ui/hud/art/rules/procesable.png" id="9_gv4gi"]
 [ext_resource type="Texture2D" uid="uid://7iphke3tm3ym" path="res://ui/hud/art/rules/cola_manchas.png" id="10_5mn0o"]
 [ext_resource type="Texture2D" uid="uid://d0rxcpvrktduc" path="res://ui/hud/art/cronometro y puntuación/bombilla.png" id="12_5mn0o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3mxrk"]
+font_size = 80
+
+[sub_resource type="LabelSettings" id="LabelSettings_6gxmt"]
+font_size = 80
+
+[sub_resource type="LabelSettings" id="LabelSettings_olkg6"]
+font_size = 80
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyo40"]
+shader = ExtResource("8_olkg6")
+shader_parameter/noise_strength = 1.0
+shader_parameter/scanline_strength = 0.5200000247
+shader_parameter/speed = 8.0
+shader_parameter/fade_size = 0.15
+shader_parameter/fade_softness = 0.1
+
+[sub_resource type="Gradient" id="Gradient_6gxmt"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.734127)
+colors = PackedColorArray(0.08235294, 0.49803922, 0.49411765, 1, 0, 0.6165998, 0.6061809, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_olkg6"]
+gradient = SubResource("Gradient_6gxmt")
 
 [sub_resource type="LabelSettings" id="LabelSettings_kwc50"]
 font = ExtResource("4_kwc50")
@@ -48,80 +75,111 @@ offset_bottom = -10.0
 texture = ExtResource("4_o2lis")
 
 [node name="Reglas" type="Node2D" parent="ReglasYPecesRestantes"]
-position = Vector2(1584.0001, 333)
-rotation = 0.23212878
-skew = -0.32114065
+position = Vector2(1576.0001, 330)
+rotation = 0.17453292
+skew = -0.27925268
 
-[node name="GridContainer" type="GridContainer" parent="ReglasYPecesRestantes/Reglas"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ReglasYPecesRestantes/Reglas"]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -188.95908
-offset_top = -137.25708
-offset_right = 79.040924
-offset_bottom = 87.74292
+offset_left = -178.96127
+offset_top = -153.9154
+offset_right = 176.03873
+offset_bottom = 309.66174
 grow_vertical = 2
-scale = Vector2(1.8, 1.8)
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 30
-columns = 3
+theme_override_constants/separation = 29
 
-[node name="Ojos" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="Rule1" type="HBoxContainer" parent="ReglasYPecesRestantes/Reglas/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Ojos" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule1"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("5_kwc50")
-expand_mode = 2
+stretch_mode = 2
 
-[node name="ReglaOjosLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="OjosLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule1"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
-text = "  >2  "
+text = ">2"
+label_settings = SubResource("LabelSettings_3mxrk")
 
-[node name="Danger1" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="Danger1" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule1"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("7_5uuaq")
-expand_mode = 2
+stretch_mode = 2
 
-[node name="ReglaCabeza" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="Rule2" type="HBoxContainer" parent="ReglasYPecesRestantes/Reglas/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ReglaCabeza" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("8_p3vm3")
-expand_mode = 2
 
-[node name="ReglaCabezaLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="CabezaLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
-text = "   =   "
+text = " = "
+label_settings = SubResource("LabelSettings_6gxmt")
+vertical_alignment = 1
 
-[node name="Danger2" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="Danger2" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("9_gv4gi")
-expand_mode = 2
 
-[node name="ReglaCola" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="Rule3" type="HBoxContainer" parent="ReglasYPecesRestantes/Reglas/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ReglaCola" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule3"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("10_5mn0o")
-expand_mode = 2
+stretch_mode = 2
 
-[node name="ReglaColaLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="ColaLabel" type="Label" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule3"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
-text = "   =   "
+text = " = "
+label_settings = SubResource("LabelSettings_olkg6")
+vertical_alignment = 1
 
-[node name="Danger3" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/GridContainer"]
+[node name="Danger3" type="TextureRect" parent="ReglasYPecesRestantes/Reglas/VBoxContainer/Rule3"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("7_5uuaq")
-expand_mode = 2
+stretch_mode = 2
+
+[node name="StaticShader" type="TextureRect" parent="ReglasYPecesRestantes/Reglas"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 2
+material = SubResource("ShaderMaterial_uyo40")
+offset_left = -307.84415
+offset_top = -330.3987
+offset_right = 303.17258
+offset_bottom = 487.95212
+texture = SubResource("GradientTexture1D_olkg6")
 
 [node name="PecesRestantes" type="Node2D" parent="ReglasYPecesRestantes"]
 position = Vector2(864.00006, 133)

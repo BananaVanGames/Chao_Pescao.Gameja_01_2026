@@ -19,7 +19,6 @@ const CABEZA_SANA: int = 0
 const CUERPO_SANO: int = 0
 const CUERPO_ENFERMO: int = 1
 
-const NIVEL_TUTORIAL: int = 0
 const MARGEN_PUNTOS_EXTRA: float = 1.00
 
 #endregion
@@ -35,60 +34,68 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	var current_rules = GameHandler.get_current_rules()
 	var processable_rules = GameHandler.get_processable_rules()
 
-	print("Fish data: ", fish_data)
-	print("Current rules: ", current_rules)
-	print("Danger rules: ", processable_rules)
+	#print("Fish data: ", fish_data)
+	#print("Current rules: ", current_rules)
+	#print("Danger rules: ", processable_rules)
 
 	if fish_data[CUERPO_PEZ] == CUERPO_ENFERMO:
-		if GameHandler.get_level() > NIVEL_TUTORIAL:
-			GameHandler.lose_life_point()
-		GameHandler.add_score(-3)
-		pez_clasificado.emit()
+		if GameHandler.add_score(-3):
+			pez_clasificado.emit()
 		body.queue_free()
 		return
 
 	var score := 2
-	var cabeza_mal := false
 
-	if fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]:
-		cabeza_mal = true
-	if fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA:
-		cabeza_mal = true
+	var cabeza_cortada: bool = fish_data[CABEZA_CORTADA]
+	var cola_cortada: bool = fish_data[COLA_CORTADA]
 
-	var cabeza_cortada = fish_data[CABEZA_CORTADA]
+	var ojos_mal: bool = fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]
+	var cabeza_mal: bool = (
+		fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES]
+		and fish_data[CABEZA_PEZ] != CABEZA_SANA
+	) or ojos_mal
+	var cola_mal: bool = fish_data[COLA_PEZ] == current_rules[COLA_RULES]
+
+	var error_ojos: bool = false
+	var error_cabeza: bool = false
+	var error_cola: bool = false
+
+	if ojos_mal:
+		if not processable_rules[OJOS_RULES]:
+			score = -3
+			error_ojos = true
+		elif not cabeza_cortada:
+			score -= 1
+			error_ojos = true
+	elif cabeza_cortada and not cabeza_mal:
+		score -= 1
 
 	if cabeza_mal:
-		if not processable_rules[OJOS_RULES] or (not processable_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA):
+		if not processable_rules[CABEZA_RULES]:
 			score = -3
-		else:
-			if not cabeza_cortada:
-				score -= 1
-	else:
-		if cabeza_cortada:
+			error_cabeza = true
+		elif not cabeza_cortada and score != -3:
 			score -= 1
-	print("Score después de la cabeza: ", score)
+			error_cabeza = true
+	elif cabeza_cortada and score != -3:
+		score -= 1
 
-	if score != -3:
-		if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
-			if not processable_rules[COLA_RULES]:
-				score = -3
-			else:
-				if not fish_data[COLA_CORTADA]:
-					score -= 1
-		else:
-			if fish_data[COLA_CORTADA]:
-				score -= 1
-	print("Score después de la cola: ", score)
+	if cola_mal:
+		if not processable_rules[COLA_RULES]:
+			score = -3
+			error_cola = true
+		elif not cola_cortada and score != -3:
+			score -= 1
+			error_cola = true
+	elif cola_cortada and score != -3:
+		score -= 1
 
 	if score == 2 and GameHandler.get_time() > MARGEN_PUNTOS_EXTRA:
-		print("Punto extra por velocidad")
 		score = 3
 
-	if score == -3 and GameHandler.get_level() > NIVEL_TUTORIAL:
-		GameHandler.lose_life_point()
-
-	GameHandler.add_score(score)
-	pez_clasificado.emit()
+	GameHandler.trigger_rules_error([error_ojos, error_cabeza, error_cola])
+	if GameHandler.add_score(score):
+		pez_clasificado.emit()
 	body.queue_free()
 
 
@@ -100,65 +107,54 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 	var current_rules = GameHandler.get_current_rules()
 	var processable_rules = GameHandler.get_processable_rules()
 
-	print("Fish data: ", fish_data)
-	print("Current rules: ", current_rules)
-	print("Danger rules: ", processable_rules)
+	#print("Fish data: ", fish_data)
+	#print("Current rules: ", current_rules)
+	#print("Danger rules: ", processable_rules)
+
+	var ojos_mal: bool = fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]
+	var cabeza_mal: bool = (
+		fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES]
+		and fish_data[CABEZA_PEZ] != CABEZA_SANA
+	) or ojos_mal
+
+	var cola_mal: bool = fish_data[COLA_PEZ] == current_rules[COLA_RULES]
+	var cuerpo_mal: bool = fish_data[CUERPO_PEZ] == CUERPO_ENFERMO
+
+	var cabeza_cortada: bool = fish_data[CABEZA_CORTADA]
+	var cola_cortada: bool = fish_data[COLA_CORTADA]
 
 	var toxic_parts: int = 0
-	if (
-			fish_data[OJOS_PEZ] > current_rules[OJOS_RULES] and not processable_rules[OJOS_PEZ]
-			or fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and not processable_rules[CABEZA_RULES]
-			and fish_data[CABEZA_PEZ] != CABEZA_SANA
-	):
+	if ojos_mal and not processable_rules[OJOS_RULES] or cabeza_mal and not processable_rules[CABEZA_RULES]:
 		toxic_parts += 1
-
-	if fish_data [CUERPO_PEZ] == CUERPO_ENFERMO:
+	if cuerpo_mal:
 		toxic_parts += 1
-
-	if fish_data[COLA_PEZ] == current_rules[COLA_RULES] and not processable_rules[COLA_RULES]:
+	if cola_mal and not processable_rules[COLA_RULES]:
 		toxic_parts += 1
 
 	if not toxic_parts:
-		if GameHandler.get_level() > NIVEL_TUTORIAL:
-			GameHandler.lose_life_point()
-		GameHandler.add_score(-3)
-		pez_clasificado.emit()
+		if GameHandler.add_score(-3):
+			pez_clasificado.emit()
 		body.queue_free()
 		return
 
 	var toxic_cut: int = 0
-	var cabeza_mal := false
 
-	if fish_data[OJOS_PEZ] > current_rules[OJOS_RULES]:
-		cabeza_mal = true
-	if fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES] and fish_data[CABEZA_PEZ] != CABEZA_SANA:
-		cabeza_mal = true
-
-	var cabeza_cortada = fish_data[CABEZA_CORTADA]
-
-	if cabeza_mal:
+	if cabeza_mal and cabeza_cortada:
 		if not processable_rules[OJOS_RULES] or not processable_rules[CABEZA_RULES]:
-			if cabeza_cortada:
-				toxic_cut += 1
+			toxic_cut += 1
 
-	if fish_data[COLA_PEZ] == current_rules[COLA_RULES]:
-		if not processable_rules[COLA_RULES]:
-			if fish_data[COLA_CORTADA]:
-				toxic_cut += 1
+	if cola_mal and cola_cortada and not processable_rules[COLA_RULES]:
+		toxic_cut += 1
+
+	var delta_score := -1
 
 	if toxic_cut == 0:
-		if GameHandler.get_time() > MARGEN_PUNTOS_EXTRA:
-			GameHandler.add_score(3)
-		else:
-			GameHandler.add_score(2)
+		delta_score = 3 if GameHandler.get_time() > MARGEN_PUNTOS_EXTRA else 2
 	elif toxic_cut == toxic_parts:
-		if GameHandler.get_level() > NIVEL_TUTORIAL:
-			GameHandler.lose_life_point()
-		GameHandler.add_score(-3)
-	else:
-		GameHandler.add_score(-1)
+		delta_score = -3
 
-	pez_clasificado.emit()
+	if GameHandler.add_score(delta_score):
+		pez_clasificado.emit()
 	body.queue_free()
 
 

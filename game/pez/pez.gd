@@ -1,5 +1,5 @@
-extends RigidBody2D
 class_name Pez
+extends RigidBody2D
 
 signal clicked(fish)
 signal corte_cabeza
@@ -59,6 +59,7 @@ var fish_texture: CompressedTexture2D = null
 @onready var sprite_cola: Sprite2D = $Cola
 @onready var cabeza_col_shape: CollisionShape2D = $CabezaColShape
 @onready var cola_col_shape: CollisionShape2D = $ColaColShape
+@onready var water: GPUParticles2D = $Water
 
 
 func _physics_process(delta: float) -> void:
@@ -69,16 +70,23 @@ func _physics_process(delta: float) -> void:
 		linear_velocity.y += gravity * delta
 
 
+func disable_grab() -> void:
+	set_physics_process(false)
+
+
 func start_drag(mouse_pos: Vector2):
 	is_dragged = true
+	water.emitting = true
 	grab_offset = mouse_pos - global_position
 
 
 func stop_drag():
 	is_dragged = false
+	water.emitting = false
 
 
 func explode():
+	water.emitting = false
 	animation_player.play("death")
 
 

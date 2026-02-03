@@ -3,26 +3,27 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg1u0ujoc45tf"
-path="res://.godot/imported/SE07.png-ea639a5f1a329ca907dde3355d5719fa.ctex"
+path.s3tc="res://.godot/imported/SE07.png-ea639a5f1a329ca907dde3355d5719fa.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://ui/tutorial/art/SE07.png"
-dest_files=["res://.godot/imported/SE07.png-ea639a5f1a329ca907dde3355d5719fa.ctex"]
+dest_files=["res://.godot/imported/SE07.png-ea639a5f1a329ca907dde3355d5719fa.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
+compress/hdr_compression=0
+compress/normal_map=2
+compress/channel_pack=1
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0

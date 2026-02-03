@@ -47,9 +47,7 @@ var cut_points: Array = []
 @onready var timer: Timer = $Timer
 @onready var spawner: Marker2D = $Spawner
 @onready var line_2d: Line2D = $HUD/Line2D
-@onready var set_transition: CanvasLayer = $SetTransition
-@onready var game_music: AudioStream = preload("res://music/InGame1.mp3")
-@onready var mesa_trampilla: Node2D = $MesaTrampilla
+@onready var mesa_trampilla: Trampilla = $MesaTrampilla
 @onready var cabeza_aux: PackedScene = preload("res://game/pez/cabeza_aux.tscn")
 @onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -57,17 +55,19 @@ var cut_points: Array = []
 
 func _ready() -> void:
 	mesa_trampilla.pez_destruido.connect(on_fish_destroyed)
-	set_transition.transition_finished.connect(_on_transition_finished)
+	GameHandler.transition_finished.connect(_on_transition_finished)
 
 	GameHandler.reset_round()
 	GameHandler.add_score(0)
 
-	MusicHandler.load_track(game_music)
+	MusicHandler.load_track(GameHandler.game_music)
 	MusicHandler.play()
 
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	GameHandler.randomize_rules()
 	start_round()
+
+	GameHandler.set_start_time(Time.get_unix_time_from_system())
 
 
 func _process(_delta: float) -> void:
@@ -113,14 +113,13 @@ func _input(event):
 
 func on_fish_destroyed() -> void:
 	await get_tree().create_timer(0.25).timeout
+	if GameHandler.fishes_left <= 0:
+		on_set_finished()
+		return
 	start_round()
 
 
 func start_round():
-	if GameHandler.fishes_left <= 0:
-		on_set_finished()
-		return
-
 	GameHandler.set_time(round_time)
 	timer.start(round_time)
 	animation_player.play("spawn_fish")
@@ -153,22 +152,17 @@ func spawn_fish():
 
 func on_set_finished():
 	timer.stop()
-
 	spawner.get_children().map(func(c): c.queue_free())
 
+	set_process(false)
 	GameHandler.advance_next_level()
 
-	set_process(false)
-	set_transition.play()
 
-
-func start_grab(fish):
-	#print("Dragged Fish: ", dragged_fish)
+func start_grab(fish: Pez):
 	if dragged_fish != null:
 		return
 
 	dragged_fish = fish
-	# Tell the fish it is being dragged
 	fish.start_drag(get_global_mouse_position())
 
 
@@ -187,7 +181,6 @@ func start_cut():
 
 func finish_cut():
 	is_cutting = false
-	# Test cut against all fish
 	for fish in spawner.get_children():
 		test_cut_against_fish(fish)
 	line_2d.clear_points()
@@ -259,7 +252,9 @@ func cut_fish():
 
 func _on_transition_finished() -> void:
 	set_process(true)
-	GameHandler.randomize_rules()
+	if GameHandler.fishes_left <= 0:
+		on_set_finished()
+		return
 	start_round()
 
 
@@ -272,31 +267,23 @@ func _on_fish_clicked(fish):
 
 
 func _on_timer_timeout() -> void:
-	if dragged_fish:
-		if GameHandler.get_level() > NIVEL_TUTORIAL:
-			GameHandler.lose_life_point()
-		GameHandler.add_score(-3)
+	if dragged_fish and dragged_fish.is_in_group("Pez"):
 		last_fish.explode()
 		await get_tree().create_timer(0.5).timeout
-		on_fish_destroyed()
+		if GameHandler.add_score(-3):
+			on_fish_destroyed()
 		return
 
-	var pez_en_mesa: bool = mesa_trampilla.fish_timeout()
-	if last_fish and not pez_en_mesa or dragged_fish:
-		if GameHandler.get_level() > NIVEL_TUTORIAL:
-			GameHandler.lose_life_point()
-		GameHandler.add_score(-3)
-		last_fish.explode()
-		on_fish_destroyed()
+	if last_fish:
+		last_fish.disable_grab()
+		mesa_trampilla.fish_timeout()
 
 
 func _on_destructor_peces_body_entered(body: Node2D) -> void:
 	if body.is_in_group("pez"):
-		if GameHandler.get_level() > NIVEL_TUTORIAL:
-			GameHandler.lose_life_point()
-		GameHandler.add_score(-3)
 		body.queue_free()
-		on_fish_destroyed()
+		if GameHandler.add_score(-3):
+			on_fish_destroyed()
 
 	if body.is_in_group("corte"):
 		#print("DESTRUYENDO PEZ DEL FONDO")

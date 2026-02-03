@@ -1,14 +1,7 @@
-extends RigidBody2D
+extends Pez
 class_name CabezaPez
 
-signal clicked(fish)
-
-var is_dragged: bool = false
-var grab_offset := Vector2.ZERO
-
 @onready var sprite: Sprite2D = $Sprite
-@export var gravity := 1000.0
-@export var drag_speed := 20.0
 
 func _physics_process(delta: float) -> void:
 	if is_dragged:

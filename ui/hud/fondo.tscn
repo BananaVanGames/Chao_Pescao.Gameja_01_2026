@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bp0iyqdeeq51h"]
+[gd_scene load_steps=7 format=3 uid="uid://bp0iyqdeeq51h"]
 
 [ext_resource type="Script" uid="uid://cpt3ydjxgke45" path="res://ui/hud/fondo.gd" id="1_ftv0e"]
-[ext_resource type="Texture2D" uid="uid://np6av2loxy1f" path="res://ui/hud/art/background/BG.png" id="1_pw8ui"]
 [ext_resource type="Texture2D" uid="uid://doav2yfimvdi2" path="res://ui/hud/art/background/cinta_arriba01.png" id="2_ftv0e"]
 [ext_resource type="Texture2D" uid="uid://cxdwbtyflbo23" path="res://ui/hud/art/background/cinta_arriba02.png" id="3_1yy0k"]
 [ext_resource type="Texture2D" uid="uid://fq5kpwdll81d" path="res://ui/hud/art/background/cinta_arriba03.png" id="4_3461v"]
@@ -42,13 +41,13 @@ animations = [{
 [node name="Fondo" type="Node2D"]
 script = ExtResource("1_ftv0e")
 
-[node name="FondoMorado" type="TextureRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="."]
 z_index = -100
-offset_left = 3.0
-offset_top = 4.0
-offset_right = 1923.0
-offset_bottom = 1084.0
-texture = ExtResource("1_pw8ui")
+offset_left = -64.0
+offset_top = -10.0
+offset_right = 1984.0
+offset_bottom = 1090.0
+color = Color(0.38039216, 0.2, 0.41960785, 1)
 
 [node name="SpawnerFondo" type="Marker2D" parent="."]
 position = Vector2(-197, 365)
