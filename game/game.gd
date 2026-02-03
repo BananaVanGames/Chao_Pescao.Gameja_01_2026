@@ -47,7 +47,7 @@ var cut_points: Array = []
 @onready var timer: Timer = $Timer
 @onready var spawner: Marker2D = $Spawner
 @onready var line_2d: Line2D = $HUD/Line2D
-@onready var mesa_trampilla: Node2D = $MesaTrampilla
+@onready var mesa_trampilla: Trampilla = $MesaTrampilla
 @onready var cabeza_aux: PackedScene = preload("res://game/pez/cabeza_aux.tscn")
 @onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -267,18 +267,16 @@ func _on_fish_clicked(fish):
 
 
 func _on_timer_timeout() -> void:
-	if dragged_fish:
+	if dragged_fish and dragged_fish.is_in_group("Pez"):
 		last_fish.explode()
 		await get_tree().create_timer(0.5).timeout
 		if GameHandler.add_score(-3):
 			on_fish_destroyed()
 		return
 
-	var pez_en_mesa: bool = mesa_trampilla.fish_timeout()
-	if last_fish and not pez_en_mesa or dragged_fish:
-		last_fish.explode()
-		if GameHandler.add_score(-3):
-			on_fish_destroyed()
+	if last_fish:
+		last_fish.disable_grab()
+		mesa_trampilla.fish_timeout()
 
 
 func _on_destructor_peces_body_entered(body: Node2D) -> void:

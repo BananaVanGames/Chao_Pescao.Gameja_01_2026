@@ -70,6 +70,10 @@ func _physics_process(delta: float) -> void:
 		linear_velocity.y += gravity * delta
 
 
+func disable_grab() -> void:
+	set_physics_process(false)
+
+
 func start_drag(mouse_pos: Vector2):
 	is_dragged = true
 	water.emitting = true

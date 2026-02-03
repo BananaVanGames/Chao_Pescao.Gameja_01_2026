@@ -38,13 +38,13 @@ radius = 29.000015
 height = 92.00001
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5oq0"]
-size = Vector2(62.000053, 103.000084)
+size = Vector2(74.000084, 132.00015)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3amar"]
-size = Vector2(90, 123)
+size = Vector2(90, 134.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kntyo"]
-size = Vector2(62, 116)
+size = Vector2(68.00003, 135.00008)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3amar"]
 animations = [{
@@ -569,12 +569,14 @@ position = Vector2(-75, 0)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCabeza"]
-scale = Vector2(0.999999, 0.999999)
+position = Vector2(-7.9999924, 6.9999948)
+scale = Vector2(0.9999988, 0.9999988)
 shape = SubResource("RectangleShape2D_f5oq0")
 
 [node name="CorteCuerpo" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCuerpo"]
+position = Vector2(0, 5.75)
 shape = SubResource("RectangleShape2D_3amar")
 
 [node name="CorteCola" type="Area2D" parent="."]
@@ -582,7 +584,8 @@ position = Vector2(91, 4.7683716e-07)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CorteCola"]
-scale = Vector2(0.9999997, 0.9999997)
+position = Vector2(-11, 5.499998)
+scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_kntyo")
 
 [node name="Corrosion" type="AnimatedSprite2D" parent="."]

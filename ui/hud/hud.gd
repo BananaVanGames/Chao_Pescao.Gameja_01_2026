@@ -148,11 +148,11 @@ func get_special_spawn_chance() -> float:
 	if lvl >= DIFICULTAD_MAXIMA:
 		chance = 1.0
 	elif lvl >= PECES_ESPECIALES:
-		# lvl 5 -> (5 - 2) / 4 = 3 / 4 = 0.75
-		# lvl 4 -> (4 - 2) / 4 = 1 / 2 = 0.5
-		# lvl 3 -> (3 - 2) / 4 = 1 / 4 = 0.25
-		var level_range: float = DIFICULTAD_MAXIMA - PECES_ESPECIALES
-		chance = float(lvl - PECES_ESPECIALES) / level_range
+		# lvl 5 -> 5+1 /6+1 = 0.857
+		# lvl 4 -> 4+1 / 6+1 = 0.714
+		# lvl 3 -> 3+1 / 6+1 = 0.571
+		# lvl 2 -> 2+1 / 6+1 = 0.428
+		chance = (lvl + 1.0) / (DIFICULTAD_MAXIMA + 1.0)
 
 	return chance
 

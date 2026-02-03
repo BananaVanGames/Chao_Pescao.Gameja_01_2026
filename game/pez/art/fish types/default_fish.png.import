@@ -3,26 +3,27 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bv5k7ncl0c8xb"
-path="res://.godot/imported/default_fish.png-68f9a54a49023a810fda4372781da026.ctex"
+path.s3tc="res://.godot/imported/default_fish.png-68f9a54a49023a810fda4372781da026.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://game/pez/art/fish types/default_fish.png"
-dest_files=["res://.godot/imported/default_fish.png-68f9a54a49023a810fda4372781da026.ctex"]
+dest_files=["res://.godot/imported/default_fish.png-68f9a54a49023a810fda4372781da026.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
+compress/hdr_compression=0
+compress/normal_map=2
+compress/channel_pack=1
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
