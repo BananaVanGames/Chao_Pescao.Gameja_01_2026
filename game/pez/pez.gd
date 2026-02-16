@@ -53,14 +53,23 @@ var fish_texture: CompressedTexture2D = null
 
 #endregion
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sprite_cabeza: Sprite2D = $Cabeza
-@onready var sprite_cuerpo: Sprite2D = $Cuerpo
-@onready var sprite_cola: Sprite2D = $Cola
-@onready var cabeza_col_shape: CollisionShape2D = $CabezaColShape
-@onready var cola_col_shape: CollisionShape2D = $ColaColShape
-@onready var water: GPUParticles2D = $Water
+@onready var animation_player: AnimationPlayer = null
+@onready var sprite_cabeza: Sprite2D = null
+@onready var sprite_cuerpo: Sprite2D = null
+@onready var sprite_cola: Sprite2D = null
+@onready var cabeza_col_shape: CollisionShape2D = null
+@onready var cola_col_shape: CollisionShape2D = null
+@onready var water: GPUParticles2D = null
 
+
+func _ready() -> void:
+	animation_player = $AnimationPlayer
+	sprite_cabeza = $Cabeza
+	sprite_cuerpo = $Cuerpo
+	sprite_cola = $Cola
+	cabeza_col_shape = $CabezaColShape
+	cola_col_shape = $ColaColShape
+	water = $Water
 
 func _physics_process(delta: float) -> void:
 	if is_dragged:
@@ -70,8 +79,9 @@ func _physics_process(delta: float) -> void:
 		linear_velocity.y += gravity * delta
 
 
-func disable_grab() -> void:
-	set_physics_process(false)
+func change_collision_mask() -> void:
+	set_collision_mask_value(1, false)
+	set_collision_mask_value(2, true)
 
 
 func start_drag(mouse_pos: Vector2):

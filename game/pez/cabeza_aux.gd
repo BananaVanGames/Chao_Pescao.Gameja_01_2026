@@ -1,7 +1,12 @@
-extends Pez
 class_name CabezaPez
+extends Pez
 
 @onready var sprite: Sprite2D = $Sprite
+
+
+func _ready() -> void:
+	pass
+
 
 func _physics_process(delta: float) -> void:
 	if is_dragged:

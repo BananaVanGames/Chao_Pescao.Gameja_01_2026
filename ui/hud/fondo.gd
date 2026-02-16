@@ -11,14 +11,13 @@ func _ready() -> void:
 
 func randomize_fish_characteristics(fish: RigidBody2D) -> void:
 	var random = randi_range(0, min(GameHandler.get_level(), 2))
-	var fish_texture = GameHandler.fish_sprites[random].pick_random()
-	var file_name = fish_texture.resource_path.get_file()
-	var valuesStr = file_name.get_basename().split(",")
+	var text_path = GameHandler.paths_levels[random].pick_random()
+	var valuesStr = text_path.get_basename().split(",")
 	var nums: Array[int] = []
 	for v in valuesStr:
 		nums.append(v.to_int())
 
-	fish.set_fish_texture(fish_texture)
+	fish.set_fish_texture(load(text_path))
 	fish.set_fish_data([nums[0], nums[1], nums[2], nums[3]])
 
 

@@ -128,14 +128,15 @@ func start_round():
 func randomize_fish_characteristics(fish: RigidBody2D) -> void:
 	var max_random: int = min(GameHandler.get_level(), 2)
 	var random = randi_range(0, max_random)
-	var fish_texture = GameHandler.fish_sprites[random].pick_random()
-	var file_name = fish_texture.resource_path.get_file()
-	var valuesStr = file_name.get_basename().split(",")
+	#var fish_texture = GameHandler.path[random].pick_random()
+	#var file_name = fish_texture.resource_path.get_file()
+	var text_path = GameHandler.paths_levels[random].pick_random()
+	var valuesStr = text_path.get_basename().split(",")
 	var nums: Array[int] = []
 	for v in valuesStr:
 		nums.append(v.to_int())
 
-	fish.set_fish_texture(fish_texture)
+	fish.set_fish_texture(load(text_path))
 	fish.set_fish_data([nums[0], nums[1], nums[2], nums[3]])
 
 
@@ -267,7 +268,7 @@ func _on_fish_clicked(fish):
 
 
 func _on_timer_timeout() -> void:
-	if dragged_fish and dragged_fish.is_in_group("Pez"):
+	if dragged_fish and dragged_fish.is_in_group("pez"):
 		last_fish.explode()
 		await get_tree().create_timer(0.5).timeout
 		if GameHandler.add_score(-3):
@@ -275,7 +276,7 @@ func _on_timer_timeout() -> void:
 		return
 
 	if last_fish:
-		last_fish.disable_grab()
+		last_fish.change_collision_mask()
 		mesa_trampilla.fish_timeout()
 
 
