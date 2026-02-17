@@ -3,7 +3,7 @@ extends Control
 
 signal tutorial_finished
 
-#region preload dialogues
+#region preload
 const ADRIA_01 = preload("uid://byybuh0eejnwd")
 const ADRIA_02 = preload("uid://cnqwbhmvy42dy")
 const ADRIA_03 = preload("uid://bof47a1krb0yj")
@@ -109,44 +109,81 @@ const CHAO_PESCAO = [
 	SERGI_CHAO_PESCAO,
 	VICTOR_CHAO_PESCAO,
 ]
+
+const PEZ1 = preload("uid://db522c10q07ow")
+const PEZ2 = preload("uid://bg1u0ujoc45tf")
+const PEZ3 = preload("uid://bi4yn862qg4se")
+const PEZ4 = preload("uid://dy8yalfw24kr1")
+const PEZ5 = preload("uid://c6krk1y5gg5uf")
+const PEZ6 = preload("uid://dhm0hpjqu7rkr")
+const PEZ7 = preload("uid://bpfc6chf3ys8u")
+const TEXTURAS_PEZ = [PEZ1, PEZ2, PEZ3, PEZ4, PEZ5, PEZ6, PEZ7]
+const VOCES = [LUISMA, SERGI, ELORA, SARA, ADRIA, PAU, VICTOR]
 #endregion
 
 var time_stamp: float = 0
-var current_sprite: int = 0
+var tutorial_idx: int = 0
 var confirm_exit: bool = false
+var especetro_audio: AudioEffectInstance = null
+var fish_talking: bool = true
 
-@onready var l_01: TextureRect = $L01
-@onready var l_02: TextureRect = $L02
-@onready var se_3: TextureRect = $Se3
-@onready var a_04: TextureRect = $A04
-@onready var e_05: TextureRect = $E05
-@onready var sa_06: TextureRect = $Sa06
-@onready var se_07: TextureRect = $Se07
-@onready var dialogos: AudioStreamPlayer = $Dialogos
+@onready var pez_1: TextureRect = $PEZ1
+@onready var pez_2: TextureRect = $PEZ2
+@onready var pez_3: TextureRect = $PEZ3
+@onready var pez_4: TextureRect = $PEZ4
+@onready var pez_5: TextureRect = $PEZ5
+@onready var pez_6: TextureRect = $PEZ6
+@onready var pez_7: TextureRect = $PEZ7
 
-@onready var fish_sprites = [l_01, l_02, se_3, a_04, e_05, sa_06, se_07]
+@onready var pez_hablando: TextureRect = $PezHablando
+@onready var audio_player: AudioStreamPlayer = $Dialogos
+
 @onready var confirm_quit_tutorial: ConfirmationDialog = $ConfirmQuitTutorial
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
+	especetro_audio = AudioServer.get_bus_effect_instance(3, 0)
 	reset_tutorial()
+	pez_hablando.visible = true
 	MusicHandler.stop()
-
-	finish_tutorial()
+	start_tutorial()
 
 
 func _process(_delta: float) -> void:
+	var dB_level = especetro_audio.get_magnitude_for_frequency_range(0, 10000).length()
+	print(dB_level)
+	if dB_level > 0.075 and fish_talking:
+		if not animation_player.is_playing():
+			animation_player.play("1_talk")
+
 	if Input.is_action_just_pressed("ui_cancel"):
 		if not confirm_exit:
 			confirm_exit = true
-			time_stamp = dialogos.get_playback_position()
-			dialogos.stop()
+			time_stamp = audio_player.get_playback_position()
+			audio_player.stop()
 			confirm_quit_tutorial.popup_centered()
 		else:
 			confirm_exit = false
 
 
+func start_tutorial():
+	for dialogo in LUISMA:
+		play_dialogue(dialogo)
+		await audio_player.finished
+		fish_talking = false
+		await get_tree().create_timer(0.5).timeout
+	finish_tutorial()
+
+
+func play_dialogue(dialogo: AudioStreamOggVorbis):
+	fish_talking = true
+	audio_player.stream = dialogo
+	audio_player.play()
+
+
 func finish_tutorial() -> void:
+	fish_talking = false
 	tutorial_finished.emit()
 	MusicHandler.play()
 	queue_free()
@@ -154,8 +191,9 @@ func finish_tutorial() -> void:
 
 func reset_tutorial():
 	time_stamp = 0
-	for i in range(7):
-		fish_sprites[i].visible = false
+	pez_hablando.texture = PEZ1
+	pez_hablando.position = Vector2(910, 512)
+	pez_hablando.visible = true
 
 
 func _on_tutorial_confirmed() -> void:
@@ -163,4 +201,4 @@ func _on_tutorial_confirmed() -> void:
 
 
 func _on_tutorial_canceled() -> void:
-	dialogos.play(time_stamp)
+	audio_player.play(time_stamp)
