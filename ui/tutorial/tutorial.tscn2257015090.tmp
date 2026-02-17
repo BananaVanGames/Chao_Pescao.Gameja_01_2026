@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ch4xwiql7mby5"]
+[gd_scene load_steps=13 format=3 uid="uid://ch4xwiql7mby5"]
 
 [ext_resource type="Texture2D" uid="uid://cmrb6gdp8adgi" path="res://ui/tutorial/placeholder.png" id="1_aw2cu"]
 [ext_resource type="Script" uid="uid://dh3jraa7xuhdp" path="res://ui/tutorial/tutorial.gd" id="1_leiwb"]
@@ -40,97 +40,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [335.0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PEZ2:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.7, 0.7)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PEZ3:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PEZ4:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_j0hjb"]
-resource_name = "2_talk"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ2:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.7, 0.7), Vector2(0.8, 0.8), Vector2(0.7, 0.7)]
-}
-
-[sub_resource type="Animation" id="Animation_sqq7s"]
-resource_name = "3_talk"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ3:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.08726646259971647, 0.0, 0.17453292519943295, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_noidg"]
-resource_name = "4_talk"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ4:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0.33436343, 0.79724115, 1), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ggehi"]
 _data = {
 &"1_talk": SubResource("Animation_leiwb"),
-&"2_talk": SubResource("Animation_j0hjb"),
-&"3_talk": SubResource("Animation_sqq7s"),
-&"4_talk": SubResource("Animation_noidg"),
 &"RESET": SubResource("Animation_ggehi")
 }
 
@@ -163,22 +76,20 @@ texture = ExtResource("2_leiwb")
 
 [node name="PEZ2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 24.999985
-offset_top = 633.0
-offset_right = 935.0
-offset_bottom = 1145.0
+offset_left = 30.0
+offset_top = 703.0
+offset_right = 940.0
+offset_bottom = 1215.0
 scale = Vector2(0.7, 0.7)
-pivot_offset = Vector2(250, 256)
 texture = ExtResource("8_vy52c")
 
 [node name="PEZ3" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 41.999985
-offset_top = 493.0
-offset_right = 952.0
-offset_bottom = 1005.0
+offset_left = 127.0
+offset_top = 528.0
+offset_right = 1037.0
+offset_bottom = 1040.0
 scale = Vector2(0.8, 0.8)
-pivot_offset = Vector2(710.23, 367.88)
 texture = ExtResource("6_noidg")
 
 [node name="PEZ4" type="TextureRect" parent="."]
