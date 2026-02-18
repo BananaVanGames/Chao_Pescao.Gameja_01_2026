@@ -91,22 +91,6 @@ const VICTOR = [
 	VICTOR_06,
 ]
 
-const PAU_CHAO_PESCAO = preload("uid://cb8wrc47jik7g")
-const ADRIA_CHAO_PESCAO = preload("uid://bjx4wxpqhdkm2")
-const ELORA_CHAO_PESCAO = preload("uid://ffp68i4bi3xl")
-const LUISMA_CHAO_PESCAO = preload("uid://c00vf68t8va1u")
-const SARA_CHAO_PESCAO = preload("uid://bwi112lnqhy5r")
-const SERGI_CHAO_PESCAO = preload("uid://d20aoi8e63a38")
-const VICTOR_CHAO_PESCAO = preload("uid://e0jqrh5mervp")
-const CHAO_PESCAO = [
-	PAU_CHAO_PESCAO,
-	ADRIA_CHAO_PESCAO,
-	ELORA_CHAO_PESCAO,
-	LUISMA_CHAO_PESCAO,
-	SARA_CHAO_PESCAO,
-	SERGI_CHAO_PESCAO,
-	VICTOR_CHAO_PESCAO,
-]
 const VOCES = [LUISMA, SERGI, ELORA, SARA, ADRIA, PAU, VICTOR]
 
 #endregion
@@ -115,13 +99,14 @@ var time_stamp: float = 0
 var tutorial_idx: int = 0
 var confirm_exit: bool = false
 var especetro_audio: AudioEffectInstance = null
-var fish_talking: bool = true
+var i: int = 0
+var j: int = 0
 
 @onready var pez_1: TextureRect = $PEZ1
 @onready var pez_2: TextureRect = $PEZ2
 @onready var pez_3: TextureRect = $PEZ3 
 @onready var pez_4: TextureRect = $PEZ4
-@onready var pez_5: TextureRect = $PEZ5
+@onready var pez_5: TextureRect = $SkewerPez5/PEZ5
 @onready var pez_6: TextureRect = $PEZ6
 @onready var pez_7: TextureRect = $PEZ7
 @onready var tutorial_fish = [pez_1, pez_2, pez_3, pez_4, pez_5, pez_6, pez_7]
@@ -136,16 +121,19 @@ func _ready() -> void:
 	especetro_audio = AudioServer.get_bus_effect_instance(3, 0)
 	reset_tutorial()
 	MusicHandler.stop()
-	start_tutorial()
+
+	#start_tutorial()
 
 
 func _process(_delta: float) -> void:
 	var dB_level = especetro_audio.get_magnitude_for_frequency_range(0, 10000).length()
-	if dB_level > 0.075 and fish_talking:
+	if dB_level > 0.075:
 		if not animation_player.is_playing():
-			animation_player.play(str(tutorial_idx + 1) + "_talk")
+			animation_player.play(str(i + 1) + "_talk")
 
-	if Input.is_action_just_pressed("ui_cancel"): 
+	handle_dialogues()
+
+	if Input.is_action_just_pressed("ui_cancel"):
 		if not confirm_exit:
 			confirm_exit = true
 			time_stamp = audio_player.get_playback_position()
@@ -155,25 +143,39 @@ func _process(_delta: float) -> void:
 			confirm_exit = false
 
 
-func start_tutorial():
-	for i in tutorial_fish.size():
+func handle_dialogues():
+	if not audio_player.is_playing():
 		tutorial_fish[i].visible = true
-		tutorial_idx = i
-		for dialogo in VOCES[i]:
-			fish_talking = true
+		tutorial_fish[i - 1].visible = false
+		audio_player.stream = VOCES[i][j]
+		audio_player.play()
 
-			audio_player.stream = dialogo
-			audio_player.play()
+		j += 1
+		if j >= VOCES[i].size():
+			j = 0
+			i += 1
+			if i >= VOCES.size():
+				i = 0
 
-			await audio_player.finished
-			fish_talking = false
-			await get_tree().create_timer(0.5).timeout
-		tutorial_fish[i].visible = false
-	finish_tutorial()
+
+#func start_tutorial():
+	#for i in VOCES.size():
+		#tutorial_fish[i].visible = true
+		#tutorial_idx = i + 1
+		#for j in VOCES[i].size():
+			#fish_talking = true
+#
+			#audio_player.stream = VOCES[i][j]
+			#audio_player.play()
+#
+			#await audio_player.finished
+			#fish_talking = false
+			#await get_tree().create_timer(0.5).timeout
+		#tutorial_fish[i].visible = false
+	#finish_tutorial()
 
 
 func finish_tutorial() -> void:
-	fish_talking = false
 	tutorial_finished.emit()
 	MusicHandler.play()
 	queue_free()

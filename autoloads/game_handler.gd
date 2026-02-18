@@ -257,7 +257,6 @@ func _ready() -> void:
 	add_child(transition)
 	transition.transition_finished.connect(_on_transition_finished)
 
-
 #func _process(_delta: float) -> void:
 	#if fish_loaded:
 		#return
@@ -301,6 +300,7 @@ func _ready() -> void:
 		#requesting_level = false
 		#request_idx = 0
 #
+
 		#if level_idx >= paths_levels.size():
 			#fish_loaded = true
 			#set_process(false)
