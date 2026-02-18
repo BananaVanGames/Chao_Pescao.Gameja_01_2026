@@ -21,7 +21,6 @@ var nav_stack: Array[Control] = []
 var current_panel
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
-@onready var tutorial_scene: PackedScene = preload("res://ui/tutorial/tutorial.tscn")
 
 @onready var menu: VBoxContainer = $Menu
 @onready var settings_button: TextureButton = $Menu/Settings
@@ -48,11 +47,6 @@ func _ready() -> void:
 
 	settings_button.pressed.connect(_navigate_to.bind(settings))
 	scoreboard_button.pressed.connect(_navigate_to.bind(scoreboard))
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
 
 
 func _show_panel(panel: Control):
@@ -104,5 +98,4 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
-	var pop_up_tutorial: Tutorial = tutorial_scene.instantiate()
-	add_child(pop_up_tutorial)
+	get_tree().change_scene_to_file("uid://ch4xwiql7mby5")

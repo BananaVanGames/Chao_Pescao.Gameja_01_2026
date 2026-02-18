@@ -68,14 +68,14 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = -10.0
-offset_right = 25.0
-offset_bottom = -10.0
+offset_left = 853.0
+offset_top = 20.0
+offset_right = 22.0
+offset_bottom = -260.0
 texture = ExtResource("4_o2lis")
 
 [node name="Reglas" type="Node2D" parent="ReglasYPecesRestantes"]
-position = Vector2(1576.0001, 330)
+position = Vector2(743.9999, 284.99997)
 rotation = 0.17453292
 skew = -0.27925268
 
@@ -182,7 +182,7 @@ offset_bottom = 487.95212
 texture = SubResource("GradientTexture1D_olkg6")
 
 [node name="PecesRestantes" type="Node2D" parent="ReglasYPecesRestantes"]
-position = Vector2(864.00006, 133)
+position = Vector2(34, 103)
 rotation = 0.01745329
 scale = Vector2(0.9, 0.9)
 skew = -0.082030535
@@ -246,7 +246,7 @@ texture = ExtResource("5_o2lis")
 expand_mode = 3
 
 [node name="VidasRestantes" type="Node2D" parent="ReglasYPecesRestantes"]
-position = Vector2(955.99994, 184.00002)
+position = Vector2(123.99994, 149)
 rotation = 0.01745329
 scale = Vector2(0.9, 0.9)
 skew = -0.082030535

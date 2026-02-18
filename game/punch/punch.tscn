@@ -1,26 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://cbf08dbu67aci"]
+[gd_scene load_steps=19 format=3 uid="uid://cbf08dbu67aci"]
 
 [ext_resource type="Script" uid="uid://b3nnetptb8ebs" path="res://game/punch/punch.gd" id="1_16sg0"]
 [ext_resource type="Texture2D" uid="uid://bahjdm6uitroo" path="res://game/punch/art/punch-01.png" id="3_xk8dd"]
 [ext_resource type="Texture2D" uid="uid://bfldict5o4tk2" path="res://game/punch/art/punch-02.png" id="4_xwkru"]
-[ext_resource type="Texture2D" uid="uid://br5rox5c5dmc2" path="res://game/punch/art/punch-03.png" id="5_ocvvv"]
 [ext_resource type="Texture2D" uid="uid://cnh4diy8pg25p" path="res://game/punch/art/punch-04.png" id="6_bd751"]
-[ext_resource type="Texture2D" uid="uid://bddvp58quht0a" path="res://game/punch/art/punch-05.png" id="7_h2hhu"]
 [ext_resource type="Texture2D" uid="uid://duo2od5rwvbtd" path="res://game/punch/art/punch-06.png" id="8_l1pi1"]
 [ext_resource type="Texture2D" uid="uid://cgoprr3b5hc1k" path="res://game/punch/art/punch-07.png" id="9_knki6"]
-[ext_resource type="Texture2D" uid="uid://dwsjt30k8qsrv" path="res://game/punch/art/punch-08.png" id="10_lt45y"]
 [ext_resource type="Texture2D" uid="uid://b0xujhj54abdf" path="res://game/punch/art/punch-09.png" id="11_pvoj3"]
-[ext_resource type="Texture2D" uid="uid://gib8ucl0b6cm" path="res://game/punch/art/punch-10.png" id="12_uc5pv"]
 [ext_resource type="Texture2D" uid="uid://st6xlx7rm02n" path="res://game/punch/art/punch-11.png" id="13_l5hmj"]
-[ext_resource type="Texture2D" uid="uid://dn1blvytxoli6" path="res://game/punch/art/punch-12.png" id="14_u1r06"]
 [ext_resource type="Texture2D" uid="uid://6jcal35v3etb" path="res://game/punch/art/punch-13.png" id="15_76art"]
-[ext_resource type="Texture2D" uid="uid://d0p1lrlamn6c7" path="res://game/punch/art/punch-14.png" id="16_efwyf"]
 [ext_resource type="Texture2D" uid="uid://2s3da055vyj7" path="res://game/punch/art/punch-15.png" id="17_es0pd"]
-[ext_resource type="Texture2D" uid="uid://bvfmwa87oos6" path="res://game/punch/art/punch-16.png" id="18_osa3p"]
 [ext_resource type="Texture2D" uid="uid://chrp5a6kvdmka" path="res://game/punch/art/punch-17.png" id="19_chslt"]
-[ext_resource type="Texture2D" uid="uid://dk5xwkuoxmpbl" path="res://game/punch/art/punch-18.png" id="20_6bom4"]
 [ext_resource type="Texture2D" uid="uid://cimtwokc5y0kb" path="res://game/punch/art/punch-19.png" id="21_v7pks"]
-[ext_resource type="Texture2D" uid="uid://daj1gnxg8qyra" path="res://game/punch/art/punch-20.png" id="22_deslh"]
 [ext_resource type="Texture2D" uid="uid://dr0i180x83ivf" path="res://game/punch/art/punch-21.png" id="23_3iuus"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh8fn"]
@@ -36,13 +27,13 @@ animations = [{
 "texture": ExtResource("4_xwkru")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_ocvvv")
+"texture": ExtResource("4_xwkru")
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_bd751")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_h2hhu")
+"texture": ExtResource("6_bd751")
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_l1pi1")
@@ -51,43 +42,43 @@ animations = [{
 "texture": ExtResource("9_knki6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_lt45y")
+"texture": ExtResource("9_knki6")
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_pvoj3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_uc5pv")
+"texture": ExtResource("11_pvoj3")
 }, {
 "duration": 1.0,
 "texture": ExtResource("13_l5hmj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_u1r06")
+"texture": ExtResource("13_l5hmj")
 }, {
 "duration": 1.0,
 "texture": ExtResource("15_76art")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_efwyf")
+"texture": ExtResource("15_76art")
 }, {
 "duration": 1.0,
 "texture": ExtResource("17_es0pd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_osa3p")
+"texture": ExtResource("17_es0pd")
 }, {
 "duration": 1.0,
 "texture": ExtResource("19_chslt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("20_6bom4")
+"texture": ExtResource("19_chslt")
 }, {
 "duration": 1.0,
 "texture": ExtResource("21_v7pks")
 }, {
 "duration": 1.0,
-"texture": ExtResource("22_deslh")
+"texture": ExtResource("21_v7pks")
 }, {
 "duration": 1.0,
 "texture": ExtResource("23_3iuus")

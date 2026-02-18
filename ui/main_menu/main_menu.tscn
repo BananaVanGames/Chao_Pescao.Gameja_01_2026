@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://db3krq1e5py1o" path="res://ui/main_menu/art/navideja.png" id="3_x57m8"]
 [ext_resource type="Texture2D" uid="uid://bdca2ah1rhfex" path="res://ui/main_menu/art/boton2.png" id="4_3c04x"]
 [ext_resource type="Texture2D" uid="uid://dcsj61mr002h1" path="res://ui/main_menu/art/BananaLogo.png" id="5_3c04x"]
-[ext_resource type="Script" path="res://ui/main_menu/settings.gd" id="6_joh67"]
+[ext_resource type="Script" uid="uid://xrvu0jl7ntua" path="res://ui/main_menu/settings.gd" id="6_joh67"]
 [ext_resource type="Script" uid="uid://pcl0wfpi0yve" path="res://ui/main_menu/scoreboard.gd" id="7_u184e"]
 [ext_resource type="Texture2D" uid="uid://be85oxo7k60gd" path="res://ui/main_menu/art/back.png" id="8_6mijq"]
 [ext_resource type="PackedScene" uid="uid://duogf0r0upxxd" path="res://ui/main_menu/score_row.tscn" id="8_w2r0d"]

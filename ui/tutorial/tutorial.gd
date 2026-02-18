@@ -144,7 +144,7 @@ func _process(_delta: float) -> void:
 
 
 func handle_dialogues():
-	if not audio_player.is_playing():
+	if not audio_player.is_playing() and not confirm_exit:
 		tutorial_fish[i].visible = true
 		tutorial_fish[i - 1].visible = false
 		audio_player.stream = VOCES[i][j]
@@ -178,7 +178,7 @@ func handle_dialogues():
 func finish_tutorial() -> void:
 	tutorial_finished.emit()
 	MusicHandler.play()
-	queue_free()
+	get_tree().change_scene_to_file("uid://4xe8awboiffn")
 
 
 func reset_tutorial():
