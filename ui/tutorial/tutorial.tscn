@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://ch4xwiql7mby5"]
+[gd_scene load_steps=23 format=3 uid="uid://ch4xwiql7mby5"]
 
-[ext_resource type="Texture2D" uid="uid://cmrb6gdp8adgi" path="res://ui/tutorial/placeholder.png" id="1_aw2cu"]
 [ext_resource type="Script" uid="uid://dh3jraa7xuhdp" path="res://ui/tutorial/tutorial.gd" id="1_leiwb"]
+[ext_resource type="PackedScene" uid="uid://dbifu6dca3j2i" path="res://game/game.tscn" id="2_ggehi"]
 [ext_resource type="Texture2D" uid="uid://db522c10q07ow" path="res://ui/tutorial/art/L01.png" id="2_leiwb"]
 [ext_resource type="Texture2D" uid="uid://dhm0hpjqu7rkr" path="res://ui/tutorial/art/L02.png" id="3_ggehi"]
 [ext_resource type="Texture2D" uid="uid://bpfc6chf3ys8u" path="res://ui/tutorial/art/SE3.png" id="4_j0hjb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bi4yn862qg4se" path="res://ui/tutorial/art/E05.png" id="6_noidg"]
 [ext_resource type="Texture2D" uid="uid://dy8yalfw24kr1" path="res://ui/tutorial/art/SA06.png" id="7_jhac3"]
 [ext_resource type="Texture2D" uid="uid://bg1u0ujoc45tf" path="res://ui/tutorial/art/SE07.png" id="8_vy52c"]
+[ext_resource type="Texture2D" uid="uid://be85oxo7k60gd" path="res://ui/main_menu/art/back.png" id="10_ggehi"]
 
 [sub_resource type="Animation" id="Animation_leiwb"]
 resource_name = "1_talk"
@@ -221,18 +222,112 @@ _data = {
 &"RESET": SubResource("Animation_ggehi")
 }
 
+[sub_resource type="Animation" id="Animation_u6ate"]
+resource_name = "highlight_containers"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 3.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arrow2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arrow1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(860, 475), Vector2(860, 400), Vector2(860, 475), Vector2(860, 400), Vector2(860, 475), Vector2(860, 400), Vector2(860, 475)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Arrow2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(250, 475), Vector2(250, 400), Vector2(250, 475), Vector2(250, 400), Vector2(250, 475), Vector2(250, 400), Vector2(250, 475)]
+}
+
+[sub_resource type="Animation" id="Animation_ss0bh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arrow2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arrow1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(859, 486.48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jg6hm"]
+_data = {
+&"RESET": SubResource("Animation_ss0bh"),
+&"highlight_containers": SubResource("Animation_u6ate")
+}
+
 [node name="Tutorial" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_leiwb")
 
-[node name="Placeholder" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("1_aw2cu")
+[node name="Game" parent="." instance=ExtResource("2_ggehi")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 offset_right = 1920.0
@@ -240,6 +335,7 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 0.60784316)
 
 [node name="PEZ1" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 612.0
 offset_top = 335.0
@@ -249,6 +345,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_leiwb")
 
 [node name="PEZ2" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 24.999985
 offset_top = 633.0
@@ -259,6 +356,7 @@ pivot_offset = Vector2(250, 256)
 texture = ExtResource("8_vy52c")
 
 [node name="PEZ3" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 41.999985
 offset_top = 493.0
@@ -269,6 +367,7 @@ pivot_offset = Vector2(710.23, 367.88)
 texture = ExtResource("6_noidg")
 
 [node name="PEZ4" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 653.0
 offset_top = 421.0
@@ -277,6 +376,7 @@ offset_bottom = 933.0
 texture = ExtResource("7_jhac3")
 
 [node name="SkewerPez5" type="Node2D" parent="."]
+visible = false
 position = Vector2(822, 269)
 skew = -0.07853982
 
@@ -290,6 +390,7 @@ pivot_offset = Vector2(360, 350)
 texture = ExtResource("5_sqq7s")
 
 [node name="PEZ6" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 213.0
 offset_top = 109.0
@@ -299,6 +400,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_ggehi")
 
 [node name="PEZ7" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 932.0
 offset_top = 94.0
@@ -318,10 +420,38 @@ title = "Exit Tutorial"
 size = Vector2i(268, 100)
 dialog_text = "Do you want to skip the tutorial?"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="FishAnimPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_ggehi")
 }
 
+[node name="TutorialAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jg6hm")
+}
+
+[node name="Arrow1" type="TextureRect" parent="."]
+visible = false
+z_index = 10
+layout_mode = 0
+offset_left = 859.0
+offset_top = 486.48
+offset_right = 1059.0005
+offset_bottom = 686.4822
+rotation = -1.5707964
+texture = ExtResource("10_ggehi")
+
+[node name="Arrow2" type="TextureRect" parent="."]
+visible = false
+z_index = 10
+layout_mode = 0
+offset_left = 245.00002
+offset_top = 478.0005
+offset_right = 445.0
+offset_bottom = 678.0015
+rotation = -1.5707964
+texture = ExtResource("10_ggehi")
+
+[connection signal="finished" from="Dialogos" to="." method="_on_dialogos_finished"]
 [connection signal="canceled" from="ConfirmQuitTutorial" to="." method="_on_tutorial_canceled"]
 [connection signal="confirmed" from="ConfirmQuitTutorial" to="." method="_on_tutorial_confirmed"]

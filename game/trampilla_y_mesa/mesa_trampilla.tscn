@@ -273,7 +273,7 @@ sprite_frames = SubResource("SpriteFrames_6f2ei")
 animation = &"open"
 
 [node name="FakeTrampilla" type="Sprite2D" parent="."]
-z_index = 100
+z_index = 1
 position = Vector2(327, 1024)
 texture = ExtResource("39_wbdj0")
 

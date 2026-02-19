@@ -190,11 +190,12 @@ antialiased = true
 
 [node name="Pinza" type="AnimatedSprite2D" parent="HUD"]
 z_index = 1000
-position = Vector2(963, 385)
+position = Vector2(963, 382)
 sprite_frames = SubResource("SpriteFrames_oacl0")
 animation = &"activate"
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_l8g03")]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

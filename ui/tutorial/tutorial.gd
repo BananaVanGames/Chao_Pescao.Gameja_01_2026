@@ -95,12 +95,15 @@ const VOCES = [LUISMA, SERGI, ELORA, SARA, ADRIA, PAU, VICTOR]
 
 #endregion
 
-var time_stamp: float = 0
+var dialogue_pause_point: float = 0
 var tutorial_idx: int = 0
-var confirm_exit: bool = false
+var tutorial_menu_opened: bool = false
 var especetro_audio: AudioEffectInstance = null
 var i: int = 0
 var j: int = 0
+var tutorial_interrupted: bool = false
+var tutorial_interruptions: Array = [[0, 1], [1, 2]]
+var dialogue_ready: bool = true
 
 @onready var pez_1: TextureRect = $PEZ1
 @onready var pez_2: TextureRect = $PEZ2
@@ -110,11 +113,14 @@ var j: int = 0
 @onready var pez_6: TextureRect = $PEZ6
 @onready var pez_7: TextureRect = $PEZ7
 @onready var tutorial_fish = [pez_1, pez_2, pez_3, pez_4, pez_5, pez_6, pez_7]
+@onready var arrow_1: TextureRect = $Arrow1
+@onready var arrow_2: TextureRect = $Arrow2
 
-@onready var audio_player: AudioStreamPlayer = $Dialogos
+@onready var dialogue_player: AudioStreamPlayer = $Dialogos
 
 @onready var confirm_quit_tutorial: ConfirmationDialog = $ConfirmQuitTutorial
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var fish_anim_player: AnimationPlayer = $FishAnimPlayer
+@onready var tutorial_anim_player: AnimationPlayer = $TutorialAnimPlayer
 
 
 func _ready() -> void:
@@ -126,53 +132,53 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	var dB_level = especetro_audio.get_magnitude_for_frequency_range(0, 10000).length()
-	if dB_level > 0.075:
-		if not animation_player.is_playing():
-			animation_player.play(str(i + 1) + "_talk")
-
+	handle_fish_animations()
 	handle_dialogues()
 
-	if Input.is_action_just_pressed("ui_cancel"):
-		if not confirm_exit:
-			confirm_exit = true
-			time_stamp = audio_player.get_playback_position()
-			audio_player.stop()
+	if Input.is_action_just_pressed("Esc"):
+		if not tutorial_menu_opened:
+			tutorial_menu_opened = true
+			dialogue_pause_point = dialogue_player.get_playback_position()
+			dialogue_player.stop()
 			confirm_quit_tutorial.popup_centered()
 		else:
-			confirm_exit = false
+			tutorial_menu_opened = false
+
+
+func handle_fish_animations():
+	if not dialogue_ready:
+		var dB_level = especetro_audio.get_magnitude_for_frequency_range(0, 10000).length()
+		if dB_level > 0.075 and not fish_anim_player.is_playing():
+			fish_anim_player.play(str(i + 1) + "_talk")
 
 
 func handle_dialogues():
-	if not audio_player.is_playing() and not confirm_exit:
-		tutorial_fish[i].visible = true
-		tutorial_fish[i - 1].visible = false
-		audio_player.stream = VOCES[i][j]
-		audio_player.play()
-
-		j += 1
-		if j >= VOCES[i].size():
-			j = 0
-			i += 1
-			if i >= VOCES.size():
-				i = 0
+	if not tutorial_menu_opened:
+		if not tutorial_interrupted:
+			if dialogue_ready:
+				dialogue_ready = false
+				tutorial_fish[i].visible = true
+				tutorial_fish[i - 1].visible = false
+				dialogue_player.stream = VOCES[i][j]
+				dialogue_player.play()
 
 
-#func start_tutorial():
-	#for i in VOCES.size():
-		#tutorial_fish[i].visible = true
-		#tutorial_idx = i + 1
-		#for j in VOCES[i].size():
-			#fish_talking = true
-#
-			#audio_player.stream = VOCES[i][j]
-			#audio_player.play()
-#
-			#await audio_player.finished
-			#fish_talking = false
-			#await get_tree().create_timer(0.5).timeout
-		#tutorial_fish[i].visible = false
-	#finish_tutorial()
+func handle_dialogue_interruption():
+	if [i, j] in tutorial_interruptions:
+		tutorial_interrupted = true
+
+		match [i, j]:
+			[0, 1]: tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false
+			[1, 2]: print("ALCANZADO")
+
+
+func handle_dialogue_position():
+	j += 1
+	if j >= VOCES[i].size():
+		j = 0
+		i += 1
+		if i >= VOCES.size():
+			i = 0
 
 
 func finish_tutorial() -> void:
@@ -182,7 +188,7 @@ func finish_tutorial() -> void:
 
 
 func reset_tutorial():
-	time_stamp = 0
+	dialogue_pause_point = 0
 	for fish in tutorial_fish:
 		fish.visible = false
 
@@ -192,4 +198,11 @@ func _on_tutorial_confirmed() -> void:
 
 
 func _on_tutorial_canceled() -> void:
-	audio_player.play(time_stamp)
+	dialogue_player.play(dialogue_pause_point)
+
+
+func _on_dialogos_finished() -> void:
+	handle_dialogue_interruption()
+	handle_dialogue_position()
+	await get_tree().create_timer(0.5).timeout
+	dialogue_ready = true
