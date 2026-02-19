@@ -65,13 +65,15 @@ script = ExtResource("1_4d6w6")
 
 [node name="ReglasYPecesRestantes" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 853.0
-offset_top = 20.0
-offset_right = 22.0
-offset_bottom = -260.0
+offset_left = 848.0
+offset_top = 34.0
+offset_right = 17.0
+offset_bottom = -246.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("4_o2lis")
 
 [node name="Reglas" type="Node2D" parent="ReglasYPecesRestantes"]
@@ -80,8 +82,7 @@ rotation = 0.17453292
 skew = -0.27925268
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ReglasYPecesRestantes/Reglas"]
-anchors_preset = 4
-anchor_top = 0.5
+anchors_preset = -1
 anchor_bottom = 0.5
 offset_left = -178.96127
 offset_top = -153.9154
@@ -281,43 +282,66 @@ layout_mode = 2
 texture = ExtResource("9_3mxrk")
 
 [node name="PuntuacionYTiempo" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Conexión" type="TextureRect" parent="PuntuacionYTiempo"]
-layout_mode = 0
-offset_left = 471.00003
-offset_top = 108.00001
-offset_right = 623.0
-offset_bottom = 162.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 476.00003
+offset_top = 111.00001
+offset_right = -1292.0
+offset_bottom = -915.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 0.28136742
 texture = ExtResource("9_5mn0o")
 
 [node name="Conexión2" type="TextureRect" parent="PuntuacionYTiempo"]
-layout_mode = 0
-offset_left = 207.99997
-offset_top = -2.999998
-offset_right = 359.99997
-offset_bottom = 51.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 191.99997
+offset_top = 6.0000024
+offset_right = -1576.0
+offset_bottom = -1020.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 1.3038516
 texture = ExtResource("9_5mn0o")
 
 [node name="Conexión3" type="TextureRect" parent="PuntuacionYTiempo"]
-layout_mode = 0
-offset_left = 552.0
-offset_top = -3.0517578e-05
-offset_right = 704.0
-offset_bottom = 53.99997
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 546.0
+offset_top = -1.0
+offset_right = -1222.0
+offset_bottom = -1027.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 2.0512323
 texture = ExtResource("9_5mn0o")
 
 [node name="TextureRect" type="TextureRect" parent="PuntuacionYTiempo"]
-layout_mode = 0
-offset_left = 156.0
-offset_top = 90.00001
-offset_right = 506.0
-offset_bottom = 266.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 162.0
+offset_top = 97.0
+offset_right = -1408.0
+offset_bottom = -807.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = -0.17976892
 pivot_offset = Vector2(175, 88)
 texture = ExtResource("2_gv4gi")
@@ -326,7 +350,7 @@ texture = ExtResource("2_gv4gi")
 layout_mode = 0
 offset_left = 93.5135
 offset_top = 38.634518
-offset_right = 268.51352
+offset_right = 268.5135
 offset_bottom = 127.63452
 scale = Vector2(1.2, 1.2)
 pivot_offset = Vector2(85, 47)
@@ -338,48 +362,68 @@ label_settings = SubResource("LabelSettings_kwc50")
 horizontal_alignment = 1
 
 [node name="Bombilla" type="TextureRect" parent="PuntuacionYTiempo"]
-layout_mode = 0
-offset_left = 516.0
-offset_top = 89.000015
-offset_right = 625.0
-offset_bottom = 205.00002
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 536.0
+offset_top = 39.999985
+offset_right = -1275.0
+offset_bottom = -924.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = -0.64304894
+pivot_offset = Vector2(54, 58)
 texture = ExtResource("12_5mn0o")
 
 [node name="Bombilla2" type="TextureRect" parent="PuntuacionYTiempo"]
-layout_mode = 0
-offset_left = 626.0
-offset_top = 20.0
-offset_right = 735.0
-offset_bottom = 136.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 628.0
+offset_top = 8.0
+offset_right = -1183.0
+offset_bottom = -956.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 0.1395444
 texture = ExtResource("12_5mn0o")
 
 [node name="Bombilla3" type="TextureRect" parent="PuntuacionYTiempo"]
-layout_mode = 0
-offset_left = 768.0
-offset_top = 59.999992
-offset_right = 877.0
-offset_bottom = 176.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 773.00006
+offset_top = 49.99997
+offset_right = -1038.0
+offset_bottom = -914.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 1.1164885
 texture = ExtResource("12_5mn0o")
 
 [node name="TextureRect2" type="TextureRect" parent="PuntuacionYTiempo"]
-layout_mode = 0
-offset_left = 574.0
-offset_top = 106.0
-offset_right = 724.0
-offset_bottom = 254.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 580.0
+offset_top = 97.0
+offset_right = -1190.0
+offset_bottom = -835.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("4_5mn0o")
 
 [node name="Score" type="Label" parent="PuntuacionYTiempo/TextureRect2"]
 layout_mode = 0
-offset_left = -6.0
-offset_top = 42.999996
-offset_right = 164.0
-offset_bottom = 138.00002
+offset_left = 60.0
+offset_top = 47.999996
+offset_right = 93.0
+offset_bottom = 103.0
 scale = Vector2(0.9, 0.9)
-pivot_offset = Vector2(85, 47)
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
@@ -392,6 +436,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_cxhb7")

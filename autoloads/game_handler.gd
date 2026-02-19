@@ -330,7 +330,7 @@ func lose_life_point() -> bool:
 	if life_points < 0:
 		transition.play_game_finished(start_time)
 		SettingsHandler.add_to_scoreboard(GameHandler.get_score(), GameHandler.get_level())
-		GameHandler.reset_game()
+		reset_game()
 
 		print("Game Over")
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
