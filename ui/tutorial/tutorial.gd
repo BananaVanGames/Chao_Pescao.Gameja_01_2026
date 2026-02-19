@@ -98,7 +98,7 @@ const VOCES = [LUISMA, SERGI, ELORA, SARA, ADRIA, PAU, VICTOR]
 var dialogue_pause_point: float = 0
 var tutorial_idx: int = 0
 var tutorial_menu_opened: bool = false
-var especetro_audio: AudioEffectInstance = null
+var espectro_audio: AudioEffectInstance = null
 var i: int = 0
 var j: int = 0
 var tutorial_interrupted: bool = false
@@ -124,11 +124,9 @@ var dialogue_ready: bool = true
 
 
 func _ready() -> void:
-	especetro_audio = AudioServer.get_bus_effect_instance(3, 0)
+	espectro_audio = AudioServer.get_bus_effect_instance(3, 0)
 	reset_tutorial()
 	MusicHandler.stop()
-
-	#start_tutorial()
 
 
 func _process(_delta: float) -> void:
@@ -147,7 +145,7 @@ func _process(_delta: float) -> void:
 
 func handle_fish_animations():
 	if not dialogue_ready:
-		var dB_level = especetro_audio.get_magnitude_for_frequency_range(0, 10000).length()
+		var dB_level = espectro_audio.get_magnitude_for_frequency_range(0, 10000).length()
 		if dB_level > 0.075 and not fish_anim_player.is_playing():
 			fish_anim_player.play(str(i + 1) + "_talk")
 
