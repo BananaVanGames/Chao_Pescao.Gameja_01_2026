@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameHandler="*res://autoloads/game_handler.gd"
 MusicHandler="*res://autoloads/music_player.gd"
 SettingsHandler="*res://autoloads/settings_handler.gd"
+TransitionHandler="*res://autoloads/transition_handler.gd"
 
 [display]
 

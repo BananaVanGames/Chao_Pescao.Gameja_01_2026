@@ -42,7 +42,7 @@ func _on_main_menu_pressed() -> void:
 
 func _on_confirmation_dialog_confirmed() -> void:
 	visible = false
-	GameHandler.reset_score()
+	GameHandler.reset_game()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
 
@@ -51,7 +51,7 @@ func _on_resume_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	visible = false
 	get_tree().paused = false
-	MusicHandler.load_track(get_parent().game_music)
+	MusicHandler.load_track(GameHandler.game_music)
 	MusicHandler.play(game_music_pos)
 
 
