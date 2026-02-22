@@ -85,7 +85,7 @@ func _on_back_pressed():
 
 
 func _on_start_button_pressed() -> void:
-	TransitionHandler.fade_out(get_tree().current_scene, "uid://dbifu6dca3j2i", .8, Color.BLACK)
+	SceneLoader.load_scene("uid://dbifu6dca3j2i")
 
 
 func _on_exit_button_pressed() -> void:
@@ -98,4 +98,4 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
-	TransitionHandler.fade_out(get_tree().current_scene, "uid://ch4xwiql7mby5", .8, Color.BLACK)
+	SceneLoader.load_scene("uid://ch4xwiql7mby5")
