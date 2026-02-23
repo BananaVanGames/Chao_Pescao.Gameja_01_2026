@@ -71,6 +71,7 @@ func _ready() -> void:
 	cola_col_shape = $ColaColShape
 	water = $Water
 
+
 func _physics_process(delta: float) -> void:
 	if is_dragged:
 		var target := get_global_mouse_position() - grab_offset

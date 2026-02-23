@@ -61,6 +61,7 @@ func _ready() -> void:
 	GameHandler.add_score(0)
 
 	MusicHandler.load_track(GameHandler.game_music)
+	MusicHandler.change_db_to(1)
 	MusicHandler.play()
 
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -68,6 +69,7 @@ func _ready() -> void:
 	start_round()
 
 	GameHandler.set_start_time(Time.get_unix_time_from_system())
+	
 
 
 func _process(_delta: float) -> void:

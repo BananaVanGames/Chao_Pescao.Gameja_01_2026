@@ -16,6 +16,7 @@ const CHAO_PESCAO = [
 	SERGI_CHAO_PESCAO,
 	VICTOR_CHAO_PESCAO,
 ]
+const CHAO_PESCAO_GRUPO = preload("uid://1wxe06ecs3sq")
 
 var nav_stack: Array[Control] = []
 var current_panel
@@ -38,6 +39,7 @@ var current_panel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	MusicHandler.change_db_to(1)
 	MusicHandler.load_track(menu_music)
 	MusicHandler.play()
 
@@ -85,6 +87,9 @@ func _on_back_pressed():
 
 
 func _on_start_button_pressed() -> void:
+	MusicHandler.change_db_to(0.3)
+	audio_player.stream = CHAO_PESCAO_GRUPO
+	audio_player.play()
 	SceneLoader.load_scene("uid://dbifu6dca3j2i")
 
 

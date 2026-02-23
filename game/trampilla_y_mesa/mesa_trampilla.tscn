@@ -284,6 +284,7 @@ libraries = {
 
 [node name="Mesa" type="StaticBody2D" parent="."]
 position = Vector2(970, 1016)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mesa"]
 position = Vector2(95, 14.5)

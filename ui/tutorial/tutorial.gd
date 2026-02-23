@@ -96,14 +96,25 @@ const VOCES = [LUISMA, SERGI, ELORA, SARA, ADRIA, PAU, VICTOR]
 #endregion
 
 var dialogue_pause_point: float = 0
-var tutorial_idx: int = 0
 var tutorial_menu_opened: bool = false
 var espectro_audio: AudioEffectInstance = null
+
 var i: int = 0
 var j: int = 0
 var tutorial_interrupted: bool = false
-var tutorial_interruptions: Array = [[0, 0], [1, 2]]
+var tutorial_interruptions := {
+	[0, 1]: func(): tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false,
+	[0, 3]: func(): tutorial_anim_player.play("show_mutant"); tutorial_interrupted = false,
+	[0, 4]: func(): drop_fish(); tutorial_interrupted = false, 
+	[1, 3]: func(): test_grab_fishes(),
+}
 var dialogue_ready: bool = true
+var dialogue_paused: bool = false
+var animation_paused: bool = false
+var fish: Pez = null
+
+@onready var mesa_trampilla: Trampilla = $MesaTrampilla
+@onready var confirm_quit_tutorial: ConfirmationDialog = $ConfirmQuitTutorial
 
 @onready var pez_1: TextureRect = $PEZ1
 @onready var pez_2: TextureRect = $PEZ2
@@ -113,14 +124,16 @@ var dialogue_ready: bool = true
 @onready var pez_6: TextureRect = $PEZ6
 @onready var pez_7: TextureRect = $PEZ7
 @onready var tutorial_fish = [pez_1, pez_2, pez_3, pez_4, pez_5, pez_6, pez_7]
+
 @onready var arrow_1: TextureRect = $Arrow1
 @onready var arrow_2: TextureRect = $Arrow2
 
-@onready var dialogue_player: AudioStreamPlayer = $Dialogos
+@onready var fish_scene := preload("uid://dqy4ordentikc")
+@onready var pez_fumon: CompressedTexture2D = preload("uid://dcjxjmqs7d7kw")
 
-@onready var confirm_quit_tutorial: ConfirmationDialog = $ConfirmQuitTutorial
 @onready var fish_anim_player: AnimationPlayer = $FishAnimPlayer
 @onready var tutorial_anim_player: AnimationPlayer = $TutorialAnimPlayer
+@onready var dialogue_player: AudioStreamPlayer = $Dialogos
 
 
 func _ready() -> void:
@@ -136,15 +149,22 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Esc"):
 		if not tutorial_menu_opened:
 			tutorial_menu_opened = true
-			dialogue_pause_point = dialogue_player.get_playback_position()
-			dialogue_player.stop()
+			if dialogue_player.is_playing():
+				dialogue_paused = true
+				dialogue_pause_point = dialogue_player.get_playback_position()
+				dialogue_player.stop()
+			if tutorial_anim_player.is_playing():
+				animation_paused = true
+				tutorial_anim_player.pause()
 			confirm_quit_tutorial.popup_centered()
 		else:
 			tutorial_menu_opened = false
-	
-	if Input.is_action_just_pressed("Space"):
+			_on_tutorial_canceled()
+
+	if not tutorial_menu_opened and Input.is_action_just_pressed("Space"):
 		dialogue_player.stop()
-		_on_dialogos_finished(true)
+		tutorial_anim_player.play("RESET")
+		_on_dialogos_finished()
 
 
 func handle_fish_animations():
@@ -165,13 +185,31 @@ func handle_dialogues():
 				dialogue_player.play()
 
 
-func handle_dialogue_interruption():
-	if [i, j] in tutorial_interruptions:
-		tutorial_interrupted = true
+func spawn_fish():
+	var pez: Pez = fish_scene.instantiate()
+	add_child(pez)
+	fish = pez
+	fish.set_fish_texture(pez_fumon)
+	fish.set_physics_process(false)
+	fish.position = Vector2(967.0, 791)
+	fish.z_index = 0
 
-		match [i, j]:
-			[0, 0]: tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false
-			[1, 2]: print("ALCANZADO")
+
+func test_grab_fishes():
+	spawn_fish()
+
+
+func drop_fish():
+	if fish:
+		mesa_trampilla.fish_timeout()
+
+
+func handle_dialogue_interruption():
+	print("POSICIÓN ACTUAL: ", i, j)
+	var current_pos := [i, j]
+	if tutorial_interruptions.has(current_pos):
+		tutorial_interrupted = true
+		tutorial_interruptions[current_pos].call()
 
 
 func handle_dialogue_position():
@@ -184,6 +222,7 @@ func handle_dialogue_position():
 
 
 func finish_tutorial() -> void:
+	dialogue_paused = false
 	tutorial_finished.emit()
 	MusicHandler.play()
 	get_tree().change_scene_to_file("uid://4xe8awboiffn")
@@ -191,8 +230,8 @@ func finish_tutorial() -> void:
 
 func reset_tutorial():
 	dialogue_pause_point = 0
-	for fish in tutorial_fish:
-		fish.visible = false
+	for tuto_fish in tutorial_fish:
+		tuto_fish.visible = false
 
 
 func _on_tutorial_confirmed() -> void:
@@ -200,14 +239,19 @@ func _on_tutorial_confirmed() -> void:
 
 
 func _on_tutorial_canceled() -> void:
-	dialogue_player.play(dialogue_pause_point)
+	confirm_quit_tutorial.visible = false
+	if dialogue_paused:
+		dialogue_paused = false
+		dialogue_player.play(dialogue_pause_point)
+	if animation_paused:
+		animation_paused = false
+		tutorial_anim_player.play()
 
 
-func _on_dialogos_finished(skip_dialogue: bool = false) -> void:
-	handle_dialogue_interruption()
+func _on_dialogos_finished() -> void:
 	handle_dialogue_position()
-	if not skip_dialogue:
-		await get_tree().create_timer(0.5).timeout
+	handle_dialogue_interruption()
+	await get_tree().create_timer(0.5).timeout
 	dialogue_ready = true
 
 
