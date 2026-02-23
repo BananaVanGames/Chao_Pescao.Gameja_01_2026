@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ch4xwiql7mby5"]
+[gd_scene load_steps=24 format=3 uid="uid://ch4xwiql7mby5"]
 
 [ext_resource type="Script" uid="uid://dh3jraa7xuhdp" path="res://ui/tutorial/tutorial.gd" id="1_leiwb"]
 [ext_resource type="Texture2D" uid="uid://db522c10q07ow" path="res://ui/tutorial/art/L01.png" id="2_leiwb"]
@@ -9,19 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dy8yalfw24kr1" path="res://ui/tutorial/art/SA06.png" id="7_jhac3"]
 [ext_resource type="Texture2D" uid="uid://bg1u0ujoc45tf" path="res://ui/tutorial/art/SE07.png" id="8_vy52c"]
 [ext_resource type="Texture2D" uid="uid://df5te8ou42bvi" path="res://ui/tutorial/art/flechas01.png" id="9_sqq7s"]
-[ext_resource type="PackedScene" uid="uid://cdkg20lpo1xmi" path="res://game/trampilla_y_mesa/mesa_trampilla.tscn" id="10_j0hjb"]
-[ext_resource type="Texture2D" uid="uid://ccofekv380kfr" path="res://ui/hud/art/pinza/pinza03.png" id="11_kw5rs"]
-[ext_resource type="PackedScene" uid="uid://bp0iyqdeeq51h" path="res://ui/hud/fondo.tscn" id="11_sqq7s"]
-[ext_resource type="PackedScene" uid="uid://b1m584cu6xjfj" path="res://ui/hud/hud.tscn" id="12_sqq7s"]
-[ext_resource type="Texture2D" uid="uid://ckbxg4t54w08v" path="res://ui/hud/art/pinza/pinza04.png" id="12_wseuc"]
-[ext_resource type="Texture2D" uid="uid://dcoovf08qythx" path="res://ui/hud/art/pinza/pinza05.png" id="13_0ry7g"]
-[ext_resource type="Texture2D" uid="uid://lq3pixtr6ffj" path="res://ui/hud/art/pinza/pinza06.png" id="14_4olgv"]
-[ext_resource type="Texture2D" uid="uid://pv84mxtl8lyj" path="res://ui/hud/art/pinza/pinza07.png" id="15_7edf0"]
-[ext_resource type="Texture2D" uid="uid://c7aqjac1t0yuh" path="res://ui/hud/art/pinza/pinza08.png" id="16_wgo43"]
-[ext_resource type="Texture2D" uid="uid://7ksnh7dpt08e" path="res://ui/hud/art/pinza/pinza09.png" id="17_0uwrr"]
-[ext_resource type="Texture2D" uid="uid://bxdahvw8qnsxn" path="res://ui/hud/art/pinza/pinza10.png" id="18_h4fw2"]
-[ext_resource type="Texture2D" uid="uid://cxd4reim2uqq2" path="res://ui/hud/art/pinza/pinza11.png" id="19_l8dw6"]
-[ext_resource type="Texture2D" uid="uid://djkqfogum0os6" path="res://ui/hud/art/pinza/pinza12.png" id="20_fnl0g"]
+[ext_resource type="PackedScene" uid="uid://dbifu6dca3j2i" path="res://game/game.tscn" id="10_ggehi"]
 
 [sub_resource type="Animation" id="Animation_leiwb"]
 resource_name = "1_talk"
@@ -272,30 +260,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(859, 486.48)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Pinza:animation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"activate"]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Pinza:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_u6ate"]
 resource_name = "highlight_containers"
@@ -352,38 +316,14 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_jg6hm"]
 resource_name = "show_mutant"
 length = 6.5
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pinza:animation")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(6),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"activate"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pinza:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(6, 6.4582996),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 12]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(6.2),
+"times": PackedFloat32Array(6.0333333),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -397,53 +337,6 @@ _data = {
 &"highlight_containers": SubResource("Animation_u6ate"),
 &"show_mutant": SubResource("Animation_jg6hm")
 }
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_wrani"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_kw5rs")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_wseuc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_0ry7g")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_4olgv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_7edf0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_wgo43")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_0uwrr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_h4fw2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_l8dw6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_fnl0g")
-}, {
-"duration": 1.0,
-"texture": null
-}],
-"loop": false,
-"name": &"activate",
-"speed": 24.0
-}]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -576,23 +469,8 @@ offset_bottom = 675.0017
 rotation = -1.5707964
 texture = ExtResource("9_sqq7s")
 
-[node name="DestructorPeces" type="Area2D" parent="."]
-collision_mask = 3
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructorPeces"]
-position = Vector2(-117, -72)
-polygon = PackedVector2Array(2656, -1211, 2659, 1598, 2449, 1428, 2451, -1042, -389, -1042, -388, 1442, 2462, 1435, 2660, 1599, -551, 1602, -550, -1212)
-
-[node name="Fondo" parent="." instance=ExtResource("11_sqq7s")]
-position = Vector2(-8, -4)
-
-[node name="Pinza" type="AnimatedSprite2D" parent="."]
-z_index = 1000
-position = Vector2(963, 382)
-sprite_frames = SubResource("SpriteFrames_wrani")
-animation = &"activate"
-
-[node name="MesaTrampilla" parent="." instance=ExtResource("10_j0hjb")]
+[node name="Game" parent="." instance=ExtResource("10_ggehi")]
+tutorial_execution = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 1
@@ -606,14 +484,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.60784316)
 
-[node name="Hud" parent="." instance=ExtResource("12_sqq7s")]
-layout_mode = 1
-offset_left = 959.0
-offset_top = 540.0
-offset_right = 959.0
-offset_bottom = 540.0
-
 [connection signal="finished" from="Dialogos" to="." method="_on_dialogos_finished"]
 [connection signal="canceled" from="ConfirmQuitTutorial" to="." method="_on_tutorial_canceled"]
 [connection signal="confirmed" from="ConfirmQuitTutorial" to="." method="_on_tutorial_confirmed"]
-[connection signal="body_entered" from="DestructorPeces" to="." method="_on_destructor_peces_body_entered"]
+
+[editable path="Game"]

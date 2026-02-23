@@ -518,7 +518,7 @@ anim_speed_min = 6.89
 anim_speed_max = 9.84
 
 [node name="Pez" type="RigidBody2D" groups=["pez"]]
-z_index = 100
+z_index = 1
 script = ExtResource("1_tlgln")
 
 [node name="GrabArea" type="Area2D" parent="."]

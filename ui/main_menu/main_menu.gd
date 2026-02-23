@@ -90,6 +90,7 @@ func _on_start_button_pressed() -> void:
 	MusicHandler.change_db_to(0.3)
 	audio_player.stream = CHAO_PESCAO_GRUPO
 	audio_player.play()
+	await audio_player.finished
 	SceneLoader.load_scene("uid://dbifu6dca3j2i")
 
 

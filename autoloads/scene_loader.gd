@@ -16,23 +16,6 @@ var use_sub_threads: bool = false
 
 func _ready() -> void:
 	set_process(false)
-	
-func load_scene(_scene_path: String) -> void:
-	scene_path = _scene_path
-	
-	var new_load_screen = loading_screen.instantiate()
-	add_child(new_load_screen)
-	progress_changed.connect(new_load_screen._on_progress_changed)
-	load_finished.connect(new_load_screen._on_load_finished)
-	
-	await new_load_screen.loading_screen_ready
-	
-	start_load()
-
-func start_load() -> void:
-	var state = ResourceLoader.load_threaded_request(scene_path, "", use_sub_threads)
-	if state == OK:
-		set_process(true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,4 +29,22 @@ func _process(delta: float) -> void:
 			loaded_resource = ResourceLoader.load_threaded_get(scene_path)
 			get_tree().change_scene_to_packed(loaded_resource)
 			load_finished.emit()
-			
+
+
+func load_scene(_scene_path: String) -> void:
+	scene_path = _scene_path
+
+	var new_load_screen = loading_screen.instantiate()
+	add_child(new_load_screen)
+	progress_changed.connect(new_load_screen._on_progress_changed)
+	load_finished.connect(new_load_screen._on_load_finished)
+
+	await new_load_screen.loading_screen_ready
+
+	start_load()
+
+
+func start_load() -> void:
+	var state = ResourceLoader.load_threaded_request(scene_path, "", use_sub_threads)
+	if state == OK:
+		set_process(true)

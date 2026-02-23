@@ -1,3 +1,4 @@
+class_name Game
 extends Node2D
 
 enum PELIGROSIDAD {
@@ -17,6 +18,7 @@ const NIVEL_TUTORIAL = 0
 
 @export var round_time: float = 5
 @export var level: int = 0
+@export var tutorial_execution: bool = false
 
 # POSIBLES PECES A SPAWNEAR = [OJOS, CABEZA, CUERPO, COLA]
 var peces_posibles1: Array = [[0, 1, 2], [0, 1], [0], [0, 1, 2]]
@@ -66,17 +68,13 @@ func _ready() -> void:
 
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	GameHandler.randomize_rules()
-	start_round()
+	if not tutorial_execution:
+		start_round()
 
 	GameHandler.set_start_time(Time.get_unix_time_from_system())
-	
 
 
 func _process(_delta: float) -> void:
-	if timer.is_stopped():
-		return
-
-	GameHandler.set_time(timer.time_left)
 	mano.global_position = get_global_mouse_position()
 
 	match current_tool:
@@ -91,6 +89,10 @@ func _process(_delta: float) -> void:
 		var pos = get_global_mouse_position()
 		line_2d.add_point(pos)
 		cut_points.append(pos)
+
+	if timer.is_stopped():
+		return
+	GameHandler.set_time(timer.time_left)
 
 
 func _input(event):
@@ -114,16 +116,18 @@ func _input(event):
 
 
 func on_fish_destroyed() -> void:
-	await get_tree().create_timer(0.25).timeout
-	if GameHandler.fishes_left <= 0:
-		on_set_finished()
-		return
-	start_round()
+	if not tutorial_execution:
+		await get_tree().create_timer(0.25).timeout
+
+		if GameHandler.fishes_left <= 0:
+			on_set_finished()
+			return
+		start_round()
 
 
-func start_round():
-	GameHandler.set_time(round_time)
-	timer.start(round_time)
+func start_round(start_timer: bool = true):
+	if start_timer:
+		timer.start(round_time)
 	animation_player.play("spawn_fish")
 
 

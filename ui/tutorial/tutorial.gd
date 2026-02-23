@@ -102,18 +102,23 @@ var espectro_audio: AudioEffectInstance = null
 var i: int = 0
 var j: int = 0
 var tutorial_interrupted: bool = false
-var tutorial_interruptions := {
-	[0, 1]: func(): tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false,
-	[0, 3]: func(): tutorial_anim_player.play("show_mutant"); tutorial_interrupted = false,
-	[0, 4]: func(): drop_fish(); tutorial_interrupted = false, 
-	[1, 3]: func(): test_grab_fishes(),
-}
+
 var dialogue_ready: bool = true
 var dialogue_paused: bool = false
 var animation_paused: bool = false
 var fish: Pez = null
+var test_containers: bool = false;
+var container_good: bool = false
+var container_false: bool = false
 
-@onready var mesa_trampilla: Trampilla = $MesaTrampilla
+var tutorial_interruptions := {
+	[0, 1]: func(): tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false,
+	[0, 3]: func(): tutorial_anim_player.play("show_mutant"); tutorial_interrupted = false,
+	[0, 4]: func(): drop_fish(); tutorial_interrupted = false,
+	[1, 3]: func(): test_containers = true
+}
+
+@onready var game: Game = $Game
 @onready var confirm_quit_tutorial: ConfirmationDialog = $ConfirmQuitTutorial
 
 @onready var pez_1: TextureRect = $PEZ1
@@ -145,6 +150,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	handle_fish_animations()
 	handle_dialogues()
+
+	if test_containers:
+		test_grab_fishes()
 
 	if Input.is_action_just_pressed("Esc"):
 		if not tutorial_menu_opened:
@@ -186,22 +194,28 @@ func handle_dialogues():
 
 
 func spawn_fish():
-	var pez: Pez = fish_scene.instantiate()
-	add_child(pez)
-	fish = pez
-	fish.set_fish_texture(pez_fumon)
-	fish.set_physics_process(false)
-	fish.position = Vector2(967.0, 791)
-	fish.z_index = 0
+	game.start_round(false)
+	await get_tree().create_timer(0.3).timeout
+	fish = game.last_fish
+	#var pez: Pez = fish_scene.instantiate()
+	#add_child(pez)
+	#fish = pez
+	#fish.set_fish_texture(pez_fumon)
+	#fish.set_physics_process(false)
+	#fish.position = Vector2(967.0, 791)
+	#fish.z_index = 0
 
 
 func test_grab_fishes():
-	spawn_fish()
+	if fish == null:
+		print("PEZ CREADO")
+		spawn_fish()
 
 
 func drop_fish():
+	print("FISH: ", fish)
 	if fish:
-		mesa_trampilla.fish_timeout()
+		game._on_timer_timeout()
 
 
 func handle_dialogue_interruption():

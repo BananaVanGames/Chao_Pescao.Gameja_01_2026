@@ -419,15 +419,16 @@ texture = ExtResource("4_5mn0o")
 
 [node name="Score" type="Label" parent="PuntuacionYTiempo/TextureRect2"]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 47.999996
-offset_right = 93.0
-offset_bottom = 103.0
+offset_left = 26.0
+offset_top = 45.999996
+offset_right = 126.0
+offset_bottom = 101.0
 scale = Vector2(0.9, 0.9)
+pivot_offset = Vector2(50, 22)
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1.4164544, 1.4164544, 1.4164544, 1)
 theme_override_font_sizes/font_size = 40
-text = "0"
+text = "-33"
 label_settings = SubResource("LabelSettings_imuuq")
 horizontal_alignment = 1
 
@@ -436,8 +437,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_cxhb7")
