@@ -102,7 +102,7 @@ var espectro_audio: AudioEffectInstance = null
 var i: int = 0
 var j: int = 0
 var tutorial_interrupted: bool = false
-var tutorial_interruptions: Array = [[0, 1], [1, 2]]
+var tutorial_interruptions: Array = [[0, 0], [1, 2]]
 var dialogue_ready: bool = true
 
 @onready var pez_1: TextureRect = $PEZ1
@@ -141,10 +141,14 @@ func _process(_delta: float) -> void:
 			confirm_quit_tutorial.popup_centered()
 		else:
 			tutorial_menu_opened = false
+	
+	if Input.is_action_just_pressed("Space"):
+		dialogue_player.stop()
+		_on_dialogos_finished(true)
 
 
 func handle_fish_animations():
-	if not dialogue_ready:
+	if not dialogue_ready and not tutorial_menu_opened:
 		var dB_level = espectro_audio.get_magnitude_for_frequency_range(0, 10000).length()
 		if dB_level > 0.075 and not fish_anim_player.is_playing():
 			fish_anim_player.play(str(i + 1) + "_talk")
@@ -166,7 +170,7 @@ func handle_dialogue_interruption():
 		tutorial_interrupted = true
 
 		match [i, j]:
-			[0, 1]: tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false
+			[0, 0]: tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false
 			[1, 2]: print("ALCANZADO")
 
 
@@ -199,8 +203,18 @@ func _on_tutorial_canceled() -> void:
 	dialogue_player.play(dialogue_pause_point)
 
 
-func _on_dialogos_finished() -> void:
+func _on_dialogos_finished(skip_dialogue: bool = false) -> void:
 	handle_dialogue_interruption()
 	handle_dialogue_position()
-	await get_tree().create_timer(0.5).timeout
+	if not skip_dialogue:
+		await get_tree().create_timer(0.5).timeout
 	dialogue_ready = true
+
+
+func _on_destructor_peces_body_entered(body: Node2D) -> void:
+	if body.is_in_group("pez"):
+		body.queue_free()
+
+	if body.is_in_group("corte"):
+		#print("DESTRUYENDO PEZ DEL FONDO")
+		body.queue_free()

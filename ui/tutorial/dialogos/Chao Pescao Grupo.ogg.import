@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://1wxe06ecs3sq"
+path="res://.godot/imported/Chao Pescao Grupo.ogg-32a4f3733e4f485b627bb112c10fae94.oggvorbisstr"
+
+[deps]
+
+source_file="res://ui/tutorial/dialogos/Chao Pescao Grupo.ogg"
+dest_files=["res://.godot/imported/Chao Pescao Grupo.ogg-32a4f3733e4f485b627bb112c10fae94.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

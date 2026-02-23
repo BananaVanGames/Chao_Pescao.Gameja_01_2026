@@ -265,7 +265,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_u6ate"]
 resource_name = "highlight_containers"
-length = 3.0
+length = 9.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -273,7 +273,7 @@ tracks/0/path = NodePath("Arrow1:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335, 3.0333333),
+"times": PackedFloat32Array(6, 8.966667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -285,7 +285,7 @@ tracks/1/path = NodePath("Arrow2:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 3.0333333),
+"times": PackedFloat32Array(6, 9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -297,7 +297,7 @@ tracks/2/path = NodePath("Arrow1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3),
+"times": PackedFloat32Array(5.9666667, 6.4666667, 6.9666667, 7.4666667, 7.9666667, 8.466667, 8.966667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(880, 475), Vector2(880, 400), Vector2(880, 475), Vector2(880, 400), Vector2(880, 475), Vector2(880, 400), Vector2(880, 475)]
@@ -309,7 +309,7 @@ tracks/3/path = NodePath("Arrow2:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3),
+"times": PackedFloat32Array(6, 6.5, 7, 7.5, 8, 8.5, 9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(275, 475), Vector2(275, 400), Vector2(275, 475), Vector2(275, 400), Vector2(275, 475), Vector2(275, 400), Vector2(250, 475)]
@@ -437,7 +437,7 @@ layout_mode = 0
 offset_left = 859.0
 offset_top = 486.48
 offset_right = 1237.0
-offset_bottom = 686.48267
+offset_bottom = 686.4829
 rotation = -1.5707964
 texture = ExtResource("9_sqq7s")
 
@@ -448,9 +448,16 @@ layout_mode = 0
 offset_left = 275.0
 offset_top = 475.0
 offset_right = 653.0
-offset_bottom = 675.00146
+offset_bottom = 675.0017
 rotation = -1.5707964
 texture = ExtResource("9_sqq7s")
+
+[node name="DestructorPeces" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructorPeces"]
+position = Vector2(-117, -72)
+polygon = PackedVector2Array(2656, -1211, 2659, 1598, 2449, 1428, 2451, -1042, -389, -1042, -388, 1442, 2462, 1435, 2660, 1599, -551, 1602, -550, -1212)
 
 [node name="Fondo" parent="." instance=ExtResource("11_sqq7s")]
 position = Vector2(-8, -4)
@@ -480,3 +487,4 @@ offset_bottom = 541.0
 [connection signal="finished" from="Dialogos" to="." method="_on_dialogos_finished"]
 [connection signal="canceled" from="ConfirmQuitTutorial" to="." method="_on_tutorial_canceled"]
 [connection signal="confirmed" from="ConfirmQuitTutorial" to="." method="_on_tutorial_confirmed"]
+[connection signal="body_entered" from="DestructorPeces" to="." method="_on_destructor_peces_body_entered"]

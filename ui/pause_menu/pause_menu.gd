@@ -25,7 +25,7 @@ func toggle_pause():
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		visible = false
 		get_tree().paused = false
-		MusicHandler.load_track(get_parent().game_music)
+		MusicHandler.load_track(GameHandler.game_music)
 		MusicHandler.play(game_music_pos)
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Luisma01.ogg-9f4fb77e5bcf0cb225642687cce393c9
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
