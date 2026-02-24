@@ -257,55 +257,6 @@ func _ready() -> void:
 	add_child(transition)
 	transition.transition_finished.connect(_on_transition_finished)
 
-#func _process(_delta: float) -> void:
-	#if fish_loaded:
-		#return
-#
-	#var level_paths: Array = paths_levels[level_idx]
-#
-	#if not requesting_level:
-		#var fish_path: String = level_paths[request_idx]
-		#ResourceLoader.load_threaded_request(fish_path, "", true)
-#
-		#request_idx += 1
-		#if request_idx >= level_paths.size():
-			#requesting_level = true
-			#request_idx = 0
-			#path_idx = 0
-			#level_loaded_count = 0
-#
-		#return
-#
-	#var path: String = level_paths[path_idx]
-	#var status := ResourceLoader.load_threaded_get_status(path)
-#
-	#if status == ResourceLoader.THREAD_LOAD_LOADED:
-		#fish_sprites[level_idx].append(
-			#ResourceLoader.load_threaded_get(path)
-		#)
-		#level_loaded_count += 1
-#
-	#elif status == ResourceLoader.THREAD_LOAD_FAILED:
-		#push_error("Failed to load: " + path)
-		#level_loaded_count += 1
-#
-	#path_idx += 1
-	#if path_idx >= level_paths.size():
-		#path_idx = 0
-#
-	#if level_loaded_count >= level_paths.size():
-		##print("Level ", level_idx, " fish loaded")
-#
-		#level_idx += 1
-		#requesting_level = false
-		#request_idx = 0
-#
-
-		#if level_idx >= paths_levels.size():
-			#fish_loaded = true
-			#set_process(false)
-			#print("All fish loaded")
-
 
 func trigger_rules_error(results: Array) -> void:
 	rules_error.emit(results)
@@ -350,8 +301,12 @@ func add_life_point() -> void:
 		update_hearts.emit(life_points - 1, restore_life)
 
 
-func get_current_rules() -> Array:
+func get_rules() -> Array:
 	return rules
+
+
+func set_rules(values: Array):
+	rules = values
 
 
 func randomize_rules():
@@ -361,6 +316,10 @@ func randomize_rules():
 	for i in range(3):
 		rules.append(reglas_procesables[min(level, 2)][i].pick_random())
 		processable_rules.append(randi_range(0, 1))
+	emit_change_rules()
+
+
+func emit_change_rules():
 	change_rules.emit(rules, processable_rules)
 
 

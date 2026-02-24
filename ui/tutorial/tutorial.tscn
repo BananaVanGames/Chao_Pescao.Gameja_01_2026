@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ch4xwiql7mby5"]
+[gd_scene load_steps=26 format=3 uid="uid://ch4xwiql7mby5"]
 
 [ext_resource type="Script" uid="uid://dh3jraa7xuhdp" path="res://ui/tutorial/tutorial.gd" id="1_leiwb"]
 [ext_resource type="Texture2D" uid="uid://db522c10q07ow" path="res://ui/tutorial/art/L01.png" id="2_leiwb"]
@@ -227,7 +227,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Arrow1:visible")
+tracks/0/path = NodePath("CanvasLayer/Arrow1:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -239,7 +239,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Arrow2:visible")
+tracks/1/path = NodePath("CanvasLayer/Arrow2:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -251,14 +251,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Arrow1:position")
+tracks/2/path = NodePath("CanvasLayer/Arrow1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(859, 486.48)]
+"values": [Vector2(880, 475)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Arrow2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(275, 475)]
 }
 
 [sub_resource type="Animation" id="Animation_u6ate"]
@@ -267,7 +279,7 @@ length = 9.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Arrow1:visible")
+tracks/0/path = NodePath("CanvasLayer/Arrow1:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -279,7 +291,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Arrow2:visible")
+tracks/1/path = NodePath("CanvasLayer/Arrow2:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -291,7 +303,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Arrow1:position")
+tracks/2/path = NodePath("CanvasLayer/Arrow1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -303,7 +315,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Arrow2:position")
+tracks/3/path = NodePath("CanvasLayer/Arrow2:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -331,37 +343,105 @@ tracks/0/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_otvs0"]
+resource_name = "highlight_containers_loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Arrow1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Arrow2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Arrow1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(880, 475), Vector2(880, 400), Vector2(880, 475)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Arrow2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(275, 475), Vector2(275, 400), Vector2(275, 475)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jg6hm"]
 _data = {
 &"RESET": SubResource("Animation_ss0bh"),
 &"highlight_containers": SubResource("Animation_u6ate"),
+&"highlight_containers_loop": SubResource("Animation_otvs0"),
 &"show_mutant": SubResource("Animation_jg6hm")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_ggehi"]
+font_size = 40
+
 [node name="Tutorial" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_leiwb")
 
 [node name="PEZ1" type="TextureRect" parent="."]
 visible = false
 z_index = 10
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0300001
+anchor_bottom = 1.021
 offset_left = 612.0
 offset_top = 335.0
-offset_right = 1522.0
-offset_bottom = 847.0
+offset_right = -455.60022
+offset_bottom = -255.68005
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_leiwb")
 
 [node name="PEZ2" type="TextureRect" parent="."]
 visible = false
 z_index = 10
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 24.999985
 offset_top = 633.0
-offset_right = 935.0
-offset_bottom = 1145.0
+offset_right = -985.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.7, 0.7)
 pivot_offset = Vector2(250, 256)
 texture = ExtResource("8_vy52c")
@@ -369,11 +449,16 @@ texture = ExtResource("8_vy52c")
 [node name="PEZ3" type="TextureRect" parent="."]
 visible = false
 z_index = 10
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 41.999985
 offset_top = 493.0
-offset_right = 952.0
-offset_bottom = 1005.0
+offset_right = -968.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(710.23, 367.88)
 texture = ExtResource("6_noidg")
@@ -381,17 +466,20 @@ texture = ExtResource("6_noidg")
 [node name="PEZ4" type="TextureRect" parent="."]
 visible = false
 z_index = 10
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 653.0
 offset_top = 421.0
-offset_right = 1563.0
-offset_bottom = 933.0
+offset_right = -357.0
+offset_bottom = -147.0
 texture = ExtResource("7_jhac3")
 
 [node name="SkewerPez5" type="Node2D" parent="."]
 visible = false
 z_index = 10
-position = Vector2(822, 269)
+position = Vector2(828, 324)
 skew = -0.07853982
 
 [node name="PEZ5" type="TextureRect" parent="SkewerPez5"]
@@ -407,22 +495,32 @@ texture = ExtResource("5_sqq7s")
 [node name="PEZ6" type="TextureRect" parent="."]
 visible = false
 z_index = 10
-layout_mode = 0
-offset_left = 213.0
-offset_top = 109.0
-offset_right = 1123.0
-offset_bottom = 621.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 326.0
+offset_top = 175.0
+offset_right = -684.0
+offset_bottom = -393.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_ggehi")
 
 [node name="PEZ7" type="TextureRect" parent="."]
 visible = false
 z_index = 10
-layout_mode = 0
-offset_left = 932.0
-offset_top = 94.0
-offset_right = 1842.0
-offset_bottom = 606.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 896.00006
+offset_top = 208.0
+offset_right = -114.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_j0hjb")
 flip_h = true
@@ -447,45 +545,71 @@ libraries = {
 &"": SubResource("AnimationLibrary_jg6hm")
 }
 
-[node name="Arrow1" type="TextureRect" parent="."]
-visible = false
-z_index = 10
-layout_mode = 0
-offset_left = 859.0
-offset_top = 486.48
-offset_right = 1237.0
-offset_bottom = 686.4829
-rotation = -1.5707964
-texture = ExtResource("9_sqq7s")
-
-[node name="Arrow2" type="TextureRect" parent="."]
-visible = false
-z_index = 10
-layout_mode = 0
-offset_left = 275.0
-offset_top = 475.0
-offset_right = 653.0
-offset_bottom = 675.0017
-rotation = -1.5707964
-texture = ExtResource("9_sqq7s")
-
 [node name="Game" parent="." instance=ExtResource("10_ggehi")]
 tutorial_execution = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 1
 layout_mode = 1
-anchors_preset = -1
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 1927.0
-offset_bottom = 1087.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.60784316)
+color = Color(0, 0, 0, 0.4509804)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Tooltip" type="Label" parent="CanvasLayer"]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 475.0
+offset_top = 629.0
+offset_right = -445.0
+offset_bottom = -151.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(500, 150)
+text = "TOOLTIP"
+label_settings = SubResource("LabelSettings_ggehi")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Arrow1" type="TextureRect" parent="CanvasLayer"]
+visible = false
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 880.0
+offset_top = 475.0
+offset_right = -662.0
+offset_bottom = -404.99707
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+texture = ExtResource("9_sqq7s")
+
+[node name="Arrow2" type="TextureRect" parent="CanvasLayer"]
+visible = false
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 275.0
+offset_top = 475.0
+offset_right = -1267.0
+offset_bottom = -404.9983
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+texture = ExtResource("9_sqq7s")
 
 [connection signal="finished" from="Dialogos" to="." method="_on_dialogos_finished"]
 [connection signal="canceled" from="ConfirmQuitTutorial" to="." method="_on_tutorial_canceled"]
 [connection signal="confirmed" from="ConfirmQuitTutorial" to="." method="_on_tutorial_confirmed"]
-
-[editable path="Game"]

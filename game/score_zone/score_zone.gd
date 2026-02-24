@@ -31,7 +31,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 		return
 
 	var fish_data = body.get_fish_data()
-	var current_rules = GameHandler.get_current_rules()
+	var current_rules = GameHandler.get_rules()
 	var processable_rules = GameHandler.get_processable_rules()
 
 	#print("Fish data: ", fish_data)
@@ -104,7 +104,7 @@ func _on_bad_area_body_entered(body: Node2D) -> void:
 		return
 
 	var fish_data = body.get_fish_data()
-	var current_rules = GameHandler.get_current_rules()
+	var current_rules = GameHandler.get_rules()
 	var processable_rules = GameHandler.get_processable_rules()
 
 	#print("Fish data: ", fish_data)

@@ -1,6 +1,8 @@
 class_name Game
 extends Node2D
 
+signal fish_entered_container
+
 enum PELIGROSIDAD {
 	TOXICO,
 	PROCESABLE,
@@ -53,6 +55,7 @@ var cut_points: Array = []
 @onready var cabeza_aux: PackedScene = preload("res://game/pez/cabeza_aux.tscn")
 @onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var pause_menu: Pause_Menu = $PauseMenu
 
 
 func _ready() -> void:
@@ -70,6 +73,8 @@ func _ready() -> void:
 	GameHandler.randomize_rules()
 	if not tutorial_execution:
 		start_round()
+	else:
+		pause_menu.in_tutorial = true
 
 	GameHandler.set_start_time(Time.get_unix_time_from_system())
 
@@ -123,10 +128,12 @@ func on_fish_destroyed() -> void:
 			on_set_finished()
 			return
 		start_round()
+	else:
+		fish_entered_container.emit()
 
 
-func start_round(start_timer: bool = true):
-	if start_timer:
+func start_round():
+	if not tutorial_execution:
 		timer.start(round_time)
 	animation_player.play("spawn_fish")
 
@@ -154,7 +161,8 @@ func spawn_fish():
 	last_fish.global_position = spawner.global_position
 	last_fish.clicked.connect(_on_fish_clicked)
 
-	GameHandler.set_fishes_left(GameHandler.fishes_left - 1)
+	if not tutorial_execution:
+		GameHandler.set_fishes_left(GameHandler.fishes_left - 1)
 
 
 func on_set_finished():

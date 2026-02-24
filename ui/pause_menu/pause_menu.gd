@@ -1,6 +1,8 @@
+class_name Pause_Menu
 extends CanvasLayer
 
-var in_tutorial: bool = false
+@export var in_tutorial: bool = false
+
 var game_music_pos: float = 0
 
 @onready var confirmation_dialog: ConfirmationDialog = $ConfirmationDialog

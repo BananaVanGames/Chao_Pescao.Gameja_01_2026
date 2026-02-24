@@ -107,15 +107,17 @@ var dialogue_ready: bool = true
 var dialogue_paused: bool = false
 var animation_paused: bool = false
 var fish: Pez = null
-var test_containers: bool = false;
-var container_good: bool = false
-var container_false: bool = false
 
+var test_containers: int = 0;
+var head_cut: bool = false
+var tail_cut: bool = false
 var tutorial_interruptions := {
 	[0, 1]: func(): tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false,
 	[0, 3]: func(): tutorial_anim_player.play("show_mutant"); tutorial_interrupted = false,
 	[0, 4]: func(): drop_fish(); tutorial_interrupted = false,
-	[1, 3]: func(): test_containers = true
+	[1, 3]: func(): start_grab_tutorial(),
+	[1, 4]: func(): start_cut_tutorial(),
+	[1, 5]: func(): drop_fish(); tutorial_interrupted = false,
 }
 
 @onready var game: Game = $Game
@@ -130,8 +132,9 @@ var tutorial_interruptions := {
 @onready var pez_7: TextureRect = $PEZ7
 @onready var tutorial_fish = [pez_1, pez_2, pez_3, pez_4, pez_5, pez_6, pez_7]
 
-@onready var arrow_1: TextureRect = $Arrow1
-@onready var arrow_2: TextureRect = $Arrow2
+@onready var tooltip: Label = $CanvasLayer/Tooltip
+@onready var arrow_1: TextureRect = $CanvasLayer/Arrow1
+@onready var arrow_2: TextureRect = $CanvasLayer/Arrow2
 
 @onready var fish_scene := preload("uid://dqy4ordentikc")
 @onready var pez_fumon: CompressedTexture2D = preload("uid://dcjxjmqs7d7kw")
@@ -143,16 +146,20 @@ var tutorial_interruptions := {
 
 func _ready() -> void:
 	espectro_audio = AudioServer.get_bus_effect_instance(3, 0)
+	game.fish_entered_container.connect(on_fish_entered_container)
 	reset_tutorial()
 	MusicHandler.stop()
+	GameHandler.set_rules([3,1,3])
+	GameHandler.set_processable_rules([0,1,0])
+	GameHandler.emit_change_rules()
 
 
 func _process(_delta: float) -> void:
 	handle_fish_animations()
 	handle_dialogues()
 
-	if test_containers:
-		test_grab_fishes()
+	if test_containers > 0 and fish == null:
+		spawn_fish()
 
 	if Input.is_action_just_pressed("Esc"):
 		if not tutorial_menu_opened:
@@ -169,7 +176,7 @@ func _process(_delta: float) -> void:
 			tutorial_menu_opened = false
 			_on_tutorial_canceled()
 
-	if not tutorial_menu_opened and Input.is_action_just_pressed("Space"):
+	if not tutorial_menu_opened and not tutorial_interrupted and Input.is_action_just_pressed("Space"):
 		dialogue_player.stop()
 		tutorial_anim_player.play("RESET")
 		_on_dialogos_finished()
@@ -194,26 +201,12 @@ func handle_dialogues():
 
 
 func spawn_fish():
-	game.start_round(false)
+	game.start_round()
 	await get_tree().create_timer(0.3).timeout
 	fish = game.last_fish
-	#var pez: Pez = fish_scene.instantiate()
-	#add_child(pez)
-	#fish = pez
-	#fish.set_fish_texture(pez_fumon)
-	#fish.set_physics_process(false)
-	#fish.position = Vector2(967.0, 791)
-	#fish.z_index = 0
-
-
-func test_grab_fishes():
-	if fish == null:
-		print("PEZ CREADO")
-		spawn_fish()
 
 
 func drop_fish():
-	print("FISH: ", fish)
 	if fish:
 		game._on_timer_timeout()
 
@@ -235,6 +228,40 @@ func handle_dialogue_position():
 			i = 0
 
 
+func start_grab_tutorial():
+	tutorial_anim_player.play("highlight_containers_loop")
+	test_containers = 2
+	tooltip.text = "Mantén clic izquierdo sobre un pez para agarrarlo.\nMete dos peces en contenedores."
+	tooltip.visible = true
+
+
+func start_cut_tutorial():
+	tooltip.text = "Mantén clic derecho para sacar el cuchillo.\nPasa el cuchillo sobre la cabeza y la cola de un pez para cortarlas."
+	tooltip.visible = true
+	spawn_fish()
+	await get_tree().create_timer(0.3).timeout
+	fish.corte_cabeza.connect(cut_head)
+	fish.corte_cola.connect(cut_tail)
+
+
+func cut_head(_text, _global_pos):
+	head_cut = true
+	if tail_cut:
+		reset_tooltip(1)
+
+
+func cut_tail(_text, _global_pos):
+	tail_cut = true
+	if head_cut:
+		reset_tooltip(1)
+
+
+func reset_tutorial():
+	dialogue_pause_point = 0
+	for tuto_fish in tutorial_fish:
+		tuto_fish.visible = false
+
+
 func finish_tutorial() -> void:
 	dialogue_paused = false
 	tutorial_finished.emit()
@@ -242,10 +269,18 @@ func finish_tutorial() -> void:
 	get_tree().change_scene_to_file("uid://4xe8awboiffn")
 
 
-func reset_tutorial():
-	dialogue_pause_point = 0
-	for tuto_fish in tutorial_fish:
-		tuto_fish.visible = false
+func on_fish_entered_container():
+	test_containers -= 1
+	if not test_containers:
+		reset_tooltip(1)
+
+
+func reset_tooltip(specific_time:float = 0):
+	tutorial_anim_player.play("RESET")
+	tooltip.visible = false
+	if specific_time:
+		await get_tree().create_timer(specific_time).timeout
+	tutorial_interrupted = false
 
 
 func _on_tutorial_confirmed() -> void:
