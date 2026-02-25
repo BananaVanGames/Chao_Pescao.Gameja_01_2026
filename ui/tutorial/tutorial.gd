@@ -111,13 +111,16 @@ var fish: Pez = null
 var test_containers: int = 0;
 var head_cut: bool = false
 var tail_cut: bool = false
+var test_cut_container: bool = false
+
 var tutorial_interruptions := {
 	[0, 1]: func(): tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false,
 	[0, 3]: func(): tutorial_anim_player.play("show_mutant"); tutorial_interrupted = false,
 	[0, 4]: func(): drop_fish(); tutorial_interrupted = false,
 	[1, 3]: func(): start_grab_tutorial(),
 	[1, 4]: func(): start_cut_tutorial(),
-	[1, 5]: func(): drop_fish(); tutorial_interrupted = false,
+	[2, 0]: func(): drop_fish(); tutorial_interrupted = false,
+	[2, 2]: func(): start_cut_and_drop_tutorial(),
 }
 
 @onready var game: Game = $Game
@@ -149,8 +152,8 @@ func _ready() -> void:
 	game.fish_entered_container.connect(on_fish_entered_container)
 	reset_tutorial()
 	MusicHandler.stop()
-	GameHandler.set_rules([3,1,3])
-	GameHandler.set_processable_rules([0,1,0])
+	GameHandler.set_rules([3, 1, 3])
+	GameHandler.set_processable_rules([0, 1, 1])
 	GameHandler.emit_change_rules()
 
 
@@ -160,6 +163,9 @@ func _process(_delta: float) -> void:
 
 	if test_containers > 0 and fish == null:
 		spawn_fish()
+
+	if test_cut_container and fish == null:
+		spawn_fish([1,1,0,3])
 
 	if Input.is_action_just_pressed("Esc"):
 		if not tutorial_menu_opened:
@@ -200,13 +206,20 @@ func handle_dialogues():
 				dialogue_player.play()
 
 
-func spawn_fish():
+func spawn_fish(data: Array = [], texture: CompressedTexture2D = null):
 	game.start_round()
 	await get_tree().create_timer(0.3).timeout
 	fish = game.last_fish
+	fish.corte_cabeza.connect(cut_head)
+	fish.corte_cola.connect(cut_tail)
+	if not data.is_empty():
+		fish.set_fish_data(data)
+	if texture:
+		fish.set_fish_texture(texture)
 
 
 func drop_fish():
+	print("VALUE OF FISH: ", fish)
 	if fish:
 		game._on_timer_timeout()
 
@@ -239,9 +252,12 @@ func start_cut_tutorial():
 	tooltip.text = "Mantén clic derecho para sacar el cuchillo.\nPasa el cuchillo sobre la cabeza y la cola de un pez para cortarlas."
 	tooltip.visible = true
 	spawn_fish()
-	await get_tree().create_timer(0.3).timeout
-	fish.corte_cabeza.connect(cut_head)
-	fish.corte_cola.connect(cut_tail)
+
+
+func start_cut_and_drop_tutorial():
+	tooltip.text = "Mantén clic derecho para sacar el cuchillo.\nPasa el cuchillo sobre la cabeza y la cola de un pez para cortarlas."
+	tooltip.visible = true
+	test_cut_container = true
 
 
 func cut_head(_text, _global_pos):
@@ -275,7 +291,7 @@ func on_fish_entered_container():
 		reset_tooltip(1)
 
 
-func reset_tooltip(specific_time:float = 0):
+func reset_tooltip(specific_time: float = 0):
 	tutorial_anim_player.play("RESET")
 	tooltip.visible = false
 	if specific_time:

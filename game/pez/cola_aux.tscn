@@ -12,7 +12,7 @@ radius = 30.0
 height = 74.0
 
 [node name="ColaAux" type="RigidBody2D" groups=["corte"]]
-z_index = 100
+z_index = 1
 script = ExtResource("1_gksol")
 
 [node name="Sprite" type="Sprite2D" parent="."]
