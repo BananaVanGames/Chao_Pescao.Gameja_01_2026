@@ -165,7 +165,7 @@ func _process(_delta: float) -> void:
 		spawn_fish()
 
 	if test_cut_container and fish == null:
-		spawn_fish([1,1,0,3])
+		spawn_fish([1, 1, 0, 3])
 
 	if Input.is_action_just_pressed("Esc"):
 		if not tutorial_menu_opened:
