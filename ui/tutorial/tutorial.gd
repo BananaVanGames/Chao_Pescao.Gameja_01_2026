@@ -109,11 +109,14 @@ var animation_paused: bool = false
 var fish: Pez = null
 
 var spawning_fish: bool = false
-var test_containers: int = 0;
+var test_containers: bool = false
+var test_fish_containers: int = 0;
 var head_cut: bool = true
 var tail_cut: bool = true
 var test_cut: bool = false
 var test_cut_grab_container: bool = false
+var current_points: int = 0
+var test_bone_fish: bool = false
 
 var tutorial_interruptions := {
 	[0, 1]: func(): tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false,
@@ -122,19 +125,21 @@ var tutorial_interruptions := {
 	[1, 3]: func(): start_grab_tutorial(),
 	[1, 4]: func(): start_cut_tutorial(),
 	[2, 0]: func(): drop_fish(); tutorial_interrupted = false,
-	[2, 2]: func(): start_cut_and_drop_tutorial(),
+	[3, 3]: func(): start_cut_and_drop_tutorial(),
+	[3, 4]: func(): start_bone_fish_tutorial(),
 }
 
 @onready var game: Game = $Game
 @onready var confirm_quit_tutorial: ConfirmationDialog = $ConfirmQuitTutorial
 
-@onready var pez_1: TextureRect = $PEZ1
-@onready var pez_2: TextureRect = $PEZ2
-@onready var pez_3: TextureRect = $PEZ3 
-@onready var pez_4: TextureRect = $PEZ4
-@onready var pez_5: TextureRect = $SkewerPez5/PEZ5
-@onready var pez_6: TextureRect = $PEZ6
-@onready var pez_7: TextureRect = $PEZ7
+@onready var pez_1: TextureRect = $PECES/PEZ1
+@onready var pez_2: TextureRect = $PECES/PEZ2
+@onready var pez_3: TextureRect = $PECES/PEZ3 
+@onready var pez_4: TextureRect = $PECES/PEZ4
+@onready var pez_5: TextureRect = $PECES/PEZ7
+@onready var pez_6: TextureRect = $PECES/PEZ6
+@onready var pez_7: TextureRect = $PECES/SkewerPez5/PEZ5
+
 @onready var tutorial_fish = [pez_1, pez_2, pez_3, pez_4, pez_5, pez_6, pez_7]
 
 @onready var tooltip: Label = $CanvasLayer/Tooltip
@@ -148,6 +153,7 @@ var tutorial_interruptions := {
 @onready var tutorial_anim_player: AnimationPlayer = $TutorialAnimPlayer
 @onready var dialogue_player: AudioStreamPlayer = $Dialogos
 @onready var cut_drag_fish: CompressedTexture2D = preload("uid://bm52r77o04e37")
+@onready var bone_fish: CompressedTexture2D = preload("uid://ee2cmcq2me3g")
 
 
 func _ready() -> void:
@@ -165,14 +171,19 @@ func _process(_delta: float) -> void:
 	handle_dialogues()
 
 	if fish == null:
-		if test_containers > 0 :
+		if test_containers:
 			spawn_fish()
-			
+
 		if not head_cut or not tail_cut:
 			spawn_fish()
 
 		if test_cut_grab_container:
 			spawn_fish([1, 1, 0, 2], cut_drag_fish)
+			current_points = GameHandler.get_score()
+
+		if test_bone_fish:
+			spawn_fish([1, 1, 1, 2], bone_fish)
+			current_points = GameHandler.get_score()
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -259,7 +270,8 @@ func start_grab_tutorial():
 	tooltip.text = "Mantén clic izquierdo sobre un pez para agarrarlo.\nMete dos peces en contenedores."
 	tooltip.visible = true
 	tutorial_anim_player.play("highlight_containers_loop")
-	test_containers = 2
+	test_containers = true
+	test_fish_containers = 2
 
 
 func start_cut_tutorial():
@@ -274,6 +286,12 @@ func start_cut_and_drop_tutorial():
 	tooltip.text = "Corta la parte procesable del pez y tira el resto en el contenedor adecuado."
 	tooltip.visible = true
 	test_cut_grab_container = true
+
+
+func start_bone_fish_tutorial():
+	tooltip.text = "Si el cuerpo del pez está en las espinas es equivalente a que el cuerpo sea tóxico."
+	tooltip.visible = true
+	test_bone_fish = true
 
 
 func cut_head(_text, _global_pos):
@@ -307,9 +325,23 @@ func finish_tutorial() -> void:
 
 
 func on_fish_entered_container():
-	test_containers -= 1
 	spawning_fish = false
-	if not test_containers:
+
+	if test_fish_containers > 0:
+		test_fish_containers -= 1
+	if test_containers and not test_fish_containers:
+		test_containers = false
+		reset_tooltip(1)
+
+	print("GameHandler.get_score(): ", GameHandler.get_score())
+	print("current_points + 3: ", current_points + 3)
+	print("GameHandler.get_score() == current_points + 3: ", GameHandler.get_score() == current_points + 3)
+	if test_cut_grab_container and GameHandler.get_score() == current_points + 3:
+		test_cut_grab_container = false
+		reset_tooltip(1)
+
+	if test_bone_fish and GameHandler.get_score() == current_points + 3:
+		test_bone_fish = false
 		reset_tooltip(1)
 
 

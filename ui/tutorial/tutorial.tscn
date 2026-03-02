@@ -17,7 +17,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ1:position:y")
+tracks/0/path = NodePath("PECES/PEZ1:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -33,7 +33,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ2:scale")
+tracks/0/path = NodePath("PECES/PEZ2:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,7 +49,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ3:rotation")
+tracks/0/path = NodePath("PECES/PEZ3:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,7 +65,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ4:modulate")
+tracks/0/path = NodePath("PECES/PEZ4:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,29 +75,13 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(4.4579406, 7.873011, 9.353, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_jhac3"]
-resource_name = "5_talk"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SkewerPez5:skew")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.08726646259971647, 0.0, 0.08726646259971647, 0.0]
-}
-
 [sub_resource type="Animation" id="Animation_vy52c"]
 resource_name = "6_talk"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ6:size")
+tracks/0/path = NodePath("PECES/PEZ6:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -107,28 +91,12 @@ tracks/0/keys = {
 "values": [Vector2(910, 512), Vector2(975, 512), Vector2(910, 512)]
 }
 
-[sub_resource type="Animation" id="Animation_noidg"]
-resource_name = "7_talk"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ7:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0.35240245, 0.6988194, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_ggehi"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PEZ1:position:y")
+tracks/0/path = NodePath("PECES/PEZ1:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -140,7 +108,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PEZ2:scale")
+tracks/1/path = NodePath("PECES/PEZ2:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -152,7 +120,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PEZ3:rotation")
+tracks/2/path = NodePath("PECES/PEZ3:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -164,7 +132,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PEZ4:modulate")
+tracks/3/path = NodePath("PECES/PEZ4:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -176,7 +144,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SkewerPez5:skew")
+tracks/4/path = NodePath("PECES/SkewerPez5:skew")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -188,7 +156,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PEZ6:size")
+tracks/5/path = NodePath("PECES/PEZ6:size")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -200,7 +168,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("PEZ7:modulate")
+tracks/6/path = NodePath("PECES/PEZ7:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -210,15 +178,47 @@ tracks/6/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_jhac3"]
+resource_name = "7_talk"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PECES/SkewerPez5:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.08726646259971647, 0.0, 0.08726646259971647, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_noidg"]
+resource_name = "5_talk"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PECES/PEZ7:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.35240245, 0.6988194, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ggehi"]
 _data = {
 &"1_talk": SubResource("Animation_leiwb"),
 &"2_talk": SubResource("Animation_j0hjb"),
 &"3_talk": SubResource("Animation_sqq7s"),
 &"4_talk": SubResource("Animation_ajco1"),
-&"5_talk": SubResource("Animation_jhac3"),
+&"5_talk": SubResource("Animation_noidg"),
 &"6_talk": SubResource("Animation_vy52c"),
-&"7_talk": SubResource("Animation_noidg"),
+&"7_talk": SubResource("Animation_jhac3"),
 &"RESET": SubResource("Animation_ggehi")
 }
 
@@ -415,10 +415,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_leiwb")
 
-[node name="PEZ1" type="TextureRect" parent="."]
-visible = false
+[node name="PECES" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="PEZ1" type="TextureRect" parent="PECES"]
 z_index = 10
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0300001
 anchor_bottom = 1.021
@@ -429,10 +430,9 @@ offset_bottom = -255.68005
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_leiwb")
 
-[node name="PEZ2" type="TextureRect" parent="."]
+[node name="PEZ2" type="TextureRect" parent="PECES"]
 visible = false
 z_index = 10
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -446,43 +446,42 @@ scale = Vector2(0.7, 0.7)
 pivot_offset = Vector2(250, 256)
 texture = ExtResource("8_vy52c")
 
-[node name="PEZ3" type="TextureRect" parent="."]
-visible = false
+[node name="PEZ3" type="TextureRect" parent="PECES"]
 z_index = 10
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 41.999985
-offset_top = 493.0
-offset_right = -968.0
-offset_bottom = -75.0
+offset_left = -1.0000076
+offset_top = 465.99997
+offset_right = -1011.0
+offset_bottom = -102.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(710.23, 367.88)
 texture = ExtResource("6_noidg")
 
-[node name="PEZ4" type="TextureRect" parent="."]
+[node name="PEZ4" type="TextureRect" parent="PECES"]
 visible = false
 z_index = 10
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 653.0
-offset_top = 421.0
-offset_right = -357.0
-offset_bottom = -147.0
+offset_left = 814.0
+offset_top = 493.0
+offset_right = -196.0
+offset_bottom = -75.0
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_jhac3")
 
-[node name="SkewerPez5" type="Node2D" parent="."]
-visible = false
+[node name="SkewerPez5" type="Node2D" parent="PECES"]
 z_index = 10
 position = Vector2(828, 324)
+scale = Vector2(1, 0.99999994)
 skew = -0.07853982
 
-[node name="PEZ5" type="TextureRect" parent="SkewerPez5"]
+[node name="PEZ5" type="TextureRect" parent="PECES/SkewerPez5"]
+visible = false
 z_index = 10
 offset_left = -360.99997
 offset_top = -352.99997
@@ -492,33 +491,30 @@ scale = Vector2(0.7, 0.7)
 pivot_offset = Vector2(360, 350)
 texture = ExtResource("5_sqq7s")
 
-[node name="PEZ6" type="TextureRect" parent="."]
+[node name="PEZ6" type="TextureRect" parent="PECES"]
 visible = false
 z_index = 10
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 326.0
-offset_top = 175.0
-offset_right = -684.0
-offset_bottom = -393.0
+offset_left = 244.0
+offset_top = 140.0
+offset_right = -766.0
+offset_bottom = -428.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_ggehi")
 
-[node name="PEZ7" type="TextureRect" parent="."]
-visible = false
+[node name="PEZ7" type="TextureRect" parent="PECES"]
 z_index = 10
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 896.00006
-offset_top = 208.0
-offset_right = -114.0
-offset_bottom = -360.0
+offset_left = 898.0
+offset_top = 108.0
+offset_right = -112.0
+offset_bottom = -460.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
