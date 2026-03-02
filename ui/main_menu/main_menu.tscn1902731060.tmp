@@ -246,14 +246,13 @@ theme_override_font_sizes/font_size = 16
 text = "Salir"
 
 [node name="Settings" type="VBoxContainer" parent="." node_paths=PackedStringArray("master_slider", "music_slider", "sfx_slider", "fullscreen_check")]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -234.0
+offset_left = -271.5
 offset_top = -600.0
 offset_right = 271.5
 grow_horizontal = 2
@@ -266,8 +265,7 @@ fullscreen_check = NodePath("FullScreen/CheckBox")
 
 [node name="Master" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 50
+size_flags_horizontal = 4
 alignment = 1
 
 [node name="Label" type="Label" parent="Settings/Master"]
@@ -282,9 +280,8 @@ layout_mode = 2
 
 [node name="Music" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 50
 alignment = 1
 
 [node name="Label" type="Label" parent="Settings/Music"]
@@ -299,9 +296,8 @@ layout_mode = 2
 
 [node name="SFX" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 85
 alignment = 1
 
 [node name="Label" type="Label" parent="Settings/SFX"]
@@ -316,14 +312,10 @@ layout_mode = 2
 
 [node name="FullScreen" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 60
 alignment = 1
 
 [node name="Label" type="Label" parent="Settings/FullScreen"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_xio0d")
-theme_override_font_sizes/font_size = 32
 text = "Pantalla Completa"
 
 [node name="CheckBox" type="CheckBox" parent="Settings/FullScreen"]

@@ -32,3 +32,5 @@ func load_scores() -> void:
 	if FileAccess.file_exists(SAVE_PATH):
 		var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
 		scores = file.get_var()
+	else:
+		scores = []

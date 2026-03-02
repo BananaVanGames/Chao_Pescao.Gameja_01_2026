@@ -25,11 +25,15 @@ var current_panel
 
 @onready var menu: VBoxContainer = $Menu
 @onready var settings_button: TextureButton = $Menu/Settings
+@onready var credits_button: TextureButton = $Menu/Credits
 @onready var scoreboard_button: TextureButton = $Menu/Scoreboard
 @onready var back_button: TextureButton = $Back
 
 @onready var settings: VBoxContainer = $Settings
 @onready var scoreboard: VBoxContainer = $Scoreboard
+@onready var credits: VBoxContainer = $Credits
+
+
 
 @onready var menu_music: AudioStream = load("res://music/menu.mp3")
 @onready var title: TextureRect = $Title
@@ -49,6 +53,7 @@ func _ready() -> void:
 
 	settings_button.pressed.connect(_navigate_to.bind(settings))
 	scoreboard_button.pressed.connect(_navigate_to.bind(scoreboard))
+	credits_button.pressed.connect(_navigate_to.bind(credits))
 
 
 func _show_panel(panel: Control):

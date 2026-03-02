@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://duogf0r0upxxd"]
+[gd_scene load_steps=2 format=3 uid="uid://duogf0r0upxxd"]
+
+[ext_resource type="FontFile" uid="uid://21qlfmewcsad" path="res://ui/Ldfcomicsans-jj7l.ttf" id="1_w648i"]
 
 [node name="ScoreRow" type="Control"]
 layout_mode = 3
@@ -26,6 +28,8 @@ theme_override_constants/separation = 40
 [node name="Position" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_w648i")
+theme_override_font_sizes/font_size = 32
 text = "Position"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -33,6 +37,8 @@ vertical_alignment = 1
 [node name="Score" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_w648i")
+theme_override_font_sizes/font_size = 32
 text = "Score"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -40,6 +46,8 @@ vertical_alignment = 1
 [node name="Level" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_w648i")
+theme_override_font_sizes/font_size = 32
 text = "Level"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -47,6 +55,8 @@ vertical_alignment = 1
 [node name="Date" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_w648i")
+theme_override_font_sizes/font_size = 32
 text = "Date"
 horizontal_alignment = 1
 vertical_alignment = 1

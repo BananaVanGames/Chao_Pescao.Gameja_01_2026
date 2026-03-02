@@ -1,6 +1,6 @@
 extends Node
 
-signal progress_changed(progress)
+#signal progress_changed(progress)
 signal load_finished
 
 var loading_screen: PackedScene = preload("uid://bexgy884vcrx3")
@@ -20,8 +20,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# Avoid warning
+	var warning_delta = delta
+	if warning_delta: pass
+
 	var load_status = ResourceLoader.load_threaded_get_status(scene_path, progress)
-	progress_changed.emit(progress[0])
+	#progress_changed.emit(progress[0])
 	match load_status:
 		ResourceLoader.THREAD_LOAD_INVALID_RESOURCE, ResourceLoader.THREAD_LOAD_FAILED:
 			set_process(false)
@@ -36,7 +40,7 @@ func load_scene(_scene_path: String) -> void:
 
 	var new_load_screen = loading_screen.instantiate()
 	add_child(new_load_screen)
-	progress_changed.connect(new_load_screen._on_progress_changed)
+	#progress_changed.connect(new_load_screen._on_progress_changed)
 	load_finished.connect(new_load_screen._on_load_finished)
 
 	await new_load_screen.loading_screen_ready

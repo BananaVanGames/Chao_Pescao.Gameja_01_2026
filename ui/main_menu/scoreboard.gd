@@ -9,6 +9,7 @@ func _ready() -> void:
 
 
 func populate_scoreboard():
+	SettingsHandler.load_scores()
 	var scores = SettingsHandler.scores
 
 	for i in range(scores.size()):
