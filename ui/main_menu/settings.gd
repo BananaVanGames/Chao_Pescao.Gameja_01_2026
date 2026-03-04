@@ -3,6 +3,7 @@ extends VBoxContainer
 @export var master_slider: HSlider
 @export var music_slider: HSlider
 @export var sfx_slider: HSlider
+@export var tutorial_slider: HSlider
 
 @export var fullscreen_check: CheckBox
 
@@ -15,13 +16,15 @@ func _ready():
 	master_slider.value_changed.connect(_on_master_volume_changed)
 	music_slider.value_changed.connect(_on_music_volume_changed)
 	sfx_slider.value_changed.connect(_on_sfx_volume_changed)
+	tutorial_slider.value_changed.connect(_on_tutorial_volume_changed)
 
 	fullscreen_check.toggled.connect(_on_check_box_toggled)
  
 func _sync_sliders():
 	master_slider.value = _db_to_slider(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
-	music_slider.value = _db_to_slider(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
+	music_slider.value = _db_to_slider(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musica")))
 	sfx_slider.value = _db_to_slider(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
+	tutorial_slider.value = _db_to_slider(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Dialogos")))
  
 func _slider_to_db(value: float) -> float:
 	if value <= 0.0:
@@ -51,6 +54,9 @@ func _on_music_volume_changed(value: float):
  
 func _on_sfx_volume_changed(value: float):
 	_set_volume("SFX", value)
+	
+func _on_tutorial_volume_changed(value: float):
+	_set_volume("Dialogos", value)
 
 
 func _on_check_box_toggled(toggled_on: bool) -> void:

@@ -55,7 +55,7 @@ var cut_points: Array = []
 @onready var cabeza_aux: PackedScene = preload("res://game/pez/cabeza_aux.tscn")
 @onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var pause_menu: Pause_Menu = $PauseMenu
+@onready var pause_menu = $PauseMenu as Pause_Menu
 
 
 func _ready() -> void:
