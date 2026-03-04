@@ -20,7 +20,7 @@ const NIVEL_TUTORIAL = 0
 
 @export var round_time: float = 5
 @export var level: int = 0
-@export var tutorial_execution: bool = false
+@export var executing_tutorial: bool = false
 
 # POSIBLES PECES A SPAWNEAR = [OJOS, CABEZA, CUERPO, COLA]
 var peces_posibles1: Array = [[0, 1, 2], [0, 1], [0], [0, 1, 2]]
@@ -71,7 +71,7 @@ func _ready() -> void:
 
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	GameHandler.randomize_rules()
-	if not tutorial_execution:
+	if not executing_tutorial:
 		start_round()
 	else:
 		pause_menu.in_tutorial = true
@@ -121,7 +121,7 @@ func _input(event):
 
 
 func on_fish_destroyed() -> void:
-	if not tutorial_execution:
+	if not executing_tutorial:
 		await get_tree().create_timer(0.25).timeout
 
 		if GameHandler.fishes_left <= 0:
@@ -133,7 +133,7 @@ func on_fish_destroyed() -> void:
 
 
 func start_round():
-	if not tutorial_execution:
+	if not executing_tutorial:
 		timer.start(round_time)
 	animation_player.play("spawn_fish")
 
@@ -161,7 +161,7 @@ func spawn_fish():
 	last_fish.global_position = spawner.global_position
 	last_fish.clicked.connect(_on_fish_clicked)
 
-	if not tutorial_execution:
+	if not executing_tutorial:
 		GameHandler.set_fishes_left(GameHandler.fishes_left - 1)
 
 
@@ -267,9 +267,6 @@ func cut_fish():
 
 func _on_transition_finished() -> void:
 	set_process(true)
-	if GameHandler.fishes_left <= 0:
-		on_set_finished()
-		return
 	start_round()
 
 

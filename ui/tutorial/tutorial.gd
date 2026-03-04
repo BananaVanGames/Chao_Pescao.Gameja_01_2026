@@ -9,14 +9,12 @@ const ADRIA_02 = preload("uid://cnqwbhmvy42dy")
 const ADRIA_03 = preload("uid://bof47a1krb0yj")
 const ADRIA_04 = preload("uid://bk6hho6te2ubs")
 const ADRIA_05 = preload("uid://3srexa6ammer")
-const ADRIA_06 = preload("uid://bajix36inhesa")
 const ADRIA = [
 	ADRIA_01,
 	ADRIA_02,
 	ADRIA_03,
 	ADRIA_04,
 	ADRIA_05,
-	ADRIA_06,
 ]
 const ELORA_01 = preload("uid://dxcs1q7taohp5")
 const ELORA_02 = preload("uid://cpyp4vms7pj7n")
@@ -99,7 +97,7 @@ var dialogue_pause_point: float = 0
 var tutorial_menu_opened: bool = false
 var espectro_audio: AudioEffectInstance = null
 
-var i: int = 0
+var i: int = 4
 var j: int = 0
 var tutorial_interrupted: bool = false
 
@@ -117,6 +115,8 @@ var test_cut: bool = false
 var test_cut_grab_container: bool = false
 var current_points: int = 0
 var test_bone_fish: bool = false
+var test_remaining_fish: bool = false
+var test_simulacrum: bool = false
 
 var tutorial_interruptions := {
 	[0, 1]: func(): tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false,
@@ -127,6 +127,8 @@ var tutorial_interruptions := {
 	[2, 0]: func(): drop_fish(); tutorial_interrupted = false,
 	[3, 3]: func(): start_cut_and_drop_tutorial(),
 	[3, 4]: func(): start_bone_fish_tutorial(),
+	[4, 3]: func(): start_remaining_fish_tutorial(),
+	[5, 0]: func(): start_simulacrum_test(),
 }
 
 @onready var game: Game = $Game
@@ -136,9 +138,9 @@ var tutorial_interruptions := {
 @onready var pez_2: TextureRect = $PECES/PEZ2
 @onready var pez_3: TextureRect = $PECES/PEZ3 
 @onready var pez_4: TextureRect = $PECES/PEZ4
-@onready var pez_5: TextureRect = $PECES/PEZ7
+@onready var pez_5: TextureRect = $PECES/PEZ5
 @onready var pez_6: TextureRect = $PECES/PEZ6
-@onready var pez_7: TextureRect = $PECES/SkewerPez5/PEZ5
+@onready var pez_7: TextureRect = $PECES/SkewerPez5/PEZ7
 
 @onready var tutorial_fish = [pez_1, pez_2, pez_3, pez_4, pez_5, pez_6, pez_7]
 
@@ -184,6 +186,16 @@ func _process(_delta: float) -> void:
 		if test_bone_fish:
 			spawn_fish([1, 1, 1, 2], bone_fish)
 			current_points = GameHandler.get_score()
+
+		if test_remaining_fish:
+			GameHandler.add_level()
+			GameHandler.advance_next_level()
+			test_remaining_fish = false
+			reset_tooltip(2)
+
+		if test_simulacrum:
+			test_simulacrum = false
+			reset_tooltip(1)
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -292,6 +304,24 @@ func start_bone_fish_tutorial():
 	tooltip.text = "Si el cuerpo del pez está en las espinas es equivalente a que el cuerpo sea tóxico."
 	tooltip.visible = true
 	test_bone_fish = true
+
+
+func start_remaining_fish_tutorial():
+	for val in range(9, 0, -1):
+		GameHandler.set_fishes_left(val)
+		await get_tree().create_timer(0.15).timeout
+	spawn_fish()
+	tooltip.text = "Procesa el último pez que queda."
+	tooltip.visible = true
+	await get_tree().create_timer(0.3).timeout
+	test_remaining_fish = true
+
+
+func start_simulacrum_test():
+	tooltip.text = "Fíjate en la tabla de reglas e intenta conseguir la puntuación máxima."
+	tooltip.visible = true
+	await get_tree().create_timer(0.3).timeout
+	test_simulacrum = true
 
 
 func cut_head(_text, _global_pos):
