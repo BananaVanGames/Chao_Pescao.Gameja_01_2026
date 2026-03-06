@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://duogf0r0upxxd"]
+[gd_scene load_steps=3 format=3 uid="uid://duogf0r0upxxd"]
 
 [ext_resource type="FontFile" uid="uid://21qlfmewcsad" path="res://ui/Ldfcomicsans-jj7l.ttf" id="1_w648i"]
+[ext_resource type="LabelSettings" uid="uid://bk5ysg43x7y50" path="res://ui/main_menu/Settings_label_settings.tres" id="2_xdsbe"]
 
 [node name="ScoreRow" type="Control"]
 layout_mode = 3
@@ -31,6 +32,7 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_w648i")
 theme_override_font_sizes/font_size = 32
 text = "Position"
+label_settings = ExtResource("2_xdsbe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -40,6 +42,7 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_w648i")
 theme_override_font_sizes/font_size = 32
 text = "Score"
+label_settings = ExtResource("2_xdsbe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -49,6 +52,7 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_w648i")
 theme_override_font_sizes/font_size = 32
 text = "Level"
+label_settings = ExtResource("2_xdsbe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -58,5 +62,6 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_w648i")
 theme_override_font_sizes/font_size = 32
 text = "Date"
+label_settings = ExtResource("2_xdsbe")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -70,6 +70,7 @@ func _ready():
 	GameHandler.update_hearts.connect(on_update_hearts)
 	GameHandler.update_max_life.connect(on_update_max_life)
 	GameHandler.rules_error.connect(on_rules_error)
+	GameHandler.changed_fish_tutorial.connect(on_changed_initial_fish)
 
 	var hearts = contenedor_vidas_restantes.get_children()
 	for i in range(hearts.size()):
@@ -112,6 +113,7 @@ func reset_peces_restantes() -> void:
 
 
 func change_rules_visuals(rules: Array, proc_rules: Array):
+	print("UPDATING RULES")
 	var tween = get_tree().create_tween()
 	static_shader.modulate = Color.WHITE
 	tween.tween_property(static_shader, "modulate", Color(1, 1, 1, 0), 0.5)
@@ -196,3 +198,9 @@ func _on_fishes_changed(value) -> void:
 	hijos_contenedor[value].modulate = Color(1, 1, 1)
 	if special_fish.size() > value and special_fish[value]:
 		GameHandler.randomize_rules()
+
+
+func on_changed_initial_fish() -> void:
+	special_fish[9] = true
+	var hijos_contenedor = contenedor_peces_restantes.get_children()
+	hijos_contenedor[9].modulate = Color("ce002f")

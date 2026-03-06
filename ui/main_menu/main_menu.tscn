@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://4xe8awboiffn"]
+[gd_scene load_steps=16 format=3 uid="uid://4xe8awboiffn"]
 
 [ext_resource type="Script" uid="uid://dho1c4kvupl4b" path="res://ui/main_menu/main_menu.gd" id="1_nvasf"]
 [ext_resource type="Texture2D" uid="uid://bxvnj3x4enmxp" path="res://ui/main_menu/art/fondo.png" id="2_6mijq"]
@@ -12,6 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://be85oxo7k60gd" path="res://ui/main_menu/art/back.png" id="8_6mijq"]
 [ext_resource type="PackedScene" uid="uid://duogf0r0upxxd" path="res://ui/main_menu/score_row.tscn" id="8_w2r0d"]
 [ext_resource type="FontFile" uid="uid://21qlfmewcsad" path="res://ui/Ldfcomicsans-jj7l.ttf" id="8_xio0d"]
+[ext_resource type="LabelSettings" uid="uid://byppevrsj7e1t" path="res://ui/main_menu/main_menu_label_settings.tres" id="9_tf5ef"]
+[ext_resource type="LabelSettings" uid="uid://bk5ysg43x7y50" path="res://ui/main_menu/Settings_label_settings.tres" id="11_qao3l"]
+
+[sub_resource type="Theme" id="Theme_qao3l"]
+default_font_size = 20
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 15
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -84,7 +91,6 @@ offset_top = -542.0
 offset_right = 151.25
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = -70
 alignment = 1
 
 [node name="StartButton" type="TextureButton" parent="Menu"]
@@ -103,16 +109,49 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -51.0
+offset_top = -13.5
+offset_right = 21.0
+offset_bottom = 10.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(36, 12)
 theme_override_fonts/font = ExtResource("8_xio0d")
 text = "Empezar"
-horizontal_alignment = 3
-vertical_alignment = 3
+label_settings = ExtResource("9_tf5ef")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tutorial" type="TextureButton" parent="Menu"]
+modulate = Color(0, 1, 0.9490196, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("5_s4pem")
+texture_pressed = ExtResource("6_xio0d")
+texture_hover = ExtResource("7_tf5ef")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Menu/Tutorial"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -13.5
+offset_right = 21.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(36, 12)
+theme_override_fonts/font = ExtResource("8_xio0d")
+theme_override_font_sizes/font_size = 16
+text = "Tutorial"
+label_settings = ExtResource("9_tf5ef")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Settings" type="TextureButton" parent="Menu"]
 layout_mode = 2
@@ -130,16 +169,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -36.0
-offset_top = -11.5
-offset_right = 36.0
-offset_bottom = 11.5
+offset_left = -51.0
+offset_top = -13.5
+offset_right = 24.0
+offset_bottom = 10.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(36, 12)
 theme_override_fonts/font = ExtResource("8_xio0d")
 text = "Opciones"
-horizontal_alignment = 3
-vertical_alignment = 3
+label_settings = ExtResource("9_tf5ef")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Scoreboard" type="TextureButton" parent="Menu"]
 layout_mode = 2
@@ -157,41 +198,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -51.0
+offset_top = -13.5
+offset_right = 38.0
+offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(36, 12)
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 16
 text = "Puntuación"
-
-[node name="Tutorial" type="TextureButton" parent="Menu"]
-layout_mode = 2
-size_flags_vertical = 3
-texture_normal = ExtResource("5_s4pem")
-texture_pressed = ExtResource("6_xio0d")
-texture_hover = ExtResource("7_tf5ef")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="Menu/Tutorial"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("8_xio0d")
-theme_override_font_sizes/font_size = 16
-text = "Tutorial"
+label_settings = ExtResource("9_tf5ef")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Credits" type="TextureButton" parent="Menu"]
 layout_mode = 2
@@ -209,15 +228,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -51.0
+offset_top = -13.5
+offset_right = 21.0
+offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(36, 12)
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 16
 text = "Créditos"
+label_settings = ExtResource("9_tf5ef")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ExitButton" type="TextureButton" parent="Menu"]
 layout_mode = 2
@@ -235,15 +258,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -51.0
+offset_top = -13.5
+offset_right = 21.0
+offset_bottom = 10.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(36, 12)
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 16
 text = "Salir"
+label_settings = ExtResource("9_tf5ef")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Settings" type="VBoxContainer" parent="." node_paths=PackedStringArray("master_slider", "music_slider", "sfx_slider", "tutorial_slider", "fullscreen_check")]
 visible = false
@@ -276,6 +303,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 32
 text = "Master"
+label_settings = ExtResource("11_qao3l")
 
 [node name="Master" type="HSlider" parent="Settings/Master"]
 custom_minimum_size = Vector2(120, 0)
@@ -293,6 +321,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 32
 text = "Musica"
+label_settings = ExtResource("11_qao3l")
 
 [node name="Music" type="HSlider" parent="Settings/Music"]
 custom_minimum_size = Vector2(120, 0)
@@ -310,6 +339,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 32
 text = "SFX"
+label_settings = ExtResource("11_qao3l")
 
 [node name="SFX" type="HSlider" parent="Settings/SFX"]
 custom_minimum_size = Vector2(120, 0)
@@ -327,6 +357,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 32
 text = "Tutorial"
+label_settings = ExtResource("11_qao3l")
 
 [node name="Tutorial" type="HSlider" parent="Settings/Dialogos"]
 custom_minimum_size = Vector2(120, 0)
@@ -343,6 +374,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 32
 text = "Pantalla Completa"
+label_settings = ExtResource("11_qao3l")
 
 [node name="CheckBox" type="CheckBox" parent="Settings/FullScreen"]
 layout_mode = 2
@@ -365,6 +397,7 @@ size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("8_xio0d")
 theme_override_font_sizes/font_size = 32
 text = "Scoreboard"
+label_settings = ExtResource("11_qao3l")
 
 [node name="ScoreRow" parent="Scoreboard" instance=ExtResource("8_w2r0d")]
 layout_mode = 2
@@ -376,17 +409,20 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 157.0
-offset_top = 121.0
-offset_right = -208.0
+offset_left = 285.0
+offset_top = 50.0
+offset_right = -285.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(675, 490)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Credits"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
+theme = SubResource("Theme_qao3l")
 theme_override_fonts/normal_font = ExtResource("8_xio0d")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "[center]¡Este es nuestro primer mini-proyecto como BananaVan Studio, así que esperamos que hayáis disfrutado del juego tanto como a nosotros nos ha gustado crearlo!
 
@@ -395,15 +431,20 @@ BananaVan Studio 🍌🚙
 - Guturu
 - Lolmaniaco
 
-Gracias especiales a la voces invitadas:
+Especiales gracias a la voces invitadas de Voice Harbor y a otros ayudantes extra:
 - Luisma Albarracín
 - Sara Ruíz
 - Sergi Alejo
 - Pau Estivill
 - Elora Mullor
 - Adrià Berjillos
+- Victor Blanco
+- Fei Reixach
+- Mike Sánchez
+- Maia Laws
 
-Este juego fue inicialmente creado para la Game Jam \"Gameja X: NavidejaV\", donde la temática era \"5 segundos\".[/center]"
+Este juego fue inicialmente creado para la Game Jam \"Gameja X: NavidejaV\", donde la temática fue \"5 segundos\".[/center]"
+fit_content = true
 
 [node name="Back" type="TextureButton" parent="."]
 visible = false

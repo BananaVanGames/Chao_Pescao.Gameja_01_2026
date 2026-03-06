@@ -165,6 +165,10 @@ func spawn_fish():
 		GameHandler.set_fishes_left(GameHandler.fishes_left - 1)
 
 
+func get_current_fish():
+	return last_fish if last_fish else null
+
+
 func on_set_finished():
 	timer.stop()
 	spawner.get_children().map(func(c): c.queue_free())

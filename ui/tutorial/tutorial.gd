@@ -117,6 +117,7 @@ var current_points: int = 0
 var test_bone_fish: bool = false
 var test_remaining_fish: bool = false
 var test_simulacrum: bool = false
+var test_special_fish: bool = false
 
 var tutorial_interruptions := {
 	[0, 1]: func(): tutorial_anim_player.play("highlight_containers"); tutorial_interrupted = false,
@@ -128,7 +129,8 @@ var tutorial_interruptions := {
 	[3, 3]: func(): start_cut_and_drop_tutorial(),
 	[3, 4]: func(): start_bone_fish_tutorial(),
 	[4, 3]: func(): start_remaining_fish_tutorial(),
-	[5, 0]: func(): start_simulacrum_test(),
+	[4, 4]: func(): if not fish: tutorial_interrupted = false,
+	[5, 0]: func(): start_special_fish_tutorial(),
 }
 
 @onready var game: Game = $Game
@@ -192,9 +194,11 @@ func _process(_delta: float) -> void:
 			GameHandler.advance_next_level()
 			test_remaining_fish = false
 			reset_tooltip(2)
+			start_simulacrum_test()
 
 		if test_simulacrum:
 			test_simulacrum = false
+			tutorial_interrupted = false
 			reset_tooltip(1)
 
 
@@ -245,7 +249,7 @@ func spawn_fish(data: Array = [], texture: CompressedTexture2D = null):
 		spawning_fish = true
 		game.start_round()
 		await get_tree().create_timer(0.3).timeout
-		fish = game.last_fish
+		fish = game.get_current_fish()
 		fish.corte_cabeza.connect(cut_head)
 		fish.corte_cola.connect(cut_tail)
 		if not data.is_empty():
@@ -255,7 +259,6 @@ func spawn_fish(data: Array = [], texture: CompressedTexture2D = null):
 
 
 func drop_fish():
-	print("VALUE OF FISH: ", fish)
 	if fish:
 		spawning_fish = false
 		game._on_timer_timeout()
@@ -309,7 +312,7 @@ func start_bone_fish_tutorial():
 func start_remaining_fish_tutorial():
 	for val in range(9, 0, -1):
 		GameHandler.set_fishes_left(val)
-		await get_tree().create_timer(0.15).timeout
+		await get_tree().create_timer(0.10).timeout
 	spawn_fish()
 	tooltip.text = "Procesa el último pez que queda."
 	tooltip.visible = true
@@ -320,8 +323,17 @@ func start_remaining_fish_tutorial():
 func start_simulacrum_test():
 	tooltip.text = "Fíjate en la tabla de reglas e intenta conseguir la puntuación máxima."
 	tooltip.visible = true
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(2).timeout
+	fish = game.get_current_fish()
 	test_simulacrum = true
+
+
+func start_special_fish_tutorial():
+	tooltip.text = "Clasifica el siguiente pez y observa cómo las normas cambian."
+	tooltip.visible = true
+	test_special_fish = true
+	GameHandler.changed_fish_tutorial.emit()
+	spawn_fish()
 
 
 func cut_head(_text, _global_pos):
@@ -363,9 +375,6 @@ func on_fish_entered_container():
 		test_containers = false
 		reset_tooltip(1)
 
-	print("GameHandler.get_score(): ", GameHandler.get_score())
-	print("current_points + 3: ", current_points + 3)
-	print("GameHandler.get_score() == current_points + 3: ", GameHandler.get_score() == current_points + 3)
 	if test_cut_grab_container and GameHandler.get_score() == current_points + 3:
 		test_cut_grab_container = false
 		reset_tooltip(1)
@@ -373,11 +382,17 @@ func on_fish_entered_container():
 	if test_bone_fish and GameHandler.get_score() == current_points + 3:
 		test_bone_fish = false
 		reset_tooltip(1)
+		
+	if test_special_fish:
+		test_special_fish = false
+		print("CALLED CHANGE RULES")
+		GameHandler.randomize_rules()
+		reset_tooltip()
 
 
 func reset_tooltip(specific_time: float = 0):
-	tutorial_anim_player.play("RESET")
 	tooltip.visible = false
+	tutorial_anim_player.play("RESET")
 	if specific_time:
 		await get_tree().create_timer(specific_time).timeout
 	tutorial_interrupted = false

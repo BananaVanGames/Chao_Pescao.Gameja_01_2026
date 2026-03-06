@@ -9,6 +9,7 @@ signal update_hearts(value)
 signal update_max_life(value)
 signal transition_finished
 signal rules_error(value)
+signal changed_fish_tutorial
 
 const NIVEL_TUTORIAL: int = 0
 
@@ -270,6 +271,10 @@ func get_score() -> int:
 	return score
 
 
+func change_hud_tutorial() -> void:
+	changed_fish_tutorial.emit()
+
+
 func lose_life_point() -> bool:
 	life_points -= 1
 	lost_life += 1
@@ -316,6 +321,7 @@ func randomize_rules():
 	for i in range(3):
 		rules.append(reglas_procesables[min(level, 2)][i].pick_random())
 		processable_rules.append(randi_range(0, 1))
+	print("EMITTING CHANGE RULES")
 	emit_change_rules()
 
 
