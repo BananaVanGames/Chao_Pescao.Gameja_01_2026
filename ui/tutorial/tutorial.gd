@@ -97,7 +97,7 @@ var dialogue_pause_point: float = 0
 var tutorial_menu_opened: bool = false
 var espectro_audio: AudioEffectInstance = null
 
-var i: int = 4
+var i: int = 0
 var j: int = 0
 var tutorial_interrupted: bool = false
 
@@ -204,26 +204,30 @@ func _process(_delta: float) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Esc"):
-		if not tutorial_menu_opened:
-			print("made mouse visible")
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			game.set_process(false)
-			tutorial_menu_opened = true
-
-			if dialogue_player.is_playing():
-				dialogue_paused = true
-				dialogue_pause_point = dialogue_player.get_playback_position()
-				dialogue_player.stop()
-			if tutorial_anim_player.is_playing():
-				animation_paused = true
-				tutorial_anim_player.pause()
-			confirm_quit_tutorial.popup_centered()
+		open_exit_tutorial()
 
 	if not tutorial_menu_opened and not tutorial_interrupted and event.is_action_pressed("Space"):
 		print("TUTO SKIPPED")
 		dialogue_player.stop()
 		tutorial_anim_player.play("RESET")
 		_on_dialogos_finished()
+
+
+func open_exit_tutorial() -> void:
+	if not tutorial_menu_opened:
+		print("made mouse visible")
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		game.set_process(false)
+		tutorial_menu_opened = true
+
+		if dialogue_player.is_playing():
+			dialogue_paused = true
+			dialogue_pause_point = dialogue_player.get_playback_position()
+			dialogue_player.stop()
+		if tutorial_anim_player.is_playing():
+			animation_paused = true
+			tutorial_anim_player.pause()
+		confirm_quit_tutorial.popup_centered()
 
 
 func handle_fish_animations():
@@ -279,6 +283,7 @@ func handle_dialogue_position():
 		i += 1
 		if i >= VOCES.size():
 			i = 0
+			open_exit_tutorial()
 
 
 func start_grab_tutorial():
@@ -382,7 +387,7 @@ func on_fish_entered_container():
 	if test_bone_fish and GameHandler.get_score() == current_points + 3:
 		test_bone_fish = false
 		reset_tooltip(1)
-		
+
 	if test_special_fish:
 		test_special_fish = false
 		print("CALLED CHANGE RULES")

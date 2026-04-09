@@ -609,6 +609,14 @@ grow_vertical = 2
 rotation = -1.5707964
 texture = ExtResource("9_sqq7s")
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 718.0
+offset_top = 1034.0
+offset_right = 1247.0
+offset_bottom = 1088.0
+theme_override_font_sizes/font_size = 30
+text = "Press space to skip a dialogue line"
+
 [connection signal="finished" from="Dialogos" to="." method="_on_dialogos_finished"]
 [connection signal="canceled" from="ConfirmQuitTutorial" to="." method="_on_tutorial_canceled"]
 [connection signal="confirmed" from="ConfirmQuitTutorial" to="." method="_on_tutorial_confirmed"]

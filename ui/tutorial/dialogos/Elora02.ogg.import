@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Elora02.ogg-2c625ddbe675dcc4b5a72fcaa6c1d8d4.
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

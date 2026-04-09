@@ -17,8 +17,8 @@ func _ready() -> void:
 	get_tree().paused = false
 
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_cancel") and not in_tutorial:
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Esc") and not in_tutorial:
 		toggle_pause()
 
 

@@ -194,6 +194,8 @@ position = Vector2(963, 382)
 sprite_frames = SubResource("SpriteFrames_oacl0")
 animation = &"activate"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_mhvfb")

@@ -3,6 +3,10 @@ extends Control
 const PECES_ESPECIALES: int = 2
 const DIFICULTAD_MAXIMA: int = 6
 
+const ACIERTO = preload("uid://4vkwothoi1b7")
+const ERROR = preload("uid://c2jp2nhtopkar")
+const TV_ESTATICA = preload("uid://bc2cqvltldec")
+
 var special_fish := []
 
 var tween_1: Tween
@@ -57,11 +61,14 @@ var tween_3: Tween
 @onready var bombilla3: TextureRect = $PuntuacionYTiempo/Bombilla3
 @onready var bombillas = [bombilla, bombilla2, bombilla3]
 @onready var static_shader: TextureRect = $ReglasYPecesRestantes/Reglas/StaticShader
+@onready var bombillas_aplayer: AudioStreamPlayer = $PuntuacionYTiempo/BombillaAplayer
+@onready var reglas_aplayer: AudioStreamPlayer = $ReglasYPecesRestantes/Reglas/ReglasAplayer
 
 #endregion
 
 
 func _ready():
+	reglas_aplayer.stream = TV_ESTATICA
 	GameHandler.time_changed.connect(_on_time_changed)
 	GameHandler.score_changed.connect(_on_score_changed)
 	GameHandler.fishes_left_changed.connect(_on_fishes_changed)
@@ -114,6 +121,7 @@ func reset_peces_restantes() -> void:
 
 func change_rules_visuals(rules: Array, proc_rules: Array):
 	print("UPDATING RULES")
+	reglas_aplayer.play()
 	var tween = get_tree().create_tween()
 	static_shader.modulate = Color.WHITE
 	tween.tween_property(static_shader, "modulate", Color(1, 1, 1, 0), 0.5)
@@ -167,6 +175,12 @@ func on_update_hearts(life_idx: int, restore: bool) -> void:
 		vidas[life_idx].set_modulate(Color("0000b4ff"))
 
 
+func on_changed_initial_fish() -> void:
+	special_fish[9] = true
+	var hijos_contenedor = contenedor_peces_restantes.get_children()
+	hijos_contenedor[9].modulate = Color("ce002f")
+
+
 func _reset_set(_value) -> void:
 	reset_peces_restantes()
 
@@ -180,14 +194,17 @@ func _on_score_changed(score, value):
 		b.texture = bombilla_off
 
 	if value < 0:
+		bombillas_aplayer.stream = ERROR
 		for i in range(abs(value)):
 			if i < bombillas.size():
 				bombillas[i].texture = bombilla_error
-	else:
+	elif value > 0:
+		bombillas_aplayer.stream = ACIERTO
 		for i in range(value):
 			if i < bombillas.size():
 				bombillas[i].texture = bombilla_acierto
 
+	bombillas_aplayer.play()
 	score_label.text = str(score)
 
 
@@ -198,9 +215,3 @@ func _on_fishes_changed(value) -> void:
 	hijos_contenedor[value].modulate = Color(1, 1, 1)
 	if special_fish.size() > value and special_fish[value]:
 		GameHandler.randomize_rules()
-
-
-func on_changed_initial_fish() -> void:
-	special_fish[9] = true
-	var hijos_contenedor = contenedor_peces_restantes.get_children()
-	hijos_contenedor[9].modulate = Color("ce002f")

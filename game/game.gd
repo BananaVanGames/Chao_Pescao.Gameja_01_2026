@@ -17,6 +17,7 @@ enum MouseTool {
 }
 
 const NIVEL_TUTORIAL = 0
+const PINZA = preload("uid://d1wx2wnhc23wr")
 
 @export var round_time: float = 5
 @export var level: int = 0
@@ -56,9 +57,11 @@ var cut_points: Array = []
 @onready var cola_aux: PackedScene = preload("res://game/pez/cola_aux.tscn")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var pause_menu = $PauseMenu as Pause_Menu
+@onready var audio_stream_player: AudioStreamPlayer = $HUD/AudioStreamPlayer
 
 
 func _ready() -> void:
+	audio_stream_player.stream = PINZA
 	mesa_trampilla.pez_destruido.connect(on_fish_destroyed)
 	GameHandler.transition_finished.connect(_on_transition_finished)
 
@@ -135,6 +138,7 @@ func on_fish_destroyed() -> void:
 func start_round():
 	if not executing_tutorial:
 		timer.start(round_time)
+	audio_stream_player.play()
 	animation_player.play("spawn_fish")
 
 
