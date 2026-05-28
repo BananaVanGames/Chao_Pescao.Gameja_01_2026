@@ -169,11 +169,11 @@ layer = 20
 script = ExtResource("1_27i77")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(949, 532)
 sprite_frames = SubResource("SpriteFrames_tjxmb")
 animation = &"transition-in"
 frame = 11
 frame_progress = 1.0
-centered = false
 
 [node name="Label" type="Label" parent="."]
 z_index = 2
@@ -210,7 +210,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.60784316)
 
 [node name="Back" type="TextureButton" parent="."]
-visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ch4xwiql7mby5"]
+[gd_scene load_steps=25 format=3 uid="uid://ch4xwiql7mby5"]
 
 [ext_resource type="Script" uid="uid://dh3jraa7xuhdp" path="res://ui/tutorial/tutorial.gd" id="1_leiwb"]
 [ext_resource type="Texture2D" uid="uid://db522c10q07ow" path="res://ui/tutorial/art/L01.png" id="2_leiwb"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dy8yalfw24kr1" path="res://ui/tutorial/art/SA06.png" id="7_jhac3"]
 [ext_resource type="Texture2D" uid="uid://bg1u0ujoc45tf" path="res://ui/tutorial/art/SE07.png" id="8_vy52c"]
 [ext_resource type="Texture2D" uid="uid://df5te8ou42bvi" path="res://ui/tutorial/art/flechas01.png" id="9_sqq7s"]
-[ext_resource type="PackedScene" uid="uid://dbifu6dca3j2i" path="res://game/game.tscn" id="10_ggehi"]
 
 [sub_resource type="Animation" id="Animation_leiwb"]
 resource_name = "1_talk"
@@ -544,19 +543,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_jg6hm")
 }
 
-[node name="Game" parent="." instance=ExtResource("10_ggehi")]
-executing_tutorial = true
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.4509804)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
 
@@ -610,12 +596,22 @@ rotation = -1.5707964
 texture = ExtResource("9_sqq7s")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 718.0
-offset_top = 1034.0
-offset_right = 1247.0
-offset_bottom = 1088.0
+offset_left = 714.0
+offset_top = 1032.0
+offset_right = 1243.0
+offset_bottom = 1086.0
 theme_override_font_sizes/font_size = 30
-text = "Press space to skip a dialogue line"
+text = "Pulsa espacio para saltar el diálogo"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4509804)
 
 [connection signal="finished" from="Dialogos" to="." method="_on_dialogos_finished"]
 [connection signal="canceled" from="ConfirmQuitTutorial" to="." method="_on_tutorial_canceled"]

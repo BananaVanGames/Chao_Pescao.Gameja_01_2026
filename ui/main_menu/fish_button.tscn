@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgttwlhe1j3f6"]
+
+[ext_resource type="Texture2D" uid="uid://dusynucoacqp2" path="res://ui/main_menu/art/boton.png" id="1_o11d7"]
+[ext_resource type="Texture2D" uid="uid://c5jvdwbhlfcdm" path="res://ui/main_menu/art/boton_pressed.png" id="2_qxfv8"]
+[ext_resource type="Texture2D" uid="uid://tubhseq3kfbs" path="res://ui/main_menu/art/boton_hover.png" id="3_h1sim"]
+[ext_resource type="Script" uid="uid://c553xqmopfiyt" path="res://ui/main_menu/fish_button.gd" id="4_qxfv8"]
+[ext_resource type="FontFile" uid="uid://21qlfmewcsad" path="res://ui/Ldfcomicsans-jj7l.ttf" id="4_x0igl"]
+[ext_resource type="LabelSettings" uid="uid://byppevrsj7e1t" path="res://ui/main_menu/main_menu_label_settings.tres" id="5_115ws"]
+
+[node name="FishButton" type="TextureButton"]
+anchors_preset = -1
+anchor_right = 0.277
+anchor_bottom = 0.24900001
+offset_right = -531.84
+offset_bottom = -268.92
+size_flags_vertical = 3
+texture_normal = ExtResource("1_o11d7")
+texture_pressed = ExtResource("2_qxfv8")
+texture_hover = ExtResource("3_h1sim")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_qxfv8")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -12.0
+offset_right = 44.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 12.5)
+theme_override_fonts/font = ExtResource("4_x0igl")
+text = "Aceptar"
+label_settings = ExtResource("5_115ws")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]

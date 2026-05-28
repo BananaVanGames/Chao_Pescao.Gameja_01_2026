@@ -61,10 +61,12 @@ var cut_points: Array = []
 
 
 func _ready() -> void:
+	pause_menu.visible = false
 	audio_stream_player.stream = PINZA
 	mesa_trampilla.pez_destruido.connect(on_fish_destroyed)
 	GameHandler.transition_finished.connect(_on_transition_finished)
 
+	GameHandler.reset_game()
 	GameHandler.reset_round()
 	GameHandler.add_score(0)
 
@@ -287,13 +289,13 @@ func _on_fish_clicked(fish):
 
 
 func _on_timer_timeout() -> void:
-	if dragged_fish and dragged_fish.is_in_group("pez"):
+	if dragged_fish and dragged_fish.is_in_group("pez") or not mesa_trampilla.pez_en_mesa:
 		last_fish.explode()
 		await get_tree().create_timer(0.5).timeout
 		if GameHandler.add_score(-3):
 			on_fish_destroyed()
 		return
-
+		
 	if last_fish:
 		last_fish.change_collision_mask()
 		mesa_trampilla.fish_timeout()

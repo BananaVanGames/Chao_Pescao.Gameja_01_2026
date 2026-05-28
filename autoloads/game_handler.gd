@@ -11,7 +11,7 @@ signal transition_finished
 signal rules_error(value)
 signal changed_fish_tutorial
 
-const NIVEL_TUTORIAL: int = 0
+@export var in_tutorial: bool = false
 
 var max_life_points: int = 5
 var life_points: int = max_life_points
@@ -290,7 +290,6 @@ func lose_life_point() -> bool:
 
 		print("Game Over")
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		get_tree().paused = true
 		return false
 	return true
 
@@ -353,7 +352,7 @@ func game_over() -> void:
 func add_score(value: int) -> bool:
 	score += value
 	score_changed.emit(score, value)
-	if value == -3 and level > NIVEL_TUTORIAL:
+	if value == -3 and level > 0 and not in_tutorial:
 		return lose_life_point()
 	return true
 

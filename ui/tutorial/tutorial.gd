@@ -91,6 +91,8 @@ const VICTOR = [
 
 const VOCES = [LUISMA, SERGI, ELORA, SARA, ADRIA, PAU, VICTOR]
 
+const MAIN_MENU = preload("uid://4xe8awboiffn")
+
 #endregion
 
 var dialogue_pause_point: float = 0
@@ -100,6 +102,7 @@ var espectro_audio: AudioEffectInstance = null
 var i: int = 0
 var j: int = 0
 var tutorial_interrupted: bool = false
+var exit_tutorial_confirmation: bool = false
 
 var dialogue_ready: bool = true
 var dialogue_paused: bool = false
@@ -133,7 +136,8 @@ var tutorial_interruptions := {
 	[5, 0]: func(): start_special_fish_tutorial(),
 }
 
-@onready var game: Game = $Game
+var game_instance
+
 @onready var confirm_quit_tutorial: ConfirmationDialog = $ConfirmQuitTutorial
 
 @onready var pez_1: TextureRect = $PECES/PEZ1
@@ -158,11 +162,18 @@ var tutorial_interruptions := {
 @onready var dialogue_player: AudioStreamPlayer = $Dialogos
 @onready var cut_drag_fish: CompressedTexture2D = preload("uid://bm52r77o04e37")
 @onready var bone_fish: CompressedTexture2D = preload("uid://ee2cmcq2me3g")
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 
 func _ready() -> void:
+	GameHandler.in_tutorial = true
+	var game_scene = load("uid://dbifu6dca3j2i")
+	game_instance = game_scene.instantiate()
+	game_instance.executing_tutorial = true
+	add_child(game_instance)
+
 	espectro_audio = AudioServer.get_bus_effect_instance(3, 0)
-	game.fish_entered_container.connect(on_fish_entered_container)
+	game_instance.fish_entered_container.connect(on_fish_entered_container)
 	reset_tutorial()
 	MusicHandler.stop()
 	GameHandler.set_rules([3, 1, 3])
@@ -206,18 +217,22 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Esc"):
 		open_exit_tutorial()
 
-	if not tutorial_menu_opened and not tutorial_interrupted and event.is_action_pressed("Space"):
-		print("TUTO SKIPPED")
-		dialogue_player.stop()
-		tutorial_anim_player.play("RESET")
-		_on_dialogos_finished()
+	if event.is_action_pressed("Space"):
+		if exit_tutorial_confirmation:
+			finish_tutorial()
+		else:
+			if not tutorial_menu_opened and not tutorial_interrupted:
+				print("TUTO SKIPPED")
+				dialogue_player.stop()
+				tutorial_anim_player.play("RESET")
+				_on_dialogos_finished()
 
 
 func open_exit_tutorial() -> void:
 	if not tutorial_menu_opened:
 		print("made mouse visible")
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		game.set_process(false)
+		game_instance.set_process(false)
 		tutorial_menu_opened = true
 
 		if dialogue_player.is_playing():
@@ -251,9 +266,9 @@ func handle_dialogues():
 func spawn_fish(data: Array = [], texture: CompressedTexture2D = null):
 	if not spawning_fish:
 		spawning_fish = true
-		game.start_round()
+		game_instance.start_round()
 		await get_tree().create_timer(0.3).timeout
-		fish = game.get_current_fish()
+		fish = game_instance.get_current_fish()
 		fish.corte_cabeza.connect(cut_head)
 		fish.corte_cola.connect(cut_tail)
 		if not data.is_empty():
@@ -265,7 +280,7 @@ func spawn_fish(data: Array = [], texture: CompressedTexture2D = null):
 func drop_fish():
 	if fish:
 		spawning_fish = false
-		game._on_timer_timeout()
+		game_instance._on_timer_timeout()
 
 
 func handle_dialogue_interruption():
@@ -283,7 +298,10 @@ func handle_dialogue_position():
 		i += 1
 		if i >= VOCES.size():
 			i = 0
-			open_exit_tutorial()
+			tutorial_interrupted = true
+			tooltip.text = "Pulsa Espacio para salir del tutorial."
+			tooltip.visible = true
+			exit_tutorial_confirmation = true
 
 
 func start_grab_tutorial():
@@ -329,7 +347,7 @@ func start_simulacrum_test():
 	tooltip.text = "Fíjate en la tabla de reglas e intenta conseguir la puntuación máxima."
 	tooltip.visible = true
 	await get_tree().create_timer(2).timeout
-	fish = game.get_current_fish()
+	fish = game_instance.get_current_fish()
 	test_simulacrum = true
 
 
@@ -364,11 +382,13 @@ func reset_tutorial():
 
 
 func finish_tutorial() -> void:
+	GameHandler.in_tutorial = false
+	GameHandler.reset_game()
 	dialogue_paused = false
 	tutorial_finished.emit()
 	MusicHandler.play()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file("uid://4xe8awboiffn")
+	get_tree().change_scene_to_packed(MAIN_MENU)
 
 
 func on_fish_entered_container():
@@ -411,7 +431,7 @@ func _on_tutorial_canceled() -> void:
 	tutorial_menu_opened = false
 	confirm_quit_tutorial.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	game.set_process(true)
+	game_instance.set_process(true)
 	if dialogue_paused:
 		dialogue_paused = false
 		dialogue_player.play(dialogue_pause_point)

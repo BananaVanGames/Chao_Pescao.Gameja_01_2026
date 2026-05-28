@@ -53,7 +53,7 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 	var cabeza_mal: bool = (
 		fish_data[CABEZA_PEZ] == current_rules[CABEZA_RULES]
 		and fish_data[CABEZA_PEZ] != CABEZA_SANA
-	) or ojos_mal
+	)
 	var cola_mal: bool = fish_data[COLA_PEZ] == current_rules[COLA_RULES]
 
 	var error_ojos: bool = false
@@ -67,18 +67,20 @@ func _on_good_area_body_entered(body: Node2D) -> void:
 		elif not cabeza_cortada:
 			score -= 1
 			error_ojos = true
-	elif cabeza_cortada and not cabeza_mal:
-		score -= 1
-
-	if cabeza_mal:
-		if not processable_rules[CABEZA_RULES]:
+		
+		if cabeza_mal and not processable_rules[CABEZA_RULES]:
 			score = -3
 			error_cabeza = true
-		elif not cabeza_cortada and score != -3:
+	else:
+		if cabeza_mal:
+			if not processable_rules[CABEZA_RULES]:
+				score = -3
+				error_cabeza = true
+			elif not cabeza_cortada and score != -3:
+				score -= 1
+				error_cabeza = true
+		elif cabeza_cortada and score != -3:
 			score -= 1
-			error_cabeza = true
-	elif cabeza_cortada and score != -3:
-		score -= 1
 
 	if cola_mal:
 		if not processable_rules[COLA_RULES]:

@@ -20,6 +20,9 @@ const CHAO_PESCAO_GRUPO = preload("uid://1wxe06ecs3sq")
 
 var nav_stack: Array[Control] = []
 var current_panel
+var entering_game: bool = false
+var hovered_button = null
+var time: float = 0.0
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
@@ -32,8 +35,6 @@ var current_panel
 @onready var settings: VBoxContainer = $Settings
 @onready var scoreboard: VBoxContainer = $Scoreboard
 @onready var credits: VBoxContainer = $Credits
-
-
 
 @onready var menu_music: AudioStream = load("res://music/menu.mp3")
 @onready var title: TextureRect = $Title
@@ -54,6 +55,28 @@ func _ready() -> void:
 	settings_button.pressed.connect(_navigate_to.bind(settings))
 	scoreboard_button.pressed.connect(_navigate_to.bind(scoreboard))
 	credits_button.pressed.connect(_navigate_to.bind(credits))
+
+	back_button.mouse_entered.connect(_mouse_entered.bind(back_button))
+	back_button.mouse_exited.connect(_mouse_exited.bind(back_button))
+
+
+func _process(delta: float) -> void:
+	if hovered_button:
+		time += delta
+		var pulse = 1.0 + sin(time * 4.0) * 0.1
+		hovered_button.scale = Vector2(pulse, pulse)
+	else:
+		time = 0.0
+
+
+func _mouse_entered(button) -> void:
+	hovered_button = button
+
+
+func _mouse_exited(button) -> void:
+	if hovered_button == button:
+		hovered_button.scale = Vector2.ONE
+		hovered_button = null
 
 
 func _show_panel(panel: Control):
@@ -92,6 +115,10 @@ func _on_back_pressed():
 
 
 func _on_start_button_pressed() -> void:
+	if entering_game:
+		return
+
+	entering_game = true
 	MusicHandler.change_db_to(0.3)
 	audio_player.stream = CHAO_PESCAO_GRUPO
 	audio_player.play()
@@ -99,14 +126,17 @@ func _on_start_button_pressed() -> void:
 	SceneLoader.load_scene("uid://dbifu6dca3j2i")
 
 
-func _on_exit_button_pressed() -> void:
+func _on_tutorial_button_pressed() -> void:
+	if entering_game:
+		return
+
+	SceneLoader.load_scene("uid://ch4xwiql7mby5")
+
+
+func _on_exit_pressed() -> void:
 	MusicHandler.change_db_to(0.3)
 	audio_player.stream = CHAO_PESCAO.pick_random()
 	audio_player.play()
 	await audio_player.finished
 	await get_tree().create_timer(1).timeout
 	get_tree().quit()
-
-
-func _on_tutorial_pressed() -> void:
-	SceneLoader.load_scene("uid://ch4xwiql7mby5")
